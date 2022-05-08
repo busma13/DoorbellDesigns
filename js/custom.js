@@ -17,6 +17,30 @@ var shuffleme = (function( $ ) {
       itemSelector: '[class*="col-"]',
       sizer: $sizer    
     });
+
+    setTimeout(function() {
+      const params = new URLSearchParams(window.location.search);
+      const catName = params.get("category");
+      console.log(catName)
+      switch (catName) {
+        case 'doorbells':
+          $grid.shuffle( 'shuffle', 'doorbells' );
+          break;
+        case 'artwork':
+          $grid.shuffle( 'shuffle', 'artwork' );
+          break;
+        case 'fan':
+          $grid.shuffle( 'shuffle', 'fan' );
+          break;
+        case 'custom':
+          $grid.shuffle( 'shuffle', 'custom' );
+          break;  
+        default:
+          break;  
+      }
+    }, 1000);
+    
+    
   },
 
       
@@ -29,6 +53,7 @@ var shuffleme = (function( $ ) {
       var $this = $(this),
           isActive = $this.hasClass( 'active' ),
           group = isActive ? 'all' : $this.data('group');
+          console.log("group: " + group);
 
       // Hide current label, show current label in title
       if ( !isActive ) {

@@ -3314,6 +3314,15 @@ section {
   color: #fbc617;
 }
 
+.product-single-image {
+  width: 70%;
+}
+
+.ruler {
+  width: 16px;
+  display: inline-block;
+}
+
 .buy-product {
   padding: 10px 0;
   display: inline-block;
