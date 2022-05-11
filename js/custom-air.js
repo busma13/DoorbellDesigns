@@ -18,27 +18,28 @@ var shuffleme = (function( $ ) {
       sizer: $sizer    
     });
 
-    setTimeout(function() {
-      const params = new URLSearchParams(window.location.search);
-      const catName = params.get("category");
-      console.log(catName)
-      switch (catName) {
-        case 'doorbells':
-          $grid.shuffle( 'shuffle', 'doorbells' );
-          break;
-        case 'artwork':
-          $grid.shuffle( 'shuffle', 'artwork' );
-          break;
-        case 'fan':
-          $grid.shuffle( 'shuffle', 'fan' );
-          break;
-        case 'custom':
-          $grid.shuffle( 'shuffle', 'custom' );
-          break;  
-        default:
-          break;  
-      }
-    }, 1000);
+    // Used to link directly to a shuffle category
+    // setTimeout(function() {
+    //   const params = new URLSearchParams(window.location.search);
+    //   const catName = params.get("category");
+    //   console.log(catName)
+    //   switch (catName) {
+    //     case 'doorbells':
+    //       $grid.shuffle( 'shuffle', 'doorbells' );
+    //       break;
+    //     case 'artwork':
+    //       $grid.shuffle( 'shuffle', 'artwork' );
+    //       break;
+    //     case 'fan':
+    //       $grid.shuffle( 'shuffle', 'fan' );
+    //       break;
+    //     case 'custom':
+    //       $grid.shuffle( 'shuffle', 'custom' );
+    //       break;  
+    //     default:
+    //       break;  
+    //   }
+    // }, 1000);
     
     
   },
