@@ -17,44 +17,6 @@ var shuffleme = (function( $ ) {
       itemSelector: '[class*="col-"]',
       sizer: $sizer    
     });
-
-    setTimeout(function() {
-      const params = new URLSearchParams(window.location.search);
-      const catName = params.get("category");
-      switch (catName) {
-        case 'beachy':
-          $grid.shuffle( 'shuffle', 'beachy' );
-          break;
-        case 'contemporary':
-          $grid.shuffle( 'shuffle', 'comtemporary' );
-          break;
-        case 'dog':
-          $grid.shuffle( 'shuffle', 'dog' );
-          break;
-        case 'animals':
-          $grid.shuffle( 'shuffle', 'animals' );
-          break;  
-        case 'petroglyphs':
-          $grid.shuffle( 'shuffle', 'petroglyphs' );
-          break;
-        case 'plants':
-          $grid.shuffle( 'shuffle', 'plants' );
-          break;
-        case 'southwest':
-          $grid.shuffle( 'shuffle', 'southwest' );
-          break;
-        case 'misc':
-          $grid.shuffle( 'shuffle', 'misc' );
-          break;
-        case 'custom':
-          $grid.shuffle( 'shuffle', 'custom' );
-          break;
-        default:
-          break;  
-      }
-    }, 1000);
-    
-    
   },
 
       
@@ -67,7 +29,6 @@ var shuffleme = (function( $ ) {
       var $this = $(this),
           isActive = $this.hasClass( 'active' ),
           group = isActive ? 'all' : $this.data('group');
-          console.log("group: " + group);
 
       // Hide current label, show current label in title
       if ( !isActive ) {

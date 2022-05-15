@@ -90,7 +90,7 @@
                             <li><a href="components.html">Components</a></li>
                         </ul>
                     </li> -->
-                    <li><a href="shopping-cart.html"><i class="lnr lnr-cart"></i> <span>Shopping Cart (2)</span></a></li>
+                    <li><a href="shopping-cart.html"><i class="lnr lnr-cart"></i> <span>Shopping Cart (<span class="cartCount">0</span>)</span></a></li>
                     <!-- <li class="dropdown w-image">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="images/eng.png" alt=""> <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
@@ -165,7 +165,7 @@
             <!-- project sidebar area -->
             <div class="col-sm-6 col-md-5 product-sidebar">
                 <div class="product-details">
-                    <h4>Bamboo Doorbell</h4>
+                    <h4 class="product-name">Bamboo Doorbell</h4>
                     <!-- <p>Maecenas bibendum erat in erat maximus, vel imperdiet leo mattis. Integer vitae pellentesque massa. Fusce ac suscipit neque. Etiam justo risus, tristique id feugiat a venenatis.</p> -->
                     <!-- <h4 class="space-top-30">Product Info</h4> -->
                     <div class="product-info">
@@ -205,7 +205,7 @@
 
                         <div class="space-25">&nbsp;</div>
 
-                        <a href="shopping-cart.html" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-cart"></i><span> Add to Cart</span></a>
+                        <a class="btn btn-primary-filled btn-rounded add-to-cart-single"><i class="lnr lnr-cart"></i><span> Add to Cart</span></a>
                         <a href="checkout.html" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-heart"></i><span> Buy Now</span></a>
                     </div>
 
@@ -343,6 +343,10 @@
 <!-- scrolling-nav -->
 <script src="js/scrolling-nav.js"></script>
 <!-- / scrolling-nav -->
+
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
 
 <!-- preloader -->
 <script src="js/preloader.js"></script>
