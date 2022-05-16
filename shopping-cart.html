@@ -13,7 +13,7 @@
 <!-- favicon -->
 <link rel="icon" href="images/favicon.png">
 <!-- page title -->
-<title>Doorbell Designs - Shopping Cart</title>
+<title>Doorbell Designs - Cart</title>
 <!-- bootstrap css -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- css -->
@@ -65,7 +65,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt=""></a>
+                <a class="navbar-brand" href="index.html"><img src="images/logo-dd.jpg" alt=""></a>
             </div><!-- / navbar-header -->
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -73,10 +73,10 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
-                            <li><a href="shop-filter.html">All Products</a></li>
-                            <li><a href="shop-filter.html#doorbells">Doorbells</a></li>
-                            <li><a href="shop-filter.html">Ceiling Fan Pulls</a></li>
-                            <li><a href="shop-filter.html#artwork">Artwork</a></li>
+                            <li><a href="doorbells.html">Doorbells</a></li>
+                            <li><a href="artwork.html">Artwork</a></li>
+                            <li><a href="fan-pulls.html">Ceiling Fan Pulls</a></li>
+                            <li><a href="air-plant-holders.html">Air Plant Holders</a></li>
                             <li><a href="custom-orders.html">Custom Orders</a></li>
                             <li><a href="shopping-cart.html">Shopping Cart</a></li>
                             <li><a href="checkout.html">Checkout</a></li>
@@ -99,7 +99,7 @@
                             <li><a href="components.html">Components</a></li>
                         </ul>
                     </li> -->
-                    <li><a href="shopping-cart.html"><i class="lnr lnr-cart"></i> <span>Shopping Cart (2)</span></a></li>
+                    <li><a href="shopping-cart.html"><i class="lnr lnr-cart"></i> <span>Shopping Cart (<span class="cartCount">0</span>)</span></a></li>
                     <!-- <li class="dropdown w-image">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="images/eng.png" alt=""> <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
@@ -144,23 +144,8 @@
                     <th>&nbsp;</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr class="cart-item">
-                    <td class="image"><a href="#"><img src="images/product-small.jpg" alt=""></a></td>
-                    <td><a href="single-product.html">Women's Shirt</a></td>
-                    <td>$59</td>
-                    <td class="qty"><input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4"></td>
-                    <td>$59</td>
-                    <td class="remove"><a href="#x" class="btn btn-danger-filled x-remove">×</a></td>
-                </tr>
-                <tr class="cart-item">
-                    <td class="image"><a href="#"><img src="images/product-small.jpg" alt=""></a></td>
-                    <td><a href="single-product.html">Women's Jeans</a></td>
-                    <td>$69</td>
-                    <td class="qty"><input type="number" step="1" min="0" name="cart" value="2" title="Qty" class="input-text qty text" size="4"></td>
-                    <td>$138</td>
-                    <td class="remove"><a href="#x" class="btn btn-danger-filled x-remove">×</a></td>
-                </tr>
+            <tbody class="cart-table-body">
+                <!-- Items in cart will be shown here -->
             </tbody>
         </table>
         <!-- / shopping cart table -->
@@ -168,25 +153,23 @@
         <div class="row cart-footer">
             <div class="coupon col-sm-6">
                 <div class="input-group">
-                    <input type="text" class="form-control rounded" id="coupon-code" placeholder="Coupon Code">
-                    <span class="input-group-btn">
-                    <button class="btn btn-primary-filled btn-rounded" type="button"><i class="lnr lnr-tag"></i> <span>Apply Coupon</span></button>
+                    
                     </span>
                 </div>
             </div><!-- / input-group -->
             <div class="update-cart col-sm-6">
-                <button class="btn btn-default-filled btn-rounded" type="button"><i class="lnr lnr-sync"></i> <span>Update Cart</span></button>
+                <!-- <button class="btn btn-default-filled btn-rounded" type="button"><i class="lnr lnr-sync"></i> <span>Update Cart</span></button> -->
             </div><!-- / update-cart -->
 
             <div class="col-sm-6 cart-total">
                 <h4>Cart Total</h4>
-                <p>Subtotal: <span>$197</span></p>
-                <p>Shipping: <span>Free</span></p>
-                <p>Total: <span>$197</span></p>
+                <p>Subtotal: <span class="subtotal">$0</span></p>
+                <p>Shipping: <span class="shipping">$0</span></p>
+                <p>Total: <span class="total">$0</span></p>
             </div><!-- / cart-total -->
 
             <div class="col-sm-6 cart-checkout">
-                <a href="shop-filter.html" class="btn btn-default-filled btn-rounded"><i class="lnr lnr-cart"></i> <span>Continue Shopping</span></a>
+                <a href="index.html#categories" class="btn btn-default-filled btn-rounded"><i class="lnr lnr-cart"></i> <span>Continue Shopping</span></a>
                 <a href="checkout.html" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-exit"></i> <span>Proceed to Checkout</span></a>
             </div><!-- / cart-checkout -->
 
@@ -313,6 +296,10 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
+
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
 
 <!-- preloader -->
 <script src="js/preloader.js"></script>
