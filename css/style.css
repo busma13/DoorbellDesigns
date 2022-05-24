@@ -3017,6 +3017,30 @@ section {
 }
 
 /* End Brands */
+/* Instructions */
+.inst-container {
+  width: 80%;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inst-container p{
+  order: 0;
+  padding: 30px;
+  width: 60%;
+  text-align: center;
+}
+
+.inst-img {
+  width: 40%;
+}
+
+.left {
+  order: -1;
+}
+/* End Instructions */
 /* Single Page Headers */
 #page-header {
   background-repeat: no-repeat;
