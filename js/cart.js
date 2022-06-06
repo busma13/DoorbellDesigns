@@ -73,12 +73,14 @@ for (let i = 0; i < addToCartBtns.length; i++) {
 
 // Grab the button that adds items on a single product page
 let addToCartBtnSinglePage = document.querySelector('.add-to-cart-single');
-
+console.log(addToCartBtnSinglePage)
 if (addToCartBtnSinglePage) {
-    addToCartBtnSinglePage.addEventListener('click', () => {
+    addToCartBtnSinglePage.addEventListener('click', (event) => {
         let qty = Number(document.querySelector('.input-text').value);
-        let productName = document.querySelector('.product-name').textContent;
+        let productName = event.currentTarget.id;
         let product = productList.find(product => product.name === productName);
+        console.log(event.currentTarget);
+        console.log(productName, product)
         cartItemCount(qty, product);
         updateTotalCost(qty, product);
     });
@@ -269,7 +271,8 @@ function calculateShippingTotal() {
             console.log(shippingTotal)
         }
     }
-       
+    localStorage.setItem('shippingTotal', shippingTotal);
+
     return shippingTotal;
 }
 
@@ -278,7 +281,7 @@ function updateCartTotals() {
     let subtotal = Number(localStorage.getItem('cartTotal'));
     document.querySelector('.subtotal').textContent = `$${subtotal}`;
 
-    let shipping = calculateShippingTotal();; //figure this out
+    let shipping = calculateShippingTotal();
 
     document.querySelector('.shipping').textContent = `$${shipping}`;
     let total = subtotal + shipping;
