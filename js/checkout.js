@@ -18,16 +18,9 @@ function sendData () {
     if (cartProducts) { 
         //GET FORM DATA
         var data = new FormData(document.getElementById("orderForm"));
-        // data.append("first-name", document.getElementById("name").value);
-        // data.append("last-name", document.getElementById("name").value);
-        // data.append("tel", document.getElementById("name").value);
-        // data.append("email", document.getElementById("email").value);
-        // data.append("address-line", document.getElementById("name").value);
-        // data.append("city", document.getElementById("name").value);
-        // data.append("state", document.getElementById("name").value);
-        // data.append("zip", document.getElementById("name").value);
+        data.append("state", document.querySelector('select').value);
         data.append("cart-products", cartProducts);
-        console.log('here')
+        data.append("submit", "submit");
     
         // INIT FETCH POST
         fetch("./includes/order.inc.php", {
@@ -37,13 +30,15 @@ function sendData () {
     
         // RETURN SERVER RESPONSE AS TEXT
         .then((result) => {
+            console.log(result)
         if (result.status != 200) { throw new Error("Bad Server Response"); }
         return result.text();
         })
     
         // SERVER RESPONSE
         .then((response) => {
-        console.log(response);
+        console.log('.then response');
+        window.location.href = 'https://www.squareup.com';
         })
     
         // HANDLE ERRORS

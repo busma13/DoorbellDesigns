@@ -1,13 +1,3 @@
-<?php
-    session_start();
-?>
-
-
-
-<?php
-    $_SESSION['name'] = 'checkout';
-    // echo $_SESSION['name'];
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -168,9 +158,8 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="address-line" placeholder="*Address Line" required>
-                            <select class="form-control" name="state">
+                            <select class="form-control" name="state" required>
                                 <optgroup label="State:">
-                                <option value="" disabled selected>*State</option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
                                 <option value="AZ">Arizona</option>
@@ -241,7 +230,32 @@
                 </form>
 
             </div><!-- / checkout-form -->
-
+            <?php
+                if (!isset($_GET['order'])) {
+                    exit();
+                }
+                else {
+                    $orderCheck = $_GET['order'];
+                    echo $orderCheck;
+                    if ($orderCheck == "empty") {
+                        echo "<p class='error'>Please fill out all required fields.</p>";
+                        // exit();
+                    }
+                    elseif ($orderCheck == "email") {
+                        echo "<p class='error'>Please enter a valid email.</p>";
+                        // exit();
+                    }
+                    elseif ($orderCheck == "error") {
+                        echo "<p class='error'>Form submission error. Please try again.</p>";
+                        // exit();
+                    }
+                    elseif ($orderCheck == "success") {
+                        echo "<p class='success'>Order submitted.</p>";
+                        // exit();
+                    }
+                }
+               
+            ?>
 
             <div class="col-sm-4 checkout-total">
                 <h4>Cart Total: <span class="total">$0</span></h4>
