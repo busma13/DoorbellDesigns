@@ -2,44 +2,58 @@
 // store this elsewhere in the future
 let productList = [
     {
-        name: 'Bamboo Doorbell',
+        name: 'bambooDoorbell',
         categories: ['Doorbells', "Plants"],
-        price: 59,
+        price: 43,
+        shipping: 3.50,
         qtyInCart: 0,
         pageUrl: 'bamboo-doorbell.html',
         imgUrl: 'images/doorbells/bamboo_9to10.jpg'
     },
     {
-        name: 'Release The Hounds Doorbell',
+        name: 'releaseTheHoundsDoorbell',
         categories: ['Doorbells', "Dog Lovers"],
-        price: 169,
+        price: 43,
+        shipping: 3.50,
         qtyInCart: 0,
-        pageUrl: 'release-the-hounds.html',
+        pageUrl: 'release-the-hounds-doorbell.html',
         imgUrl: 'images/doorbells/to-release-the-hounds-1_9to10.jpg'
     },
     {
-        name: 'Buffalo Shaman Doorbell',
+        name: 'buffaloShamanDoorbell',
         categories: ['Doorbells', "Petroglyphs"],
-        price: 49,
+        price: 43,
+        shipping: 3.5,
         qtyInCart: 0,
-        pageUrl: 'bamboo-doorbell.html',
+        pageUrl: 'buffalo-shaman-doorbell.html',
         imgUrl: 'images/doorbells/buffalo-shaman_9to10.jpg'
     },
     {
-        name: 'Grapes Doorbell',
+        name: 'grapesDoorbell',
         categories: ['Doorbells', "Plants"],
-        price: 29,
+        price: 43,
+        shipping: 3.50,
         qtyInCart: 0,
-        pageUrl: 'bamboo-doorbell.html',
+        pageUrl: 'grapes-doorbell.html',
         imgUrl: 'images/doorbells/grapes_9to10.jpg'
     },
     {
-        name: 'Green Lizard Doorbell',
+        name: 'greenLizardDoorbell',
         categories: ['Doorbells', "Animals"],
-        price: 99,
+        price: 43,
+        shipping: 3.50,
         qtyInCart: 0,
-        pageUrl: 'bamboo-doorbell.html',
+        pageUrl: 'green-lLizard-doorbell.html',
         imgUrl: 'images/doorbells/lizard-green_9to10.jpg'
+    },
+    {
+        name: 'largePetroglyphDoorbell',
+        categories: ['Doorbells', "Petroglyphs"],
+        price: 55,
+        shipping: 5,
+        qtyInCart: 0,
+        pageUrl: 'large-petroglyph-doorbell.html',
+        imgUrl: 'images/doorbells/large-petroglyph_9to10.jpg'
     },
 ];
 
@@ -59,12 +73,14 @@ for (let i = 0; i < addToCartBtns.length; i++) {
 
 // Grab the button that adds items on a single product page
 let addToCartBtnSinglePage = document.querySelector('.add-to-cart-single');
-
+console.log(addToCartBtnSinglePage)
 if (addToCartBtnSinglePage) {
-    addToCartBtnSinglePage.addEventListener('click', () => {
+    addToCartBtnSinglePage.addEventListener('click', (event) => {
         let qty = Number(document.querySelector('.input-text').value);
-        let productName = document.querySelector('.product-name').textContent;
+        let productName = event.currentTarget.id;
         let product = productList.find(product => product.name === productName);
+        console.log(event.currentTarget);
+        console.log(productName, product)
         cartItemCount(qty, product);
         updateTotalCost(qty, product);
     });
@@ -108,8 +124,7 @@ function setItems(qty, product) {
     localStorage.setItem('cartProducts', JSON.stringify(cartContents))
 }
 
-// When page loads/changes get the number of items in the shopping cart and display
-// it in the nav bar.
+// When page loads/changes get the number of items in the shopping cart and display it in the nav bar.
 function updateCartCount() {
     let numOfItems = Number(localStorage.getItem('cartItemCount'));
     if(numOfItems != undefined) {
@@ -127,6 +142,7 @@ function updateTotalCost(qty, product) {
     }
 }
 
+// Loads all of the products into the shopping cart table and updates the cart totals
 function displayCart() {
     let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
     //console.log(productsInCart);
@@ -169,7 +185,6 @@ function updateSingleProductTotals() {
                 tdQty.nextElementSibling.textContent = `$${tdQty.previousElementSibling.textContent.slice(1) * qty}`;
                 
                 // Update the localStorage cartItemCount value
-                
                 cartItemCount(qtyToAdd, product)
                 
                 //Update the localStorage cartTotal value
@@ -178,6 +193,7 @@ function updateSingleProductTotals() {
                 // update cart total in the nav bar
                 updateCartCount()
 
+                // update cart totals on the shupping cart page
                 updateCartTotals()
             }
         });
@@ -216,11 +232,57 @@ function removeProductFromCart() {
     });
 }
 
+//Calculate shipping total
+function calculateShippingTotal() {
+    let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
+    // console.log('productsInCart', productsInCart.bambooDoorbell);
+    let shippingTotal = 0;
+    let qtyAtEachShippingPrice = {};
+    for (let product in productsInCart) {
+        // console.log(product);
+        // console.log(`${productsInCart[product].shipping}`);
+        let itemShipping = productsInCart[product].shipping;
+        let itemQty = productsInCart[product].qtyInCart;
+
+        if (!qtyAtEachShippingPrice[itemShipping]) {
+            qtyAtEachShippingPrice[itemShipping] = 0;
+        }
+        qtyAtEachShippingPrice[itemShipping] += itemQty;
+
+    }
+    console.table(qtyAtEachShippingPrice)
+
+    for (let price in qtyAtEachShippingPrice) {
+        // console.log(`${qtyAtEachShippingPrice[price]}`)
+        if (price == 3.5) {
+            if(qtyAtEachShippingPrice[price] % 2 === 0) {
+                // console.log('even')
+                // console.log(Number(price) * qtyAtEachShippingPrice[price] / 2)
+                shippingTotal += Number(price) * qtyAtEachShippingPrice[price] / 2;
+                console.log(shippingTotal)
+            } else {
+                // console.log('odd')
+                shippingTotal += Number(price) * (qtyAtEachShippingPrice[price] + 1) / 2;
+                console.log(shippingTotal)
+            }
+        } else {
+            // console.log(`${qtyAtEachShippingPrice[price]}`)
+            shippingTotal += Number(price) * qtyAtEachShippingPrice[price]; // fix for other prices
+            console.log(shippingTotal)
+        }
+    }
+    localStorage.setItem('shippingTotal', shippingTotal);
+
+    return shippingTotal;
+}
+
+//Updates all the prices in the Cart Total area of the shopping cart
 function updateCartTotals() {
     let subtotal = Number(localStorage.getItem('cartTotal'));
     document.querySelector('.subtotal').textContent = `$${subtotal}`;
 
-    let shipping = 25; //figure this out
+    let shipping = calculateShippingTotal();
+
     document.querySelector('.shipping').textContent = `$${shipping}`;
     let total = subtotal + shipping;
     document.querySelector('.total').textContent = `$${total}`;

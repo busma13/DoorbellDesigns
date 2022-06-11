@@ -1,3 +1,13 @@
+<?php
+    session_start();
+?>
+
+
+
+<?php
+    $_SESSION['name'] = 'checkout';
+    // echo $_SESSION['name'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,6 +54,8 @@
 
 <!-- header -->
 <header>
+    <!-- https://connect.squareup.com/v2/checkout?c={{CHECKOUT_ID}}&l={{LOCATION_ID}}
+ -->
     <div class="top-menu top-menu-inverse">
         <!-- <div class="container">
             <p>
@@ -135,66 +147,111 @@
         <div class="row checkout-screen">
             <div class="col-sm-8 checkout-form">
                 <h4 class="space-left">Checkout</h4>
-                <p class="space-left have-account">Already have an account? <a href="login-register.html" class="btn btn-link"><i class="lnr lnr-enter"></i><span>Login</span></a></p>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="first-name" placeholder="*First name" required>
-                        <input type="text" class="form-control" name="last-name" placeholder="*Last name" required>
-                        <input type="email" class="form-control" name="email" placeholder="*Email" required>
-                        
-                    </div>
-                    <div class="col-sm-6">
-                        <input type="tel" class="form-control" name="tel" placeholder="*Phone" required>
-                        <input type="text" class="form-control" name="company" placeholder="Company">
-                        <input type="text" class="form-control" name="address-line" placeholder="*Address Line" required>
-                    </div>
-                </div><!-- / row -->
+                <!-- <p class="space-left have-account">Already have an account? <a href="login-register.html" class="btn btn-link"><i class="lnr lnr-enter"></i><span>Login</span></a></p> -->
+                <form onsubmit="return sendData()" id="orderForm">
+                <!-- <form action="./includes/order.inc.php" method="POST"> -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="first-name" placeholder="*First name" required>
+                            <input type="text" class="form-control" name="last-name" placeholder="*Last name" required>
+                            
+                            
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="tel" class="form-control" name="tel" placeholder="Phone">
+                            <input type="email" class="form-control" name="email" placeholder="*Email" required>
+                            <!-- <input type="text" class="form-control" name="company" placeholder="Company"> -->
+                            
+                        </div>
+                    </div><!-- / row -->
 
-                <div class="row">
-                    <div class="col-sm-6">
-                        <select class="form-control" name="country">
-                            <optgroup label="Country:">
-                                <option value="usa">USA</option>
-                                <option value="australia">Australia</option>
-                                <option value="g-britain">Great Britain</option>
-                                <option value="sp">Spain</option>
-                            </optgroup>
-                        </select>
-                        <select class="form-control" name="state">
-                            <optgroup label="State:">
-                                <option value="s1">Florida</option>
-                                <option value="s2">VIC</option>
-                                <option value="s3">United Kingdom</option>
-                                <option value="s4">Catalonia</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div class="col-sm-6">
-                        <select class="form-control" name="city">
-                            <optgroup label="State:">
-                                <option value="s1">Miami</option>
-                                <option value="s2">Melbourne</option>
-                                <option value="s3">London</option>
-                                <option value="s4">Barcelona</option>
-                            </optgroup>
-                        </select>
-                        <input type="text" class="form-control" name="zip" placeholder="ZIP Code" required>
-                    </div>
-                </div><!-- / row -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="address-line" placeholder="*Address Line" required>
+                            <select class="form-control" name="state">
+                                <optgroup label="State:">
+                                <option value="" disabled selected>*State</option>
+                                <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                                <option value="AZ">Arizona</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="CA">California</option>
+                                <option value="CO">Colorado</option>
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="DC">District of Columbia</option>
+                                <option value="FL">Florida</option>
+                                <option value="GA">Georgia</option>
+                                <option value="HI">Hawaii</option>
+                                <option value="ID">Idaho</option>
+                                <option value="IL">Illinois</option>
+                                <option value="IN">Indiana</option>
+                                <option value="IA">Iowa</option>
+                                <option value="KS">Kansas</option>
+                                <option value="KY">Kentucky</option>
+                                <option value="LA">Louisiana</option>
+                                <option value="ME">Maine</option>
+                                <option value="MD">Maryland</option>
+                                <option value="MA">Massachusetts</option>
+                                <option value="MI">Michigan</option>
+                                <option value="MN">Minnesota</option>
+                                <option value="MS">Mississippi</option>
+                                <option value="MO">Missouri</option>
+                                <option value="MT">Montana</option>
+                                <option value="NE">Nebraska</option>
+                                <option value="NV">Nevada</option>
+                                <option value="NH">New Hampshire</option>
+                                <option value="NJ">New Jersey</option>
+                                <option value="NM">New Mexico</option>
+                                <option value="NY">New York</option>
+                                <option value="NC">North Carolina</option>
+                                <option value="ND">North Dakota</option>
+                                <option value="OH">Ohio</option>
+                                <option value="OK">Oklahoma</option>
+                                <option value="OR">Oregon</option>
+                                <option value="PA">Pennsylvania</option>
+                                <option value="RI">Rhode Island</option>
+                                <option value="SC">South Carolina</option>
+                                <option value="SD">South Dakota</option>
+                                <option value="TN">Tennessee</option>
+                                <option value="TX">Texas</option>
+                                <option value="UT">Utah</option>
+                                <option value="VT">Vermont</option>
+                                <option value="VA">Virginia</option>
+                                <option value="WA">Washington</option>
+                                <option value="WV">West Virginia</option>
+                                <option value="WI">Wisconsin</option>
+                                <option value="WY">Wyoming</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="city" placeholder="*City" required>
+                            <input type="text" class="form-control" name="zip" placeholder="*ZIP Code" required>
+                        </div>
+                    </div><!-- / row -->
 
-                <div class="checkout-form-footer space-left space-right">
-                    <textarea class="form-control" name="message" placeholder="Message" required></textarea>
-                    <a href="" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-exit"></i><span>Checkout</span></a>
-                </div><!-- / checkout-form-footer -->
+                    <!-- <input type="hidden" name="cart-products" value="test"> -->
+
+                    <div class="checkout-form-footer space-left space-right">
+                        <!-- <textarea class="form-control" name="message" placeholder="Message" required></textarea> -->
+                        <!-- <a href="" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-exit"></i><span>Checkout with Square</span></a> -->
+                        <button type="submit" name="submit" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-exit"></i><span>Checkout with Square</span></button>
+                    </div><!-- / checkout-form-footer -->
+                </form>
 
             </div><!-- / checkout-form -->
 
+
             <div class="col-sm-4 checkout-total">
-                <h4>Cart Total: <span>$197</span></h4>
-                <p>* The price includes Worldwide shipping and taxes.</p>
+                <h4>Cart Total: <span class="total">$0</span></h4>
+                <p>Subtotal: <span class="subtotal">$0</span></p>
+                <p>Shipping: <span class="shipping">$0</span></p>
+
+                
                 <div class="cart-total-footer">
                     <a href="shopping-cart.html" class="btn btn-default-filled btn-rounded"><i class="lnr lnr-arrow-left"></i><span>Back to Cart</span></a>
-                    <a href="shop-right.html" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-cart"></i><span>Back to Shop</span></a>
+                    <a href="./#categories" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-cart"></i><span>Back to Shop</span></a>
                 </div><!-- / cart-total-footer -->
             </div><!-- / checkout-total -->
 
@@ -320,6 +377,10 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
+
+<!-- checkout -->
+<script src="js/checkout.js"></script>
+<!-- / checkout -->
 
 <!-- preloader -->
 <script src="js/preloader.js"></script>
