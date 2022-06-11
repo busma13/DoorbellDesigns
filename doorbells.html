@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,6 +48,7 @@
 
 <!-- header -->
 <header>
+
     <div class="top-menu top-menu-inverse">
         <!-- <div class="container">
             <p>
@@ -162,7 +167,7 @@
                             <a href="bamboo-doorbell.html" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a class="add-to-cart" id="Bamboo Doorbell">
+                            <a class="add-to-cart" id="bambooDoorbell">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->
@@ -170,7 +175,7 @@
                         <!-- product-details -->
                         <div class="product-details">
                             <h3 class="product-title">Bamboo</h3>
-                            <h6 class="product-price">$59</h6>
+                            <h6 class="product-price">$43</h6>
                         </div><!-- / product-details -->
                     </div><!-- / product -->
 
@@ -187,7 +192,7 @@
                             <a href="buffalo-shaman.html" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a class="add-to-cart" id="Buffalo Shaman Doorbell">
+                            <a class="add-to-cart" id="buffaloShamanDoorbell">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->
@@ -195,31 +200,7 @@
                         <!-- product-details -->
                         <div class="product-details">
                             <h3 class="product-title">Buffalo Shaman</h3>
-                            <h6 class="product-price">$49</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["petroglyphs"]'>
-                        <a href="cardman.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/cardman_9to10.jpg" alt="Cardman Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="cardman.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Cardman</h3>
-                            <h6 class="product-price">$99</h6>
+                            <h6 class="product-price">$43</h6>
                         </div><!-- / product-details -->
                     </div><!-- / product -->
 
@@ -235,7 +216,7 @@
                             <a href="grapes.html" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a class="add-to-cart" id="Grapes Doorbell">
+                            <a class="add-to-cart" id="grapesDoorbell">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->
@@ -243,79 +224,7 @@
                         <!-- product-details -->
                         <div class="product-details">
                             <h3 class="product-title">Grapes</h3>
-                            <h6 class="product-price">$29</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["animals"]'>
-                        <a href="hummingbird-welcome.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/hummingbird-welcome_9to10.jpg" alt="Hummingbird Welcome Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="hummingbird-welcome.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Welcome</h3>
-                            <h6 class="product-price">$69</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["animals"]'>
-                        <a href="hummingbird.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/hummingbird_9to10.jpg" alt="Hummingbird Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="hummingbird.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Hummingbird</h3>
-                            <h6 class="product-price">$39</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["southwest"]'>
-                        <a href="kokopelli.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/kokopelli_9to10.jpg" alt="Kokopelli Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="kokopelli.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Kokopelli</h3>
-                            <h6 class="product-price">$499</h6>
+                            <h6 class="product-price">$43</h6>
                         </div><!-- / product-details -->
                     </div><!-- / product -->
 
@@ -331,7 +240,7 @@
                             <a href="large-petroglyph.html" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a href="#" class="add-to-cart">
+                            <a href="#" class="add-to-cart" id="largePetroglyphDoorbell">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->
@@ -339,56 +248,7 @@
                         <!-- product-details -->
                         <div class="product-details">
                             <h3 class="product-title">Large Petroglyph</h3>
-                            <h6 class="product-price">$199</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["animals"]'>
-                        <!-- <span class="sale-label">SALE</span> -->
-                        <a href="lizard-blue-green.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/lizard-blue-green_9to10.jpg" alt="Blue-Green Lizard Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="lizard-blue-green.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Blue-Green Lizard</h3>
-                            <h6 class="product-price">$35</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["animals"]'>
-                        <a href="lizard-brown.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/lizard-brown_9to10.jpg" alt="Brown Lizard Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="lizard-brown.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Brown Lizard</h3>
-                            <h6 class="product-price">$189</h6>
+                            <h6 class="product-price">$55</h6>
                         </div><!-- / product-details -->
                     </div><!-- / product -->
 
@@ -404,7 +264,7 @@
                             <a href="lizard-green.html" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a class="add-to-cart" id="Green Lizard Doorbell">
+                            <a class="add-to-cart" id="greenLizardDoorbell">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->
@@ -412,223 +272,7 @@
                         <!-- product-details -->
                         <div class="product-details">
                             <h3 class="product-title">Green Lizard</h3>
-                            <h6 class="product-price">$99</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["plants"]'>
-                        <a href="pineapple.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/pineapple_9to10.jpg" alt="pineapple doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="pineapple.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Pineapple</h3>
-                            <h6 class="product-price">$169</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["plants"]'>
-                        <a href="pull-weeds.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/pull-weeds_9to10.jpg" alt="pull weeds doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="pull-weeds.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Pull Weeds</h3>
-                            <h6 class="product-price">$49</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["plants"]'>
-                        <a href="saguaro-oval.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/saguaro-cactus-oval_9to10.jpg" alt="saguaro cactus oval doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="saguaro-oval.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Saguaro Oval</h3>
-                            <h6 class="product-price">$169</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["plants"]'>
-                        <a href="saguaro-rectangle.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/saguaro-cactus-rectangle_9to10.jpg" alt="saguaro cactus rectangle doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="saguaro-rectangle.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Saguaro Rectangle</h3>
-                            <h6 class="product-price">$169</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["petroglyphs"]'>
-                        <a href="shaman.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/shaman-chief_9to10.jpg" alt="shaman chief doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="shaman.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Shaman Chief</h3>
-                            <h6 class="product-price">$169</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["plants"]'>
-                        <a href="strawberries.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/strawberries_9to10.jpg" alt="strawberries doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="strawberries.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Strawberries</h3>
-                            <h6 class="product-price">$169</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["misc"]'>
-                        <a href="to-beam-up-blue.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/to-beam-up-blue_9to10.jpg" alt="to beam up press here blue doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="to-beam-up-blue.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">To Beam Up Blue</h3>
-                            <h6 class="product-price">$169</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["misc"]'>
-                        <a href="to-beam-up-orange.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/to-beam-up-orange_9to10.jpg" alt="to beam up press here orange doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="to-beam-up-orange.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">To Beam Up Orange</h3>
-                            <h6 class="product-price">$169</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["misc"]'>
-                        <a href="to-beam-up-red.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/to-beam-up-red_9to10.jpg" alt="to beam up press here red doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="to-beam-up-red.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">To Beam Up Red</h3>
-                            <h6 class="product-price">$169</h6>
+                            <h6 class="product-price">$43</h6>
                         </div><!-- / product-details -->
                     </div><!-- / product -->
 
@@ -644,7 +288,7 @@
                             <a href="release-the-hounds.html" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a class="add-to-cart" id="Release The Hounds Doorbell">
+                            <a class="add-to-cart" id="releaseTheHoundsDoorbell">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->
@@ -652,83 +296,11 @@
                         <!-- product-details -->
                         <div class="product-details">
                             <h3 class="product-title">Release The Hounds</h3>
-                            <h6 class="product-price">$169</h6>
+                            <h6 class="product-price">$43</h6>
                         </div><!-- / product-details -->
                     </div><!-- / product -->
 
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["plants"]'>
-                        <a href="wine-and-grapes.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/wine-and-grapes_9to10.jpg" alt="wine and grapes doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="wine-and-grapes.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart" id="Release The Hounds Doorbell">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Wine And Grapes</h3>
-                            <h6 class="product-price">$169</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["petroglyphs"]'>
-                        <a href="woman.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/woman-1_9to10.jpg" alt="woman doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="woman.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Woman</h3>
-                            <h6 class="product-price">$169</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["artwork"]'>
-                        <a href="pineapple.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/pineapple_9to10.jpg" alt="pineapple doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="pineapple.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Pineapple</h3>
-                            <h6 class="product-price">$169</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
+                   
 
                     <!-- grid-resizer -->
                     <div class="col-xs-6 col-md-3 shuffle_sizer"></div>
