@@ -148,7 +148,7 @@
                             
                         </div>
                         <div class="col-sm-6">
-                            <input type="tel" class="form-control" name="tel" placeholder="Phone">
+                            <input type="tel" class="form-control" name="tel" placeholder="Phone" required>
                             <input type="email" class="form-control" name="email" placeholder="*Email" required>
                             <!-- <input type="text" class="form-control" name="company" placeholder="Company"> -->
                             
@@ -229,33 +229,35 @@
                     </div><!-- / checkout-form-footer -->
                 </form>
 
+            
+                <!-- Server side form validation notifications. -->
+                <?php
+                    if (!isset($_GET['order'])) {
+                        //do nothing
+                    }
+                    else {
+                        $orderCheck = $_GET['order'];
+                        // echo $orderCheck;
+                        if ($orderCheck == "empty") {
+                            echo "<p class='error'>Please fill out all required fields.</p>";
+                            // exit();
+                        }
+                        elseif ($orderCheck == "email") {
+                            echo "<p class='error'>Please enter a valid email.</p>";
+                            // exit();
+                        }
+                        elseif ($orderCheck == "error") {
+                            echo "<p class='error'>Form submission error. Please try again.</p>";
+                            // exit();
+                        }
+                        elseif ($orderCheck == "success") {
+                            echo "<p class='success'>Order submitted.</p>";
+                            // exit();
+                        }
+                    }
+                ?>
+
             </div><!-- / checkout-form -->
-            <?php
-                if (!isset($_GET['order'])) {
-                    exit();
-                }
-                else {
-                    $orderCheck = $_GET['order'];
-                    echo $orderCheck;
-                    if ($orderCheck == "empty") {
-                        echo "<p class='error'>Please fill out all required fields.</p>";
-                        // exit();
-                    }
-                    elseif ($orderCheck == "email") {
-                        echo "<p class='error'>Please enter a valid email.</p>";
-                        // exit();
-                    }
-                    elseif ($orderCheck == "error") {
-                        echo "<p class='error'>Form submission error. Please try again.</p>";
-                        // exit();
-                    }
-                    elseif ($orderCheck == "success") {
-                        echo "<p class='success'>Order submitted.</p>";
-                        // exit();
-                    }
-                }
-               
-            ?>
 
             <div class="col-sm-4 checkout-total">
                 <h4>Cart Total: <span class="total">$0</span></h4>

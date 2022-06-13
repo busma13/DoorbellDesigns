@@ -1,0 +1,17 @@
+{
+    "name": "busma/doorbell-designs",
+    "autoload": {
+        "psr-4": {
+            "Busma\\DoorbellDesigns\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "busma13",
+            "email": "peterluitjens@gmail.com"
+        }
+    ],
+    "require": {
+        "square/square": "19.0.1.20220512"
+    }
+}
