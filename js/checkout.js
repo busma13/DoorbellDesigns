@@ -38,7 +38,7 @@ function sendData () {
         // SERVER RESPONSE
         .then((response) => {
         console.log('.then response');
-        window.location.href = 'https://www.squareup.com';
+        // window.location.href = 'https://www.squareup.com';
         })
     
         // HANDLE ERRORS
