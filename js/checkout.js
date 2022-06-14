@@ -27,19 +27,31 @@ function sendData () {
         method: "POST",
         body: data
         })
-    
-        // RETURN SERVER RESPONSE AS TEXT
-        .then((result) => {
+
+         // RETURN SERVER RESPONSE AS TEXT
+         .then((result) => {
             console.log(result)
-        if (result.status != 200) { throw new Error("Bad Server Response"); }
-        return result.text();
+            if (result.status != 200) { throw new Error("Bad Server Response"); }
+            return result;
         })
     
         // SERVER RESPONSE
         .then((response) => {
-        console.log('.then response');
-        // window.location.href = 'https://www.squareup.com';
+            console.log(response);
+            // console.log(typeof response);
+            // window.location.href = response.url;
         })
+    
+        // // GET SERVER RESPONSE
+        // .then((result) => {
+        //     if (result.status != 200) { throw new Error("Bad Server Response"); }
+        //     return result;
+        // })
+    
+        // // REDIRECT TO SQUARE CHECKOUT URL
+        // .then((response) => {
+        //     window.location.href = response.url;//TURN THIS INTO A FETCH?
+        // })
     
         // HANDLE ERRORS
         .catch((error) => { console.log(error); });
