@@ -8,13 +8,13 @@ use Square\Environment;
 use Square\Exceptions\ApiException;
 use Square\Models\Order;
 
-echo getenv('SQUARE_ACCESS_TOKEN');
+// echo getenv('SQUARE_ACCESS_TOKEN');
 
 $client = new SquareClient([
-    // 'accessToken' => getenv('SQUARE_ACCESS_TOKEN') , //update for production
-    // 'environment' => getenv('Environment::SANDBOX'), // update for production
-    'accessToken' => 'EAAAEFN_O2W7e2OFxMrK-kO7VE37kDXLCsZdU5m8emAZa_opNfCoINMcbFqK1maV' , //update for production
-    'environment' => 'sandbox', // update for production
+    'accessToken' => getenv('SQUARE_ACCESS_TOKEN') , //update for production
+    'environment' => getenv('ENVIRONMENT'), // update for production
+    // 'accessToken' => 'EAAAEFN_O2W7e2OFxMrK-kO7VE37kDXLCsZdU5m8emAZa_opNfCoINMcbFqK1maV' , //update for production
+    // 'environment' => 'sandbox', // update for production
 ]);
 
 if (isset($_POST['submit'])) {
@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
 
             $stmt = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($stmt, $sql)) {
-                echo "SQL statement failed";
+                header("Location: ../checkout.php?order=SQL-statement-failed");//work on this
             } else {
                 mysqli_stmt_bind_param($stmt, "ssssssssss", $id, $first, $last, $tel, $email, $address_line, $city, $state, $zip, $products);
                 mysqli_stmt_execute($stmt);
@@ -94,6 +94,7 @@ if (isset($_POST['submit'])) {
             
             $checkout_options = new \Square\Models\CheckoutOptions();
             $checkout_options->setAskForShippingAddress(true);
+            $checkout_options->setRedirectUrl("http://localhost/doorbelldesigns/confirmation.php"); //add this or use square's confirmation page?
             
             $address = new \Square\Models\Address();
             $address->setAddressLine1($post_array[5]);
@@ -108,10 +109,10 @@ if (isset($_POST['submit'])) {
             $recipient->setEmailAddress($post_array[4]);
             $recipient->setAddress($address);
             
-            // $pre_populated_data = new \Square\Models\PrePopulatedData();
+            $pre_populated_data = new \Square\Models\PrePopulatedData();
             // $pre_populated_data->setBuyerAddress($address);//here
             // $pre_populated_data->setBuyerEmail($recipient->getEmailAddress);
-            // $pre_populated_data->setBuyerPhoneNumber($recipient->getPhoneNumber);
+            $pre_populated_data->setBuyerPhoneNumber($post_array[3]);
             
             $shipment_details = new \Square\Models\OrderFulfillmentShipmentDetails();
             $shipment_details->setRecipient($recipient);
@@ -124,13 +125,13 @@ if (isset($_POST['submit'])) {
             $order = new Order('L20MQK5M4PT2Z'); //location - change from sandbox to real location
             // $order->setCustomerId($post_array[9]); //remove if not needed. If needed add ID to array after received from database.
             $order->setLineItems($line_items);
-            $order->setFulfillments($fulfillments);//here
+            $order->setFulfillments($fulfillments);
             
             $body = new \Square\Models\CreatePaymentLinkRequest();
             $body->setIdempotencyKey($post_array[0]); 
             $body->setOrder($order);
             $body->setCheckoutOptions($checkout_options);
-            // $body->setPrePopulatedData($pre_populated_data);
+            $body->setPrePopulatedData($pre_populated_data);
             
             //checkoutAPI
             $api_response = $client->getCheckoutApi()->createPaymentLink($body);
@@ -141,13 +142,14 @@ if (isset($_POST['submit'])) {
                 $payment_link = json_encode($result->getPaymentLink()->getUrl());
                 $payment_link =  stripslashes($payment_link);
                 // return $payment_link;
-                header("Location: Https://www.example.com");
-                // header("Location: " . $payment_link); // change to return link to square checkout page
+                // exit($payment_link);//Access-Control-Allow-Origin: 
+                header('Location: '.$result->getPaymentLink()->getUrl()); // change to return link to square checkout page
+                exit();
             } else {
                 $errors = $api_response->getErrors();
                 $json = json_encode($errors);
-                // return $json;
-                header("Location: ./checkout.php?ex=" . $exception);
+                exit($json);
+                // header("Location: ./checkout.php?ex=" . $exception);
             }
             
 
