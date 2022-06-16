@@ -14,7 +14,7 @@ function sendData () {
         // Get products from the cart
     let cartProducts = localStorage.getItem('cartProducts');
         // Check if there are items in the cart
-        console.log(cartProducts)
+        // console.log(cartProducts)
     if (cartProducts) { 
         //GET FORM DATA
         var data = new FormData(document.getElementById("orderForm"));
@@ -28,18 +28,30 @@ function sendData () {
         body: data
         })
 
-         // RETURN SERVER RESPONSE AS TEXT
-         .then((result) => {
+        // RETURN SERVER RESPONSE AS TEXT
+        .then((result) => {
             console.log(result)
             if (result.status != 200) { throw new Error("Bad Server Response"); }
-            return result;
+            return result.json();
         })
     
         // SERVER RESPONSE
         .then((response) => {
+            // console.log(response.text());
             console.log(response);
-            // console.log(typeof response);
-            // window.location.href = response.url;
+            // fetch(response, {mode: "no-cors"})
+            //     .then((res) => {
+            //         console.log(res);
+            //     })
+
+            //     .catch(err => {
+            //         console.log(err);
+            //     })
+            window.location.href = response;
+        })
+
+        .catch(err => {
+            console.log(err);
         })
     
         // // GET SERVER RESPONSE
