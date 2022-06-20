@@ -220,7 +220,7 @@
                         </div>
                     </div><!-- / row -->
 
-                    <input type="hidden" name="cart-products" value="test">
+                    <input type="hidden" name="cart-list-input" id="cart-list-input" value="">
 
                     <div class="checkout-form-footer space-left space-right">
                         <!-- <textarea class="form-control" name="message" placeholder="Message" required></textarea> -->
