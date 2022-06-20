@@ -10,67 +10,86 @@ function updateCartTotals() {
     document.querySelector('.total').textContent = `$${total}`;
 }
 
-function sendData () {
-        // Get products from the cart
-    let cartProducts = localStorage.getItem('cartProducts');
-        // Check if there are items in the cart
-        // console.log(cartProducts)
-    if (cartProducts) { 
-        //GET FORM DATA
-        var data = new FormData(document.getElementById("orderForm"));
-        data.append("state", document.querySelector('select').value);
-        data.append("cart-products", cartProducts);
-        data.append("submit", "submit");
-    
-        // INIT FETCH POST
-        fetch("./includes/order.inc.php", {
-        method: "POST",
-        body: data
-        })
+function createCartList() {
+    let checkoutList = [];
+    let cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    // console.log(cartProducts);
+    for (obj in cartProducts) {
+        // console.log(cartProducts[obj]);
+        listItem = { 
+        };
+        listItem.itemName = cartProducts[obj].itemName;
+        listItem.itemNameString = cartProducts[obj].itemNameString;
+        listItem.itemQty = cartProducts[obj].qtyInCart; 
+        checkoutList.push(listItem);
+    }
+    localStorage.setItem('cartList', JSON.stringify(checkoutList));
+    document.querySelector('#cart-list-input').value = JSON.stringify(checkoutList);
+    // console.log(checkoutList)
+}
 
-        // RETURN SERVER RESPONSE AS TEXT
-        .then((result) => {
-            console.log(result)
-            if (result.status != 200) { throw new Error("Bad Server Response"); }
-            return result.json();
-        })
+// function sendData () {
+//         // Get products from the cart
+//     let cartProducts = localStorage.getItem('cartProducts');
+//         // Check if there are items in the cart
+//         // console.log(cartProducts)
+//     if (cartProducts) { 
+//         //GET FORM DATA
+//         var data = new FormData(document.getElementById("orderForm"));
+//         data.append("state", document.querySelector('select').value);
+//         data.append("cart-products", cartProducts);
+//         data.append("submit", "submit");
     
-        // SERVER RESPONSE
-        .then((response) => {
-            // console.log(response.text());
-            console.log(response);
-            // fetch(response, {mode: "no-cors"})
-            //     .then((res) => {
-            //         console.log(res);
-            //     })
+//         // INIT FETCH POST
+//         fetch("./includes/order.inc.php", {
+//         method: "POST",
+//         body: data
+//         })
 
-            //     .catch(err => {
-            //         console.log(err);
-            //     })
-            window.location.href = response;
-        })
+//         // RETURN SERVER RESPONSE AS TEXT
+//         .then((result) => {
+//             console.log(result)
+//             if (result.status != 200) { throw new Error("Bad Server Response"); }
+//             return result.json();
+//         })
+    
+//         // SERVER RESPONSE
+//         .then((response) => {
+//             // console.log(response.text());
+//             console.log(response);
+//             // fetch(response, {mode: "no-cors"})
+//             //     .then((res) => {
+//             //         console.log(res);
+//             //     })
 
-        .catch(err => {
-            console.log(err);
-        })
-    
-        // // GET SERVER RESPONSE
-        // .then((result) => {
-        //     if (result.status != 200) { throw new Error("Bad Server Response"); }
-        //     return result;
-        // })
-    
-        // // REDIRECT TO SQUARE CHECKOUT URL
-        // .then((response) => {
-        //     window.location.href = response.url;//TURN THIS INTO A FETCH?
-        // })
-    
-        // HANDLE ERRORS
-        .catch((error) => { console.log(error); });
-    
-        // PREVENT FORM SUBMIT
-        return false;
-    } 
-  }
+//             //     .catch(err => {
+//             //         console.log(err);
+//             //     })
+//             window.location.href = response;
+//         })
 
-updateCartTotals()
+//         .catch(err => {
+//             console.log(err);
+//         })
+    
+//         // // GET SERVER RESPONSE
+//         // .then((result) => {
+//         //     if (result.status != 200) { throw new Error("Bad Server Response"); }
+//         //     return result;
+//         // })
+    
+//         // // REDIRECT TO SQUARE CHECKOUT URL
+//         // .then((response) => {
+//         //     window.location.href = response.url;//TURN THIS INTO A FETCH?
+//         // })
+    
+//         // HANDLE ERRORS
+//         .catch((error) => { console.log(error); });
+    
+//         // PREVENT FORM SUBMIT
+//         return false;
+//     } 
+//   }
+
+updateCartTotals();
+createCartList();

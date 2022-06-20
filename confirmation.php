@@ -6,20 +6,21 @@ use Square\SquareClient;
 use Square\Exceptions\ApiException;
 
 // dotenv is used to read from the '.env' file created
-$dotenv = Dotenv::create(__DIR__);
+$dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 // Use the environment and the key name to get the appropriate values from the .env file.
-$access_token = getenv('SQUARE_ACCESS_TOKEN');
-$location_id =  getenv('SQUARE_LOCATION_ID');
+$access_token = $_ENV['SQUARE_ACCESS_TOKEN'];
+$location_id = $_ENV['SQUARE_LOCATION_ID'];
 
 // Initialize the authorization for Square
 $client = new SquareClient([
   'accessToken' => $access_token,
-  'environment' => getenv('ENVIRONMENT')
+  'environment' => $_ENV['ENVIRONMENT']
 ]);
 
 $transaction_id = $_GET["transactionId"];
+
 
 try {
   $orders_api = $client->getOrdersApi();
@@ -29,13 +30,17 @@ try {
   echo 'Caught exception!<br/>';
   echo '<strong>Response body:</strong><br/>';
   echo '<pre>';
-  var_dump($e->getResponseBody());
+  var_dump($e->getHttpResponse());
   echo '</pre>';
-  echo '<br/><strong>Context:</strong><br/>';
-  echo '<pre>';
-  var_dump($e->getContext());
-  echo '</pre>';
+  // echo '<br/><strong>Context:</strong><br/>';
+  // echo '<pre>';
+  // var_dump($e->getContext());
+  // echo '</pre>';
   exit();
+} catch (Error $err) {
+  echo print_r($_GET);
+  echo 'Caught error';
+  echo $err;
 }
 
 // If there was an error with the request we will

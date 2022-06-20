@@ -2,7 +2,8 @@
 // store this elsewhere in the future
 let productList = [
     {
-        name: 'bambooDoorbell',
+        itemName: 'bambooDoorbell',
+        itemNameString: 'Bamboo Doorbell',
         categories: ['Doorbells', "Plants"],
         price: 43,
         shipping: 3.50,
@@ -11,7 +12,8 @@ let productList = [
         imgUrl: 'images/doorbells/bamboo_9to10.jpg'
     },
     {
-        name: 'releaseTheHoundsDoorbell',
+        itemName: 'releaseTheHoundsDoorbell',
+        itemNameString: 'Release The Hounds Doorbell',
         categories: ['Doorbells', "Dog Lovers"],
         price: 43,
         shipping: 3.50,
@@ -20,7 +22,8 @@ let productList = [
         imgUrl: 'images/doorbells/to-release-the-hounds-1_9to10.jpg'
     },
     {
-        name: 'buffaloShamanDoorbell',
+        itemName: 'buffaloShamanDoorbell',
+        itemNameString: 'Buffalo Shaman Doorbell',
         categories: ['Doorbells', "Petroglyphs"],
         price: 43,
         shipping: 3.5,
@@ -29,7 +32,8 @@ let productList = [
         imgUrl: 'images/doorbells/buffalo-shaman_9to10.jpg'
     },
     {
-        name: 'grapesDoorbell',
+        itemName: 'grapesDoorbell',
+        itemNameString: 'Grapes Doorbell',
         categories: ['Doorbells', "Plants"],
         price: 43,
         shipping: 3.50,
@@ -38,7 +42,8 @@ let productList = [
         imgUrl: 'images/doorbells/grapes_9to10.jpg'
     },
     {
-        name: 'greenLizardDoorbell',
+        itemName: 'greenLizardDoorbell',
+        itemNameString: 'Green Lizard Doorbell',
         categories: ['Doorbells', "Animals"],
         price: 43,
         shipping: 3.50,
@@ -47,7 +52,8 @@ let productList = [
         imgUrl: 'images/doorbells/lizard-green_9to10.jpg'
     },
     {
-        name: 'largePetroglyphDoorbell',
+        itemName: 'largePetroglyphDoorbell',
+        itemNameString: 'Large Petroglyph Doorbell',
         categories: ['Doorbells', "Petroglyphs"],
         price: 55,
         shipping: 5,
@@ -64,7 +70,7 @@ let addToCartBtns = document.querySelectorAll('.add-to-cart');
 for (let i = 0; i < addToCartBtns.length; i++) {
     addToCartBtns[i].addEventListener('click', (event) => {
         let productName = event.currentTarget.id;
-        let product = productList.find(product => product.name === productName)
+        let product = productList.find(product => product.itemName === productName)
         console.log(event.currentTarget);
         cartItemCount(1, product);
         updateTotalCost(1, product);
@@ -78,7 +84,7 @@ if (addToCartBtnSinglePage) {
     addToCartBtnSinglePage.addEventListener('click', (event) => {
         let qty = Number(document.querySelector('.input-text').value);
         let productName = event.currentTarget.id;
-        let product = productList.find(product => product.name === productName);
+        let product = productList.find(product => product.itemName === productName);
         console.log(event.currentTarget);
         console.log(productName, product)
         cartItemCount(qty, product);
@@ -107,17 +113,17 @@ function setItems(qty, product) {
     let cartContents = JSON.parse(localStorage.getItem('cartProducts'));
     
     if(cartContents) {
-        if(!cartContents[product.name]) {
+        if(!cartContents[product.itemName]) {
             cartContents = {
                 ...cartContents,
-                [product.name]: product
+                [product.itemName]: product
             }
         }
-        cartContents[product.name].qtyInCart += qty;
+        cartContents[product.itemName].qtyInCart += qty;
     } else {
         product.qtyInCart = qty;
         cartContents = {
-            [product.name]: product
+            [product.itemName]: product
         }
     }
     
@@ -153,7 +159,7 @@ function displayCart() {
             productTable.innerHTML += `
             <tr class="cart-item">
                 <td class="image"><a href="${item.pageUrl}"><img src="${item.imgUrl}" alt=""></a></td>
-                <td><a href="${item.pageUrl}">${item.name}</a></td>
+                <td><a href="${item.pageUrl}">${item.itemName}</a></td>
                 <td>$${item.price}</td>
                 <td class="qty"><input type="number" step="1" min="1" name="cart" value="${item.qtyInCart}" title="Qty" class="input-text qty text qty-input-box" size="4"></td>
                 <td>$${item.price * item.qtyInCart}</td>
