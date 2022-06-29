@@ -2,64 +2,72 @@
 // store this elsewhere in the future
 let productList = [
     {
+        id: 1,
         itemName: 'bambooDoorbell',
         itemNameString: 'Bamboo Doorbell',
-        categories: ['Doorbells', "Plants"],
+        mainCategory: 'Doorbells',
+        subCategories: ["plants"],
         price: 43,
         shipping: 3.50,
         qtyInCart: 0,
         pageUrl: 'bamboo-doorbell.html',
-        imgUrl: 'images/doorbells/bamboo_9to10.jpg'
+        imgUrl: 'images/doorbells/bamboo_9to10.jpg',
+        dimensions: '6" x 3 5/8"'
     },
     {
+        id: 2,
         itemName: 'releaseTheHoundsDoorbell',
         itemNameString: 'Release The Hounds Doorbell',
-        categories: ['Doorbells', "Dog Lovers"],
+        mainCategory: 'Doorbells',
+        categories: ["dog lovers"],
         price: 43,
         shipping: 3.50,
         qtyInCart: 0,
         pageUrl: 'release-the-hounds-doorbell.html',
         imgUrl: 'images/doorbells/to-release-the-hounds-1_9to10.jpg'
     },
+    // {
+    //     itemName: 'buffaloShamanDoorbell',
+    //     itemNameString: 'Buffalo Shaman Doorbell',
+    //     categories: ['Doorbells', "Petroglyphs"],
+    //     price: 43,
+    //     shipping: 3.5,
+    //     qtyInCart: 0,
+    //     pageUrl: 'buffalo-shaman-doorbell.html',
+    //     imgUrl: 'images/doorbells/buffalo-shaman_9to10.jpg'
+    // },
+    // {
+    //     itemName: 'grapesDoorbell',
+    //     itemNameString: 'Grapes Doorbell',
+    //     categories: ['Doorbells', "Plants"],
+    //     price: 43,
+    //     shipping: 3.50,
+    //     qtyInCart: 0,
+    //     pageUrl: 'grapes-doorbell.html',
+    //     imgUrl: 'images/doorbells/grapes_9to10.jpg'
+    // },
+    // {
+    //     itemName: 'greenLizardDoorbell',
+    //     itemNameString: 'Green Lizard Doorbell',
+    //     categories: ['Doorbells', "Animals"],
+    //     price: 43,
+    //     shipping: 3.50,
+    //     qtyInCart: 0,
+    //     pageUrl: 'green-lLizard-doorbell.html',
+    //     imgUrl: 'images/doorbells/lizard-green_9to10.jpg'
+    // },
     {
-        itemName: 'buffaloShamanDoorbell',
-        itemNameString: 'Buffalo Shaman Doorbell',
-        categories: ['Doorbells', "Petroglyphs"],
-        price: 43,
-        shipping: 3.5,
-        qtyInCart: 0,
-        pageUrl: 'buffalo-shaman-doorbell.html',
-        imgUrl: 'images/doorbells/buffalo-shaman_9to10.jpg'
-    },
-    {
-        itemName: 'grapesDoorbell',
-        itemNameString: 'Grapes Doorbell',
-        categories: ['Doorbells', "Plants"],
-        price: 43,
-        shipping: 3.50,
-        qtyInCart: 0,
-        pageUrl: 'grapes-doorbell.html',
-        imgUrl: 'images/doorbells/grapes_9to10.jpg'
-    },
-    {
-        itemName: 'greenLizardDoorbell',
-        itemNameString: 'Green Lizard Doorbell',
-        categories: ['Doorbells', "Animals"],
-        price: 43,
-        shipping: 3.50,
-        qtyInCart: 0,
-        pageUrl: 'green-lLizard-doorbell.html',
-        imgUrl: 'images/doorbells/lizard-green_9to10.jpg'
-    },
-    {
+        id: 3,
         itemName: 'largePetroglyphDoorbell',
         itemNameString: 'Large Petroglyph Doorbell',
-        categories: ['Doorbells', "Petroglyphs"],
+        mainCategory: 'Doorbells',
+        subCategories: ["petroglyphs"],
         price: 55,
         shipping: 5,
         qtyInCart: 0,
         pageUrl: 'large-petroglyph-doorbell.html',
-        imgUrl: 'images/doorbells/large-petroglyph_9to10.jpg'
+        imgUrl: 'images/doorbells/large-petroglyph_9to10.jpg',
+        dimensions: '6 1/4” X 6 1/2”'
     },
 ];
 
@@ -79,7 +87,7 @@ for (let i = 0; i < addToCartBtns.length; i++) {
 
 // Grab the button that adds items on a single product page
 let addToCartBtnSinglePage = document.querySelector('.add-to-cart-single');
-console.log(addToCartBtnSinglePage)
+// console.log(addToCartBtnSinglePage)
 if (addToCartBtnSinglePage) {
     addToCartBtnSinglePage.addEventListener('click', (event) => {
         let qty = Number(document.querySelector('.input-text').value);
@@ -258,6 +266,7 @@ function calculateShippingTotal() {
     }
     console.table(qtyAtEachShippingPrice)
 
+    //update for fan pulls, artwork, etc
     for (let price in qtyAtEachShippingPrice) {
         // console.log(`${qtyAtEachShippingPrice[price]}`)
         if (price == 3.5) {

@@ -1,0 +1,26 @@
+CREATE TABLE products (
+    id int(5) not null PRIMARY KEY AUTO_INCREMENT,
+    itemName varchar(128) not null,
+    itemNameString varchar(128) not null,
+    mainCategory varchar(128) not null,
+    subCategories  varchar(128) not null,
+    price int(7) not null,
+    shipping int(7) not null,
+    qtyInCart int(2) not null,
+    pageUrl varchar(1000) not null,
+    imgUrl varchar(1000) not null
+);
+
+INSERT INTO products (`itemName`, `itemNameString`, `mainCategory`, `subCategories`, `price`, `shipping`, `qtyInCart`, `pageUrl`, `imgUrl`, `dimensions`) VALUES (
+        'largePetroglyphDoorbell',
+        'Large Petroglyph Doorbell',
+        'Doorbells',
+        ["Petroglyphs"],
+        55,
+        5,
+        0,
+        'large-petroglyph-doorbell.html',
+        'images/doorbells/large-petroglyph_9to10.jpg',
+        '6 1/4” X 6 1/2”')
+
+

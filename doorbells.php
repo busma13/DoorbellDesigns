@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    include_once 'includes/dbh.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -154,154 +154,45 @@
                     <li><a href="#" data-group="custom">Custom Orders</a></li>
                 </ul>
                 <!-- / product filter -->
+                
                 <div id="grid" class="row">
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["plants"]'>
-                        <a href="bamboo-doorbell.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
-                        <!-- / product-image -->
 
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a class="add-to-cart" id="bambooDoorbell">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
+                    <?php
+                         $get_doorbell_products_sql = "SELECT * FROM products WHERE mainCategory='Doorbells';";
+                         $queryResult = mysqli_query($conn, $get_doorbell_products_sql);
+                         $resultCheck = mysqli_num_rows($queryResult);
+         
+                         if ($resultCheck > 0) {
+                             while ($row = mysqli_fetch_assoc($queryResult)) { ?>
+                                <!-- product -->
+                                <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
+                                    <a href="<?php echo $row['pageUrl'] ?>" class="product-link"></a>
+                                    <!-- / product-link -->
+                                    <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                                    <!-- / product-image -->
 
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Bamboo</h3>
-                            <h6 class="product-price">$43</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
+                                    <!-- product-hover-tools -->
+                                    <div class="product-hover-tools">
+                                        <a href="<?php echo $row['pageUrl'] ?>" class="view-btn">
+                                            <i class="lnr lnr-eye"></i>
+                                        </a>
+                                        <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
+                                            <i class="lnr lnr-cart"></i>
+                                        </a>
+                                    </div><!-- / product-hover-tools -->
 
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["petroglyphs"]'>
-                        <!-- <span class="sale-label">SALE</span> -->
-                        <a href="buffalo-shaman.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/buffalo-shaman_9to10.jpg" alt="Buffalo Shaman Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="buffalo-shaman.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a class="add-to-cart" id="buffaloShamanDoorbell">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Buffalo Shaman</h3>
-                            <h6 class="product-price">$43</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["plants"]'>
-                        <a href="grapes.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/grapes_9to10.jpg" alt="grapes doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="grapes.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a class="add-to-cart" id="grapesDoorbell">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Grapes</h3>
-                            <h6 class="product-price">$43</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["petroglyphs"]'>
-                        <a href="large-petroglyph.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/large-petroglyph_9to10.jpg" alt="Large Petroglyph Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="large-petroglyph.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="#" class="add-to-cart" id="largePetroglyphDoorbell">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Large Petroglyph</h3>
-                            <h6 class="product-price">$55</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["animals"]'>
-                        <a href="lizard-green.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/lizard-green_9to10.jpg" alt="green lizard Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="lizard-green.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a class="add-to-cart" id="greenLizardDoorbell">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Green Lizard</h3>
-                            <h6 class="product-price">$43</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["dog"]'>
-                        <a href="release-the-hounds.html" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/to-release-the-hounds-1_9to10.jpg" alt="to release the hounds press here doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="release-the-hounds.html" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a class="add-to-cart" id="releaseTheHoundsDoorbell">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Release The Hounds</h3>
-                            <h6 class="product-price">$43</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
+                                    <!-- product-details -->
+                                    <div class="product-details">
+                                        <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
+                                        <h6 class="product-price">$<?php echo $row['price'] ?></h6>
+                                    </div><!-- / product-details -->
+                                </div><!-- / product -->
+                                 <?php   
+                             }
+                        }
+                    ?>
+                    
                    
-
                     <!-- grid-resizer -->
                     <div class="col-xs-6 col-md-3 shuffle_sizer"></div>
                     <!-- / grid-resizer -->

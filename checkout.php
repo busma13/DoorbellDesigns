@@ -148,7 +148,7 @@
                             
                         </div>
                         <div class="col-sm-6">
-                            <input type="tel" class="form-control" name="tel" placeholder="Phone" required>
+                            <input type="tel" class="form-control" name="tel" placeholder="*Phone" required>
                             <input type="email" class="form-control" name="email" placeholder="*Email" required>
                             <!-- <input type="text" class="form-control" name="company" placeholder="Company"> -->
                             
@@ -225,7 +225,7 @@
                     <div class="checkout-form-footer space-left space-right">
                         <!-- <textarea class="form-control" name="message" placeholder="Message" required></textarea> -->
                         <!-- <a href="" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-exit"></i><span>Checkout with Square</span></a> -->
-                        <button type="submit" name="submit" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-exit"></i><span>Checkout with Square</span></button>
+                        <button type="submit" name="submit" id="checkout-btn" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-exit"></i><span>Checkout with Square</span></button>
                     </div><!-- / checkout-form-footer -->
                 </form>
 
