@@ -240,6 +240,10 @@ strong {
   padding: 3px 4px;
 }
 
+.disabled {
+  pointer-events: none;
+}
+
 /* / End Typography */
 .row {
   margin-right: 0;
@@ -3934,6 +3938,23 @@ a.btn-social {
   color: #4cbbdb;
   vertical-align: middle;
 }
+
+.show-header {
+  display: flex;
+
+}
+
+/* .show-name {
+  flex: 1;
+}
+
+.show-date {
+  flex: 3;
+}
+
+.show-location {
+  flex: 4;
+} */
 
 /* End Single Pages */
 /* Content */

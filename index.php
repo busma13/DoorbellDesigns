@@ -1,3 +1,8 @@
+<?php
+    include_once 'includes/dbh.inc.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,7 +80,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
-                            <li><a href="doorbells.html">Doorbells</a></li>
+                            <li><a href="doorbells.php">Doorbells</a></li>
                             <li><a href="artwork.html">Artwork</a></li>
                             <li><a href="fan-pulls.html">Ceiling Fan Pulls</a></li>
                             <li><a href="air-plant-holders.html">Air Plant Holders</a></li>
@@ -191,7 +196,7 @@
         <div class="row">
 
             <div class="col-sm-4 category">
-                <a href="doorbells.html">
+                <a href="doorbells.php">
                     <div class="category-item">
                         <img src="images/category1.jpg" alt="">
                         <div class="overlay">
@@ -241,41 +246,73 @@
     </div><!--/ page-header -->
     <div id="products-carousel" class="owl-carousel">
 
+    <?php
+        //Retrieve list of IDs of featured products
+        $get_featured_sql = "SELECT id FROM featured;";
+        $featuredQueryResult = mysqli_query($conn, $get_featured_sql);
+        $featuredResultCheck = mysqli_num_rows($featuredQueryResult);
+
+        $featuredArray = array();
+        if ($featuredResultCheck > 0) {
+            while ($featuredRow = mysqli_fetch_assoc($featuredQueryResult)) { 
+                $featuredArray[] = strval($featuredRow['id']);
+            }
+        }
+
+        // Retrieve featured products from database and insert into html
+        $in = '(' . implode(',', $featuredArray) . ')';
+        $get_products_sql = "SELECT * FROM products WHERE id IN " . $in;
+        $productsQueryResult = mysqli_query($conn, $get_products_sql);
+        $productsResultCheck = mysqli_num_rows($productsQueryResult);
+
+        if ($productsResultCheck > 0) {
+            while ($row = mysqli_fetch_assoc($productsQueryResult)) { ?>
+
+                <!-- item -->
+                <div class="item product">
+                    <!-- <span class="sale-label">SALE</span> -->
+                    <!-- / sale-label -->
+                    <a href="<?php echo $row['pageUrl'] ?>" class="product-link"></a>
+                    <!-- / product-link -->
+                    <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                    <!-- / product-image -->
+
+                    <!-- product-hover-tools -->
+                    <div class="product-hover-tools">
+                        <a href="<?php echo $row['pageUrl'] ?>" class="view-btn">
+                            <i class="lnr lnr-eye"></i>
+                        </a>
+                        <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
+                            <i class="lnr lnr-cart"></i>
+                        </a>
+                    </div>
+                    <!-- / product-hover-tools -->
+
+                    <!-- product-details -->
+                    <div class="product-details">
+                        <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
+                        <h6 class="product-price">$<?php echo $row['price'] ?></h6>
+                    </div>
+                    <!-- / product-details -->
+                </div>
+                <!-- / item -->
+                <?php   
+            }
+        }
+        else {
+            echo '<h1> ERROR </h1>';
+        }
+   ?>
+    
+
         <!-- item -->
-        <div class="item product">
-            <!-- <span class="sale-label">SALE</span> -->
-            <!-- / sale-label -->
-            <a href="bamboo-doorbell.html" class="product-link"></a>
-            <!-- / product-link -->
-            <img src="images/doorbells/bamboo_9to10.jpg" alt="bamboo doorbell">
-            <!-- / product-image -->
-
-            <!-- product-hover-tools -->
-            <div class="product-hover-tools">
-                <a href="bamboo-doorbell.html" class="view-btn">
-                    <i class="lnr lnr-eye"></i>
-                </a>
-                <a href="shopping-cart.html" class="add-to-cart">
-                    <i class="lnr lnr-cart"></i>
-                </a>
-            </div><!-- / product-hover-tools -->
-
-            <!-- product-details -->
-            <div class="product-details">
-                <h3 class="product-title">Bamboo Doorbell</h3>
-                <h6 class="product-price">$35 </h6>
-            </div><!-- / product-details -->
-        </div>
-        <!-- / item -->
-
-        <!-- item -->
-        <div class="item product">
+        <!-- <div class="item product">
             <a href="release-the-hounds.html" class="product-link"></a>
-            <!-- / product-link -->
+            <! -- / product-link -- >
             <img src="images/doorbells/to-release-the-hounds-1_9to10.jpg" alt="">
-            <!-- / product-image -->
+            <! -- / product-image -->
 
-            <!-- product-hover-tools -->
+            <!-- product-hover-tools -- >
             <div class="product-hover-tools">
                 <a href="release-the-hounds.html" class="view-btn">
                     <i class="lnr lnr-eye"></i>
@@ -283,166 +320,14 @@
                 <a href="shopping-cart.html" class="add-to-cart">
                     <i class="lnr lnr-cart"></i>
                 </a>
-            </div><!-- / product-hover-tools -->
+            </div><! -- / product-hover-tools -- >
 
-            <!-- product-details -->
+            <! -- product-details -- >
             <div class="product-details">
                 <h3 class="product-title">Release The Hounds Doorbell</h3>
                 <h6 class="product-price">$59</h6>
-            </div><!-- / product-details -->
-        </div>
-        <!-- / item -->
-
-        <!-- item -->
-        <div class="item product">
-            <a href="single-product.html" class="product-link"></a>
-            <!-- / product-link -->
-            <img src="images/f-product.jpg" alt="">
-            <!-- / product-image -->
-
-            <!-- product-hover-tools -->
-            <div class="product-hover-tools">
-                <a href="single-product.html" class="view-btn">
-                    <i class="lnr lnr-eye"></i>
-                </a>
-                <a href="shopping-cart.html" class="add-to-cart">
-                    <i class="lnr lnr-cart"></i>
-                </a>
-            </div><!-- / product-hover-tools -->
-
-            <!-- product-details -->
-            <div class="product-details">
-                <h3 class="product-title">Women's Shirt</h3>
-                <h6 class="product-price">$39</h6>
-            </div><!-- / product-details -->
-        </div>
-        <!-- / item -->
-
-        <!-- item -->
-        <div class="item product">
-            <a href="single-product.html" class="product-link"></a>
-            <!-- / product-link -->
-            <img src="images/f-product.jpg" alt="">
-            <!-- / product-image -->
-
-            <!-- product-hover-tools -->
-            <div class="product-hover-tools">
-                <a href="single-product.html" class="view-btn">
-                    <i class="lnr lnr-eye"></i>
-                </a>
-                <a href="shopping-cart.html" class="add-to-cart">
-                    <i class="lnr lnr-cart"></i>
-                </a>
-            </div><!-- / product-hover-tools -->
-
-            <!-- product-details -->
-            <div class="product-details">
-                <h3 class="product-title">Women's Jeans</h3>
-                <h6 class="product-price">$69</h6>
-            </div><!-- / product-details -->
-        </div>
-        <!-- / item -->
-
-        <!-- item -->
-        <div class="item product">
-            <a href="single-product.html" class="product-link"></a>
-            <!-- / product-link -->
-            <img src="images/f-product.jpg" alt="">
-            <!-- / product-image -->
-
-            <!-- product-hover-tools -->
-            <div class="product-hover-tools">
-                <a href="single-product.html" class="view-btn">
-                    <i class="lnr lnr-eye"></i>
-                </a>
-                <a href="shopping-cart.html" class="add-to-cart">
-                    <i class="lnr lnr-cart"></i>
-                </a>
-            </div><!-- / product-hover-tools -->
-
-            <!-- product-details -->
-            <div class="product-details">
-                <h3 class="product-title">Women's Shirt</h3>
-                <h6 class="product-price">$29</h6>
-            </div><!-- / product-details -->
-        </div>
-        <!-- / item -->
-
-        <!-- item -->
-        <div class="item product">
-            <span class="sale-label">SALE</span>
-            <!-- / sale-label -->
-            <a href="single-product.html" class="product-link"></a>
-            <!-- / product-link -->
-            <img src="images/f-product.jpg" alt="">
-            <!-- / product-image -->
-
-            <!-- product-hover-tools -->
-            <div class="product-hover-tools">
-                <a href="single-product.html" class="view-btn">
-                    <i class="lnr lnr-eye"></i>
-                </a>
-                <a href="shopping-cart.html" class="add-to-cart">
-                    <i class="lnr lnr-cart"></i>
-                </a>
-            </div><!-- / product-hover-tools -->
-
-            <!-- product-details -->
-            <div class="product-details">
-                <h3 class="product-title">Women's Shirt</h3>
-                <h6 class="product-price"><del>$49</del> <span class="sale-price">$29</span></h6>
-            </div><!-- / product-details -->
-        </div>
-        <!-- / item -->
-
-        <!-- item -->
-        <div class="item product">
-            <a href="single-product.html" class="product-link"></a>
-            <!-- / product-link -->
-            <img src="images/f-product.jpg" alt="">
-            <!-- / product-image -->
-
-            <!-- product-hover-tools -->
-            <div class="product-hover-tools">
-                <a href="single-product.html" class="view-btn">
-                    <i class="lnr lnr-eye"></i>
-                </a>
-                <a href="shopping-cart.html" class="add-to-cart">
-                    <i class="lnr lnr-cart"></i>
-                </a>
-            </div><!-- / product-hover-tools -->
-
-            <!-- product-details -->
-            <div class="product-details">
-                <h3 class="product-title">Women's Shirt</h3>
-                <h6 class="product-price">$99</h6>
-            </div><!-- / product-details -->
-        </div>
-        <!-- / item -->
-
-        <!-- item -->
-        <div class="item product">
-            <a href="single-product.html" class="product-link"></a>
-            <!-- / product-link -->
-            <img src="images/f-product.jpg" alt="">
-            <!-- / product-image -->
-
-            <!-- product-hover-tools -->
-            <div class="product-hover-tools">
-                <a href="single-product.html" class="view-btn">
-                    <i class="lnr lnr-eye"></i>
-                </a>
-                <a href="shopping-cart.html" class="add-to-cart">
-                    <i class="lnr lnr-cart"></i>
-                </a>
-            </div><!-- / product-hover-tools -->
-
-            <!-- product-details -->
-            <div class="product-details">
-                <h3 class="product-title">Women's Shirt</h3>
-                <h6 class="product-price">$59</h6>
-            </div><!-- / product-details -->
-        </div>
+            </div><! -- / product-details -- >
+        </div> -->
         <!-- / item -->
 
         
@@ -457,6 +342,64 @@
     </div><!--/ page-header -->
     <div class="container">
         <div id="grid" class="row">
+
+        <?php
+        //Retrieve list of IDs of new arrivals
+        $get_new_sql = "SELECT id FROM newArrivals;";
+        $newQueryResult = mysqli_query($conn, $get_new_sql);
+        $newResultCheck = mysqli_num_rows($newQueryResult);
+
+        $newArray = array();
+        if ($newResultCheck > 0) {
+            while ($newRow = mysqli_fetch_assoc($newQueryResult)) { 
+                $newArray[] = strval($newRow['id']);
+            }
+        }
+
+        // Retrieve new arrivals from database and insert into html
+        $in = '(' . implode(',', $newArray) . ')';
+        $get_products_sql = "SELECT * FROM products WHERE id IN " . $in;
+        $productsQueryResult = mysqli_query($conn, $get_products_sql);
+        $productsResultCheck = mysqli_num_rows($productsQueryResult);
+
+        if ($productsResultCheck > 0) {
+            while ($row = mysqli_fetch_assoc($productsQueryResult)) { ?>
+
+                <!-- item -->
+                <div class="item product">
+                    <!-- <span class="sale-label">SALE</span> -->
+                    <!-- / sale-label -->
+                    <a href="<?php echo $row['pageUrl'] ?>" class="product-link"></a>
+                    <!-- / product-link -->
+                    <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                    <!-- / product-image -->
+
+                    <!-- product-hover-tools -->
+                    <div class="product-hover-tools">
+                        <a href="<?php echo $row['pageUrl'] ?>" class="view-btn">
+                            <i class="lnr lnr-eye"></i>
+                        </a>
+                        <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
+                            <i class="lnr lnr-cart"></i>
+                        </a>
+                    </div>
+                    <!-- / product-hover-tools -->
+
+                    <!-- product-details -->
+                    <div class="product-details">
+                        <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
+                        <h6 class="product-price">$<?php echo $row['price'] ?></h6>
+                    </div>
+                    <!-- / product-details -->
+                </div>
+                <!-- / item -->
+                <?php   
+            }
+        }
+        else {
+            echo '<h1> ERROR </h1>';
+        }
+   ?>
 
             <!-- product -->
             <div class="col-xs-6 col-md-4 product">
@@ -714,31 +657,31 @@
                     </div>
                     <div class="link-widget">
                         <div class="info">
-                            <a href="doorbells.html">All</a>
+                            <a href="doorbells.php">All</a>
                         </div>
                         <div class="info">
-                            <a href="doorbells.html?category=beachy">Beachy</a>
+                            <a href="doorbells.php?category=beachy">Beachy</a>
                         </div>
                         <div class="info">
-                            <a href="doorbells.html?category=contemporary">Contemporary</a>
+                            <a href="doorbells.php?category=contemporary">Contemporary</a>
                         </div>
                         <div class="info">
-                            <a href="doorbells.html?category=dog">Dog Lovers</a>
+                            <a href="doorbells.php?category=dog">Dog Lovers</a>
                         </div>
                         <div class="info">
-                            <a href="doorbells.html?category=animals">Animals</a>
+                            <a href="doorbells.php?category=animals">Animals</a>
                         </div>
                         <div class="info">
-                            <a href="doorbells.html?category=petroglyphs">Petroglyph</a>
+                            <a href="doorbells.php?category=petroglyphs">Petroglyph</a>
                         </div>
                         <div class="info">
-                            <a href="doorbells.html?category=plants">Plants</a>
+                            <a href="doorbells.php?category=plants">Plants</a>
                         </div>
                         <div class="info">
-                            <a href="doorbells.html?category=southwest">Southwest</a>
+                            <a href="doorbells.php?category=southwest">Southwest</a>
                         </div>
                         <div class="info">
-                            <a href="doorbells.html?category=misc">Miscellaneous</a>
+                            <a href="doorbells.php?category=misc">Miscellaneous</a>
                         </div>
                     </div>
                 </div><!-- / widget -->

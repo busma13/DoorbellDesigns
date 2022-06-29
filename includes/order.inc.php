@@ -1,6 +1,7 @@
 <?php
 
 require '../vendor/autoload.php'; 
+include_once 'dbh.inc.php';
 
 use Dotenv\Dotenv;
 use Square\SquareClient;
@@ -17,8 +18,6 @@ $client = new SquareClient([
 
 if (isset($_POST['submit'])) {
 
-    include_once 'dbh.inc.php';
-
     $first = mysqli_real_escape_string($conn, $_POST['first-name']);
     $last = mysqli_real_escape_string($conn, $_POST['last-name']);
     $tel = mysqli_real_escape_string($conn, $_POST['tel']);
@@ -29,7 +28,7 @@ if (isset($_POST['submit'])) {
     $zip = mysqli_real_escape_string($conn, $_POST['zip']);
     $products = mysqli_real_escape_string($conn, $_POST['cart-list-input']);
 
-    if (empty($first) || empty($last) || empty($email) || empty($address_line) || empty($city) || empty($state) || empty($zip) || empty($products)) {
+    if (empty($first) || empty($last) || empty($tel) || empty($email) || empty($address_line) || empty($city) || empty($state) || empty($zip) || empty($products)) {
         header("Location: ../checkout.php?order=empty");
         exit();
     }
@@ -39,13 +38,16 @@ if (isset($_POST['submit'])) {
             exit();
         }
         else {
+            if (strlen($tel) === 10) {
+                $tel = "1" . $tel;
+            }
             //create unique ID for the order
             $id = uniqid('ID', true);
             // store order info in the orders database
-            $sql = "INSERT INTO orders (id, first_name, last_name, tel, email, address_line, city, state, zip, cart_products) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            $insert_sql = "INSERT INTO orders (id, first_name, last_name, tel, email, address_line, city, state, zip, cart_products) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
             $stmt = mysqli_stmt_init($conn);
-            if (!mysqli_stmt_prepare($stmt, $sql)) {
+            if (!mysqli_stmt_prepare($stmt, $insert_sql)) {
                 header("Location: ../checkout.php?order=SQL-statement-failed");//work on this error on checkout.php
             } else {
                 
@@ -61,24 +63,25 @@ if (isset($_POST['submit'])) {
 
             // Create a payment link.  This includes an order object.
             $products_array = json_decode($_POST['cart-list-input'], false);
-
-            $post_array = array($id, $first, $last, $tel, $email, $address_line, $city, $state, $zip, $products_array);
             
-            // try {
-            //     $payment_link_url = createPaymentLink($client, $post_data); // check if response is a url or an error.
-            //     header("Location: " . $payment_link_url); // change to return link to square checkout page
-            // }
-            // catch (Exception $ex) {
-            //     $exception = $ex->getMessage();
-            //     header("Location: ./checkout.php?ex=" . $exception);
-            // }
-            // exit();
-
             $line_items = array();
-            $arrLength = count($products_array);
-            echo $arrLength;
-            echo '<br>';
-            for ($i = 0; $i < $arrLength; $i++) {
+            $TAX_RATE = 8; // get this from database?
+            $totalShippingCents = 0;
+            $qtyAtEachShippingPrice = new stdClass;
+
+             // add California tax if applicable
+             if ($state === 'CA') {
+                $order_line_item_tax = new \Square\Models\OrderLineItemTax();
+                $order_line_item_tax->setName('State Sales Tax');
+                $order_line_item_tax->setUid('state-sales-tax');
+                $order_line_item_tax->setPercentage($TAX_RATE);
+                $order_line_item_tax->setScope('LINE_ITEM');//????
+
+                $taxes = [$order_line_item_tax];
+            }
+
+            for ($i = 0; $i < count($products_array); $i++) {
+                $priceCents = 0;
                 $obj = $products_array[$i];
                 // echo var_dump($obj);
                 // echo '<br>';
@@ -86,76 +89,92 @@ if (isset($_POST['submit'])) {
                 // echo '<br>';
                 // echo $obj->itemQty;
                 // echo '<br>';
+
+                $id = $obj->id;
+                $get_products_sql = "SELECT * FROM products WHERE id=$id;";
+                $queryResult = mysqli_query($conn, $get_products_sql);
+                $resultCheck = mysqli_num_rows($queryResult);
+
+                if ($resultCheck > 0) {
+                    while ($row = mysqli_fetch_assoc($queryResult)) {
+                        $priceCents = $row['price'] * 100;
+                        $shippingCents = $row['shipping'] * 100;
+                        // echo $priceCents;
+                        // echo '<br>';
+                        // echo$shippingCents;
+                        // echo '<br>';
+
+                        if (!$qtyAtEachShippingPrice->$shippingCents) {
+                            $qtyAtEachShippingPrice->$shippingCents = $obj->itemQty;
+                        } else {
+                            $qtyAtEachShippingPrice->$shippingCents += $obj->itemQty;
+                        }
+                    }
+                }
+
                 $base_price_money = new \Square\Models\Money();
-                $base_price_money->setAmount(500);//fill
+                $base_price_money->setAmount($priceCents);
                 $base_price_money->setCurrency('USD');
 
-                $order_line_item = new \Square\Models\OrderLineItem($obj->itemQty);//fill
-                $order_line_item->setName($obj->itemNameString);//fill
+                $order_line_item = new \Square\Models\OrderLineItem($obj->itemQty);
+                $order_line_item->setName($obj->itemNameString);
                 $order_line_item->setBasePriceMoney($base_price_money);
-                
+
+                $order_line_item_applied_tax = new \Square\Models\OrderLineItemAppliedTax('state-sales-tax');
+
+                if ($state === 'CA') {
+                    $applied_taxes = [$order_line_item_applied_tax];
+                    $order_line_item->setAppliedTaxes($applied_taxes);
+                }
+
                 $line_items[] = $order_line_item;
             }
 
             // add shipping cost
+
+            // print_r($qtyAtEachShippingPrice);
+
+            foreach ($qtyAtEachShippingPrice as $price => $qty) {
+                // echo "$price => $qty <br>";
+                if ($price == 350) {
+                    if($qty % 2 === 0) {
+                        $totalShippingCents += $price * $qty / 2;
+                        // echo $totalShippingCents . '<br>';
+                    } else {
+                        $totalShippingCents += $price * ($qty + 1) / 2;
+                        // echo $totalShippingCents . '<br>';
+                    }
+                } else {
+                    $totalShippingCents += $price * $qty; // fix for other shipping prices
+                    // echo $totalShippingCents . '<br>';
+                }
+            }
             
             $shipping_money = new \Square\Models\Money();
-            $shipping_money->setAmount(750);//fill
+            $shipping_money->setAmount($totalShippingCents);
             $shipping_money->setCurrency('USD');
 
-            $order_line_item_shipping = new \Square\Models\OrderLineItem('1');//fill
-            $order_line_item_shipping->setName('Shipping');//fill
+            $order_line_item_shipping = new \Square\Models\OrderLineItem('1');
+            $order_line_item_shipping->setName('Shipping');
             $order_line_item_shipping->setBasePriceMoney($shipping_money);
             $line_items[] = $order_line_item_shipping;
             
-            // echo var_dump($line_items);
-            // $base_price_money = new \Square\Models\Money();
-            // $base_price_money->setAmount(5500);//fill
-            // $base_price_money->setCurrency('USD');
-            
-            // $base_price_money1 = new \Square\Models\Money();
-            // $base_price_money1->setAmount(4300);//fill
-            // $base_price_money1->setCurrency('USD');
-            
-            // $base_price_money2 = new \Square\Models\Money();
-            // $base_price_money2->setAmount(750);//fill
-            // $base_price_money2->setCurrency('USD');
-            
-            // $order_line_item = new \Square\Models\OrderLineItem('1');//fill
-            // $order_line_item->setName('Paws Doorbell');//fill
-            // $order_line_item->setBasePriceMoney($base_price_money);
-            
-            // $order_line_item1 = new \Square\Models\OrderLineItem('1');//fill
-            // $order_line_item1->setName('Bamboo Doorbell');//fill
-            // $order_line_item1->setBasePriceMoney($base_price_money1);
-            
-            // $order_line_item2 = new \Square\Models\OrderLineItem('1');//fill
-            // $order_line_item2->setName('shipping');//fill
-            // $order_line_item2->setBasePriceMoney($base_price_money2);
-            
-            // // $line_items = [$order_line_item, $order_line_item1, $order_line_item2];
-            
-            $checkout_options = new \Square\Models\CheckoutOptions();
-            $checkout_options->setAskForShippingAddress(true);
-            $checkout_options->setRedirectUrl("http://localhost/doorbelldesigns/confirmation.php"); //add this or use square's confirmation page?
+            // $checkout_options = new \Square\Models\CheckoutOptions();
+            // $checkout_options->setAskForShippingAddress(true);
+            // $checkout_options->setRedirectUrl("http://localhost/doorbelldesigns/confirmation.php"); //add this or use square's confirmation page?
             
             $address = new \Square\Models\Address();
-            $address->setAddressLine1($post_array[5]);
-            $address->setLocality($post_array[6]);
-            $address->setAdministrativeDistrictLevel1($post_array[7]);
-            $address->setPostalCode($post_array[8]);
+            $address->setAddressLine1($address_line);
+            $address->setLocality($city);
+            $address->setAdministrativeDistrictLevel1($state);
+            $address->setPostalCode($zip);
             $address->setCountry('US');
             
             $recipient = new \Square\Models\OrderFulfillmentRecipient();
-            $recipient->setDisplayName($post_array[1] . ' ' . $post_array[2]);
-            $recipient->setPhoneNumber($post_array[3]);
-            $recipient->setEmailAddress($post_array[4]);
+            $recipient->setDisplayName($first . ' ' . $last);
+            $recipient->setPhoneNumber($tel);
+            $recipient->setEmailAddress($email);
             $recipient->setAddress($address);
-            
-            $pre_populated_data = new \Square\Models\PrePopulatedData();
-            // $pre_populated_data->setBuyerAddress($address);//here
-            // $pre_populated_data->setBuyerEmail($recipient->getEmailAddress);
-            $pre_populated_data->setBuyerPhoneNumber($post_array[3]);
             
             $shipment_details = new \Square\Models\OrderFulfillmentShipmentDetails();
             $shipment_details->setRecipient($recipient);
@@ -166,27 +185,28 @@ if (isset($_POST['submit'])) {
             
             $fulfillments = [$order_fulfillment];
             $order = new Order('L20MQK5M4PT2Z'); //location - change from sandbox to real location
-            // $order->setCustomerId($post_array[9]); //remove if not needed. If needed add ID to array after received from database.
+            
             $order->setLineItems($line_items);
+            $order->setTaxes($taxes);
             $order->setFulfillments($fulfillments);
             
             $body = new \Square\Models\CreatePaymentLinkRequest();
-            $body->setIdempotencyKey($post_array[0]); 
+            $body->setIdempotencyKey($id); 
             $body->setOrder($order);
-            $body->setCheckoutOptions($checkout_options);
-            $body->setPrePopulatedData($pre_populated_data);
+            // $body->setCheckoutOptions($checkout_options);
             
             // checkoutAPI
             $api_response = $client->getCheckoutApi()->createPaymentLink($body);
             
             if ($api_response->isSuccess()) {
                 $result = $api_response->getResult();
-                
                 $payment_link = json_encode($result->getPaymentLink()->getUrl());
                 $payment_link =  stripslashes($payment_link);
-                // return $payment_link;
-                // exit($payment_link);//Access-Control-Allow-Origin: 
-                header('Location: '.$result->getPaymentLink()->getUrl()); // change to return link to square checkout page
+                /* This delay ensures the payment link will be created by square before the user is redirected to it.
+                */
+                sleep(1);
+                //Redirect user to square checkout page
+                header('Location: '.$result->getPaymentLink()->getUrl());
                 exit();
             } else {
                 $errors = $api_response->getErrors();
@@ -203,93 +223,3 @@ else {
     header("Location: ../checkout.php?order=error");
     exit();
 }
-
-// // Create payment link request that includes Order object
-// function createPaymentLink($client, $post_array) {
-
-//     // for ($i = 0; $i < $post_array[8]; $i++) {
-
-//     // }
-//     $base_price_money = new \Square\Models\Money();
-//     $base_price_money->setAmount(5500);//fill
-//     $base_price_money->setCurrency('USD');
-    
-//     $base_price_money1 = new \Square\Models\Money();
-//     $base_price_money1->setAmount(4300);//fill
-//     $base_price_money1->setCurrency('USD');
-    
-//     $base_price_money2 = new \Square\Models\Money();
-//     $base_price_money2->setAmount(750);//fill
-//     $base_price_money2->setCurrency('USD');
-    
-//     $order_line_item = new \Square\Models\OrderLineItem('1');//fill
-//     $order_line_item->setName('Paws Doorbell');//fill
-//     $order_line_item->setBasePriceMoney($base_price_money);
-    
-//     $order_line_item1 = new \Square\Models\OrderLineItem('1');//fill
-//     $order_line_item1->setName('Bamboo Doorbell');//fill
-//     $order_line_item1->setBasePriceMoney($base_price_money1);
-    
-//     $order_line_item2 = new \Square\Models\OrderLineItem('1');//fill
-//     $order_line_item2->setName('shipping');//fill
-//     $order_line_item2->setBasePriceMoney($base_price_money2);
-    
-//     $line_items = [$order_line_item, $order_line_item1, $order_line_item2];
-    
-//     $checkout_options = new \Square\Models\CheckoutOptions();
-//     $checkout_options->setAskForShippingAddress(true);
-    
-//     $address = new \Square\Models\Address();
-//     $address->setAddressLine1($post_array[5]);
-//     $address->setLocality($post_array[6]);
-//     $address->setAdministrativeDistrictLevel1($post_array[7]);
-//     $address->setPostalCode($post_array[8]);
-//     $address->setCountry('US');
-    
-//     $recipient = new \Square\Models\OrderFulfillmentRecipient();
-//     $recipient->setDisplayName($post_array[1] . ' ' . $post_array[2]);
-//     $recipient->setPhoneNumber($post_array[3]);
-//     $recipient->setEmailAddress($post_array[4]);
-//     $recipient->setAddress($address);
-    
-//     // $pre_populated_data = new \Square\Models\PrePopulatedData();
-//     // $pre_populated_data->setBuyerAddress($address);//here
-//     // $pre_populated_data->setBuyerEmail($recipient->getEmailAddress);
-//     // $pre_populated_data->setBuyerPhoneNumber($recipient->getPhoneNumber);
-    
-//     $shipment_details = new \Square\Models\OrderFulfillmentShipmentDetails();
-//     $shipment_details->setRecipient($recipient);
-    
-//     $order_fulfillment = new \Square\Models\OrderFulfillment();
-//     $order_fulfillment->setType('SHIPMENT');
-//     $order_fulfillment->setShipmentDetails($shipment_details);
-    
-//     $fulfillments = [$order_fulfillment];
-//     $order = new Order('L20MQK5M4PT2Z'); //location - change from sandbox to real location
-//     // $order->setCustomerId($post_array[9]); //remove if not needed. If needed add ID to array after received from database.
-//     $order->setLineItems($line_items);
-//     $order->setFulfillments($fulfillments);//here
-    
-//     $body = new \Square\Models\CreatePaymentLinkRequest();
-//     $body->setIdempotencyKey($post_array[0]); 
-//     $body->setOrder($order);
-//     $body->setCheckoutOptions($checkout_options);
-//     // $body->setPrePopulatedData($pre_populated_data);
-    
-//     //checkoutAPI
-//     $api_response = $client->getCheckoutApi()->createPaymentLink($body);
-    
-//     if ($api_response->isSuccess()) {
-//         $result = $api_response->getResult();
-        
-//         $payment_link = json_encode($result->getPaymentLink()->getUrl());
-//         $payment_link =  stripslashes($payment_link);
-//         return $payment_link;
-//     } else {
-//         $errors = $api_response->getErrors();
-//         $json = json_encode($errors);
-//         return $json;
-//     }
-// }
-
-

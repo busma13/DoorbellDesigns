@@ -32,7 +32,7 @@ if (empty($_POST["message"])) {
 }
  
 //Add your email here
-$EmailTo = "hello@example.com";
+$EmailTo = "peterluitjens@gmail.com";
 $Subject = "New Message Received";
  
 // prepare email body text
@@ -58,7 +58,9 @@ if ($success && $errorMSG == ""){
    echo "success";
 }else{
     if($errorMSG == ""){
+        $errorMessage = error_get_last()['body'];
         echo "Something went wrong :(";
+        echo $errorMessage;
     } else {
         echo $errorMSG;
     }

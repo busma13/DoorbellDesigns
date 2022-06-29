@@ -10,6 +10,8 @@ function updateCartTotals() {
     document.querySelector('.total').textContent = `$${total}`;
 }
 
+//Creates a list of all items in the cart and saves tehm to local storage.
+//When user checks out this list is sent with the form.
 function createCartList() {
     let checkoutList = [];
     let cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
@@ -18,6 +20,7 @@ function createCartList() {
         // console.log(cartProducts[obj]);
         listItem = { 
         };
+        listItem.id = cartProducts[obj].id;
         listItem.itemName = cartProducts[obj].itemName;
         listItem.itemNameString = cartProducts[obj].itemNameString;
         listItem.itemQty = cartProducts[obj].qtyInCart; 
@@ -27,6 +30,11 @@ function createCartList() {
     document.querySelector('#cart-list-input').value = JSON.stringify(checkoutList);
     // console.log(checkoutList)
 }
+
+//Disable Checkout button after first click
+document.querySelector('#checkout-btn').addEventListener('click', (e) => {
+    e.currentTarget.classList.add('disabled');
+})
 
 // function sendData () {
 //         // Get products from the cart
