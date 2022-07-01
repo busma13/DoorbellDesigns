@@ -241,7 +241,7 @@ strong {
 }
 
 .disabled {
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 /* / End Typography */
