@@ -57,27 +57,28 @@ if ($response->isError()) {
 } else {
   $order = $response->getResult()->getOrder();
 }
+
+    include 'header-pt1.php';
+    $title = 'Checkout Confirmation - Doorbell Designs';
+    echo $title;
+    include 'header-pt2.php';
 ?>
 
-<!DOCTYPE html>
-<html>
 
-<head>
-  <title>Checkout Confirmation</title>
-  <meta name="description" content="An example of Square Checkout on Glitch">
-  <link rel='stylesheet' href='/main.css'>
-  <link rel='stylesheet' href='/normalize.css'>
-  <link id="favicon" rel="icon" href="https://cdn.glitch.com/4c9bc573-ca4c-48de-8afe-501eddad0b79%2Fsquare-logo.svg?1521834224783" type="image/x-icon">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-</head>
 
-<body>
-  <header class="container">
-    <div id="square-logo"></div>
-    <h1 class="header">Custom Checkout Confirmation</h1>
-  </header>
+    <div id="page-header" class="about">
+        <div class="container">
+            <div class="page-header-content text-center">
+                <div class="page-header wsub">
+                    <h1 class="page-title fadeInDown animated first">Checkout Complete</h1>
+                </div><!-- / page-header -->
+                <p class="slide-text fadeInUp animated second"></p>
+            </div><!-- / page-header-content -->
+        </div><!-- / container -->
+    </div><!-- / page-header -->
+
+</header>
+<!-- / header -->
 
   <div class="container" id="confirmation">
     <div>
@@ -116,9 +117,35 @@ if ($response->isError()) {
     </div>
     <div>
       <span>Payment Successful!</span>
-      <a href="http://localhost:8888">Back to home page</a>
+      <a href="http://localhost/doorbelldesigns">Back to home page</a>
     </div>
   </div>
+
+  <?php
+    include 'footer.php';
+  ?>
+
+  <!-- javascript -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+
+<!-- scrolling-nav -->
+<script src="js/scrolling-nav.js"></script>
+<!-- / scrolling-nav -->
+
+
+
+<!-- shuffle grid-resizer -->
+<script src="js/jquery.shuffle.min.js"></script>
+<script src="js/custom.js"></script>
+<!-- / shuffle grid-resizer -->
+
+<!-- preloader -->
+<script src="js/preloader.js"></script>
+<!-- / preloader -->
+
+<!-- / javascript -->
 </body>
 
 </html>

@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
             $products_array = json_decode($_POST['cart-list-input'], false);
             
             $line_items = array();
-            $TAX_RATE = 8; // get this from database?
+            $TAX_RATE = 7.75; // get this from database?
             $totalShippingCents = 0;
             $qtyAtEachShippingPrice = new stdClass;
 
@@ -90,8 +90,8 @@ if (isset($_POST['submit'])) {
                 // echo $obj->itemQty;
                 // echo '<br>';
 
-                $id = $obj->id;
-                $get_products_sql = "SELECT * FROM products WHERE id=$id;";
+                $prodId = $obj->id;
+                $get_products_sql = "SELECT * FROM products WHERE id=$prodId;";
                 $queryResult = mysqli_query($conn, $get_products_sql);
                 $resultCheck = mysqli_num_rows($queryResult);
 
@@ -159,9 +159,9 @@ if (isset($_POST['submit'])) {
             $order_line_item_shipping->setBasePriceMoney($shipping_money);
             $line_items[] = $order_line_item_shipping;
             
-            // $checkout_options = new \Square\Models\CheckoutOptions();
+            $checkout_options = new \Square\Models\CheckoutOptions();
             // $checkout_options->setAskForShippingAddress(true);
-            // $checkout_options->setRedirectUrl("http://localhost/doorbelldesigns/confirmation.php"); //add this or use square's confirmation page?
+            $checkout_options->setRedirectUrl("http://localhost/doorbelldesigns/confirmation.php"); //add this or use square's confirmation page?
             
             $address = new \Square\Models\Address();
             $address->setAddressLine1($address_line);
@@ -193,7 +193,7 @@ if (isset($_POST['submit'])) {
             $body = new \Square\Models\CreatePaymentLinkRequest();
             $body->setIdempotencyKey($id); 
             $body->setOrder($order);
-            // $body->setCheckoutOptions($checkout_options);
+            $body->setCheckoutOptions($checkout_options);
             
             // checkoutAPI
             $api_response = $client->getCheckoutApi()->createPaymentLink($body);
@@ -209,6 +209,7 @@ if (isset($_POST['submit'])) {
                 header('Location: '.$result->getPaymentLink()->getUrl());
                 exit();
             } else {
+                echo $id;
                 $errors = $api_response->getErrors();
                 $json = json_encode($errors);
                 exit($json);
