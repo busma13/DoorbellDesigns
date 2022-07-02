@@ -3,9 +3,9 @@ var shuffleme = (function( $ ) {
   var $grid = $('#grid'), //locate what we want to sort 
       $filterOptions = $('.product-filter li'),  //locate the filter categories
       $sizer = $grid.find('.shuffle_sizer'),    //sizer stores the size of the items
+      
 
   init = function() {
-
     // None of these need to be executed synchronously
     setTimeout(function() {
       listen();
