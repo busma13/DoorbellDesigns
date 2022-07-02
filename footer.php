@@ -55,16 +55,16 @@
                     </div>
                     <div class="link-widget">
                         <div class="info">
-                            <a href="art.html">Artwork</a>
+                            <a href="artwork.php">Artwork</a>
                         </div>
                         <div class="info">
-                            <a href="fan-pulls.html">Ceiling Fan Pulls</a>
+                            <a href="fan-pulls.php">Ceiling Fan Pulls</a>
                         </div>
                         <div class="info">
-                            <a href="air-plant-holders.html">Air Plant Holders</a>
+                            <a href="air-plant-holders.php">Air Plant Holders</a>
                         </div>
                         <div class="info">
-                            <a href="custom-orders.html">Custom Orders</a>
+                            <a href="custom-orders.php">Custom Orders</a>
                         </div>
                         <!-- <div class="info">
                             <a href="#x">Animals</a>
@@ -86,19 +86,19 @@
                     </div>
                     <div class="link-widget">
                         <div class="info">
-                            <a href="instructions.html">Instructions</a>
+                            <a href="instructions.php">Instructions</a>
                         </div>
                         <!-- <div class="info">
                             <a href="#x">Shipping & Return</a>
                         </div> -->
                         <div class="info">
-                            <a href="faq.html">F.A.Q</a>
+                            <a href="faq.php">F.A.Q</a>
                         </div>
                         <div class="info">
-                            <a href="schedule.html">Show Schedule</a>
+                            <a href="schedule.php">Show Schedule</a>
                         </div>
                         <div class="info">
-                            <a href="contact.html">Contact</a>
+                            <a href="contact.php">Contact</a>
                         </div>
                     </div>
                 </div><!-- / widget -->
