@@ -1,5 +1,9 @@
 <?php
-
+    // include_once 'includes/dbh.inc.php';
+    include 'header-pt1.php';
+    $title = 'Doorbell Designs - Schedule';
+    echo $title;
+    include 'header-pt2.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
