@@ -121,9 +121,11 @@ if ($response->isError()) {
     </div>
   </div>
 
+  <!-- footer -->
   <?php
     include 'footer.php';
   ?>
+  <!-- / footer -->
 
   <!-- javascript -->
 <script src="js/jquery.min.js"></script>

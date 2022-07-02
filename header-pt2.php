@@ -61,16 +61,16 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
                             <li><a href="doorbells.php">Doorbells</a></li>
-                            <li><a href="artwork.html">Artwork</a></li>
-                            <li><a href="fan-pulls.html">Ceiling Fan Pulls</a></li>
-                            <li><a href="air-plant-holders.html">Air Plant Holders</a></li>
-                            <li><a href="custom-orders.html">Custom Orders</a></li>
-                            <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
+                            <li><a href="artwork.php">Artwork</a></li>
+                            <li><a href="fan-pulls.php">Ceiling Fan Pulls</a></li>
+                            <li><a href="air-plant-holders.php">Air Plant Holders</a></li>
+                            <li><a href="custom-orders.php">Custom Orders</a></li>
+                            <li><a href="shopping-cart.php">Shopping Cart</a></li>
+                            <li><a href="checkout.php">Checkout</a></li>
                         </ul>
                     </li>
-                    <li><a href="instructions.html">Instructions</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="instructions.php">Instructions</a></li>
+                    <li><a href="faq.php">FAQ</a></li>
                     <li><a href="about.php">About</a></li>
                     <!-- <li><a href="blog.html">Blog</a></li> -->
                     <li><a href="contact.php">Contact</a></li>
@@ -86,7 +86,7 @@
                             <li><a href="components.html">Components</a></li>
                         </ul>
                     </li> -->
-                    <li><a href="shopping-cart.html"><i class="lnr lnr-cart"></i> <span>Shopping Cart (<span class="cartCount">0</span>)</span></a></li>
+                    <li><a href="shopping-cart.php"><i class="lnr lnr-cart"></i> <span>Shopping Cart (<span class="cartCount">0</span>)</span></a></li>
                     <!-- <li class="dropdown w-image">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="images/eng.png" alt=""> <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
