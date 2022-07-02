@@ -6,19 +6,21 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Responsive Shop Theme">
-<meta name="keywords" content="responsive, retina ready, shop bootstrap template, html5, css3" />
-<meta name="author" content="KingStudio.ro">
+<meta name="description" content="Doorbell Designs">
+<meta name="keywords" content="doorbell, ceramic, hand-made" />
+<meta name="author" content="Peter Luitjens">
 
 <!-- favicon -->
 <link rel="icon" href="images/favicon.png">
 <!-- page title -->
-<title>Doorbell Designs - Contact</title>
+<title>Doorbell Designs - Add Product</title>
 <!-- bootstrap css -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- css -->
 <link href="css/style.css" rel="stylesheet">
 <link href="css/animate.css" rel="stylesheet">
+<link href="css/owl.carousel.css" rel="stylesheet">
+<link href="css/owl.theme.css" rel="stylesheet">
 <!-- fonts -->
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700" rel="stylesheet">
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -65,7 +67,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt=""></a>
+                <a class="navbar-brand" href="index.html"><img src="images/logo-dd.jpg" alt=""></a>
             </div><!-- / navbar-header -->
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -73,10 +75,10 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
-                            <li><a href="shop-filter.html">All Products</a></li>
-                            <li><a href="shop-filter.html#doorbells">Doorbells</a></li>
-                            <li><a href="shop-filter.html">Ceiling Fan Pulls</a></li>
-                            <li><a href="shop-filter.html#artwork">Artwork</a></li>
+                            <li><a href="doorbells.php">Doorbells</a></li>
+                            <li><a href="artwork.html">Artwork</a></li>
+                            <li><a href="fan-pulls.html">Ceiling Fan Pulls</a></li>
+                            <li><a href="air-plant-holders.html">Air Plant Holders</a></li>
                             <li><a href="custom-orders.html">Custom Orders</a></li>
                             <li><a href="shopping-cart.html">Shopping Cart</a></li>
                             <li><a href="checkout.html">Checkout</a></li>
@@ -99,7 +101,7 @@
                             <li><a href="components.html">Components</a></li>
                         </ul>
                     </li> -->
-                    <li><a href="shopping-cart.html"><i class="lnr lnr-cart"></i> <span>Shopping Cart (2)</span></a></li>
+                    <li><a href="shopping-cart.html"><i class="lnr lnr-cart"></i> <span>Shopping Cart (<span class="cartCount">0</span>)</span></a></li>
                     <!-- <li class="dropdown w-image">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="images/eng.png" alt=""> <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
@@ -113,13 +115,13 @@
         </div><!-- / container -->
     </nav><!-- / navbar -->
 
-    <div id="page-header" class="contact">
+    <div id="page-header" class="checkout">
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub">
-                    <h1 class="page-title fadeInDown animated first">Contact</h1>
+                    <h1 class="page-title fadeInDown animated first">Add Product</h1>
                 </div><!-- / page-header -->
-                <p class="slide-text fadeInUp animated second">Your page's description goes here...</p>
+                <p class="slide-text fadeInUp animated second">Fill out this form to add a new product to your website</p>
             </div><!-- / page-header-content -->
         </div><!-- / container -->
     </div><!-- / page-header -->
@@ -129,56 +131,36 @@
 
 <!-- content -->
 
-<!-- contact -->
-<section id="contact">
-    <div class="container">
-        <div class="row">
+<form action="./includes/product-management.inc.php" method="POST">
+    <label for="itemNameString">Item name:</label>
+    <input type="text" name="itemNameString" placeholder="Item name" id="itemNameString">
+    
+    <p>Main category type: </p>
+    <input type="radio" name="mainCategory" value="doorbells" id="doorbells">
+    <label for="doorbells">Doorbells</label>
+    <input type="radio" name="mainCategory" value="artwork" id="artwork">
+    <label for="artwork">Artwork</label>
+    <input type="radio" name="mainCategory" value="miscellaneous" id="miscellaneous">
+    <label for="miscellaneous">Miscellaneous</label>
 
-            <div class="col-sm-6 contact-details">
-                <h4>Email</h4>
-                <p><a href="mailto:info@cicadaceramics.com">info@cicadaceramics.com</a></p>
+    <label for="subcategory">Subcategory:</label>
+    <input type="text" name="Subcategory" placeholder="subcategory" id="subcategory">
 
-                <h4 class="space-top">Phone</h4>
-                <p><a href="tel:6194431872">619-443-1872</a></p>
+    <label for="price">Price (xx.xx format):</label>
+    <input type="number" name="price" placeholder="Price" id="price">
 
-                <h4 class="space-top">Cell</h4>
-                <p><a href="tel:6193685314">619-368-5314</a></p>
+    <label for="shipping">Shipping (xx.xx format):</label>
+    <input type="number" name="shipping" placeholder="Shipping" id="shipping">
 
-                <h4 class="space-top">Mailing Address</h4>
-                <address>
-                    <p>Cicada Ceramics</p>
-                    <p>11885 Rocoso Rd.</p>
-                    <p>Lakeside, CA, 92040</p>
-                </address>
-                
-            </div>
+    <label for="pageUrl">page URL:</label>
+    <input type="text" name="pageUrl" placeholder="Page URL" id="pageUrl">
 
-             <div class="col-sm-6 form-container">
-                <!-- contact form -->
-                <div id="contact-form-1">
-                    <form id="contactForm" data-toggle="validator">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="name" placeholder="Full Name" required>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="email" placeholder="Email" required>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                        <textarea id="message" class="form-control" rows="5" placeholder="Message" required></textarea>
-                        <div class="help-block with-errors"></div>
-                        </div>
-                        <button type="submit" id="form-submit" class="btn btn-md btn-primary-filled btn-form-submit btn-rounded">Send Message</button>
-                        <div id="msgSubmit" class="h3 text-center hidden"></div>
-                        <div class="clearfix"></div>  
-                    </form>
-                </div><!-- / contact form -->
-            </div><!-- / form-container -->
-        </div><!-- / row -->
-    </div><!-- / container -->
-</section>
-<!-- / contact -->
+    <label for="image">Image:</label>
+    <input type="file" name="image" placeholder="Image" id="image">
+
+    <!-- <label for="itemNameString">Item name:</label>
+    <input type="text" name="itemNameString" placeholder="Item name" id="itemNameString"> -->
+</form>
 
 <!-- / content -->
 
@@ -188,36 +170,78 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-sm-6 col-md-4 widget">
+                <!--<div class="col-sm-6 col-md-4 widget">
                     <div class="about-widget">
                         <div class="widget-title-image">
                             <img src="images/logo.png" alt="">
                         </div>
                         <p>Praesent sed congue ipsum. Nullam tempus ornare est, non aliquet velit tincidunt elementum. Nulla at risus ut felis eleifend. Nulla non lacinia. Integer est lacus, ultricies sed feugiat id, maximus nec.</p>
                     </div><!-- / about-widget -->
-                </div><!-- / widget -->
-                <!-- / first widget -->
+                <!--</div><!-- / widget -->
+                
 
                 <div class="col-sm-6 col-md-2 widget">
                     <div class="widget-title">
-                        <h4>Brands</h4>
+                        <h4>Doorbells</h4>
                     </div>
                     <div class="link-widget">
                         <div class="info">
-                            <a href="#x">Marco REA</a>
+                            <a href="doorbells.php">All</a>
                         </div>
                         <div class="info">
-                            <a href="#x">3Days</a>
+                            <a href="doorbells.php?category=beachy">Beachy</a>
                         </div>
                         <div class="info">
-                            <a href="#x">La Barcelona</a>
+                            <a href="doorbells.php?category=contemporary">Contemporary</a>
                         </div>
                         <div class="info">
-                            <a href="#x">Lora Towers</a>
+                            <a href="doorbells.php?category=dog">Dog Lovers</a>
                         </div>
                         <div class="info">
-                            <a href="#x">Ginneys</a>
+                            <a href="doorbells.php?category=animals">Animals</a>
                         </div>
+                        <div class="info">
+                            <a href="doorbells.php?category=petroglyphs">Petroglyph</a>
+                        </div>
+                        <div class="info">
+                            <a href="doorbells.php?category=plants">Plants</a>
+                        </div>
+                        <div class="info">
+                            <a href="doorbells.php?category=southwest">Southwest</a>
+                        </div>
+                        <div class="info">
+                            <a href="doorbells.php?category=misc">Miscellaneous</a>
+                        </div>
+                    </div>
+                </div><!-- / widget -->
+                <!-- / first widget -->
+                <div class="col-sm-6 col-md-2 widget">
+                    <div class="widget-title">
+                        <h4>Miscellaneous</h4>
+                    </div>
+                    <div class="link-widget">
+                        <div class="info">
+                            <a href="art.html">Artwork</a>
+                        </div>
+                        <div class="info">
+                            <a href="fan-pulls.html">Ceiling Fan Pulls</a>
+                        </div>
+                        <div class="info">
+                            <a href="air-plant-holders.html">Air Plant Holders</a>
+                        </div>
+                        <div class="info">
+                            <a href="custom-orders.html">Custom Orders</a>
+                        </div>
+                        <!-- <div class="info">
+                            <a href="#x">Animals</a>
+                        </div>
+                        
+                        <div class="info">
+                            <a href="#x">Plants</a>
+                        </div>
+                        <div class="info">
+                            <a href="#x">Traditional</a>
+                        </div> -->
                     </div>
                 </div><!-- / widget -->
                 <!-- / second widget -->
@@ -228,16 +252,16 @@
                     </div>
                     <div class="link-widget">
                         <div class="info">
-                            <a href="#x">Privacy Policy</a>
+                            <a href="instructions.html">Instructions</a>
                         </div>
-                        <div class="info">
+                        <!-- <div class="info">
                             <a href="#x">Shipping & Return</a>
-                        </div>
-                        <div class="info">
-                            <a href="#x">Terms & Conditions</a>
-                        </div>
+                        </div> -->
                         <div class="info">
                             <a href="faq.html">F.A.Q</a>
+                        </div>
+                        <div class="info">
+                            <a href="schedule.html">Show Schedule</a>
                         </div>
                         <div class="info">
                             <a href="contact.html">Contact</a>
@@ -252,15 +276,15 @@
                     </div>
                     <div class="contact-widget">
                         <div class="info">
-                            <p><i class="lnr lnr-map-marker"></i><span>Miami, S Miami Ave, SW 20th.</span></p>
+                            <p><i class="lnr lnr-map-marker"></i><span>11885 Rocoso Road<br> Lakeside, CA 92040-1035</span></p>
                         </div>
                         <div class="info">
-                            <a href="tel:+0123456789"><i class="lnr lnr-phone-handset"></i><span>+0123 456 789</span></a>
+                            <a href="tel:6194671176"><i class="lnr lnr-phone-handset"></i><span>619-467-1176</span></a>
                         </div>
                         <div class="info">
-                            <a href="mailto:hello@yoursite.com"><i class="lnr lnr-envelope"></i><span>office@yoursite.com</span></a>
+                            <a href="mailto:info@cicadaceramics.com"><i class="lnr lnr-envelope"></i><span>info@cicadaceramics.com</span></a>
                         </div>
-                        <div class="info">
+                        <!-- <div class="info">
                             <p class="social pull-left">
                                 <a class="no-margin" href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
@@ -269,7 +293,7 @@
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><i class="fa fa-dribbble"></i></a>
                             </p>
-                        </div>
+                        </div> -->
                     </div><!-- / contact-widget -->
                 </div><!-- / widget -->
                 <!-- / fourth widget -->
@@ -280,13 +304,10 @@
     <div class="footer-info">
         <div class="container">
                 <div class="pull-left">
-                    <p>© 2016 - <strong>inCart</strong> - Responsive Shop Theme.</p>
+                    <p>© 2022 - <strong>Cicada Ceramics</strong> </p>
                 </div>
                 <span class="pull-right">
-                    <img src="images/visa.png" alt="">
-                    <img src="images/mastercard.png" alt="">
-                    <img src="images/discover.png" alt="">
-                    <img src="images/paypal.png" alt="">
+                    <span>???</span>
                 </span>
         </div><!-- / container -->
     </div><!-- / footer-info -->
@@ -298,10 +319,35 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
-<!-- contact-form -->
-<script src="js/validator.min.js" type="text/javascript"></script>
-<script src="js/form-scripts.js" type="text/javascript"></script>
-<!-- / contact-form -->
+<!-- scrolling-nav -->
+<script src="js/scrolling-nav.js"></script>
+<!-- / scrolling-nav -->
+
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
+
+<!-- sliders -->
+<script src="js/owl.carousel.min.js"></script>
+<!-- featured-products carousel -->
+<script>
+    $(document).ready(function() {
+      $("#products-carousel").owlCarousel({
+        autoPlay: 3000, //set autoPlay to 3 seconds.
+        items : 4,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+      });
+
+    });
+</script>
+<!-- / featured-products carousel -->
+<!-- / sliders -->
+
+<!-- shuffle grid-resizer -->
+<script src="js/jquery.shuffle.min.js"></script>
+<script src="js/custom.js"></script>
+<!-- / shuffle grid-resizer -->
 
 <!-- preloader -->
 <script src="js/preloader.js"></script>

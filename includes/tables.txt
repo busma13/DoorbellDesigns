@@ -6,6 +6,7 @@ CREATE TABLE orders (
     email varchar(150) not null,
     address_line varchar(255) not null,
     city varchar(50) not null,
+    state varchar(50) not null,
     zip varchar(10) not null,
     cart_products varchar(5000) not null
 );

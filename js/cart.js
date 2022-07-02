@@ -2,58 +2,72 @@
 // store this elsewhere in the future
 let productList = [
     {
-        name: 'bambooDoorbell',
-        categories: ['Doorbells', "Plants"],
+        id: 1,
+        itemName: 'bambooDoorbell',
+        itemNameString: 'Bamboo Doorbell',
+        mainCategory: 'Doorbells',
+        subCategories: ["plants"],
         price: 43,
         shipping: 3.50,
         qtyInCart: 0,
         pageUrl: 'bamboo-doorbell.html',
-        imgUrl: 'images/doorbells/bamboo_9to10.jpg'
+        imgUrl: 'images/doorbells/bamboo_9to10.jpg',
+        dimensions: '6" x 3 5/8"'
     },
     {
-        name: 'releaseTheHoundsDoorbell',
-        categories: ['Doorbells', "Dog Lovers"],
+        id: 2,
+        itemName: 'releaseTheHoundsDoorbell',
+        itemNameString: 'Release The Hounds Doorbell',
+        mainCategory: 'Doorbells',
+        categories: ["dog lovers"],
         price: 43,
         shipping: 3.50,
         qtyInCart: 0,
         pageUrl: 'release-the-hounds-doorbell.html',
         imgUrl: 'images/doorbells/to-release-the-hounds-1_9to10.jpg'
     },
+    // {
+    //     itemName: 'buffaloShamanDoorbell',
+    //     itemNameString: 'Buffalo Shaman Doorbell',
+    //     categories: ['Doorbells', "Petroglyphs"],
+    //     price: 43,
+    //     shipping: 3.5,
+    //     qtyInCart: 0,
+    //     pageUrl: 'buffalo-shaman-doorbell.html',
+    //     imgUrl: 'images/doorbells/buffalo-shaman_9to10.jpg'
+    // },
+    // {
+    //     itemName: 'grapesDoorbell',
+    //     itemNameString: 'Grapes Doorbell',
+    //     categories: ['Doorbells', "Plants"],
+    //     price: 43,
+    //     shipping: 3.50,
+    //     qtyInCart: 0,
+    //     pageUrl: 'grapes-doorbell.html',
+    //     imgUrl: 'images/doorbells/grapes_9to10.jpg'
+    // },
+    // {
+    //     itemName: 'greenLizardDoorbell',
+    //     itemNameString: 'Green Lizard Doorbell',
+    //     categories: ['Doorbells', "Animals"],
+    //     price: 43,
+    //     shipping: 3.50,
+    //     qtyInCart: 0,
+    //     pageUrl: 'green-lLizard-doorbell.html',
+    //     imgUrl: 'images/doorbells/lizard-green_9to10.jpg'
+    // },
     {
-        name: 'buffaloShamanDoorbell',
-        categories: ['Doorbells', "Petroglyphs"],
-        price: 43,
-        shipping: 3.5,
-        qtyInCart: 0,
-        pageUrl: 'buffalo-shaman-doorbell.html',
-        imgUrl: 'images/doorbells/buffalo-shaman_9to10.jpg'
-    },
-    {
-        name: 'grapesDoorbell',
-        categories: ['Doorbells', "Plants"],
-        price: 43,
-        shipping: 3.50,
-        qtyInCart: 0,
-        pageUrl: 'grapes-doorbell.html',
-        imgUrl: 'images/doorbells/grapes_9to10.jpg'
-    },
-    {
-        name: 'greenLizardDoorbell',
-        categories: ['Doorbells', "Animals"],
-        price: 43,
-        shipping: 3.50,
-        qtyInCart: 0,
-        pageUrl: 'green-lLizard-doorbell.html',
-        imgUrl: 'images/doorbells/lizard-green_9to10.jpg'
-    },
-    {
-        name: 'largePetroglyphDoorbell',
-        categories: ['Doorbells', "Petroglyphs"],
+        id: 3,
+        itemName: 'largePetroglyphDoorbell',
+        itemNameString: 'Large Petroglyph Doorbell',
+        mainCategory: 'Doorbells',
+        subCategories: ["petroglyphs"],
         price: 55,
         shipping: 5,
         qtyInCart: 0,
         pageUrl: 'large-petroglyph-doorbell.html',
-        imgUrl: 'images/doorbells/large-petroglyph_9to10.jpg'
+        imgUrl: 'images/doorbells/large-petroglyph_9to10.jpg',
+        dimensions: '6 1/4” X 6 1/2”'
     },
 ];
 
@@ -64,7 +78,7 @@ let addToCartBtns = document.querySelectorAll('.add-to-cart');
 for (let i = 0; i < addToCartBtns.length; i++) {
     addToCartBtns[i].addEventListener('click', (event) => {
         let productName = event.currentTarget.id;
-        let product = productList.find(product => product.name === productName)
+        let product = productList.find(product => product.itemName === productName)
         console.log(event.currentTarget);
         cartItemCount(1, product);
         updateTotalCost(1, product);
@@ -73,12 +87,12 @@ for (let i = 0; i < addToCartBtns.length; i++) {
 
 // Grab the button that adds items on a single product page
 let addToCartBtnSinglePage = document.querySelector('.add-to-cart-single');
-console.log(addToCartBtnSinglePage)
+// console.log(addToCartBtnSinglePage)
 if (addToCartBtnSinglePage) {
     addToCartBtnSinglePage.addEventListener('click', (event) => {
         let qty = Number(document.querySelector('.input-text').value);
         let productName = event.currentTarget.id;
-        let product = productList.find(product => product.name === productName);
+        let product = productList.find(product => product.itemName === productName);
         console.log(event.currentTarget);
         console.log(productName, product)
         cartItemCount(qty, product);
@@ -107,17 +121,17 @@ function setItems(qty, product) {
     let cartContents = JSON.parse(localStorage.getItem('cartProducts'));
     
     if(cartContents) {
-        if(!cartContents[product.name]) {
+        if(!cartContents[product.itemName]) {
             cartContents = {
                 ...cartContents,
-                [product.name]: product
+                [product.itemName]: product
             }
         }
-        cartContents[product.name].qtyInCart += qty;
+        cartContents[product.itemName].qtyInCart += qty;
     } else {
         product.qtyInCart = qty;
         cartContents = {
-            [product.name]: product
+            [product.itemName]: product
         }
     }
     
@@ -153,7 +167,7 @@ function displayCart() {
             productTable.innerHTML += `
             <tr class="cart-item">
                 <td class="image"><a href="${item.pageUrl}"><img src="${item.imgUrl}" alt=""></a></td>
-                <td><a href="${item.pageUrl}">${item.name}</a></td>
+                <td><a href="${item.pageUrl}">${item.itemName}</a></td>
                 <td>$${item.price}</td>
                 <td class="qty"><input type="number" step="1" min="1" name="cart" value="${item.qtyInCart}" title="Qty" class="input-text qty text qty-input-box" size="4"></td>
                 <td>$${item.price * item.qtyInCart}</td>
@@ -252,6 +266,7 @@ function calculateShippingTotal() {
     }
     console.table(qtyAtEachShippingPrice)
 
+    //update for fan pulls, artwork, etc
     for (let price in qtyAtEachShippingPrice) {
         // console.log(`${qtyAtEachShippingPrice[price]}`)
         if (price == 3.5) {
