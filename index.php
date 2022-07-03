@@ -160,14 +160,14 @@
                 <div class="item product">
                     <!-- <span class="sale-label">SALE</span> -->
                     <!-- / sale-label -->
-                    <a href="<?php echo $row['pageUrl'] ?>" class="product-link"></a>
+                    <a href="single-product.php?product=<?php echo $row['id'] ?>" class="product-link"></a>
                     <!-- / product-link -->
                     <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
                     <!-- / product-image -->
 
                     <!-- product-hover-tools -->
                     <div class="product-hover-tools">
-                        <a href="<?php echo $row['pageUrl'] ?>" class="view-btn">
+                        <a href="single-product.php?product=<?php echo $row['id'] ?>" class="view-btn">
                             <i class="lnr lnr-eye"></i>
                         </a>
                         <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
@@ -188,7 +188,7 @@
             }
         }
         else {
-            echo '<h1> ERROR </h1>';
+            echo '<h1> ERROR - Could not load products from database</h1>';
         }
    ?>
     
@@ -257,14 +257,14 @@
                 <div class="col-xs-6 col-md-4 product">
                     <!-- <span class="sale-label">SALE</span> -->
                     <!-- / sale-label -->
-                    <a href="<?php echo $row['pageUrl'] ?>" class="product-link"></a>
+                    <a href="single-product.php?product=<?php echo $row['id'] ?>" class="product-link"></a>
                     <!-- / product-link -->
                     <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
                     <!-- / product-image -->
 
                     <!-- product-hover-tools -->
                     <div class="product-hover-tools">
-                        <a href="<?php echo $row['pageUrl'] ?>" class="view-btn">
+                        <a href="single-product.php?product=<?php echo $row['id'] ?>" class="view-btn">
                             <i class="lnr lnr-eye"></i>
                         </a>
                         <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
@@ -285,7 +285,7 @@
             }
         }
         else {
-            echo '<h1> ERROR </h1>';
+            echo '<h1> ERROR - Could not load products from database </h1>';
         }
    ?>
 
