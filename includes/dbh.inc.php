@@ -6,23 +6,23 @@
 
 // if ($URL_REF_HOST) {
 //     $a = 'if';
-//     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-//     $server = $url["host"];
-//     $username = $url["user"];
-//     $password = $url["pass"];
-//     $db = substr($url["path"], 1);
+    $server = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $db = substr($url["path"], 1);
 
-//     $conn = new mysqli($server, $username, $password, $db);
+    $conn = new mysqli($server, $username, $password, $db);
 // }
 // else {
-    $a = 'else';
-    $dbServername = "localhost"; //needs to point to actual online server 
-    $dbUsername = "root"; //will be different for online server
-    $dbPassword = ""; //xampp has no default pw
-    $dbName = "doorbell_designs";
+    // $a = 'else';
+    // $dbServername = "localhost"; //needs to point to actual online server 
+    // $dbUsername = "root"; //will be different for online server
+    // $dbPassword = ""; //xampp has no default pw
+    // $dbName = "doorbell_designs";
 
-    $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+    // $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 // }
 
 ?>
