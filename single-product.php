@@ -6,16 +6,16 @@
     include 'header-pt2.php';
 ?>
 
-    <div id="page-header" class="single-product">
+    <!-- <div id="page-header" class="single-product">
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub">
                     <h1 class="page-title fadeInDown animated first">Single Product</h1>
-                </div><!-- / page-header -->
-                <p class="slide-text fadeInUp animated second">Your product's description goes here...</p>
-            </div><!-- / page-header-content -->
-        </div><!-- / container -->
-    </div><!-- / page-header -->
+                </div><! -- / page-header -->
+                <!-- <p class="slide-text fadeInUp animated second">Your product's description goes here...</p> 
+            </div><! -- / page-header-content -->
+        <!-- </div>/ container -->
+    <!-- </div>/ page-header -->
 
 </header>
 <!-- / header -->
@@ -27,6 +27,16 @@
     <div class="container">
         <div class="row">
 
+<?php
+    //Retrieve product by id
+    $get_product_sql = 'SELECT * FROM products WHERE id = "'.$_GET['product'].'";';
+    $productQueryResult = mysqli_query($conn, $get_product_sql);
+    $productResultCheck = mysqli_num_rows($productQueryResult);
+    
+    if ($productResultCheck > 0) {
+        while ($row = mysqli_fetch_assoc($productQueryResult)) {
+?> 
+
             <!-- product content area -->
             <div class="col-sm-6 col-md-7 content-area">
                 <div class="product-content-area">
@@ -34,151 +44,31 @@
                         <!-- wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img src="images/product-slide1.jpg" alt="">
+                                <img class="product-single-image" src="<?php echo $row['imgUrl']?>" alt="<?php echo $row['itemNameString']?>">
                             </div>
-                            <div class="item">
-                                <img src="images/product-slide2.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="images/product-slide3.jpg" alt="">
-                            </div>
+                           
                         </div>
                         <!-- / wrapper for slides -->
 
                         <!-- controls -->
-                        <a class="left carousel-control" href="#product-slider" role="button" data-slide="prev">
+                        <!-- <a class="left carousel-control" href="#product-slider" role="button" data-slide="prev">
                             <span class="lnr lnr-chevron-left" aria-hidden="true"></span>
                         </a>
                         <a class="right carousel-control" href="#product-slider" role="button" data-slide="next">
                             <span class="lnr lnr-chevron-right" aria-hidden="true"></span>
-                        </a>
+                        </a> -->
                         <!-- / controls -->
                     </div><!-- / product-slider -->
 
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="active"><a href="#description" role="tab" data-toggle="tab" aria-expanded="true">Description</a></li>
-                        <li class=""><a href="#info" role="tab" data-toggle="tab" aria-expanded="false">Product Info</a></li>
-                        <li class=""><a href="#reviews" role="tab" data-toggle="tab" aria-expanded="false">Reviews (2)</a></li>
-                    </ul>
-                    <!-- / nav-tabs -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane animated fadeIn active" id="description">
-                            <p>Phasellus risus nulla, tempor in est vel, sodales efficitur tellus. Nunc libero sapien, elementum vitae posuere in, efficitur non nulla. Aenean dignissim quam vel vulputate lacinia. Aliquam mauris proin ut pretium est pellentesque nisl nec ultricies scelerisque.</p>
-                        </div>
-                        <!-- / description-tab -->
-
-                        <div role="tabpanel" class="tab-pane animated fadeIn" id="info">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <th>Sizes:</th>
-                                                <td>Small, Medium, Large</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Colors:</th>
-                                                <td>Grey, Black, Blue</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Fabric:</th>
-                                                <td>100% Cotton</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <th>Weight:</th>
-                                                <td>0.34 Kg</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Made In:</th>
-                                                <td>USA</td>
-                                            </tr>
-                                            <tr>
-                                                <th>More Info:</th>
-                                                <td>Fusce ipsum felis.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div><!-- / row -->
-                        </div>
-                        <!-- / info-tab -->
-
-                        <div role="tabpanel" class="tab-pane animated fadeIn" id="reviews">
-                            <div class="reviews">
-                                <div class="review-author pull-left">
-                                  <img src="images/author1.jpg" alt="">
-                                </div>
-                                <div class="review-content">
-                                    <h4 class="review-title no-margin">Simply the Best!</h4>
-                                    <div class="review-stars">
-                                        <span class="product-rating">
-                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                        </span>
-                                    </div><!-- / review-stars -->
-                                    <p>Aliquam pellentesque nisl nec ultricies scelerisque. Proin vel blandit magna. Class aptent taciti sociosqu.</p>
-                                    <cite> - Johana Doe</cite>
-                                </div><!-- / review-content -->
-
-                                <div class="space-25">&nbsp;</div>
-
-                                <div class="review-author pull-left">
-                                  <img src="images/author2.jpg" alt="">
-                                </div>
-                                <div class="review-content">
-                                    <h4 class="review-title no-margin">Good Product.</h4>
-                                    <div class="review-stars">
-                                        <span class="product-rating">
-                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i>
-                                        </span>
-                                    </div><!-- / review-stars -->
-                                    <p>Vestibulum luctus justo justo, ac iaculis dolor luctus nec. In nec molestie mi. Praesent blandit interdum neque.</p>
-                                    <cite> - Nicole Dowe</cite>
-                                </div><!-- / review-content -->
-                            </div><!-- / reviews -->
-                        </div>
-                        <!-- / reviews-tab -->
-                    </div>
-                    <!-- / tab-content -->
+                    
+                    
                 </div><!-- / product-content-area -->
 
-                <!-- add review -->
-                <div id="add-review" class="space-top-30">
-                    <h4>Leave a review</h4>
-                    <div class="row">
-                        <div class="col-sm-4 review-form">
-                            <input type="text" class="form-control" placeholder="*Name" required>
-                        </div>
-                        <div class="col-sm-4 review-form">
-                            <input type="email" class="form-control" placeholder="*Email" required>
-                        </div>
-                        <div class="col-sm-4 review-form">
-                            <select class="form-control">
-                                <option>5 Stars</option>
-                                <option>4 Stars</option>
-                                <option>3 Stars</option>
-                                <option>2 Stars</option>
-                                <option>1 Star</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-12 review-form">
-                            <textarea rows="7" class="form-control" placeholder="*Review" required></textarea>
-                            <button type="submit" class="btn btn-submit btn-primary-filled btn-rounded">Submit Review</button>
-                        </div>
-                    </div><!-- / row -->
-                </div>
-                <!-- / add review -->
-
+                
                 <!-- product pagination -->
                 <div class="pagination no-padding">
-                    <a href="#x" class="btn btn-default btn-rounded no-margin"><i class="fa fa-long-arrow-left"></i><span>Previous</span></a>
-                     <a href="#x" class="btn btn-default btn-rounded no-margin pull-right"><span>Next</span><i class="fa fa-long-arrow-right"></i></a>
+                    <a href="single-product.php?product=<?php echo $_GET['product'] - 1?>" class="btn btn-default btn-rounded no-margin"><i class="fa fa-long-arrow-left"></i><span>Previous</span></a>
+                     <a href="single-product.php?product=<?php echo $_GET['product'] + 1?>" class="btn btn-default btn-rounded no-margin pull-right"><span>Next</span><i class="fa fa-long-arrow-right"></i></a>
                 </div><!-- / product pagination -->       
 
             </div>
@@ -187,56 +77,64 @@
             <!-- project sidebar area -->
             <div class="col-sm-6 col-md-5 product-sidebar">
                 <div class="product-details">
-                    <h4>Womens Shirt</h4>
-                    <p>Maecenas bibendum erat in erat maximus, vel imperdiet leo mattis. Integer vitae pellentesque massa. Fusce ac suscipit neque. Etiam justo risus, tristique id feugiat a venenatis.</p>
-                    <h4 class="space-top-30">Product Info</h4>
+                    <h4 class="product-name"><?php echo $row['itemNameString']?></h4>
+                    <!-- <p>Maecenas bibendum erat in erat maximus, vel imperdiet leo mattis. Integer vitae pellentesque massa. Fusce ac suscipit neque. Etiam justo risus, tristique id feugiat a venenatis.</p> -->
+                    <!-- <h4 class="space-top-30">Product Info</h4> -->
                     <div class="product-info">
                         <div class="info">
-                            <p><i class="lnr lnr-tag"></i><span>Price: $59</span></p>
+                            <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $row['price'] ?></span></p>
                         </div>
                         <div class="info">
-                            <p><i class="lnr lnr-heart"></i><span>Category: <a href="#"> Women's</a>, <a href="#">Shirts</a></span></p>
+                            <p><i class="lnr lnr-heart"></i><span>Category: <a href="<?php echo strtolower($row['mainCategory'])?>.php"> <?php echo $row['mainCategory']?></a>, 
+
+                            <!-- Loop through subcategory array. Add name of each subcategory with link to subcategory page.-->
+                            <?php 
+                                $subCatArr = JSON_decode($row['subCategories']);
+                                // echo $subCatArr;
+                                foreach($subCatArr as $i) { 
+                                    // echo $i; 
+                                    ?>
+                                    <a href="<?php echo strtolower($row['mainCategory'])?>.php?category=<?php echo $i?>"><?php echo ucfirst($i)?></a> <?php
+                                }
+                            ?>
+
+                            </span></p>
                         </div>
                         <div class="info">
-                            <p><i class="lnr lnr-menu"></i><span>SKU: 3872473225</span></p>
+                            <p><img class="ruler" src="images/ruler.png"><span>Dimensions: <?php echo $row['dimensions']?></span></p>
                         </div>
-                        <div class="info">
-                            <p><i class="lnr lnr-star"></i><span>Reviews: <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i></span></p>
-                        </div>
+                        
                     </div><!-- / project-info -->
 
                     <div class="buy-product">
                         <div class="options">
+                            <span>Qty:</span>
                             <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
                             <span class="selectors">
                                 <select class="selectpicker">
-                                    <optgroup label="Size:">
-                                        <option>Small</option>
-                                        <option>Medium</option>
-                                        <option>Large</option>
+                                    <optgroup label="Color:">
+                                        <option>Grey</option>
+                                        <option>Light Brown</option>
                                     </optgroup>
                                 </select>
-                                <select class="selectpicker two">
+                                <!-- <select class="selectpicker two">
                                     <optgroup label="Color:">
                                         <option>Grey</option>
                                         <option>Black</option>
                                         <option>Blue</option>
                                     </optgroup>
-                                </select>
+                                </select> -->
                             </span>
                         </div>
                         <!-- / options -->
 
                         <div class="space-25">&nbsp;</div>
 
-                        <a href="shopping-cart.html" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-cart"></i><span> Add to Cart</span></a>
-                        <a href="checkout.html" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-heart"></i><span> Buy Now</span></a>
+                        <a class="btn btn-primary-filled btn-rounded add-to-cart-single" id="bambooDoorbell"><i class="lnr lnr-cart"></i><span> Add to Cart</span></a>
+                        <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
                     </div>
 
-                    <div class="info-buttons">
-                        <a href="#add-review" class="page-scroll btn btn-default btn-rounded"><i class="lnr lnr-star"></i><span> Leave a review</span></a>
-                        <a href="contact.html" class="btn btn-primary btn-rounded"><i class="lnr lnr-phone-handset"></i><span> Contact Us</span></a>
-                    </div><!-- / info-buttons -->
+                    
 
                 </div><!-- product-details -->
 
@@ -244,111 +142,15 @@
             <!-- / project sidebar area -->
 
         </div><!-- / row -->
+    
 
-        <div id="related-products">
-            <h4 class="space-left space-bottom-30">Related Products</h4>
-            <div class="row">
+        <?php
+                }
+            }
 
-                <!-- product -->
-                <div class="col-xs-6 col-md-3 product">
-                    <span class="sale-label">SALE</span>
-                    <a href="single-product.html" class="product-link"></a>
-                    <!-- / product-link -->
-                    <img src="images/f-product.jpg" alt="">
-                    <!-- / product-image -->
-
-                    <!-- product-hover-tools -->
-                    <div class="product-hover-tools">
-                        <a href="single-product.html" class="view-btn">
-                            <i class="lnr lnr-eye"></i>
-                        </a>
-                        <a href="shopping-cart.html" class="add-to-cart">
-                            <i class="lnr lnr-cart"></i>
-                        </a>
-                    </div><!-- / product-hover-tools -->
-
-                    <!-- product-details -->
-                    <div class="product-details">
-                        <h3 class="product-title">Women's Shirt</h3>
-                        <h6 class="product-price"><del>$49</del> <span class="sale-price">$29</span></h6>
-                    </div><!-- / product-details -->
-                </div><!-- / product -->
-
-                <!-- product -->
-                <div class="col-xs-6 col-md-3 product">
-                    <a href="single-product.html" class="product-link"></a>
-                    <!-- / product-link -->
-                    <img src="images/f-product.jpg" alt="">
-                    <!-- / product-image -->
-
-                    <!-- product-hover-tools -->
-                    <div class="product-hover-tools">
-                        <a href="single-product.html" class="view-btn">
-                            <i class="lnr lnr-eye"></i>
-                        </a>
-                        <a href="shopping-cart.html" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                        </a>
-                    </div><!-- / product-hover-tools -->
-
-                    <!-- product-details -->
-                    <div class="product-details">
-                        <h3 class="product-title">Women's Shirt</h3>
-                        <h6 class="product-price">$99</h6>
-                    </div><!-- / product-details -->
-                </div><!-- / product -->
-
-                <!-- product -->
-                <div class="col-xs-6 col-md-3 product">
-                    <a href="single-product.html" class="product-link"></a>
-                    <!-- / product-link -->
-                    <img src="images/f-product.jpg" alt="">
-                    <!-- / product-image -->
-
-                    <!-- product-hover-tools -->
-                    <div class="product-hover-tools">
-                        <a href="single-product.html" class="view-btn">
-                            <i class="lnr lnr-eye"></i>
-                        </a>
-                        <a href="shopping-cart.html" class="add-to-cart">
-                            <i class="lnr lnr-cart"></i>
-                        </a>
-                    </div><!-- / product-hover-tools -->
-
-                    <!-- product-details -->
-                    <div class="product-details">
-                        <h3 class="product-title">Women's Shirt</h3>
-                        <h6 class="product-price">$29</h6>
-                    </div><!-- / product-details -->
-                </div><!-- / product -->
-
-                <!-- product -->
-                <div class="col-xs-6 col-md-3 product">
-                    <a href="single-product.html" class="product-link"></a>
-                    <!-- / product-link -->
-                    <img src="images/f-product.jpg" alt="">
-                    <!-- / product-image -->
-
-                    <!-- product-hover-tools -->
-                    <div class="product-hover-tools">
-                        <a href="single-product.html" class="view-btn">
-                            <i class="lnr lnr-eye"></i>
-                        </a>
-                        <a href="shopping-cart.html" class="add-to-cart">
-                            <i class="lnr lnr-cart"></i>
-                        </a>
-                    </div><!-- / product-hover-tools -->
-
-                    <!-- product-details -->
-                    <div class="product-details">
-                        <h3 class="product-title">Women's Shirt</h3>
-                        <h6 class="product-price">$39</h6>
-                    </div><!-- / product-details -->
-                </div><!-- / product -->
-
-            </div><!-- / row -->
-        </div><!-- / related-products -->
-    </div><!-- / container -->
+        ?>    
+            
+            </div><!-- / container -->
 </section>
 <!-- / shop single-product -->
 
@@ -368,6 +170,10 @@
 <!-- scrolling-nav -->
 <script src="js/scrolling-nav.js"></script>
 <!-- / scrolling-nav -->
+
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
 
 <!-- preloader -->
 <script src="js/preloader.js"></script>
