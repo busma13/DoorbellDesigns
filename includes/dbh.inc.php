@@ -1,28 +1,40 @@
 <?php
 // database handler includes folder = dbh.inc.php
 
-// $URL_REF = parse_url($_SERVER['HTTP_REFERER']);
-// $URL_REF_HOST =   $URL_REF['host'];
+$host = $_SERVER['HTTP_HOST'];
 
-// if ($URL_REF_HOST) {
-//     $a = 'if';
+if ($host === 'localhost') {
+    $dbServername = "localhost"; //needs to point to actual online server 
+    $dbUsername = "root"; //will be different for online server
+    $dbPassword = ""; //xampp has no default pw
+    $dbName = "doorbell_designs";
+}
+else {
     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-    $server = $url["host"];
-    $username = $url["user"];
-    $password = $url["pass"];
-    $db = substr($url["path"], 1);
+    $dbServername = $url["host"];
+    $dbUsername = $url["user"];
+    $dbPassword = $url["pass"];
+    $dbName = substr($url["path"], 1);
+}
 
-    $conn = new mysqli($server, $username, $password, $db);
-// }
-// else {
-    // $a = 'else';
-    // $dbServername = "localhost"; //needs to point to actual online server 
-    // $dbUsername = "root"; //will be different for online server
-    // $dbPassword = ""; //xampp has no default pw
-    // $dbName = "doorbell_designs";
+$pdo = NULL;
 
-    // $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-// }
+/* Connection string, or "data source name" */
+$dsn = 'mysql:host=' . $dbServername . ';dbname=' . $dbName;
 
-?>
+/* Connection inside a try/catch block */
+try
+{  
+   /* PDO object creation */
+   $pdo = new PDO($dsn, $dbUsername,  $dbPassword);
+   
+   /* Enable exceptions on errors */
+   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch (PDOException $e)
+{
+   /* If there is an error an exception is thrown */
+   echo 'Database connection failed.';
+   die();
+}

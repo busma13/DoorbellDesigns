@@ -29,7 +29,6 @@
             <div class="col-sm-8 checkout-form">
                 <h4 class="space-left">Checkout</h4>
                 <!-- <p class="space-left have-account">Already have an account? <a href="login-register.html" class="btn btn-link"><i class="lnr lnr-enter"></i><span>Login</span></a></p> -->
-                <!-- <form onsubmit="return sendData()" id="orderForm"> -->
                 <form action="./includes/order.inc.php" method="POST">
                     <div class="row">
                         <div class="col-sm-6">

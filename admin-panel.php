@@ -1,9 +1,42 @@
 <?php
-    include_once 'includes/dbh.inc.php';
-    include 'header-pt1.php';
-    $title = 'Doorbell Designs Admin - Add Product';
-    echo $title;
-    include 'header-pt2.php';
+    session_start();
+    include_once './includes/dbh.inc.php';
+
+    /* Include the Account class file */
+    include './includes/account-class.php';
+
+    /* Create a new Account object */
+    $account = new Account();
+    
+    
+    $login = FALSE;
+
+    try
+    {
+        $login = $account->sessionLogin();
+    }
+    catch (Exception $e)
+    {
+        echo $e->getMessage();
+        die();
+    }
+
+    if ($login)
+    {
+        // echo 'Authentication successful.';
+        // echo 'Account ID: ' . $account->getId() . '<br>';
+        echo 'Logged in as: ' . $account->getName() . '<br>';
+        ?>
+            <form action="./includes/admin-login.inc.php" method="POST">
+                <button type="submit" name="logout" id="checkout-btn" class="btn btn-primary-filled btn-rounded">Log out</button>
+            </form>
+        <?php
+    
+
+        include 'header-pt1.php';
+        $title = 'Doorbell Designs Admin - Add Product';
+        echo $title;
+        include 'header-pt2.php';
 ?>
 
     <div id="page-header" class="checkout">
@@ -51,6 +84,7 @@
 
     <!-- <label for="itemNameString">Item name:</label>
     <input type="text" name="itemNameString" placeholder="Item name" id="itemNameString"> -->
+    <button type="submit" name="addProduct" id="checkout-btn" class="btn btn-primary-filled btn-rounded">Add Product</button>
     
 </form>
 
@@ -71,10 +105,6 @@
 <script src="js/scrolling-nav.js"></script>
 <!-- / scrolling-nav -->
 
-<!-- cart -->
-<script src="js/cart.js"></script>
-<!-- / cart -->
-
 <!-- shuffle grid-resizer -->
 <script src="js/jquery.shuffle.min.js"></script>
 <script src="js/custom.js"></script>
@@ -88,3 +118,10 @@
 </body>
 
 </html>
+<?php
+    }
+    else
+    {
+        header("Location: ./admin.php");
+    }
+?>

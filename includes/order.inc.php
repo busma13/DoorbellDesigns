@@ -18,21 +18,22 @@ $client = new SquareClient([
 
 if (isset($_POST['submit'])) {
 
-    $first = mysqli_real_escape_string($conn, $_POST['first-name']);
-    $last = mysqli_real_escape_string($conn, $_POST['last-name']);
-    $tel = mysqli_real_escape_string($conn, $_POST['tel']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $address_line = mysqli_real_escape_string($conn, $_POST['address-line']);
-    $city = mysqli_real_escape_string($conn, $_POST['city']);
-    $state = mysqli_real_escape_string($conn, $_POST['state']);
-    $zip = mysqli_real_escape_string($conn, $_POST['zip']);
-    $products = mysqli_real_escape_string($conn, $_POST['cart-list-input']);
+    $first = $_POST['first-name'];
+    $last = $_POST['last-name'];
+    $tel = $_POST['tel'];
+    $email = $_POST['email'];
+    $address_line = $_POST['address-line'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $zip = $_POST['zip'];
+    $products = $_POST['cart-list-input'];
 
     if (empty($first) || empty($last) || empty($tel) || empty($email) || empty($address_line) || empty($city) || empty($state) || empty($zip) || empty($products)) {
         header("Location: ../checkout.php?order=empty");
         exit();
     }
     else {
+        // Check for valid email address
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             header("Location: ../checkout.php?order=email");
             exit();
@@ -43,23 +44,27 @@ if (isset($_POST['submit'])) {
             }
             //create unique ID for the order
             $id = uniqid('ID', true);
-            // store order info in the orders database
-            $insert_sql = "INSERT INTO orders (id, first_name, last_name, tel, email, address_line, city, state, zip, cart_products) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-            $stmt = mysqli_stmt_init($conn);
-            if (!mysqli_stmt_prepare($stmt, $insert_sql)) {
-                header("Location: ../checkout.php?order=SQL-statement-failed");//work on this error on checkout.php
-            } else {
-                
-                // echo 'start<br>';
-                // var_dump($products_array);
-                // echo "<br>";
-                // var_dump($products_array2);
-                // echo '<br>end';
-                // exit();
-                mysqli_stmt_bind_param($stmt, "ssssssssss", $id, $first, $last, $tel, $email, $address_line, $city, $state, $zip, $products);
-                mysqli_stmt_execute($stmt);
+            // store order info in the orders database
+            $insert_sql = "INSERT INTO orders (id, first_name, last_name, tel, email, address_line, city, state, zip, cart_products) VALUES (:id, :first, :last, :tel, :email, :address_line, :city, :state, :zip, :products);";
+            
+            /* Values array for PDO */
+            $values = array(':id' => $id, ':first' => $first, ':last' => $last, ':tel' => $tel, ':email' => $email, ':address_line' => $address_line, ':city' => $city, ':state' => $state, ':zip' => $zip, ':products' => $products);
+            
+            /* Execute the query */
+            try
+            {
+                $res = $pdo->prepare($insert_sql);
+                $res->execute($values);
+                $retVal = $pdo->lastInsertId();
             }
+            catch (PDOException $e)
+            {
+                header("Location: ../checkout.php?order=SQL-statement-failed");//work on this error on checkout.php
+                /* If there is a PDO exception, throw a standard exception */
+                throw new Exception('Database query error');
+            }
+            
 
             // Create a payment link.  This includes an order object.
             $products_array = json_decode($_POST['cart-list-input'], false);
@@ -92,11 +97,24 @@ if (isset($_POST['submit'])) {
 
                 $prodId = $obj->id;
                 $get_products_sql = "SELECT * FROM products WHERE id=$prodId;";
-                $queryResult = mysqli_query($conn, $get_products_sql);
-                $resultCheck = mysqli_num_rows($queryResult);
+                // $queryResult = mysqli_query($conn, $get_products_sql);
+                // $resultCheck = mysqli_num_rows($queryResult);
 
-                if ($resultCheck > 0) {
-                    while ($row = mysqli_fetch_assoc($queryResult)) {
+                /* Execute the query */
+                try
+                {
+                    $res2 = $pdo->prepare($get_products_sql);
+                    $res2->execute();
+                }
+                catch (PDOException $e)
+                {
+                /* If there is a PDO exception, throw a standard exception */
+                throw new Exception('Database query error');
+                }
+                while ($row = $res2->fetch(PDO::FETCH_ASSOC)) { 
+
+                // if ($resultCheck > 0) {
+                //     while ($row = mysqli_fetch_assoc($queryResult)) {
                         $priceCents = $row['price'] * 100;
                         $shippingCents = $row['shipping'] * 100;
                         // echo $priceCents;
@@ -109,7 +127,7 @@ if (isset($_POST['submit'])) {
                         } else {
                             $qtyAtEachShippingPrice->$shippingCents += $obj->itemQty;
                         }
-                    }
+                    
                 }
 
                 $base_price_money = new \Square\Models\Money();
@@ -161,7 +179,13 @@ if (isset($_POST['submit'])) {
             
             $checkout_options = new \Square\Models\CheckoutOptions();
             // $checkout_options->setAskForShippingAddress(true);
-            $checkout_options->setRedirectUrl("http://localhost/doorbelldesigns/confirmation.php"); //add this or use square's confirmation page?
+            $host = $_SERVER['HTTP_HOST'];
+            if ($host === 'localhost') {
+                $checkout_options->setRedirectUrl("http://localhost/doorbelldesigns/confirmation.php");
+            } 
+            else {
+                $checkout_options->setRedirectUrl("http://doorbelldesigns.herokuapp.com/confirmation.php"); //change for production server
+            }
             
             $address = new \Square\Models\Address();
             $address->setAddressLine1($address_line);
