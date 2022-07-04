@@ -38,17 +38,17 @@
                 <div id="grid" class="row">
                     <!-- product -->
                     <div class="col-xs-6 col-md-3 product" data-groups='["plants"]'>
-                        <a href="bamboo-doorbell.html" class="product-link"></a>
+                        <a href="bamboo-doorbell.php" class="product-link"></a>
                         <!-- / product-link -->
                         <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
                         <!-- / product-image -->
 
                         <!-- product-hover-tools -->
                         <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.html" class="view-btn">
+                            <a href="bamboo-doorbell.php" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a href="shopping-cart.html" class="add-to-cart">
+                            <a href="shopping-cart.php" class="add-to-cart">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->

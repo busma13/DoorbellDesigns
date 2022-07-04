@@ -43,7 +43,7 @@
                 All our door bells come with lighted buttons, screws and anchors, and instructions. They are for wired doorbells. They can replace any shape of wired door bell button. We can also make a decorative door bell surround for your wireless doorbell button.
             </p>
             <p>    
-                 We primarily do shows in the Southwest and Florida (<a href="schedule.html">Show Schedule</a>).  Although we have sold hundreds of doorbells to people throughout the US, Canada, the UK and Australia.
+                 We primarily do shows in the Southwest and Florida (<a href="schedule.php">Show Schedule</a>).  Although we have sold hundreds of doorbells to people throughout the US, Canada, the UK and Australia.
             </p>
             <div class="page-header text-center space-top-30">
                 <h3>There are a few things you do need to know:</h3>
