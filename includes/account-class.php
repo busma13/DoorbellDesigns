@@ -122,7 +122,7 @@ class Account
         $id = NULL;
         
         /* Search the ID on the database */
-        $query = 'SELECT account_id FROM doorbell_designs.accounts WHERE (account_name = :name)';
+        $query = 'SELECT account_id FROM accounts WHERE (account_name = :name)';
         $values = array(':name' => $name);
         
         try
@@ -178,7 +178,7 @@ class Account
 		/* Finally, add the new account */
 		
 		/* Insert query template */
-		$query = 'INSERT INTO doorbell_designs.accounts (account_name, account_passwd) VALUES (:name, :passwd)';
+		$query = 'INSERT INTO accounts (account_name, account_passwd) VALUES (:name, :passwd)';
 		
 		/* Password hash */
 		$hash = password_hash($passwd, PASSWORD_DEFAULT);
@@ -215,7 +215,7 @@ class Account
 		}
 		
 		/* Query template */
-		$query = 'DELETE FROM doorbell_designs.accounts WHERE (account_id = :id)';
+		$query = 'DELETE FROM accounts WHERE (account_id = :id)';
 		
 		/* Values array for PDO */
 		$values = array(':id' => $id);
@@ -233,7 +233,7 @@ class Account
 		}
 		
 		/* Delete the Sessions related to the account */
-		$query = 'DELETE FROM doorbell_designs.account_sessions WHERE (account_id = :id)';
+		$query = 'DELETE FROM account_sessions WHERE (account_id = :id)';
 		
 		/* Values array for PDO */
 		$values = array(':id' => $id);
@@ -290,7 +290,7 @@ class Account
 		/* Finally, edit the account */
 		
 		/* Edit query template */
-		$query = 'UPDATE doorbell_designs.accounts SET account_name = :name, account_passwd = :passwd, account_enabled = :enabled WHERE account_id = :id';
+		$query = 'UPDATE accounts SET account_name = :name, account_passwd = :passwd, account_enabled = :enabled WHERE account_id = :id';
 		
 		/* Password hash */
 		$hash = password_hash($passwd, PASSWORD_DEFAULT);
@@ -337,7 +337,7 @@ class Account
         }
         
         /* Look for the account in the db. Note: the account must be enabled (account_enabled = 1) */
-        $query = 'SELECT * FROM doorbell_designs.accounts WHERE (account_name = :name) AND (account_enabled = 1)';
+        $query = 'SELECT * FROM accounts WHERE (account_name = :name) AND (account_enabled = 1)';
         
         /* Values array for PDO */
         $values = array(':name' => $name);
@@ -394,7 +394,7 @@ class Account
             */
             $query = 
             
-            'SELECT * FROM doorbell_designs.account_sessions, doorbell_designs.accounts WHERE (account_sessions.session_id = :sid) ' . 
+            'SELECT * FROM account_sessions, accounts WHERE (account_sessions.session_id = :sid) ' . 
             'AND (account_sessions.login_time >= (NOW() - INTERVAL 7 DAY)) AND (account_sessions.account_id = accounts.account_id) ' . 
             'AND (accounts.account_enabled = 1)';
             
@@ -443,7 +443,7 @@ class Account
                 - insert a new row with the session id, if it doesn't exist, or...
                 - update the row having the session id, if it does exist.
             */
-            $query = 'REPLACE INTO doorbell_designs.account_sessions (session_id, account_id, login_time) VALUES (:sid, :accountId, NOW())';
+            $query = 'REPLACE INTO account_sessions (session_id, account_id, login_time) VALUES (:sid, :accountId, NOW())';
             $values = array(':sid' => session_id(), ':accountId' => $this->id);
             
             /* Execute the query */
@@ -481,7 +481,7 @@ class Account
         if (session_status() == PHP_SESSION_ACTIVE)
         {
             /* Delete query */
-            $query = 'DELETE FROM doorbell_designs.account_sessions WHERE (session_id = :sid)';
+            $query = 'DELETE FROM account_sessions WHERE (session_id = :sid)';
             
             /* Values array for PDO */
             $values = array(':sid' => session_id());
