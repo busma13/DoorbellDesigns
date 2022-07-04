@@ -4,6 +4,9 @@
     $title = 'Doorbell Designs';
     echo $title;
     include 'header-pt2.php';
+
+    /* Global $pdo object */
+	global $pdo;
 ?>
 
 
@@ -137,58 +140,82 @@
     <?php
         //Retrieve list of IDs of featured products
         $get_featured_sql = "SELECT id FROM featured;";
-        $featuredQueryResult = mysqli_query($conn, $get_featured_sql);
-        $featuredResultCheck = mysqli_num_rows($featuredQueryResult);
+        // $featuredQueryResult = mysqli_query($conn, $get_featured_sql);
+        // $featuredResultCheck = mysqli_num_rows($featuredQueryResult);
 
-        $featuredArray = array();
-        if ($featuredResultCheck > 0) {
-            while ($featuredRow = mysqli_fetch_assoc($featuredQueryResult)) { 
-                $featuredArray[] = strval($featuredRow['id']);
-            }
+        /* Execute the query */
+        try
+        {
+            $res1 = $pdo->prepare($get_featured_sql);
+            $res1->execute();
         }
+        catch (PDOException $e)
+        {
+        /* If there is a PDO exception, throw a standard exception */
+        throw new Exception('Database query error');
+        }
+        
+        $featuredArray = array();
+        while ($featuredRow = $res1->fetch(PDO::FETCH_ASSOC)) { 
+            $featuredArray[] = strval($featuredRow['id']);
+        }
+
+        // if ($featuredResultCheck > 0) {
+            // while ($featuredRow = mysqli_fetch_assoc($featuredQueryResult)) { 
+            //     $featuredArray[] = strval($featuredRow['id']);
+            // }
+        // }
 
         // Retrieve featured products from database and insert into html
         $in = '(' . implode(',', $featuredArray) . ')';
         $get_products_sql = "SELECT * FROM products WHERE id IN " . $in;
-        $productsQueryResult = mysqli_query($conn, $get_products_sql);
-        $productsResultCheck = mysqli_num_rows($productsQueryResult);
+        // $productsQueryResult = mysqli_query($conn, $get_products_sql);
+        // $productsResultCheck = mysqli_num_rows($productsQueryResult);
 
-        if ($productsResultCheck > 0) {
-            while ($row = mysqli_fetch_assoc($productsQueryResult)) { ?>
-
-                <!-- item -->
-                <div class="item product">
-                    <!-- <span class="sale-label">SALE</span> -->
-                    <!-- / sale-label -->
-                    <a href="single-product.php?product=<?php echo $row['id'] ?>" class="product-link"></a>
-                    <!-- / product-link -->
-                    <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
-                    <!-- / product-image -->
-
-                    <!-- product-hover-tools -->
-                    <div class="product-hover-tools">
-                        <a href="single-product.php?product=<?php echo $row['id'] ?>" class="view-btn">
-                            <i class="lnr lnr-eye"></i>
-                        </a>
-                        <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
-                            <i class="lnr lnr-cart"></i>
-                        </a>
-                    </div>
-                    <!-- / product-hover-tools -->
-
-                    <!-- product-details -->
-                    <div class="product-details">
-                        <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
-                        <h6 class="product-price">$<?php echo $row['price'] ?></h6>
-                    </div>
-                    <!-- / product-details -->
-                </div>
-                <!-- / item -->
-                <?php   
-            }
+        /* Execute the query */
+        try
+        {
+            $res2 = $pdo->prepare($get_products_sql);
+            $res2->execute();
         }
-        else {
-            echo '<h1> ERROR - Could not load products from database</h1>';
+        catch (PDOException $e)
+        {
+        /* If there is a PDO exception, throw a standard exception */
+        throw new Exception('Database query error');
+        }
+
+        while ($row = $res2->fetch(PDO::FETCH_ASSOC)) { ?>
+
+            <!-- item -->
+            <div class="item product">
+                <!-- <span class="sale-label">SALE</span> -->
+                <!-- / sale-label -->
+                <a href="single-product.php?product=<?php echo $row['id'] ?>" class="product-link"></a>
+                <!-- / product-link -->
+                <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                <!-- / product-image -->
+
+                <!-- product-hover-tools -->
+                <div class="product-hover-tools">
+                    <a href="single-product.php?product=<?php echo $row['id'] ?>" class="view-btn">
+                        <i class="lnr lnr-eye"></i>
+                    </a>
+                    <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
+                        <i class="lnr lnr-cart"></i>
+                    </a>
+                </div>
+                <!-- / product-hover-tools -->
+
+                <!-- product-details -->
+                <div class="product-details">
+                    <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
+                    <h6 class="product-price">$<?php echo $row['price'] ?></h6>
+                </div>
+                <!-- / product-details -->
+            </div>
+            <!-- / item -->
+            <?php   
+            
         }
    ?>
     
@@ -234,58 +261,81 @@
         <?php
         //Retrieve list of IDs of new arrivals
         $get_new_sql = "SELECT id FROM newArrivals;";
-        $newQueryResult = mysqli_query($conn, $get_new_sql);
-        $newResultCheck = mysqli_num_rows($newQueryResult);
+        // $newQueryResult = mysqli_query($conn, $get_new_sql);
+        // $newResultCheck = mysqli_num_rows($newQueryResult);
+
+        /* Execute the query */
+        try
+        {
+            $res3 = $pdo->prepare($get_new_sql);
+            $res3->execute();
+        }
+        catch (PDOException $e)
+        {
+        /* If there is a PDO exception, throw a standard exception */
+        throw new Exception('Database query error');
+        }
 
         $newArray = array();
-        if ($newResultCheck > 0) {
-            while ($newRow = mysqli_fetch_assoc($newQueryResult)) { 
-                $newArray[] = strval($newRow['id']);
-            }
+        while ($newRow = $res3->fetch(PDO::FETCH_ASSOC)) { 
+            $newArray[] = strval($newRow['id']);
         }
+        // if ($newResultCheck > 0) {
+        //     while ($newRow = mysqli_fetch_assoc($newQueryResult)) { 
+        //         $newArray[] = strval($newRow['id']);
+        //     }
+        // }
 
         // Retrieve new arrivals from database and insert into html
         $in = '(' . implode(',', $newArray) . ')';
         $get_products_sql = "SELECT * FROM products WHERE id IN " . $in;
-        $productsQueryResult = mysqli_query($conn, $get_products_sql);
-        $productsResultCheck = mysqli_num_rows($productsQueryResult);
+        // $productsQueryResult = mysqli_query($conn, $get_products_sql);
+        // $productsResultCheck = mysqli_num_rows($productsQueryResult);
 
-        if ($productsResultCheck > 0) {
-            while ($row = mysqli_fetch_assoc($productsQueryResult)) { ?>
-
-                <!-- product -->
-                <div class="col-xs-6 col-md-4 product">
-                    <!-- <span class="sale-label">SALE</span> -->
-                    <!-- / sale-label -->
-                    <a href="single-product.php?product=<?php echo $row['id'] ?>" class="product-link"></a>
-                    <!-- / product-link -->
-                    <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
-                    <!-- / product-image -->
-
-                    <!-- product-hover-tools -->
-                    <div class="product-hover-tools">
-                        <a href="single-product.php?product=<?php echo $row['id'] ?>" class="view-btn">
-                            <i class="lnr lnr-eye"></i>
-                        </a>
-                        <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
-                            <i class="lnr lnr-cart"></i>
-                        </a>
-                    </div>
-                    <!-- / product-hover-tools -->
-
-                    <!-- product-details -->
-                    <div class="product-details">
-                        <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
-                        <h6 class="product-price">$<?php echo $row['price'] ?></h6>
-                    </div>
-                    <!-- / product-details -->
-                </div>
-                <!-- / item -->
-                <?php   
-            }
+        /* Execute the query */
+        try
+        {
+            $res4 = $pdo->prepare($get_products_sql);
+            $res4->execute();
         }
-        else {
-            echo '<h1> ERROR - Could not load products from database </h1>';
+        catch (PDOException $e)
+        {
+        /* If there is a PDO exception, throw a standard exception */
+        throw new Exception('Database query error');
+        }
+
+        while ($row = $res4->fetch(PDO::FETCH_ASSOC)) { ?>
+
+            <!-- product -->
+            <div class="col-xs-6 col-md-4 product">
+                <!-- <span class="sale-label">SALE</span> -->
+                <!-- / sale-label -->
+                <a href="single-product.php?product=<?php echo $row['id'] ?>" class="product-link"></a>
+                <!-- / product-link -->
+                <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                <!-- / product-image -->
+
+                <!-- product-hover-tools -->
+                <div class="product-hover-tools">
+                    <a href="single-product.php?product=<?php echo $row['id'] ?>" class="view-btn">
+                        <i class="lnr lnr-eye"></i>
+                    </a>
+                    <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
+                        <i class="lnr lnr-cart"></i>
+                    </a>
+                </div>
+                <!-- / product-hover-tools -->
+
+                <!-- product-details -->
+                <div class="product-details">
+                    <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
+                    <h6 class="product-price">$<?php echo $row['price'] ?></h6>
+                </div>
+                <!-- / product-details -->
+            </div>
+            <!-- / item -->
+            <?php   
+            
         }
    ?>
 

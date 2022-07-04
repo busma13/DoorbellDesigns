@@ -4,6 +4,9 @@
     $title = 'Doorbell Designs - Doorbells';
     echo $title;
     include 'header-pt2.php';
+
+    /* Global $pdo object */
+	global $pdo;
 ?>
 
     <div id="page-header" class="shop-full">
@@ -46,37 +49,48 @@
                 <div id="grid" class="row">
 
                     <?php
-                         $get_doorbell_products_sql = "SELECT * FROM products WHERE mainCategory='Doorbells';";
-                         $queryResult = mysqli_query($conn, $get_doorbell_products_sql);
-                         $resultCheck = mysqli_num_rows($queryResult);
-         
-                         if ($resultCheck > 0) {
-                             while ($row = mysqli_fetch_assoc($queryResult)) { ?>
-                                <!-- product -->
-                                <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
-                                    <a href="single-product.php?product=<?php echo $row['id'] ?>" class="product-link"></a>
-                                    <!-- / product-link -->
-                                    <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
-                                    <!-- / product-image -->
+                        $get_doorbell_products_sql = "SELECT * FROM products WHERE mainCategory='Doorbells';";
+                        //  $queryResult = mysqli_query($conn, $get_doorbell_products_sql);
+                        //  $resultCheck = mysqli_num_rows($queryResult);
 
-                                    <!-- product-hover-tools -->
-                                    <div class="product-hover-tools">
-                                        <a href="single-product.php?product=<?php echo $row['id'] ?>" class="view-btn">
-                                            <i class="lnr lnr-eye"></i>
-                                        </a>
-                                        <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
-                                            <i class="lnr lnr-cart"></i>
-                                        </a>
-                                    </div><!-- / product-hover-tools -->
+                        /* Execute the query */
+                        try
+                        {
+                            $res = $pdo->prepare($get_doorbell_products_sql);
+                            $res->execute();
+                        }
+                        catch (PDOException $e)
+                        {
+                        /* If there is a PDO exception, throw a standard exception */
+                        throw new Exception('Database query error');
+                        }
+                        while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
 
-                                    <!-- product-details -->
-                                    <div class="product-details">
-                                        <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
-                                        <h6 class="product-price">$<?php echo $row['price'] ?></h6>
-                                    </div><!-- / product-details -->
-                                </div><!-- / product -->
-                                 <?php   
-                             }
+                            <!-- product -->
+                            <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
+                                <a href="single-product.php?product=<?php echo $row['id'] ?>" class="product-link"></a>
+                                <!-- / product-link -->
+                                <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                                <!-- / product-image -->
+
+                                <!-- product-hover-tools -->
+                                <div class="product-hover-tools">
+                                    <a href="single-product.php?product=<?php echo $row['id'] ?>" class="view-btn">
+                                        <i class="lnr lnr-eye"></i>
+                                    </a>
+                                    <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
+                                        <i class="lnr lnr-cart"></i>
+                                    </a>
+                                </div><!-- / product-hover-tools -->
+
+                                <!-- product-details -->
+                                <div class="product-details">
+                                    <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
+                                    <h6 class="product-price">$<?php echo $row['price'] ?></h6>
+                                </div><!-- / product-details -->
+                            </div><!-- / product -->
+                                <?php   
+                             
                         }
                     ?>
                     

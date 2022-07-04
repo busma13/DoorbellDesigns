@@ -4,6 +4,9 @@
     $title = 'Doorbell Designs - ';//Add product name
     echo $title;
     include 'header-pt2.php';
+
+    /* Global $pdo object */
+	global $pdo;
 ?>
 
     <!-- <div id="page-header" class="single-product">
@@ -28,13 +31,46 @@
         <div class="row">
 
 <?php
-    //Retrieve product by id
-    $get_product_sql = 'SELECT * FROM products WHERE id = "'.$_GET['product'].'";';
-    $productQueryResult = mysqli_query($conn, $get_product_sql);
-    $productResultCheck = mysqli_num_rows($productQueryResult);
-    
-    if ($productResultCheck > 0) {
-        while ($row = mysqli_fetch_assoc($productQueryResult)) {
+
+//Retrieve product count
+$get_count_sql = 'SELECT COUNT(*) FROM products;';
+// $productCountQueryResult = mysqli_query($conn, $get_count_sql);
+// $productCountResultCheck = mysqli_num_rows($productCountQueryResult);
+
+/* Execute the query */
+try
+{
+    $res = $pdo->prepare($get_count_sql);
+    $res->execute();
+}
+catch (PDOException $e)
+{
+/* If there is a PDO exception, throw a standard exception */
+throw new Exception('Database query error');
+}
+
+while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+    $totalProducts = $row['COUNT(*)'];
+}
+
+//Retrieve product by id
+$get_product_sql = 'SELECT * FROM products WHERE id = "'.$_GET['product'].'";';
+// $productQueryResult = mysqli_query($conn, $get_product_sql);
+// $productResultCheck = mysqli_num_rows($productQueryResult);
+
+/* Execute the query */
+try
+{
+    $res2 = $pdo->prepare($get_product_sql);
+    $res2->execute();
+}
+catch (PDOException $e)
+{
+/* If there is a PDO exception, throw a standard exception */
+throw new Exception('Database query error');
+}
+while ($row = $res2->fetch(PDO::FETCH_ASSOC)) {
+ 
 ?> 
 
             <!-- product content area -->
@@ -67,8 +103,22 @@
                 
                 <!-- product pagination -->
                 <div class="pagination no-padding">
-                    <a href="single-product.php?product=<?php echo $_GET['product'] - 1?>" class="btn btn-default btn-rounded no-margin"><i class="fa fa-long-arrow-left"></i><span>Previous</span></a>
-                     <a href="single-product.php?product=<?php echo $_GET['product'] + 1?>" class="btn btn-default btn-rounded no-margin pull-right"><span>Next</span><i class="fa fa-long-arrow-right"></i></a>
+                    <a href="single-product.php?product=<?php 
+                        if ($_GET['product'] == 1) {
+                            echo $totalProducts;
+                        } else {
+                            echo $_GET['product'] - 1;
+                        }
+                    ?>
+                    " class="btn btn-default btn-rounded no-margin"><i class="fa fa-long-arrow-left"></i><span>Previous</span></a>
+                     <a href="single-product.php?product=<?php 
+                        if ($_GET['product'] == $totalProducts) {
+                            echo 1;
+                        } else {
+                            echo $_GET['product'] + 1;
+                        }
+                    ?>
+                    " class="btn btn-default btn-rounded no-margin pull-right"><span>Next</span><i class="fa fa-long-arrow-right"></i></a>
                 </div><!-- / product pagination -->       
 
             </div>
@@ -144,11 +194,11 @@
         </div><!-- / row -->
     
 
-        <?php
-                }
-            }
+<?php
+        
+    }
 
-        ?>    
+?>    
             
             </div><!-- / container -->
 </section>

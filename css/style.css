@@ -242,6 +242,8 @@ strong {
 
 .disabled {
   /* pointer-events: none; */
+  background-color: #ebebeb;
+  cursor: not-allowed;
 }
 
 /* / End Typography */
