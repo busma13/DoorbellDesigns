@@ -42,17 +42,17 @@
                 <div id="grid" class="row">
                     <!-- product -->
                     <div class="col-xs-6 col-md-3 product" data-groups='["saguaros"]'>
-                        <a href="bamboo-doorbell.html" class="product-link"></a>
+                        <a href="bamboo-doorbell.php" class="product-link"></a>
                         <!-- / product-link -->
                         <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
                         <!-- / product-image -->
 
                         <!-- product-hover-tools -->
                         <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.html" class="view-btn">
+                            <a href="bamboo-doorbell.php" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a href="shopping-cart.html" class="add-to-cart">
+                            <a href="shopping-cart.php" class="add-to-cart">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->
@@ -66,17 +66,17 @@
 
                     <!-- product -->
                     <div class="col-xs-6 col-md-3 product" data-groups='["hamsas"]'>
-                        <a href="bamboo-doorbell.html" class="product-link"></a>
+                        <a href="bamboo-doorbell.php" class="product-link"></a>
                         <!-- / product-link -->
                         <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
                         <!-- / product-image -->
 
                         <!-- product-hover-tools -->
                         <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.html" class="view-btn">
+                            <a href="bamboo-doorbell.php" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a href="shopping-cart.html" class="add-to-cart">
+                            <a href="shopping-cart.php" class="add-to-cart">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->
@@ -90,17 +90,17 @@
 
                     <!-- product -->
                     <div class="col-xs-6 col-md-3 product" data-groups='["hearts"]'>
-                        <a href="bamboo-doorbell.html" class="product-link"></a>
+                        <a href="bamboo-doorbell.php" class="product-link"></a>
                         <!-- / product-link -->
                         <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
                         <!-- / product-image -->
 
                         <!-- product-hover-tools -->
                         <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.html" class="view-btn">
+                            <a href="bamboo-doorbell.php" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a href="shopping-cart.html" class="add-to-cart">
+                            <a href="shopping-cart.php" class="add-to-cart">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->
@@ -114,17 +114,17 @@
 
                     <!-- product -->
                     <div class="col-xs-6 col-md-3 product" data-groups='["rods"]'>
-                        <a href="bamboo-doorbell.html" class="product-link"></a>
+                        <a href="bamboo-doorbell.php" class="product-link"></a>
                         <!-- / product-link -->
                         <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
                         <!-- / product-image -->
 
                         <!-- product-hover-tools -->
                         <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.html" class="view-btn">
+                            <a href="bamboo-doorbell.php" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a href="shopping-cart.html" class="add-to-cart">
+                            <a href="shopping-cart.php" class="add-to-cart">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->
@@ -138,17 +138,17 @@
 
                     <!-- product -->
                     <div class="col-xs-6 col-md-3 product" data-groups='["custom"]'>
-                        <a href="bamboo-doorbell.html" class="product-link"></a>
+                        <a href="bamboo-doorbell.php" class="product-link"></a>
                         <!-- / product-link -->
                         <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
                         <!-- / product-image -->
 
                         <!-- product-hover-tools -->
                         <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.html" class="view-btn">
+                            <a href="bamboo-doorbell.php" class="view-btn">
                                 <i class="lnr lnr-eye"></i>
                             </a>
-                            <a href="shopping-cart.html" class="add-to-cart">
+                            <a href="shopping-cart.php" class="add-to-cart">
                                 <i class="lnr lnr-cart"></i>
                             </a>
                         </div><!-- / product-hover-tools -->

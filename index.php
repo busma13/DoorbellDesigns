@@ -39,7 +39,7 @@
                                 <div class="col-md-12 slider-content">
                                     <h3 class="slide-title fadeInDown animated first">Ceiling Fan Pulls</h3>
                                     <p class="slide-text flipInX animated second">Vivamus facilisis sapien enim, eget lobortis ante faucibus vel. In hendrerit arcu eget arcu fringilla.</p>
-                                    <a href="index2.html" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
+                                    <a href="index2.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
                                 </div><!-- slider-content -->
                             </div><!-- / row -->
                         </div><!-- / carousel-caption -->
@@ -54,7 +54,7 @@
                                 <div class="col-md-12 slider-content">
                                     <h3 class="slide-title fadeInDown animated first">Artwork</h3>
                                     <p class="slide-text flipInX animated second">Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus sapien libero.</p>
-                                    <a href="index3.html" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
+                                    <a href="index3.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
                                 </div><!-- slider-content -->
                             </div><!-- / row -->
                         </div><!-- / carousel-caption -->
@@ -100,7 +100,7 @@
             </div><!-- / category -->
 
             <div class="col-sm-4 category">
-                <a href="fan-pulls.html">
+                <a href="fan-pulls.php">
                     <div class="category-item">
                         <img src="images/category2.jpg" alt="">
                         <div class="overlay">
@@ -113,7 +113,7 @@
             </div><!-- / category -->
 
             <div class="col-sm-4 category">
-                <a href="artwork.html">
+                <a href="artwork.php">
                     <div class="category-item">
                         <img src="images/category3.jpg" alt="">
                         <div class="overlay">
@@ -342,17 +342,17 @@
             
             <!-- product -->
             <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.html" class="product-link"></a>
+                <a href="single-product.php" class="product-link"></a>
                 <!-- / product-link -->
                 <img src="images/f-product.jpg" alt="">
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
                 <div class="product-hover-tools">
-                    <a href="single-product.html" class="view-btn">
+                    <a href="single-product.php" class="view-btn">
                         <i class="lnr lnr-eye"></i>
                     </a>
-                    <a href="shopping-cart.html" class="add-to-cart">
+                    <a href="shopping-cart.php" class="add-to-cart">
                         <i class="lnr lnr-cart"></i>
                     </a>
                 </div><!-- / product-hover-tools -->
@@ -366,17 +366,17 @@
 
             <!-- product -->
             <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.html" class="product-link"></a>
+                <a href="single-product.php" class="product-link"></a>
                 <!-- / product-link -->
                 <img src="images/f-product.jpg" alt="">
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
                 <div class="product-hover-tools">
-                    <a href="single-product.html" class="view-btn">
+                    <a href="single-product.php" class="view-btn">
                         <i class="lnr lnr-eye"></i>
                     </a>
-                    <a href="shopping-cart.html" class="add-to-cart">
+                    <a href="shopping-cart.php" class="add-to-cart">
                         <i class="lnr lnr-cart"></i>
                     </a>
                 </div><!-- / product-hover-tools -->
@@ -390,17 +390,17 @@
 
             <!-- product -->
             <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.html" class="product-link"></a>
+                <a href="single-product.php" class="product-link"></a>
                 <!-- / product-link -->
                 <img src="images/f-product.jpg" alt="">
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
                 <div class="product-hover-tools">
-                    <a href="single-product.html" class="view-btn">
+                    <a href="single-product.php" class="view-btn">
                         <i class="lnr lnr-eye"></i>
                     </a>
-                    <a href="shopping-cart.html" class="add-to-cart">
+                    <a href="shopping-cart.php" class="add-to-cart">
                         <i class="lnr lnr-cart"></i>
                     </a>
                 </div><!-- / product-hover-tools -->
@@ -414,17 +414,17 @@
 
             <!-- product -->
             <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.html" class="product-link"></a>
+                <a href="single-product.php" class="product-link"></a>
                 <!-- / product-link -->
                 <img src="images/f-product.jpg" alt="">
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
                 <div class="product-hover-tools">
-                    <a href="single-product.html" class="view-btn">
+                    <a href="single-product.php" class="view-btn">
                         <i class="lnr lnr-eye"></i>
                     </a>
-                    <a href="shopping-cart.html" class="add-to-cart">
+                    <a href="shopping-cart.php" class="add-to-cart">
                         <i class="lnr lnr-cart"></i>
                     </a>
                 </div><!-- / product-hover-tools -->
@@ -438,17 +438,17 @@
 
             <!-- product -->
             <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.html" class="product-link"></a>
+                <a href="single-product.php" class="product-link"></a>
                 <!-- / product-link -->
                 <img src="images/f-product.jpg" alt="">
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
                 <div class="product-hover-tools">
-                    <a href="single-product.html" class="view-btn">
+                    <a href="single-product.php" class="view-btn">
                         <i class="lnr lnr-eye"></i>
                     </a>
-                    <a href="shopping-cart.html" class="add-to-cart">
+                    <a href="shopping-cart.php" class="add-to-cart">
                         <i class="lnr lnr-cart"></i>
                     </a>
                 </div><!-- / product-hover-tools -->
@@ -462,17 +462,17 @@
 
             <!-- product -->
             <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.html" class="product-link"></a>
+                <a href="single-product.php" class="product-link"></a>
                 <!-- / product-link -->
                 <img src="images/f-product.jpg" alt="">
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
                 <div class="product-hover-tools">
-                    <a href="single-product.html" class="view-btn">
+                    <a href="single-product.php" class="view-btn">
                         <i class="lnr lnr-eye"></i>
                     </a>
-                    <a href="shopping-cart.html" class="add-to-cart">
+                    <a href="shopping-cart.php" class="add-to-cart">
                         <i class="lnr lnr-cart"></i>
                     </a>
                 </div><!-- / product-hover-tools -->
@@ -487,17 +487,17 @@
             <!-- product -->
             <div class="col-xs-6 col-md-4 product">
                 <span class="sale-label">SALE</span>
-                <a href="single-product.html" class="product-link"></a>
+                <a href="single-product.php" class="product-link"></a>
                 <!-- / product-link -->
                 <img src="images/f-product.jpg" alt="">
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
                 <div class="product-hover-tools">
-                    <a href="single-product.html" class="view-btn">
+                    <a href="single-product.php" class="view-btn">
                         <i class="lnr lnr-eye"></i>
                     </a>
-                    <a href="shopping-cart.html" class="add-to-cart">
+                    <a href="shopping-cart.php" class="add-to-cart">
                         <i class="lnr lnr-cart"></i>
                     </a>
                 </div><!-- / product-hover-tools -->

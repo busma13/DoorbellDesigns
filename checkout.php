@@ -156,7 +156,7 @@
 
                 
                 <div class="cart-total-footer">
-                    <a href="shopping-cart.html" class="btn btn-default-filled btn-rounded"><i class="lnr lnr-arrow-left"></i><span>Back to Cart</span></a>
+                    <a href="shopping-cart.php" class="btn btn-default-filled btn-rounded"><i class="lnr lnr-arrow-left"></i><span>Back to Cart</span></a>
                     <a href="./#categories" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-cart"></i><span>Back to Shop</span></a>
                 </div><!-- / cart-total-footer -->
             </div><!-- / checkout-total -->
