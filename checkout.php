@@ -127,22 +127,18 @@
                     }
                     else {
                         $orderCheck = $_GET['order'];
-                        // echo $orderCheck;
+                        
                         if ($orderCheck == "empty") {
                             echo "<p class='error'>Please fill out all required fields.</p>";
-                            // exit();
                         }
                         elseif ($orderCheck == "email") {
                             echo "<p class='error'>Please enter a valid email.</p>";
-                            // exit();
                         }
                         elseif ($orderCheck == "error") {
                             echo "<p class='error'>Form submission error. Please try again.</p>";
-                            // exit();
                         }
                         elseif ($orderCheck == "success") {
                             echo "<p class='success'>Order submitted.</p>";
-                            // exit();
                         }
                     }
                 ?>

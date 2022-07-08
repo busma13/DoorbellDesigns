@@ -46,10 +46,10 @@ if (isset($_POST['submit'])) {
             $id = uniqid('ID', true);
 
             // store order info in the orders database
-            $insert_sql = "INSERT INTO orders (id, first_name, last_name, tel, email, address_line, city, state, zip, cart_products) VALUES (:id, :first, :last, :tel, :email, :address_line, :city, :state, :zip, :products);";
+            $insert_sql = "INSERT INTO orders (id, first_name, last_name, tel, email, address_line, city, state, zip, cart_products, paid) VALUES (:id, :first, :last, :tel, :email, :address_line, :city, :state, :zip, :products, :paid);";
             
             /* Values array for PDO */
-            $values = array(':id' => $id, ':first' => $first, ':last' => $last, ':tel' => $tel, ':email' => $email, ':address_line' => $address_line, ':city' => $city, ':state' => $state, ':zip' => $zip, ':products' => $products);
+            $values = array(':id' => $id, ':first' => $first, ':last' => $last, ':tel' => $tel, ':email' => $email, ':address_line' => $address_line, ':city' => $city, ':state' => $state, ':zip' => $zip, ':products' => $products, ':paid' => 'no');
             
             /* Execute the query */
             try
@@ -61,8 +61,6 @@ if (isset($_POST['submit'])) {
             catch (PDOException $e)
             {
                 header("Location: ../checkout.php?order=SQL-statement-failed");//work on this error on checkout.php
-                /* If there is a PDO exception, throw a standard exception */
-                throw new Exception('Database query error');
             }
             
 
@@ -108,8 +106,7 @@ if (isset($_POST['submit'])) {
                 }
                 catch (PDOException $e)
                 {
-                /* If there is a PDO exception, throw a standard exception */
-                throw new Exception('Database query error');
+                    header("Location: ../checkout.php?order=SQL-statement-failed");
                 }
                 while ($row = $res2->fetch(PDO::FETCH_ASSOC)) { 
 
