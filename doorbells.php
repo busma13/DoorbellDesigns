@@ -68,14 +68,14 @@
 
                             <!-- product -->
                             <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
-                                <a href="single-product.php?product=<?php echo $row['id'] ?>" class="product-link"></a>
+                                <a href="single-product.php?category=doorbells&product=<?php echo $row['id'] ?>" class="product-link"></a>
                                 <!-- / product-link -->
                                 <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
                                 <!-- / product-image -->
 
                                 <!-- product-hover-tools -->
                                 <div class="product-hover-tools">
-                                    <a href="single-product.php?product=<?php echo $row['id'] ?>" class="view-btn">
+                                    <a href="single-product.php?category=doorbells&product=<?php echo $row['id'] ?>" class="view-btn">
                                         <i class="lnr lnr-eye"></i>
                                     </a>
                                     <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">

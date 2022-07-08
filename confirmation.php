@@ -21,6 +21,7 @@ $client = new SquareClient([
 
 $transaction_id = $_GET["transactionId"];
 
+//TODO: add transaction id and paid = yes to database
 
 try {
   $orders_api = $client->getOrdersApi();

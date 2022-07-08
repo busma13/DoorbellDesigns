@@ -32,15 +32,15 @@
 
 <?php
 
-//Retrieve product count
-$get_count_sql = 'SELECT COUNT(*) FROM products;';
+//Retrieve all products in category
+$get_category_products_sql = 'SELECT * FROM products WHERE mainCategory = "'.$_GET['category'].'";';
 // $productCountQueryResult = mysqli_query($conn, $get_count_sql);
 // $productCountResultCheck = mysqli_num_rows($productCountQueryResult);
 
 /* Execute the query */
 try
 {
-    $res = $pdo->prepare($get_count_sql);
+    $res = $pdo->prepare($get_category_products_sql);
     $res->execute();
 }
 catch (PDOException $e)
@@ -49,27 +49,27 @@ catch (PDOException $e)
 throw new Exception('Database query error');
 }
 
+//TODO: load the item we want.  On prev or next load the next/prev product.
+$categoryProdIds = array();
+$currentRow;
 while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-    $totalProducts = $row['COUNT(*)'];
+    //Find the index where the current product's ID resides.
+    if ($row['id'] == $_GET['product']) {
+        $currentRow = $row;
+    }
+    //Make an array of all the product IDs in the category
+    $categoryProdIds[] = $row['id'];
+    // echo print_r($categoryProdIds);
 }
 
-//Retrieve product by id
-$get_product_sql = 'SELECT * FROM products WHERE id = "'.$_GET['product'].'";';
-// $productQueryResult = mysqli_query($conn, $get_product_sql);
-// $productResultCheck = mysqli_num_rows($productQueryResult);
+for ($i = 0; $i < count($categoryProdIds); $i++) {
+    if ($categoryProdIds[$i] == $currentRow['id']) {
+        $currentRowIndex = $i;
+        break;
+    }
+}
 
-/* Execute the query */
-try
-{
-    $res2 = $pdo->prepare($get_product_sql);
-    $res2->execute();
-}
-catch (PDOException $e)
-{
-/* If there is a PDO exception, throw a standard exception */
-throw new Exception('Database query error');
-}
-while ($row = $res2->fetch(PDO::FETCH_ASSOC)) {
+if ($currentRow) {
  
 ?> 
 
@@ -80,7 +80,7 @@ while ($row = $res2->fetch(PDO::FETCH_ASSOC)) {
                         <!-- wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img class="product-single-image" src="<?php echo $row['imgUrl']?>" alt="<?php echo $row['itemNameString']?>">
+                                <img class="product-single-image" src="<?php echo $currentRow['imgUrl']?>" alt="<?php echo $currentRow['itemNameString']?>">
                             </div>
                            
                         </div>
@@ -103,19 +103,19 @@ while ($row = $res2->fetch(PDO::FETCH_ASSOC)) {
                 
                 <!-- product pagination -->
                 <div class="pagination no-padding">
-                    <a href="single-product.php?product=<?php 
-                        if ($_GET['product'] == 1) {
-                            echo $totalProducts;
+                    <a href="single-product.php?category=<?php echo $currentRow['mainCategory']?>&product=<?php 
+                        if ($currentRowIndex == 0) {
+                            echo $categoryProdIds[count($categoryProdIds)-1];//fix
                         } else {
-                            echo $_GET['product'] - 1;
+                            echo $categoryProdIds[$currentRowIndex - 1];//fix
                         }
                     ?>
                     " class="btn btn-default btn-rounded no-margin"><i class="fa fa-long-arrow-left"></i><span>Previous</span></a>
-                     <a href="single-product.php?product=<?php 
-                        if ($_GET['product'] == $totalProducts) {
-                            echo 1;
+                     <a href="single-product.php?category=<?php echo $currentRow['mainCategory']?>&product=<?php 
+                        if ($currentRowIndex == count($categoryProdIds) - 1) {
+                            echo $categoryProdIds[0];
                         } else {
-                            echo $_GET['product'] + 1;
+                            echo $categoryProdIds[$currentRowIndex + 1];
                         }
                     ?>
                     " class="btn btn-default btn-rounded no-margin pull-right"><span>Next</span><i class="fa fa-long-arrow-right"></i></a>
@@ -127,31 +127,31 @@ while ($row = $res2->fetch(PDO::FETCH_ASSOC)) {
             <!-- project sidebar area -->
             <div class="col-sm-6 col-md-5 product-sidebar">
                 <div class="product-details">
-                    <h4 class="product-name"><?php echo $row['itemNameString']?></h4>
+                    <h4 class="product-name"><?php echo $currentRow['itemNameString']?></h4>
                     <!-- <p>Maecenas bibendum erat in erat maximus, vel imperdiet leo mattis. Integer vitae pellentesque massa. Fusce ac suscipit neque. Etiam justo risus, tristique id feugiat a venenatis.</p> -->
                     <!-- <h4 class="space-top-30">Product Info</h4> -->
                     <div class="product-info">
                         <div class="info">
-                            <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $row['price'] ?></span></p>
+                            <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $currentRow['price'] ?></span></p>
                         </div>
                         <div class="info">
-                            <p><i class="lnr lnr-heart"></i><span>Category: <a href="<?php echo strtolower($row['mainCategory'])?>.php"> <?php echo $row['mainCategory']?></a>, 
+                            <p><i class="lnr lnr-heart"></i><span>Category: <a href="<?php echo strtolower($currentRow['mainCategory'])?>.php"> <?php echo $currentRow['mainCategory']?></a>
 
                             <!-- Loop through subcategory array. Add name of each subcategory with link to subcategory page.-->
                             <?php 
-                                $subCatArr = JSON_decode($row['subCategories']);
+                                $subCatArr = JSON_decode($currentRow['subCategories']);
                                 // echo $subCatArr;
                                 foreach($subCatArr as $i) { 
                                     // echo $i; 
                                     ?>
-                                    <a href="<?php echo strtolower($row['mainCategory'])?>.php?category=<?php echo $i?>"><?php echo ucfirst($i)?></a> <?php
+                                    , <a href="<?php echo strtolower($currentRow['mainCategory'])?>.php?category=<?php echo $i?>"><?php echo ucfirst($i)?></a> <?php
                                 }
                             ?>
 
                             </span></p>
                         </div>
                         <div class="info">
-                            <p><img class="ruler" src="images/ruler.png"><span>Dimensions: <?php echo $row['dimensions']?></span></p>
+                            <p><img class="ruler" src="images/ruler.png"><span>Dimensions: <?php echo $currentRow['dimensions']?></span></p>
                         </div>
                         
                     </div><!-- / project-info -->
@@ -196,6 +196,9 @@ while ($row = $res2->fetch(PDO::FETCH_ASSOC)) {
 
 <?php
         
+    }
+    else {
+        echo 'Error retrieving product.';
     }
 
 ?>    
