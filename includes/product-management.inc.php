@@ -23,13 +23,13 @@ if (isset($_POST['addProduct'])) {
         /* Values array for PDO */
         $values = array(':itemName' => $itemName, ':itemNameString' => $itemNameString,':mainCategory' => $_POST['mainCategory'],':subCategories' => $subCategories,':price' => $_POST['price'],':shipping' => $_POST['shipping'],':qtyInCart' => 0,':imgUrl' => $imgUrl,':dimensions' => $_POST['dimensions']);
     
-        echo $_POST['itemNameString'] . '<br>';
-        echo $itemName . '<br>';
-        echo $_POST['mainCategory'] . '<br>';
-        echo print_r($subCategories) . '<br>';
-        echo $_POST['price'] . '<br>';
-        echo $_POST['shipping'] . '<br>';
-        echo $_POST['dimensions'] . '<br>';
+        // echo $_POST['itemNameString'] . '<br>';
+        // echo $itemName . '<br>';
+        // echo $_POST['mainCategory'] . '<br>';
+        // echo print_r($subCategories) . '<br>';
+        // echo $_POST['price'] . '<br>';
+        // echo $_POST['shipping'] . '<br>';
+        // echo $_POST['dimensions'] . '<br>';
         
         /* Execute the query */
         try
@@ -49,6 +49,38 @@ if (isset($_POST['addProduct'])) {
         
     } 
     
+}
+else if (isset($_POST['delete'])) {
+    if (!isset($_POST['deleteProductName'])) {
+        header("Location: ../admin-panel.php?deleteProduct=empty#delete-form");
+        exit();    
+    }
+    $deleteProductName = StringUtils::formatCase($_POST['deleteProductName'], StringUtils::FORMAT_LOWER_CAMEL_CASE);
+    echo $deleteProductName;
+
+    $query = "DELETE FROM `products` WHERE itemName = :deleteProductName;";
+
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->bindParam(':deleteProductName', $deleteProductName);
+        $success = $res->execute();
+        if ($success) {
+            header("Location: ../admin-panel.php?deleteProduct=success#delete-form");
+
+        }
+        else {
+            header("Location: ../admin-panel.php?deleteProduct=fail#delete-form");
+        }
+    }
+    catch (PDOException $e)
+    {
+        $msg = $e->getMessage();
+        echo $msg;
+        header("Location: ../admin-panel.php?deleteProduct=query&code=" . $msg . "#delete-form");
+        exit();
+    }
 }
 else {
     header("Location: ../admin-panel.php?addProduct=error#add-form");
