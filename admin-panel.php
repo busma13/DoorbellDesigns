@@ -65,7 +65,7 @@
 </div><!-- / container -->
 
 <div class="form-container">
-    <!-- delete form -->
+    <!-- add product form -->
     <div id="add-form">
         <form action="./includes/product-management.inc.php" method="POST">
             <div class="row">
@@ -142,7 +142,7 @@
                 
             </div>
         </form>
-    </div><!-- / delete form -->
+    </div><!-- / add product form -->
 </div><!-- / form-container -->
 
 <div class="container">
@@ -157,10 +157,10 @@
 <div class="form-container">
     <!-- delete form -->
     <div id="delete-form">
-        <form id="deleteForm" data-toggle="validator">
+        <form action="./includes/product-management.inc.php" method="POST">
             <div class="col-sm-6">
                 <label for="deleteName">Product name:</label>
-                <input type="text" class="form-control" id="deleteName" placeholder="Product name" required>
+                <input type="text" name="deleteProductName" class="form-control" id="deleteName" placeholder="Product name" required>
                 <div class="help-block with-errors"></div>
             </div>
             <div class="col-sm-6">
@@ -168,6 +168,36 @@
             </div>
             <div id="msgSubmit" class="h3 text-center hidden"></div>
             <div class="clearfix"></div>  
+
+            <!-- Server side form validation notifications. -->
+            <?php
+                    if (!isset($_GET['deleteProduct'])) {
+                        //do nothing
+                    }
+                    else {
+                        $deleteProductCheck = $_GET['deleteProduct'];
+
+                        if ($deleteProductCheck == "query") {
+                            echo "<p class='error'>There was a database error. Please try again.</p>";
+                            if (isset($_GET['code'])) {
+                                echo "<p>Error: " . $_GET['code'] . "</p>";
+                            }
+                        }
+                        elseif ($deleteProductCheck == "empty") {
+                            echo "<p class='error'>Please fill out the form completely.</p>";
+                        }
+                        elseif ($deleteProductCheck == "error") {
+                            echo "<p class='error'>Form submission error. Please try again.</p>";
+                        }
+                        elseif ($deleteProductCheck == "fail") {
+                            echo "<p class='error'>The delete operation failed. Try again.</p>";
+                            //Product not found. Check your spelling.
+                        }
+                        elseif ($deleteProductCheck == "success") {
+                            echo "<p class='success'>Product deleted Successfully.</p>";
+                        }
+                    }
+                ?>
         </form>
     </div><!-- / delete form -->
 </div><!-- / form-container -->
