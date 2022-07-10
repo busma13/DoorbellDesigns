@@ -50,7 +50,7 @@ if (isset($_POST['addProduct'])) {
     } 
     
 }
-else if (isset($_POST['delete'])) {
+else if (isset($_POST['deleteProduct'])) {
     if (!isset($_POST['deleteProductName'])) {
         header("Location: ../admin-panel.php?deleteProduct=empty#delete-form");
         exit();    
@@ -80,6 +80,42 @@ else if (isset($_POST['delete'])) {
         echo $msg;
         header("Location: ../admin-panel.php?deleteProduct=query&code=" . $msg . "#delete-form");
         exit();
+    }
+}
+else if (isset($_POST['editProduct'])) {
+    echo 'edit prod man' . '<br>';
+    if (empty($_POST['newNameString']) || empty($_POST['mainCategory']) || empty($_POST['price']) || empty($_POST['shipping']) || empty($_POST['dimensions']) || empty($_POST['subCategories']) || empty($_POST['image'])) {
+        header("Location: ../admin-panel.php?editProduct=empty#edit-form");   
+    } 
+    else {
+        echo 'else' . '<br>';
+        $itemName = StringUtils::formatCase($_POST['newNameString'], StringUtils::FORMAT_LOWER_CAMEL_CASE);
+        $subCategories = json_encode(explode(' ', $_POST['subCategories']));
+        $imgUrl = 'images/' . strtolower($_POST['mainCategory']) . '/' . $itemName . '.jpg';
+
+        //TODO format image and store to images folder
+        
+        $query =         
+        "INSERT INTO products (itemName, newNameString, mainCategory, subCategories, price, shipping, qtyInCart, imgUrl, dimensions) VALUES (:itemName,:newNameString,:mainCategory,:subCategories,:price,:shipping,:qtyInCart,:imgUrl,:dimensions);";
+        
+        /* Values array for PDO */
+        $values = array(':itemName' => $itemName, ':newNameString' => $_POST['newNameString'],':mainCategory' => $_POST['mainCategory'],':subCategories' => $subCategories,':price' => $_POST['price'],':shipping' => $_POST['shipping'],':qtyInCart' => 0,':imgUrl' => $imgUrl,':dimensions' => $_POST['dimensions']);
+        
+        /* Execute the query */
+        try
+        {
+            $res = $pdo->prepare($query);
+            $res->execute($values);
+            $retVal = $pdo->lastInsertId();
+            echo $retVal;
+            header("Location: ../admin-panel.php?addProduct=success#add-form");
+        }
+        catch (PDOException $e)
+        {
+            $msg = $e->getMessage();
+            header("Location: ../admin-panel.php?addProduct=query&code=" . $msg . "#add-form");
+            exit();
+        }
     }
 }
 else {

@@ -112,7 +112,7 @@
                 
             </div>
             <div class="row">
-                <button type="submit" name="addProduct" id="checkout-btn" class="btn btn-primary-filled btn-rounded">Add Product</button>
+                <button type="submit" name="addProduct" id="add-submit" class="btn btn-primary-filled btn-rounded">Add Product</button>
 
                  <!-- Server side form validation notifications. -->
                  <?php
@@ -135,7 +135,7 @@
                             echo "<p class='error'>Form submission error. Please try again.</p>";
                         }
                         elseif ($addProductCheck == "success") {
-                            echo "<p class='success'>Product added Successfully.</p>";
+                            echo "<p class='success'>Product added successfully.</p>";
                         }
                     }
                 ?>
@@ -164,7 +164,7 @@
                 <div class="help-block with-errors"></div>
             </div>
             <div class="col-sm-6">
-                <button type="submit" name="delete" id="delete-submit" class="btn btn-md btn-primary-filled btn-form-submit btn-rounded">Delete Product</button>
+                <button type="submit" name="deleteProduct" id="delete-submit" class="btn btn-md btn-primary-filled btn-form-submit btn-rounded">Delete Product</button>
             </div>
             <div id="msgSubmit" class="h3 text-center hidden"></div>
             <div class="clearfix"></div>  
@@ -194,7 +194,7 @@
                             //Product not found. Check your spelling.
                         }
                         elseif ($deleteProductCheck == "success") {
-                            echo "<p class='success'>Product deleted Successfully.</p>";
+                            echo "<p class='success'>Product deleted successfully.</p>";
                         }
                     }
                 ?>
@@ -212,7 +212,118 @@
     </div><!-- / page-header-content -->
 </div><!-- / container -->
 
+<div class="form-container">
+    <!-- edit product form -->
+    <div id="select-product">
+        <div class="col-sm-6">
+            <label for="selectProductName">Name of product to edit:</label>
+            <input type="text" class="form-control" name="selectProductName" placeholder="Product name" id="selectProductName">
+        </div>
+        <div class="row">
+            <button name="selectProduct" id="selectProduct" class="btn btn-primary-filled btn-rounded">Select Product</button>
 
+            <p id="select-product-error" hidden></p>   
+        </div>
+    </div>
+    <div id="table-container">
+        <table>
+            <tr>
+                    <th>Product Name</th>
+                    <th>Main Category</th>
+                    <th>Subcategories</th>
+                    <th>Price</th>
+                    <th>Shipping</th>
+                    <th>Dimensions</th>
+                    <th>Image Url</th>
+                    <th>Active Status</th>
+            </tr>
+            <tr class="table-data"></tr>
+        </table>
+    </div>
+    <?php 
+    if (isset($_GET['editProduct'])) {
+        echo '<div id="edit-product">';
+    } else {
+        echo '<div id="edit-product" hidden >';
+    }
+    ?>
+        <h3>Please make your changes below:</h3>
+        <form action="./includes/product-management.inc.php" method="POST" id="edit-form">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Main category type: </p>
+                    <fieldset>
+                        <input type="radio" name="mainCategory" value="Doorbells" id="doorbells">
+                        <label for="doorbells">Doorbells</label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="radio" name="mainCategory" value="Artwork" id="artwork">
+                        <label for="artwork">Artwork</label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="radio" name="mainCategory" value="Miscellaneous" id="miscellaneous">
+                        <label for="miscellaneous">Miscellaneous</label>
+                    <fieldset>
+                </div>
+                <div class="col-sm-6">
+                    <label for="image">Image:</label>
+                    <input type="file" class="form-control" name="image" placeholder="Image" id="image">
+                </div>
+                <div class="col-sm-6">
+                    <label for="price">Price (xx.xx format):</label>
+                    <input type="number" step="0.01" class="form-control" name="price" placeholder="Price" id="price">
+                </div>
+                <div class="col-sm-6">
+                    <label for="subCategories">Subcategories:</label>
+                    <input type="text" class="form-control" name="subCategories" placeholder="subcategories" id="subCategories">
+                </div>
+                
+                <div class="col-sm-6">
+                    <label for="shipping">Shipping (xx.xx format):</label>
+                    <input type="number" step="0.01" class="form-control" name="shipping" placeholder="Shipping" id="shipping">
+                </div>
+                <div class="col-sm-6">
+                    <label for="newNameString">New product name:</label>
+                    <input type="text" class="form-control" name="newNameString" placeholder="New product name" id="newNameString">
+                </div>
+                <div class="col-sm-6">
+                    <label for="dimensions">Dimensions:</label>
+                    <input type="text" class="form-control" name="dimensions" placeholder="Dimensions" id="dimensions">
+                </div>
+                <div class="row">
+                    <button type="submit" name="editProduct" id="edit-submit" class="btn btn-primary-filled btn-rounded">Submit Edit</button>
+                </div>
+            </div>
+
+            <!-- Server side form validation notifications. -->
+            <?php
+                if (!isset($_GET['editProduct'])) {
+                    //do nothing
+                }
+                else {
+                    $editProductCheck = $_GET['editProduct'];
+
+                    if ($editProductCheck == "query") {
+                        echo "<p class='error'>There was a database error. Please try again.</p>";
+                        if (isset($_GET['code'])) {
+                            echo "<p>Error: " . $_GET['code'] . "</p>";
+                        }
+                    }
+                    elseif ($editProductCheck == "empty") {
+                        echo "<p class='error'>Please fill out all required fields.</p>";
+                    }
+                    elseif ($editProductCheck == "error") {
+                        echo "<p class='error'>Form submission error. Please try again.</p>";
+                    }
+                    elseif ($editProductCheck == "success") {
+                        echo "<p class='success'>Product edited successfully.</p>";
+                    }
+                }
+            ?>
+            
+        </form>
+    </div><!-- / edit product form -->
+</div><!-- / form-container -->
 
 <div class="container">
     <div class="page-header-content text-center">
@@ -310,14 +421,9 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
-<!-- scrolling-nav -->
-<script src="js/scrolling-nav.js"></script>
-<!-- / scrolling-nav -->
-
-<!-- shuffle grid-resizer -->
-<script src="js/jquery.shuffle.min.js"></script>
-<script src="js/custom.js"></script>
-<!-- / shuffle grid-resizer -->
+<!-- ajax -->
+<script src="js/ajax.js"></script>
+<!-- / ajax -->
 
 <!-- preloader -->
 <script src="js/preloader.js"></script>
