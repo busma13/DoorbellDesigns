@@ -1,7 +1,9 @@
 document.querySelector('#selectProduct').addEventListener('click', getProductInfo);
 
 async function getProductInfo() {
-    let productName = document.querySelector("#selectProductName").value;
+    let productInput = document.querySelector("#selectProductName")
+    let productName = productInput.value;
+    let data;
     if (productName !== '') {
         editProduct = {
             'name': productName
@@ -23,8 +25,8 @@ async function getProductInfo() {
                     body: JSON.stringify(editProduct)
                 }
             )
-            const data = await response.json();
-
+            data = await response.json();
+        
             const errorLine = document.querySelector('#select-product-error');
             const editForm = document.querySelector('#edit-product');
             const tableContainer = document.querySelector('#table-container');
@@ -40,7 +42,8 @@ async function getProductInfo() {
                 editForm.hidden = true;
                 tableContainer.hidden = true;
             } else {
-                productName.textContent = 'test';
+                productInput.value = '';
+                originalProductName.value = productName;
                 tableContainer.hidden = false;
                 errorLine.hidden = true;
                 errorLine.textContent = '';

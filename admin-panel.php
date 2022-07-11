@@ -67,25 +67,26 @@
 <div class="form-container">
     <!-- add product form -->
     <div id="add-form">
-        <form action="./includes/product-management.inc.php" method="POST">
+        <form action="./includes/product-management.inc.php" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-sm-6">
                     <p>Main category type: </p>
                     <fieldset>
-                        <input type="radio" name="mainCategory" value="Doorbells" id="doorbells">
-                        <label for="doorbells">Doorbells</label>
+                        <input type="radio" name="mainCategory" value="Doorbells" id="addDoorbells">
+                        <label for="addDoorbells">Doorbells</label>
                     </fieldset>
                     <fieldset>
-                        <input type="radio" name="mainCategory" value="Artwork" id="artwork">
-                        <label for="artwork">Artwork</label>
+                        <input type="radio" name="mainCategory" value="Artwork" id="addArtwork">
+                        <label for="addArtwork">Artwork</label>
                     </fieldset>
                     <fieldset>
-                        <input type="radio" name="mainCategory" value="Miscellaneous" id="miscellaneous">
-                        <label for="miscellaneous">Miscellaneous</label>
+                        <input type="radio" name="mainCategory" value="Miscellaneous" id="addMiscellaneous">
+                        <label for="addMiscellaneous">Miscellaneous</label>
                     <fieldset>
                 </div>
                 <div class="col-sm-6">
                     <label for="image">Image:</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
                     <input type="file" class="form-control" name="image" placeholder="Image" id="image">
                 </div>
                 <div class="col-sm-6">
@@ -108,6 +109,10 @@
                 <div class="col-sm-6">
                     <label for="dimensions">Dimensions:</label>
                     <input type="text" class="form-control" name="dimensions" placeholder="Dimensions" id="dimensions">
+                </div>
+                <div class="col-sm-6">
+                    <input type="checkbox" name="addActive" id="addActive" value="1" checked>
+                    <label for="addActive">Active item?</label>
                 </div>
                 
             </div>
@@ -133,6 +138,9 @@
                         }
                         elseif ($addProductCheck == "error") {
                             echo "<p class='error'>Form submission error. Please try again.</p>";
+                        }
+                        elseif ($addProductCheck == "imageError") {
+                            echo "<p class='error'>Image upload error. Please try again.</p>";
                         }
                         elseif ($addProductCheck == "success") {
                             echo "<p class='success'>Product added successfully.</p>";
@@ -248,21 +256,22 @@
     }
     ?>
         <h3>Please make your changes below:</h3>
-        <form action="./includes/product-management.inc.php" method="POST" id="edit-form">
+        <form action="./includes/product-management.inc.php" method="POST" enctype="multipart/form-data" id="edit-form">
             <div class="row">
+                <input type="hidden" name="originalProductName" id ="originalProductName" value="">
                 <div class="col-sm-6">
                     <p>Main category type: </p>
                     <fieldset>
-                        <input type="radio" name="mainCategory" value="Doorbells" id="doorbells">
-                        <label for="doorbells">Doorbells</label>
+                        <input type="radio" name="mainCategory" value="Doorbells" id="editDoorbells">
+                        <label for="editDoorbells">Doorbells</label>
                     </fieldset>
                     <fieldset>
-                        <input type="radio" name="mainCategory" value="Artwork" id="artwork">
-                        <label for="artwork">Artwork</label>
+                        <input type="radio" name="mainCategory" value="Artwork" id="editArtwork">
+                        <label for="editArtwork">Artwork</label>
                     </fieldset>
                     <fieldset>
-                        <input type="radio" name="mainCategory" value="Miscellaneous" id="miscellaneous">
-                        <label for="miscellaneous">Miscellaneous</label>
+                        <input type="radio" name="mainCategory" value="Miscellaneous" id="editMiscellaneous">
+                        <label for="editMiscellaneous">Miscellaneous</label>
                     <fieldset>
                 </div>
                 <div class="col-sm-6">
@@ -289,6 +298,10 @@
                 <div class="col-sm-6">
                     <label for="dimensions">Dimensions:</label>
                     <input type="text" class="form-control" name="dimensions" placeholder="Dimensions" id="dimensions">
+                </div>
+                <div class="col-sm-6">
+                    <input type="checkbox" name="editActive" id="editActive" value="1" checked>
+                    <label for="editActive">Active item?</label>
                 </div>
                 <div class="row">
                     <button type="submit" name="editProduct" id="edit-submit" class="btn btn-primary-filled btn-rounded">Submit Edit</button>
