@@ -2,11 +2,21 @@
 include_once 'dbh.inc.php';
 require '../turbocommons-php-3.8.0.phar';
 use org\turbocommons\src\main\php\utils\StringUtils;
+echo $_POST['editActive'];
 
 if (isset($_POST['addProduct'])) {
-
-    if (empty($_POST['itemNameString']) || empty($_POST['mainCategory']) || empty($_POST['price']) || empty($_POST['shipping']) || empty($_POST['dimensions']) || empty($_POST['subCategories']) || empty($_POST['image'])) {
+    echo __DIR__ . '<br>';
+    // print_r($_FILES);
+    // echo $_FILES['image']['name'] . '<br>';
+    if (empty($_POST['itemNameString']) || empty($_POST['mainCategory']) || empty($_POST['price']) || empty($_POST['shipping']) || empty($_POST['dimensions']) || empty($_POST['subCategories']) || empty($_FILES['image'])) { 
         header("Location: ../admin-panel.php?addProduct=empty#add-form");
+        // echo $_POST['itemNameString'] . '<br>';
+        // echo $_POST['mainCategory'] . '<br>';
+        // echo $_POST['price'] . '<br>';
+        // echo $_POST['shipping'] . '<br>';
+        // echo $_POST['dimensions'] . '<br>';
+        // echo $_POST['subCategories'] . '<br>';
+        // echo $_FILES['image']['name'] . '<br>';
         exit();
     }
     else {
@@ -14,41 +24,46 @@ if (isset($_POST['addProduct'])) {
         $itemName = StringUtils::formatCase($itemNameString, StringUtils::FORMAT_LOWER_CAMEL_CASE);
         $subCategories = json_encode(explode(' ', $_POST['subCategories']));
         $imgUrl = 'images/' . strtolower($_POST['mainCategory']) . '/' . $itemName . '.jpg';
+        $addActive = $_POST['addActive'] ?? '0';
 
-        //TODO format image and store to images folder
+        //TODO format image?
+        if(move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__, 2) . '/' . $imgUrl))  {
+            $query =         
+            "INSERT INTO products (itemName, itemNameString, mainCategory, subCategories, price, shipping, qtyInCart, imgUrl, dimensions, active) VALUES (:itemName,:itemNameString,:mainCategory,:subCategories,:price,:shipping,:qtyInCart,:imgUrl,:dimensions, :addActive);";
+            
+            /* Values array for PDO */
+            $values = array(':itemName' => $itemName, ':itemNameString' => $itemNameString,':mainCategory' => $_POST['mainCategory'],':subCategories' => $subCategories,':price' => $_POST['price'],':shipping' => $_POST['shipping'],':qtyInCart' => 0,':imgUrl' => $imgUrl,':dimensions' => $_POST['dimensions'], ':addActive' => $addActive);
         
-        $query =         
-        "INSERT INTO products (itemName, itemNameString, mainCategory, subCategories, price, shipping, qtyInCart, imgUrl, dimensions) VALUES (:itemName,:itemNameString,:mainCategory,:subCategories,:price,:shipping,:qtyInCart,:imgUrl,:dimensions);";
-        
-        /* Values array for PDO */
-        $values = array(':itemName' => $itemName, ':itemNameString' => $itemNameString,':mainCategory' => $_POST['mainCategory'],':subCategories' => $subCategories,':price' => $_POST['price'],':shipping' => $_POST['shipping'],':qtyInCart' => 0,':imgUrl' => $imgUrl,':dimensions' => $_POST['dimensions']);
-    
-        // echo $_POST['itemNameString'] . '<br>';
-        // echo $itemName . '<br>';
-        // echo $_POST['mainCategory'] . '<br>';
-        // echo print_r($subCategories) . '<br>';
-        // echo $_POST['price'] . '<br>';
-        // echo $_POST['shipping'] . '<br>';
-        // echo $_POST['dimensions'] . '<br>';
-        
-        /* Execute the query */
-        try
-        {
-            $res = $pdo->prepare($query);
-            $res->execute($values);
-            $retVal = $pdo->lastInsertId();
-            echo $retVal;
-            header("Location: ../admin-panel.php?addProduct=success#add-form");
+            // echo $_POST['itemNameString'] . '<br>';
+            // echo $itemName . '<br>';
+            // echo $_POST['mainCategory'] . '<br>';
+            // echo print_r($subCategories) . '<br>';
+            // echo $_POST['price'] . '<br>';
+            // echo $_POST['shipping'] . '<br>';
+            // echo $_POST['dimensions'] . '<br>';
+            
+            /* Execute the query */
+            try
+            {
+                $res = $pdo->prepare($query);
+                $res->execute($values);
+                $retVal = $pdo->lastInsertId();
+                echo $retVal;
+                header("Location: ../admin-panel.php?addProduct=success#add-form");
+            }
+            catch (PDOException $e)
+            {
+                $msg = $e->getMessage();
+                header("Location: ../admin-panel.php?addProduct=query&code=" . $msg . "#add-form");
+                exit();
+            }
         }
-        catch (PDOException $e)
-        {
-            $msg = $e->getMessage();
-            header("Location: ../admin-panel.php?addProduct=query&code=" . $msg . "#add-form");
-            exit();
+        else {
+            // echo 'fail';
+            header("Location: ../admin-panel.php?addProduct=imageError#add-form");
         }
-        
     } 
-    
+
 }
 else if (isset($_POST['deleteProduct'])) {
     if (!isset($_POST['deleteProductName'])) {
@@ -84,7 +99,7 @@ else if (isset($_POST['deleteProduct'])) {
 }
 else if (isset($_POST['editProduct'])) {
     echo 'edit prod man' . '<br>';
-    if (empty($_POST['newNameString']) || empty($_POST['mainCategory']) || empty($_POST['price']) || empty($_POST['shipping']) || empty($_POST['dimensions']) || empty($_POST['subCategories']) || empty($_POST['image'])) {
+    if (empty($_POST['newNameString']) || empty($_POST['mainCategory']) || empty($_POST['price']) || empty($_POST['shipping']) || empty($_POST['dimensions']) || empty($_POST['subCategories']) || empty($_FILES['image'])) {
         header("Location: ../admin-panel.php?editProduct=empty#edit-form");   
     } 
     else {
@@ -92,33 +107,53 @@ else if (isset($_POST['editProduct'])) {
         $itemName = StringUtils::formatCase($_POST['newNameString'], StringUtils::FORMAT_LOWER_CAMEL_CASE);
         $subCategories = json_encode(explode(' ', $_POST['subCategories']));
         $imgUrl = 'images/' . strtolower($_POST['mainCategory']) . '/' . $itemName . '.jpg';
+        $editActive = $_POST['editActive'] ?? '0';
+        echo $editActive;
 
-        //TODO format image and store to images folder
+        //TODO format image?
+        if (move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__, 2) . '/' . $imgUrl))  {
         
-        $query =         
-        "INSERT INTO products (itemName, newNameString, mainCategory, subCategories, price, shipping, qtyInCart, imgUrl, dimensions) VALUES (:itemName,:newNameString,:mainCategory,:subCategories,:price,:shipping,:qtyInCart,:imgUrl,:dimensions);";
-        
-        /* Values array for PDO */
-        $values = array(':itemName' => $itemName, ':newNameString' => $_POST['newNameString'],':mainCategory' => $_POST['mainCategory'],':subCategories' => $subCategories,':price' => $_POST['price'],':shipping' => $_POST['shipping'],':qtyInCart' => 0,':imgUrl' => $imgUrl,':dimensions' => $_POST['dimensions']);
-        
-        /* Execute the query */
-        try
-        {
-            $res = $pdo->prepare($query);
-            $res->execute($values);
-            $retVal = $pdo->lastInsertId();
-            echo $retVal;
-            header("Location: ../admin-panel.php?addProduct=success#add-form");
+            $query =         
+            "UPDATE products 
+                SET itemName = :itemName, 
+                    itemNameString = :newNameString, 
+                    mainCategory = :mainCategory,
+                    subCategories = :subCategories,
+                    price = :price,
+                    shipping = :shipping,
+                    qtyInCart = :qtyInCart,
+                    imgUrl = :imgUrl,
+                    dimensions = :dimensions,
+                    active = :editActive
+            WHERE itemNameString = :originalProductName;";
+            
+            /* Values array for PDO */
+            $values = array(':itemName' => $itemName, ':newNameString' => $_POST['newNameString'],':mainCategory' => $_POST['mainCategory'],':subCategories' => $subCategories,':price' => $_POST['price'],':shipping' => $_POST['shipping'],':qtyInCart' => 0,':imgUrl' => $imgUrl,':dimensions' => $_POST['dimensions'], ':editActive' => $editActive, ':originalProductName' => $_POST['originalProductName']);
+            
+            /* Execute the query */
+            try
+            {
+                $res = $pdo->prepare($query);
+                $res->execute($values);
+                $retVal = $pdo->lastInsertId();
+                echo $retVal;
+                header("Location: ../admin-panel.php?editProduct=success#edit-form");
+            }
+            catch (PDOException $e)
+            {
+                $msg = $e->getMessage();
+                header("Location: ../admin-panel.php?editProduct=query&code=" . $msg . "#edit-form");
+                exit();
+            }
         }
-        catch (PDOException $e)
-        {
-            $msg = $e->getMessage();
-            header("Location: ../admin-panel.php?addProduct=query&code=" . $msg . "#add-form");
-            exit();
+        else {
+            echo 'fail';
+            // header("Location: ../admin-panel.php?editProduct=imageError#edit-form");
         }
     }
 }
 else {
-    header("Location: ../admin-panel.php?addProduct=error#add-form");
+    // header("Location: ../admin-panel.php?productMgmt=error"); 
+    //TODO: make this error show on page
     exit();
 }
