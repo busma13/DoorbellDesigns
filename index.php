@@ -167,7 +167,7 @@
         // }
 
         // Retrieve featured products from database and insert into html
-        $in = '(' . implode(',', $featuredArray) . ')';
+        // $in = '(' . implode(',', $featuredArray) . ')';
         $get_products_sql = "SELECT * FROM products WHERE featured = '1';";
         // $productsQueryResult = mysqli_query($conn, $get_products_sql);
         // $productsResultCheck = mysqli_num_rows($productsQueryResult);
