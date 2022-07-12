@@ -114,6 +114,10 @@
                     <input type="checkbox" name="addActive" id="addActive" value="1" checked>
                     <label for="addActive">Active item?</label>
                 </div>
+                <div class="col-sm-6">
+                    <input type="checkbox" name="addFeatured" id="addFeatured" value="1">
+                    <label for="addFeatured">Featured item?</label>
+                </div>
                 
             </div>
             <div class="row">
@@ -302,6 +306,10 @@
                 <div class="col-sm-6">
                     <input type="checkbox" name="editActive" id="editActive" value="1" checked>
                     <label for="editActive">Active item?</label>
+                </div>
+                <div class="col-sm-6">
+                    <input type="checkbox" name="editFeatured" id="editFeatured" value="1">
+                    <label for="editFeatured">Featured item?</label>
                 </div>
                 <div class="row">
                     <button type="submit" name="editProduct" id="edit-submit" class="btn btn-primary-filled btn-rounded">Submit Edit</button>
