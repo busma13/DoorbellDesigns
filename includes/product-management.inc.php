@@ -25,14 +25,15 @@ if (isset($_POST['addProduct'])) {
         $subCategories = json_encode(explode(' ', $_POST['subCategories']));
         $imgUrl = 'images/' . strtolower($_POST['mainCategory']) . '/' . $itemName . '.jpg';
         $addActive = $_POST['addActive'] ?? '0';
+        $addFeatured = $_POST['addFeatured'] ?? '0';
 
         //TODO format image?
         if(move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__, 2) . '/' . $imgUrl))  {
             $query =         
-            "INSERT INTO products (itemName, itemNameString, mainCategory, subCategories, price, shipping, qtyInCart, imgUrl, dimensions, active) VALUES (:itemName,:itemNameString,:mainCategory,:subCategories,:price,:shipping,:qtyInCart,:imgUrl,:dimensions, :addActive);";
+            "INSERT INTO products (itemName, itemNameString, mainCategory, subCategories, price, shipping, qtyInCart, imgUrl, dimensions, active, featured) VALUES (:itemName,:itemNameString,:mainCategory,:subCategories,:price,:shipping,:qtyInCart,:imgUrl,:dimensions, :addActive, :addFeatured);";
             
             /* Values array for PDO */
-            $values = array(':itemName' => $itemName, ':itemNameString' => $itemNameString,':mainCategory' => $_POST['mainCategory'],':subCategories' => $subCategories,':price' => $_POST['price'],':shipping' => $_POST['shipping'],':qtyInCart' => 0,':imgUrl' => $imgUrl,':dimensions' => $_POST['dimensions'], ':addActive' => $addActive);
+            $values = array(':itemName' => $itemName, ':itemNameString' => $itemNameString,':mainCategory' => $_POST['mainCategory'],':subCategories' => $subCategories,':price' => $_POST['price'],':shipping' => $_POST['shipping'],':qtyInCart' => 0,':imgUrl' => $imgUrl,':dimensions' => $_POST['dimensions'], ':addActive' => $addActive, ':addFeatured' => $addFeatured);
         
             // echo $_POST['itemNameString'] . '<br>';
             // echo $itemName . '<br>';
@@ -70,10 +71,11 @@ else if (isset($_POST['deleteProduct'])) {
         header("Location: ../admin-panel.php?deleteProduct=empty#delete-form");
         exit();    
     }
-    $deleteProductName = StringUtils::formatCase($_POST['deleteProductName'], StringUtils::FORMAT_LOWER_CAMEL_CASE);
-    echo $deleteProductName;
+    $deleteProductName = $_POST['deleteProductName'];
+    // StringUtils::formatCase($_POST['deleteProductName'], StringUtils::FORMAT_LOWER_CAMEL_CASE);
+    // echo $deleteProductName;
 
-    $query = "DELETE FROM `products` WHERE itemName = :deleteProductName;";
+    $query = "DELETE FROM products WHERE itemNameString = :deleteProductName;";
 
     /* Execute the query */
     try
@@ -108,7 +110,7 @@ else if (isset($_POST['editProduct'])) {
         $subCategories = json_encode(explode(' ', $_POST['subCategories']));
         $imgUrl = 'images/' . strtolower($_POST['mainCategory']) . '/' . $itemName . '.jpg';
         $editActive = $_POST['editActive'] ?? '0';
-        echo $editActive;
+        $editFeatured = $_POST['editFeatured'] ?? '0';
 
         //TODO format image?
         if (move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__, 2) . '/' . $imgUrl))  {
@@ -124,11 +126,12 @@ else if (isset($_POST['editProduct'])) {
                     qtyInCart = :qtyInCart,
                     imgUrl = :imgUrl,
                     dimensions = :dimensions,
-                    active = :editActive
+                    active = :editActive,
+                    featured = :editFeatured
             WHERE itemNameString = :originalProductName;";
             
             /* Values array for PDO */
-            $values = array(':itemName' => $itemName, ':newNameString' => $_POST['newNameString'],':mainCategory' => $_POST['mainCategory'],':subCategories' => $subCategories,':price' => $_POST['price'],':shipping' => $_POST['shipping'],':qtyInCart' => 0,':imgUrl' => $imgUrl,':dimensions' => $_POST['dimensions'], ':editActive' => $editActive, ':originalProductName' => $_POST['originalProductName']);
+            $values = array(':itemName' => $itemName, ':newNameString' => $_POST['newNameString'],':mainCategory' => $_POST['mainCategory'],':subCategories' => $subCategories,':price' => $_POST['price'],':shipping' => $_POST['shipping'],':qtyInCart' => 0,':imgUrl' => $imgUrl,':dimensions' => $_POST['dimensions'], ':editActive' => $editActive, ':editFeatured' => $editFeatured, ':originalProductName' => $_POST['originalProductName']);
             
             /* Execute the query */
             try

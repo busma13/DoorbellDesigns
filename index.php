@@ -168,7 +168,7 @@
 
         // Retrieve featured products from database and insert into html
         $in = '(' . implode(',', $featuredArray) . ')';
-        $get_products_sql = "SELECT * FROM products WHERE id IN " . $in;
+        $get_products_sql = "SELECT * FROM products WHERE featured = '1';";
         // $productsQueryResult = mysqli_query($conn, $get_products_sql);
         // $productsResultCheck = mysqli_num_rows($productsQueryResult);
 
@@ -288,7 +288,7 @@
 
         // Retrieve new arrivals from database and insert into html
         $in = '(' . implode(',', $newArray) . ')';
-        $get_products_sql = "SELECT * FROM products WHERE id IN " . $in;
+        $get_products_sql = "SELECT * FROM `products` ORDER BY id DESC LIMIT 9;";
         // $productsQueryResult = mysqli_query($conn, $get_products_sql);
         // $productsResultCheck = mysqli_num_rows($productsQueryResult);
 
@@ -340,159 +340,16 @@
    ?>
 
             
+            
             <!-- product -->
-            <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.php" class="product-link"></a>
-                <!-- / product-link -->
-                <img src="images/f-product.jpg" alt="">
-                <!-- / product-image -->
-
-                <!-- product-hover-tools -->
-                <div class="product-hover-tools">
-                    <a href="single-product.php" class="view-btn">
-                        <i class="lnr lnr-eye"></i>
-                    </a>
-                    <a href="shopping-cart.php" class="add-to-cart">
-                        <i class="lnr lnr-cart"></i>
-                    </a>
-                </div><!-- / product-hover-tools -->
-
-                <!-- product-details -->
-                <div class="product-details">
-                    <h3 class="product-title">Women's Shirt</h3>
-                    <h6 class="product-price">$99</h6>
-                </div><!-- / product-details -->
-            </div><!-- / product -->
-
-            <!-- product -->
-            <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.php" class="product-link"></a>
-                <!-- / product-link -->
-                <img src="images/f-product.jpg" alt="">
-                <!-- / product-image -->
-
-                <!-- product-hover-tools -->
-                <div class="product-hover-tools">
-                    <a href="single-product.php" class="view-btn">
-                        <i class="lnr lnr-eye"></i>
-                    </a>
-                    <a href="shopping-cart.php" class="add-to-cart">
-                        <i class="lnr lnr-cart"></i>
-                    </a>
-                </div><!-- / product-hover-tools -->
-
-                <!-- product-details -->
-                <div class="product-details">
-                    <h3 class="product-title">Women's Shirt</h3>
-                    <h6 class="product-price">$29</h6>
-                </div><!-- / product-details -->
-            </div><!-- / product -->
-
-            <!-- product -->
-            <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.php" class="product-link"></a>
-                <!-- / product-link -->
-                <img src="images/f-product.jpg" alt="">
-                <!-- / product-image -->
-
-                <!-- product-hover-tools -->
-                <div class="product-hover-tools">
-                    <a href="single-product.php" class="view-btn">
-                        <i class="lnr lnr-eye"></i>
-                    </a>
-                    <a href="shopping-cart.php" class="add-to-cart">
-                        <i class="lnr lnr-cart"></i>
-                    </a>
-                </div><!-- / product-hover-tools -->
-
-                <!-- product-details -->
-                <div class="product-details">
-                    <h3 class="product-title">Women's Jeans</h3>
-                    <h6 class="product-price">$69</h6>
-                </div><!-- / product-details -->
-            </div><!-- / product -->
-
-            <!-- product -->
-            <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.php" class="product-link"></a>
-                <!-- / product-link -->
-                <img src="images/f-product.jpg" alt="">
-                <!-- / product-image -->
-
-                <!-- product-hover-tools -->
-                <div class="product-hover-tools">
-                    <a href="single-product.php" class="view-btn">
-                        <i class="lnr lnr-eye"></i>
-                    </a>
-                    <a href="shopping-cart.php" class="add-to-cart">
-                        <i class="lnr lnr-cart"></i>
-                    </a>
-                </div><!-- / product-hover-tools -->
-
-                <!-- product-details -->
-                <div class="product-details">
-                    <h3 class="product-title">Women's Shirt</h3>
-                    <h6 class="product-price">$39</h6>
-                </div><!-- / product-details -->
-            </div><!-- / product -->
-
-            <!-- product -->
-            <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.php" class="product-link"></a>
-                <!-- / product-link -->
-                <img src="images/f-product.jpg" alt="">
-                <!-- / product-image -->
-
-                <!-- product-hover-tools -->
-                <div class="product-hover-tools">
-                    <a href="single-product.php" class="view-btn">
-                        <i class="lnr lnr-eye"></i>
-                    </a>
-                    <a href="shopping-cart.php" class="add-to-cart">
-                        <i class="lnr lnr-cart"></i>
-                    </a>
-                </div><!-- / product-hover-tools -->
-
-                <!-- product-details -->
-                <div class="product-details">
-                    <h3 class="product-title">Designer Watch</h3>
-                    <h6 class="product-price">$599</h6>
-                </div><!-- / product-details -->
-            </div><!-- / product -->
-
-            <!-- product -->
-            <div class="col-xs-6 col-md-4 product">
-                <a href="single-product.php" class="product-link"></a>
-                <!-- / product-link -->
-                <img src="images/f-product.jpg" alt="">
-                <!-- / product-image -->
-
-                <!-- product-hover-tools -->
-                <div class="product-hover-tools">
-                    <a href="single-product.php" class="view-btn">
-                        <i class="lnr lnr-eye"></i>
-                    </a>
-                    <a href="shopping-cart.php" class="add-to-cart">
-                        <i class="lnr lnr-cart"></i>
-                    </a>
-                </div><!-- / product-hover-tools -->
-
-                <!-- product-details -->
-                <div class="product-details">
-                    <h3 class="product-title">Men's Gloves</h3>
-                    <h6 class="product-price">$199</h6>
-                </div><!-- / product-details -->
-            </div><!-- / product -->
-
-            <!-- product -->
-            <div class="col-xs-6 col-md-4 product">
+            <!-- <div class="col-xs-6 col-md-4 product">
                 <span class="sale-label">SALE</span>
                 <a href="single-product.php" class="product-link"></a>
-                <!-- / product-link -->
+                <! -- / product-link -- >
                 <img src="images/f-product.jpg" alt="">
-                <!-- / product-image -->
+                <! -- / product-image -->
 
-                <!-- product-hover-tools -->
+                <!-- product-hover-tools -- >
                 <div class="product-hover-tools">
                     <a href="single-product.php" class="view-btn">
                         <i class="lnr lnr-eye"></i>
@@ -500,14 +357,14 @@
                     <a href="shopping-cart.php" class="add-to-cart">
                         <i class="lnr lnr-cart"></i>
                     </a>
-                </div><!-- / product-hover-tools -->
+                </div><! -- / product-hover-tools -->
 
-                <!-- product-details -->
+                <!-- product-details -- >
                 <div class="product-details">
                     <h3 class="product-title">Leather Bag</h3>
                     <h6 class="product-price"><del>$149</del> <span class="sale-price">$79</span></h6>
-                </div><!-- / product-details -->
-            </div><!-- / product -->
+                </div><!-- / product-details -- >
+            </div>/ product -->
 
             <!-- grid-resizer -->
             <div class="col-xs-6 col-md-4 shuffle_sizer"></div>
