@@ -3,7 +3,6 @@ var shuffleme = (function( $ ) {
   var $grid = $('#grid'), //locate what we want to sort 
       $filterOptions = $('.product-filter li'),  //locate the filter categories
       $sizer = $grid.find('.shuffle_sizer'),    //sizer stores the size of the items
-      
 
   init = function() {
     // None of these need to be executed synchronously
@@ -18,41 +17,41 @@ var shuffleme = (function( $ ) {
       sizer: $sizer    
     });
 
-    setTimeout(function() {
-      const params = new URLSearchParams(window.location.search);
-      const catName = params.get("category");
-      switch (catName) {
-        case 'beachy':
-          $grid.shuffle( 'shuffle', 'beachy' );
-          break;
-        case 'contemporary':
-          $grid.shuffle( 'shuffle', 'comtemporary' );
-          break;
-        case 'dog':
-          $grid.shuffle( 'shuffle', 'dog' );
-          break;
-        case 'animals':
-          $grid.shuffle( 'shuffle', 'animals' );
-          break;  
-        case 'petroglyphs':
-          $grid.shuffle( 'shuffle', 'petroglyphs' );
-          break;
-        case 'plants':
-          $grid.shuffle( 'shuffle', 'plants' );
-          break;
-        case 'southwest':
-          $grid.shuffle( 'shuffle', 'southwest' );
-          break;
-        case 'misc':
-          $grid.shuffle( 'shuffle', 'misc' );
-          break;
-        case 'custom':
-          $grid.shuffle( 'shuffle', 'custom' );
-          break;
-        default:
-          break;  
-      }
-    }, 1000);
+    // setTimeout(function() {
+    //   const params = new URLSearchParams(window.location.search);
+    //   const catName = params.get("category");
+    //   switch (catName) {
+    //     case 'beachy':
+    //       $grid.shuffle( 'shuffle', 'beachy' );
+    //       break;
+    //     case 'contemporary':
+    //       $grid.shuffle( 'shuffle', 'comtemporary' );
+    //       break;
+    //     case 'dog':
+    //       $grid.shuffle( 'shuffle', 'dog' );
+    //       break;
+    //     case 'animals':
+    //       $grid.shuffle( 'shuffle', 'animals' );
+    //       break;  
+    //     case 'petroglyphs':
+    //       $grid.shuffle( 'shuffle', 'petroglyphs' );
+    //       break;
+    //     case 'plants':
+    //       $grid.shuffle( 'shuffle', 'plants' );
+    //       break;
+    //     case 'southwest':
+    //       $grid.shuffle( 'shuffle', 'southwest' );
+    //       break;
+    //     case 'misc':
+    //       $grid.shuffle( 'shuffle', 'misc' );
+    //       break;
+    //     case 'custom':
+    //       $grid.shuffle( 'shuffle', 'custom' );
+    //       break;
+    //     default:
+    //       break;  
+    //   }
+    // }, 1000);
     
     
   },

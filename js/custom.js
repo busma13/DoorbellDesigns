@@ -5,7 +5,6 @@ var shuffleme = (function( $ ) {
       $sizer = $grid.find('.shuffle_sizer'),    //sizer stores the size of the items
 
   init = function() {
-
     // None of these need to be executed synchronously
     setTimeout(function() {
       listen();

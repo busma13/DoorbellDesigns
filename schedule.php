@@ -30,17 +30,47 @@
             <div class="page-header text-center space-top-30">
                 <h3>Show Schedule</h3>
             </div><!-- / page-header -->
-            <div class="show-header">
-                <h2 class="show-date">Date</h2>
-                <h2 class="show-name">Name</h2>
-                <h2 class="show-location">Location</h2>
-            </div>
-            <div class="show">
-                <time datetime="2022-06-26">June 26, 2022</time>
-                <span>Carlsbad Art in the Village</span>
-                <span>Carlsbad, CA</span>
-            </div>
-            <span>* Denotes confirmed show</span>
+            <table>
+                <tbody class="show">
+                    <tr>
+                        <th class="show-date">Date</th>
+                        <th class="show-name">Name</th>
+                        <th class="show-location">Location</th>
+                    </tr>
+
+<?php
+$get_shows_sql = "SELECT * FROM shows ORDER BY date;";
+
+/* Execute the query */
+try
+{
+    $res = $pdo->prepare($get_shows_sql);
+    $res->execute();
+}
+catch (PDOException $e)
+{
+/* If there is a PDO exception, throw a standard exception */
+throw new Exception('Database query error');
+}
+while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
+                    
+                    <tr>
+                        <td><time><?php echo $row['dateString']?></time></td>
+                        <td><?php echo $row['name']?></td>
+                        <td><?php echo $row['location']?></td>
+                    </tr>
+                
+<?php
+}
+?>
+                
+                    <tr>
+                        <td></td>
+                        <td>* Denotes confirmed show</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
             
              
         </div><!-- / text-wrap -->   
