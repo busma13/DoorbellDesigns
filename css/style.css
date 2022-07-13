@@ -2784,6 +2784,10 @@ section {
   padding: 15px 0;
 }
 
+.product .product-title {
+  height: 53 px;
+}
+
 .product img {
   -webkit-backface-visibility: hidden;
   -webkit-transition: ease-in-out 0.3s;
