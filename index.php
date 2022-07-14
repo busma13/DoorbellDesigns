@@ -138,39 +138,8 @@
     <div id="products-carousel" class="owl-carousel">
 
     <?php
-        //Retrieve list of IDs of featured products
-        // $get_featured_sql = "SELECT featured FROM products;";
-        // // $featuredQueryResult = mysqli_query($conn, $get_featured_sql);
-        // // $featuredResultCheck = mysqli_num_rows($featuredQueryResult);
-
-        // /* Execute the query */
-        // try
-        // {
-        //     $res1 = $pdo->prepare($get_featured_sql);
-        //     $res1->execute();
-        // }
-        // catch (PDOException $e)
-        // {
-        // /* If there is a PDO exception, throw a standard exception */
-        // throw new Exception('Database query error');
-        // }
-        
-        // $featuredArray = array();
-        // while ($featuredRow = $res1->fetch(PDO::FETCH_ASSOC)) { 
-        //     $featuredArray[] = strval($featuredRow['id']);
-        // }
-
-        // if ($featuredResultCheck > 0) {
-            // while ($featuredRow = mysqli_fetch_assoc($featuredQueryResult)) { 
-            //     $featuredArray[] = strval($featuredRow['id']);
-            // }
-        // }
-
         // Retrieve featured products from database and insert into html
-        // $in = '(' . implode(',', $featuredArray) . ')';
         $get_products_sql = "SELECT * FROM products WHERE featured = '1';";
-        // $productsQueryResult = mysqli_query($conn, $get_products_sql);
-        // $productsResultCheck = mysqli_num_rows($productsQueryResult);
 
         /* Execute the query */
         try
@@ -259,38 +228,8 @@
         <div id="grid" class="row">
 
         <?php
-        //Retrieve list of IDs of new arrivals
-        // $get_new_sql = "SELECT id FROM newArrivals;";
-        // // $newQueryResult = mysqli_query($conn, $get_new_sql);
-        // // $newResultCheck = mysqli_num_rows($newQueryResult);
-
-        // /* Execute the query */
-        // try
-        // {
-        //     $res3 = $pdo->prepare($get_new_sql);
-        //     $res3->execute();
-        // }
-        // catch (PDOException $e)
-        // {
-        // /* If there is a PDO exception, throw a standard exception */
-        // throw new Exception('Database query error');
-        // }
-
-        // $newArray = array();
-        // while ($newRow = $res3->fetch(PDO::FETCH_ASSOC)) { 
-        //     $newArray[] = strval($newRow['id']);
-        // }
-        // // if ($newResultCheck > 0) {
-        // //     while ($newRow = mysqli_fetch_assoc($newQueryResult)) { 
-        // //         $newArray[] = strval($newRow['id']);
-        // //     }
-        // // }
-
         // // Retrieve new arrivals from database and insert into html
-        // $in = '(' . implode(',', $newArray) . ')';
         $get_products_sql = "SELECT * FROM `products` ORDER BY id DESC LIMIT 9;";
-        // $productsQueryResult = mysqli_query($conn, $get_products_sql);
-        // $productsResultCheck = mysqli_num_rows($productsQueryResult);
 
         /* Execute the query */
         try
