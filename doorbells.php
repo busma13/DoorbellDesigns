@@ -50,8 +50,6 @@
 
                     <?php
                         $get_doorbell_products_sql = "SELECT * FROM products WHERE mainCategory='Doorbells' and active='1';";
-                        //  $queryResult = mysqli_query($conn, $get_doorbell_products_sql);
-                        //  $resultCheck = mysqli_num_rows($queryResult);
 
                         /* Execute the query */
                         try
