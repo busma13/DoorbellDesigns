@@ -52,7 +52,7 @@
 
 </header>
 <!-- / header -->
-
+<hr>
 <!-- content -->
 
 <div class="container">
@@ -157,6 +157,8 @@
     </div><!-- / add product form -->
 </div><!-- / form-container -->
 
+<hr>
+
 <div class="container">
     <div class="page-header-content text-center">
         <div class="page-header wsub">
@@ -170,12 +172,12 @@
     <!-- delete form -->
     <div id="delete-form">
         <form action="./includes/product-management.inc.php" method="POST">
-            <div class="col-sm-6">
+            <div class="row">
                 <label for="deleteName">Product name:</label>
                 <input type="text" name="deleteProductName" class="form-control" id="deleteName" placeholder="Product name" required>
                 <div class="help-block with-errors"></div>
             </div>
-            <div class="col-sm-6">
+            <div class="row">
                 <button type="submit" name="deleteProduct" id="delete-submit" class="btn btn-md btn-primary-filled btn-form-submit btn-rounded">Delete Product</button>
             </div>
             <div id="msgSubmit" class="h3 text-center hidden"></div>
@@ -214,6 +216,7 @@
     </div><!-- / delete form -->
 </div><!-- / form-container -->
 
+<hr>
 
 <div class="container">
     <div class="page-header-content text-center">
@@ -227,17 +230,18 @@
 <div class="form-container">
     <!-- edit product form -->
     <div id="select-product">
-        <div class="col-sm-6">
+        <div class="row">
             <label for="selectProductName">Name of product to edit:</label>
             <input type="text" class="form-control" name="selectProductName" placeholder="Product name" id="selectProductName">
+            <div class="help-block with-errors"></div>
         </div>
         <div class="row">
-            <button name="selectProduct" id="selectProduct" class="btn btn-primary-filled btn-rounded">Select Product</button>
+            <button name="selectProduct" id="selectProduct" class="btn btn-md btn-primary-filled btn-form-submit btn-rounded">Select Product</button>
 
             <p id="select-product-error" hidden></p>   
         </div>
     </div>
-    <div id="table-container">
+    <div id="table-container" hidden>
         <table>
             <tr>
                     <th>Product Name</th>
@@ -248,6 +252,7 @@
                     <th>Dimensions</th>
                     <th>Image Url</th>
                     <th>Active Status</th>
+                    <th>Featured Status</th>
             </tr>
             <tr class="table-data"></tr>
         </table>
@@ -346,88 +351,64 @@
     </div><!-- / edit product form -->
 </div><!-- / form-container -->
 
+<hr>
+
 <div class="container">
     <div class="page-header-content text-center">
         <div class="page-header wsub">
             <h1 class="page-title fadeInDown animated first">Edit Show Schedule</h1>
         </div><!-- / page-header -->
-        <p class="slide-text fadeInUp animated second">Fill out this form to edit the show schedule</p>
+        <p class="slide-text fadeInUp animated second">Double click a date, name, or location to edit the content.  Click a trashcan to delete the whole show. Click the Add Show button to add a new row.</p>
     </div><!-- / page-header-content -->
 </div><!-- / container -->
 
-<div class="form-container">
-    <h4 class="space-left">Checkout</h4>
-    <form action="./includes/order.inc.php" method="POST">
-        <div class="row">
-            <div class="col-sm-6">
-                <label for="test">Image:</label>
-                <input type="text" id="test" class="form-control" name="first-name" placeholder="*First name" required>
-                <input type="text" class="form-control" name="last-name" placeholder="*Last name" required>
-                
-                
-            </div>
-            <div class="col-sm-6">
-                <input type="tel" class="form-control" name="tel" placeholder="*Phone" required>
-                <input type="email" class="form-control" name="email" placeholder="*Email" required>
-                <!-- <input type="text" class="form-control" name="company" placeholder="Company"> -->
-                
-            </div>
-        </div><!-- / row -->
+<div class="container">
+    <h4 class="space-left">Current Schedule:</h4>
+    <div id="table-container">
+        <table class="editable">
+            <tbody id="tableBody"> 
+                <tr>
+                    <th></th>
+                    <th class="show-date">Date</th>
+                    <th class="show-name">Name</th>
+                    <th class="show-location">Location</th>
+                </tr>
+            
+<?php
+$get_shows_sql = "SELECT * FROM shows ORDER BY date;";
 
-        <div class="row">
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="address-line" placeholder="*Address Line" required>
-                <select class="form-control" name="state" required>
-                    <optgroup label="State:">
-                    <option value="AL">Alabama</option>
+/* Execute the query */
+try
+{
+    $res = $pdo->prepare($get_shows_sql);
+    $res->execute();
+}
+catch (PDOException $e)
+{
+/* If there is a PDO exception, throw a standard exception */
+throw new Exception('Database query error');
+}
+while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                     
-                    </optgroup>
-                </select>
-            </div>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="city" placeholder="*City" required>
-                <input type="text" class="form-control" name="zip" placeholder="*ZIP Code" required>
-            </div>
-        </div><!-- / row -->
+                <tr id="<?php echo $row['date']?>">
+                    <td><button class="deleteShowButton"><i class="lnr lnr-trash"></i></button></td>
+                    <td class="scheduleDateString"><time><?php echo $row['dateString']?></time></td>
+                    <td class="scheduleName"><?php echo $row['name']?></td>
+                    <td class="scheduleLocation"><?php echo $row['location']?></td>
+                </tr>
+                
+<?php
+}
+?>
+            </tbody>
+        </table>
+    </div>
+    <p class="responseMessage"></p>
 
-        <input type="hidden" name="cart-list-input" id="cart-list-input" value="">
-
-        <div class="checkout-form-footer space-left space-right">
-            <!-- <textarea class="form-control" name="message" placeholder="Message" required></textarea> -->
-            <!-- <a href="" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-exit"></i><span>Checkout with Square</span></a> -->
-            <button type="submit" name="submit" id="checkout-btn" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-exit"></i><span>Checkout with Square</span></button>
-        </div><!-- / checkout-form-footer -->
-    </form>
+    <button name="addShow" id="addShowButton" class="btn btn-primary-filled btn-rounded btn-edit-show">Add a Show</button>
 
 
-    <!-- Server side form validation notifications. -->
-    <?php
-        if (!isset($_GET['order'])) {
-            //do nothing
-        }
-        else {
-            $orderCheck = $_GET['order'];
-            // echo $orderCheck;
-            if ($orderCheck == "empty") {
-                echo "<p class='error'>Please fill out all required fields.</p>";
-                // exit();
-            }
-            elseif ($orderCheck == "email") {
-                echo "<p class='error'>Please enter a valid email.</p>";
-                // exit();
-            }
-            elseif ($orderCheck == "error") {
-                echo "<p class='error'>Form submission error. Please try again.</p>";
-                // exit();
-            }
-            elseif ($orderCheck == "success") {
-                echo "<p class='success'>Order submitted.</p>";
-                // exit();
-            }
-        }
-    ?>
-
-</div><!-- / checkout-form -->
+</div><!-- / edit schedule -->
 
 <!-- / content -->
 
@@ -445,6 +426,10 @@
 <!-- ajax -->
 <script src="js/ajax.js"></script>
 <!-- / ajax -->
+
+<!-- edit table -->
+<script src="js/edit-table.js"></script>
+<!-- / edit table -->
 
 <!-- preloader -->
 <script src="js/preloader.js"></script>

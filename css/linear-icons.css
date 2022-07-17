@@ -166,7 +166,7 @@
 	content: "\e82e";
 }
 .lnr-tag:before {
-	content: "\e82f";
+	/* content: "\e82f"; */
 }
 .lnr-phone-handset:before {
 	content: "\e830";

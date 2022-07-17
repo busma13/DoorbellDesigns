@@ -2,7 +2,6 @@
 include_once 'dbh.inc.php';
 require '../turbocommons-php-3.8.0.phar';
 use org\turbocommons\src\main\php\utils\StringUtils;
-echo $_POST['editActive'];
 
 if (isset($_POST['addProduct'])) {
     echo __DIR__ . '<br>';
@@ -28,7 +27,7 @@ if (isset($_POST['addProduct'])) {
         $addFeatured = $_POST['addFeatured'] ?? '0';
 
         //TODO format image?
-        if(move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__, 2) . '/' . $imgUrl))  {
+        if(is_uploaded_file($_FILES['image']['tmp_name']))  {
             $query =         
             "INSERT INTO products (itemName, itemNameString, mainCategory, subCategories, price, shipping, qtyInCart, imgUrl, dimensions, active, featured) VALUES (:itemName,:itemNameString,:mainCategory,:subCategories,:price,:shipping,:qtyInCart,:imgUrl,:dimensions, :addActive, :addFeatured);";
             
@@ -50,7 +49,15 @@ if (isset($_POST['addProduct'])) {
                 $res->execute($values);
                 $retVal = $pdo->lastInsertId();
                 echo $retVal;
-                header("Location: ../admin-panel.php?addProduct=success#add-form");
+
+                $move_file = move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__, 2) . '/' . $imgUrl);
+
+                if ($move_file) {
+                    header("Location: ../admin-panel.php?addProduct=success#add-form");
+                }
+                else {
+                    header("Location: ../admin-panel.php?addProduct=imageError#add-form");
+                }
             }
             catch (PDOException $e)
             {
@@ -58,6 +65,8 @@ if (isset($_POST['addProduct'])) {
                 header("Location: ../admin-panel.php?addProduct=query&code=" . $msg . "#add-form");
                 exit();
             }
+
+            
         }
         else {
             // echo 'fail';
