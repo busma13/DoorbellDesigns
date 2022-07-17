@@ -23,8 +23,8 @@
 
 <!-- content -->
 
-<!-- about -->
-<section id="about">
+<!-- schedule -->
+<section id="schedule">
     <div class="container">
         <div class="text-wrap">
             <div class="page-header text-center space-top-30">
@@ -32,7 +32,7 @@
             </div><!-- / page-header -->
             <table>
                 <tbody class="show">
-                    <tr>
+                    <tr class="flex-container">
                         <th class="show-date">Date</th>
                         <th class="show-name">Name</th>
                         <th class="show-location">Location</th>
@@ -54,7 +54,7 @@ throw new Exception('Database query error');
 }
 while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                     
-                    <tr>
+                    <tr class="flex-container">
                         <td><time><?php echo $row['dateString']?></time></td>
                         <td><?php echo $row['name']?></td>
                         <td><?php echo $row['location']?></td>
@@ -64,7 +64,7 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
 }
 ?>
                 
-                    <tr>
+                <tr class="flex-container">
                         <td></td>
                         <td>* Denotes confirmed show</td>
                         <td></td>
@@ -76,12 +76,7 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
         </div><!-- / text-wrap -->   
     </div><!-- / container -->
 </section>
-<!-- / about -->
-
-
-
-
-<!-- / about -->
+<!-- / schedule -->
 
 <!-- / content -->
 
