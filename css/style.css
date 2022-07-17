@@ -3560,6 +3560,21 @@ section {
 }
 
 /* End Login / Register Forms */
+
+/* Admin Forms */
+
+.btn-edit-show {
+  margin-bottom: 16px;
+}
+
+.form-container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/* End Admin Forms */
+
 /* End Forms */
 #shopping-cart {
   padding: 50px 0;

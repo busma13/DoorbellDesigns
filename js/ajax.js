@@ -73,6 +73,9 @@ async function getProductInfo() {
                 td = document.createElement('td');
                 td.textContent = data['active'] == 1 ? 'active' : 'inactive';
                 tableRow.appendChild(td);
+                td = document.createElement('td');
+                td.textContent = data['featured'] == 1 ? 'featured' : 'not featured';
+                tableRow.appendChild(td);
             }
         } 
         catch(error) {
