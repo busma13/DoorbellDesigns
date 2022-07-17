@@ -2182,6 +2182,19 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 }
 
 /* / End Shopping Cart Table */
+
+/* Schedule Table */
+
+#schedule .flex-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#schedule .flex-container > * {
+  flex-basis: 25%;
+}
+
+/* / Schedule Table */
 /* / End Tables */
 /* End Base CSS */
 /* Headers */
