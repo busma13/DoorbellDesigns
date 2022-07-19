@@ -31,6 +31,15 @@
                         <div class="info">
                             <a href="doorbells.php?category=dog">Dog Lovers</a>
                         </div>
+                        
+                        
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 widget">
+                <div class="widget-title">
+                        <h4></h4>
+                    </div>
+                    <div class="link-widget">
                         <div class="info">
                             <a href="doorbells.php?category=animals">Animals</a>
                         </div>
@@ -104,7 +113,7 @@
                 </div><!-- / widget -->
                 <!-- / third widget -->
 
-                <div class="col-sm-6 col-md-4 widget">
+                <div class="col-sm-6 col-md-2 widget">
                     <div class="widget-title">
                         <h4>Get in Touch</h4>
                     </div>
@@ -112,7 +121,7 @@
                         <div class="info">
                             <p><i class="lnr lnr-map-marker"></i><span>11885 Rocoso Road<br> Lakeside, CA 92040-1035</span></p>
                         </div>
-                        <div class="info">
+                        <div class="info space-top">
                             <a href="tel:6194671176"><i class="lnr lnr-phone-handset"></i><span>619-467-1176</span></a>
                         </div>
                         <div class="info">

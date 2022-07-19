@@ -1,104 +1,111 @@
-// List of all products
-// store this elsewhere in the future
-let productList = [
-    {
-        id: 1,
-        itemName: 'bambooDoorbell',
-        itemNameString: 'Bamboo Doorbell',
-        mainCategory: 'Doorbells',
-        subCategories: ["plants"],
-        price: 43,
-        shipping: 3.50,
-        qtyInCart: 0,
-        pageUrl: 'bamboo-doorbell.html',
-        imgUrl: 'images/doorbells/bamboo_9to10.jpg',
-        dimensions: '6" x 3 5/8"'
-    },
-    {
-        id: 2,
-        itemName: 'releaseTheHoundsDoorbell',
-        itemNameString: 'Release The Hounds Doorbell',
-        mainCategory: 'Doorbells',
-        categories: ["dog lovers"],
-        price: 43,
-        shipping: 3.50,
-        qtyInCart: 0,
-        pageUrl: 'release-the-hounds-doorbell.html',
-        imgUrl: 'images/doorbells/to-release-the-hounds-1_9to10.jpg'
-    },
-    // {
-    //     itemName: 'buffaloShamanDoorbell',
-    //     itemNameString: 'Buffalo Shaman Doorbell',
-    //     categories: ['Doorbells', "Petroglyphs"],
-    //     price: 43,
-    //     shipping: 3.5,
-    //     qtyInCart: 0,
-    //     pageUrl: 'buffalo-shaman-doorbell.html',
-    //     imgUrl: 'images/doorbells/buffalo-shaman_9to10.jpg'
-    // },
-    // {
-    //     itemName: 'grapesDoorbell',
-    //     itemNameString: 'Grapes Doorbell',
-    //     categories: ['Doorbells', "Plants"],
-    //     price: 43,
-    //     shipping: 3.50,
-    //     qtyInCart: 0,
-    //     pageUrl: 'grapes-doorbell.html',
-    //     imgUrl: 'images/doorbells/grapes_9to10.jpg'
-    // },
-    // {
-    //     itemName: 'greenLizardDoorbell',
-    //     itemNameString: 'Green Lizard Doorbell',
-    //     categories: ['Doorbells', "Animals"],
-    //     price: 43,
-    //     shipping: 3.50,
-    //     qtyInCart: 0,
-    //     pageUrl: 'green-lLizard-doorbell.html',
-    //     imgUrl: 'images/doorbells/lizard-green_9to10.jpg'
-    // },
-    {
-        id: 3,
-        itemName: 'largePetroglyphDoorbell',
-        itemNameString: 'Large Petroglyph Doorbell',
-        mainCategory: 'Doorbells',
-        subCategories: ["petroglyphs"],
-        price: 55,
-        shipping: 5,
-        qtyInCart: 0,
-        pageUrl: 'large-petroglyph-doorbell.html',
-        imgUrl: 'images/doorbells/large-petroglyph_9to10.jpg',
-        dimensions: '6 1/4” X 6 1/2”'
-    },
-];
+// This script file controls all shopping cart functionality
 
+// Stores an item in local storage with an expiration
+var ls = {
+    set: function (variable, value, ttl_ms) {
+        var data = {value: value, expires_at: new Date().getTime() + ttl_ms / 1};
+        localStorage.setItem(variable.toString(), JSON.stringify(data));
+    },
+    get: function (variable) {
+        var data = JSON.parse(localStorage.getItem(variable.toString()));
+        if (data !== null) {
+            if (data.expires_at !== null && data.expires_at < new Date().getTime()) {
+                localStorage.removeItem(variable.toString());
+            } else {
+                return data.value;
+            }
+        }
+        return null;
+    }
+};
+let productList = ls.get('productList')
+console.log(productList);
+if (productList === null) {
+    getProductList();   
+}
+// console.log(productList[0])
+// console.log(Object.keys(productList))
 
 // Grab all the buttons that add items on a shop page
 let addToCartBtns = document.querySelectorAll('.add-to-cart');
 
+// Add event listeners to buttons
 for (let i = 0; i < addToCartBtns.length; i++) {
-    addToCartBtns[i].addEventListener('click', (event) => {
-        let productName = event.currentTarget.id;
-        let product = productList.find(product => product.itemName === productName)
-        console.log(event.currentTarget);
-        cartItemCount(1, product);
-        updateTotalCost(1, product);
-    })
+    addToCartBtns[i].addEventListener('click', addToCart)
 }
+
+async function addToCart(event) {
+    let productName = event.currentTarget.id;
+    let product;
+    console.log(ls.get('productList'))
+    if (ls.get('productList') === null) {
+        console.log('if')
+        await getProductList();
+        console.log(ls.get('productList'))
+        product = ls.get('productList').find(product => product.itemName === productName);
+    } else {
+        console.log('else')
+        product = ls.get('productList').find(product => product.itemName === productName);
+    }
+    console.log(event.currentTarget);
+    cartItemCount(1, product);
+    updateTotalCost(1, product);
+}
+
 
 // Grab the button that adds items on a single product page
 let addToCartBtnSinglePage = document.querySelector('.add-to-cart-single');
-// console.log(addToCartBtnSinglePage)
+
+// Add event listeners to buttons
 if (addToCartBtnSinglePage) {
-    addToCartBtnSinglePage.addEventListener('click', (event) => {
-        let qty = Number(document.querySelector('.input-text').value);
-        let productName = event.currentTarget.id;
-        let product = productList.find(product => product.itemName === productName);
-        console.log(event.currentTarget);
-        console.log(productName, product)
-        cartItemCount(qty, product);
-        updateTotalCost(qty, product);
-    });
+    addToCartBtnSinglePage.addEventListener('click', addToCartSingle)
 }
+    
+async function addToCartSingle(event) {
+    let qty = Number(document.querySelector('.input-text').value);
+    let productName = event.currentTarget.id;
+    let product;
+    console.log(ls.get('productList'))
+    if (ls.get('productList') === null) {
+        console.log('if')
+        await getProductList();
+        console.log(ls.get('productList'))
+        product = ls.get('productList').find(product => product.itemName === productName);
+    } else {
+        console.log('else')
+        product = ls.get('productList').find(product => product.itemName === productName);
+    }
+    console.log(event.currentTarget);
+    console.log(productName, product)
+    cartItemCount(qty, product);
+    updateTotalCost(qty, product);
+}
+
+// Get the product list
+async function getProductList() {
+    try{
+        const response = await fetch ('./includes/get-product-list.inc.php');
+        data = await response.json();
+        ls.set('productList', data, 86400000)
+        productList = JSON.parse(localStorage.getItem('productList'))
+        console.log('product list set');
+    } 
+    catch(error) {
+        console.error(`Could not get product list: ${error}`);
+    }
+}
+
+//Clear the shopping cart on confirmation of a succesful checkout.
+const confPage = document.querySelector('#confirmation');
+if (confPage) {
+    console.log(confPage)
+    localStorage.removeItem('cartList')
+    localStorage.removeItem('shippingTotal')
+    localStorage.removeItem('cartTotal')
+    localStorage.removeItem('cartItemCount')
+    localStorage.removeItem('cartProducts')
+}
+
 
 // Update the localStorage cartItemCount and display to nav bar 
 function cartItemCount(qty, product) {
@@ -166,11 +173,11 @@ function displayCart() {
         Object.values(productsInCart).map(item => {
             productTable.innerHTML += `
             <tr class="cart-item">
-                <td class="image"><a href="${item.pageUrl}"><img src="${item.imgUrl}" alt=""></a></td>
-                <td><a href="${item.pageUrl}">${item.itemName}</a></td>
+                <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="${item.imgUrl}" alt=""></a></td>
+                <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemName}</a></td>
                 <td>$${item.price}</td>
                 <td class="qty"><input type="number" step="1" min="1" name="cart" value="${item.qtyInCart}" title="Qty" class="input-text qty text qty-input-box" size="4"></td>
-                <td>$${item.price * item.qtyInCart}</td>
+                <td>$${(item.price * item.qtyInCart).toFixed(2)}</td>
                 <td class="remove"><a href="#x" class="btn btn-danger-filled x-remove">×</a></td>
             </tr>
             `; 
@@ -294,13 +301,13 @@ function calculateShippingTotal() {
 //Updates all the prices in the Cart Total area of the shopping cart
 function updateCartTotals() {
     let subtotal = Number(localStorage.getItem('cartTotal'));
-    document.querySelector('.subtotal').textContent = `$${subtotal}`;
+    document.querySelector('.subtotal').textContent = `$${subtotal.toFixed(2)}`;
 
     let shipping = calculateShippingTotal();
 
-    document.querySelector('.shipping').textContent = `$${shipping}`;
+    document.querySelector('.shipping').textContent = `$${shipping.toFixed(2)}`;
     let total = subtotal + shipping;
-    document.querySelector('.total').textContent = `$${total}`;
+    document.querySelector('.total').textContent = `$${total.toFixed(2)}`;
 }
 
 updateCartCount();

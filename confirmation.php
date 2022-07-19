@@ -19,45 +19,6 @@ $client = new SquareClient([
   'environment' => $_ENV['ENVIRONMENT']
 ]);
 
-$transaction_id = $_GET["transactionId"];
-
-//TODO: add transaction id and paid = yes to database
-
-try {
-  $orders_api = $client->getOrdersApi();
-  $response = $orders_api->retrieveOrder($transaction_id);
-} catch (ApiException $e) {
-  // If an error occurs, output the message
-  echo 'Caught exception!<br/>';
-  echo '<strong>Response body:</strong><br/>';
-  echo '<pre>';
-  var_dump($e->getHttpResponse());
-  echo '</pre>';
-  // echo '<br/><strong>Context:</strong><br/>';
-  // echo '<pre>';
-  // var_dump($e->getContext());
-  // echo '</pre>';
-  exit();
-} catch (Error $err) {
-  echo print_r($_GET);
-  echo 'Caught error';
-  echo $err;
-}
-
-// If there was an error with the request we will
-// print them to the browser screen here
-if ($response->isError()) {
-  echo 'Api response has Errors';
-  $errors = $response->getErrors();
-  echo '<ul>';
-  foreach ($errors as $error) {
-    echo '<li>❌ ' . $error->getDetail() . '</li>';
-  }
-  echo '</ul>';
-  exit();
-} else {
-  $order = $response->getResult()->getOrder();
-}
 
     include 'header-pt1.php';
     $title = 'Checkout Confirmation - Doorbell Designs';
@@ -67,7 +28,7 @@ if ($response->isError()) {
 
 
 
-    <div id="page-header" class="about">
+    <div id="page-header" class="complete">
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub">
@@ -81,20 +42,55 @@ if ($response->isError()) {
 </header>
 <!-- / header -->
 
-  <div class="container" id="confirmation">
-    <div>
-      <div>
-        <?php
-        echo ("Order " . $order->getId());
-        ?>
-      </div>
-      <div>
-        <?php
-        echo ("Status: " . $order->getState());
-        ?>
-      </div>
-    </div>
-    <div>
+<?php
+$transaction_id = $_GET["transactionId"];
+
+//TODO: add transaction id and paid = yes to database
+if ($transaction_id === null) { ?>
+  <p class="whitespace noTransId">There was an error.  No transaction ID found.</p> 
+<?php
+}
+else {
+  try {
+    $orders_api = $client->getOrdersApi();
+    $response = $orders_api->retrieveOrder($transaction_id);
+  } catch (ApiException $e) {
+    // If an error occurs, output the message
+    echo 'Caught exception!<br/>';
+    echo '<strong>Response body:</strong><br/>';
+    echo '<pre>';
+    var_dump($e->getHttpResponse());
+    echo '</pre>';
+    // echo '<br/><strong>Context:</strong><br/>';
+    // echo '<pre>';
+    // var_dump($e->getContext());
+    // echo '</pre>';
+    exit();
+  } catch (Error $err) {
+    echo 'Caught error';
+    echo $err;
+  }
+  
+  // If there was an error with the request we will
+  // print them to the browser screen here
+  if ($response->isError()) {
+    echo 'Api response has Errors';
+    $errors = $response->getErrors();
+    echo '<ul>';
+    foreach ($errors as $error) {
+      echo '<li>❌ ' . $error->getDetail() . '</li>';
+    }
+    echo '</ul>';
+    exit();
+  } else {
+    $order = $response->getResult()->getOrder();
+  }
+
+?>
+
+  <div class="container space-left space-right" id="confirmation">
+    <div class="row">
+      <h4 class="space-top">Your Order:</h4>
       <?php
       foreach ($order->getLineItems() as $line_item) {
         // Display each line item in the order, you may want to consider formatting the money amount using different currencies
@@ -115,12 +111,23 @@ if ($response->isError()) {
         </div>
         ");
       ?>
-    </div>
+    </div class="row">
+    <h4 class="space-top">Payment Successful!</h4>
     <div>
-      <span>Payment Successful!</span>
+      <div class="space-top">
+        <?php
+        echo ("Square Order Id: " . $order->getId());
+        ?>
+      </div>
+    </div>
+    <div class="space-top">
       <a href="http://localhost/doorbelldesigns">Back to home page</a>
     </div>
   </div>
+
+  <?php
+    }
+  ?>
 
   <!-- footer -->
   <?php
@@ -137,12 +144,14 @@ if ($response->isError()) {
 <script src="js/scrolling-nav.js"></script>
 <!-- / scrolling-nav -->
 
-
-
 <!-- shuffle grid-resizer -->
 <script src="js/jquery.shuffle.min.js"></script>
 <script src="js/custom.js"></script>
 <!-- / shuffle grid-resizer -->
+
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
 
 <!-- preloader -->
 <script src="js/preloader.js"></script>
