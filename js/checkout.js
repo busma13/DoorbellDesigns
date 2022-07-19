@@ -1,13 +1,13 @@
 //Updates all the prices in the Cart Total area of the checkout page
 function updateCartTotals() {
     let subtotal = Number(localStorage.getItem('cartTotal'));
-    document.querySelector('.subtotal').textContent = `$${subtotal}`;
+    document.querySelector('.subtotal').textContent = `$${subtotal.toFixed(2)}`;
 
     let shipping = Number(localStorage.getItem('shippingTotal'));
 
-    document.querySelector('.shipping').textContent = `$${shipping}`;
+    document.querySelector('.shipping').textContent = `$${shipping.toFixed(2)}`;
     let total = subtotal + shipping;
-    document.querySelector('.total').textContent = `$${total}`;
+    document.querySelector('.total').textContent = `$${total.toFixed(2)}`;
 }
 
 //Creates a list of all items in the cart and saves tehm to local storage.

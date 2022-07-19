@@ -180,7 +180,7 @@ if ($currentRow) {
 
                         <div class="space-25">&nbsp;</div>
 
-                        <a class="btn btn-primary-filled btn-rounded add-to-cart-single" id="bambooDoorbell"><i class="lnr lnr-cart"></i><span> Add to Cart</span></a>
+                        <a class="btn btn-primary-filled btn-rounded add-to-cart-single" id="<?php echo $currentRow['itemName']?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></a>
                         <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
                     </div>
 

@@ -3978,17 +3978,33 @@ a.btn-social {
 
 }
 
-/* .show-name {
-  flex: 1;
+/* Checkout */
+
+.whitespace {
+  padding: 200px 50px;
+  text-align: center;
 }
 
-.show-date {
-  flex: 3;
+/* / Checkout */
+
+/* Confirmation */
+
+.item-line {
+  padding: 15px;
 }
 
-.show-location {
-  flex: 4;
-} */
+.item-label {
+
+}
+
+.item-amount {
+
+}
+
+.total-line {
+  font-weight: bold;
+}
+/* / Confirmation */
 
 /* End Single Pages */
 /* Content */

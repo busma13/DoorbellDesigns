@@ -179,6 +179,10 @@
 <script src="js/checkout.js"></script>
 <!-- / checkout -->
 
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
+
 <!-- preloader -->
 <script src="js/preloader.js"></script>
 <!-- / preloader -->
