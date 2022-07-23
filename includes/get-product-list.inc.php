@@ -27,4 +27,4 @@ catch (PDOException $e)
 }
 
 /* Send success to fetch API */
-die(json_encode($response));
+die(json_encode($productList));
