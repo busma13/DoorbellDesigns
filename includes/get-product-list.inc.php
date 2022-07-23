@@ -15,7 +15,7 @@ try
         $productList[] = $row;
     }
 
-    $response = $productList;
+    $response = 'testing';
 }
 catch (PDOException $e)
 {
