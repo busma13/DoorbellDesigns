@@ -13,12 +13,12 @@ try
     $str = '';
     $productList = array();
     while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-        $productList[] = $row;
+        $productList[] = $row['id'];
         // $rows++;
         // $str .= $rows . ' ' . 'line' . "----"; //implode(', ', $row)
     }
 
-    $response = var_dump($productList);
+    $response = $productList;
 }
 catch (PDOException $e)
 {
@@ -27,4 +27,4 @@ catch (PDOException $e)
 }
 
 /* Send success to fetch API */
-die(json_encode($productList));
+die(json_encode($response));
