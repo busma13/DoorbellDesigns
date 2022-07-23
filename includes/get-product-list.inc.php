@@ -18,7 +18,7 @@ try
         $str .= $rows . ' ' . implode(', ', $row) . "----";
     }
 
-    $response = $str;
+    $response = $rows;
 }
 catch (PDOException $e)
 {
