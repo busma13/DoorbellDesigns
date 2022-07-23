@@ -4099,7 +4099,7 @@ footer .social a {
 }
 
 footer .widget-title {
-  text-align: left;
+  text-align: center;
   margin-bottom: 30px;
 }
 
@@ -4117,7 +4117,8 @@ footer .widget-title:after {
   position: absolute;
   height: 2px;
   width: 30px;
-  margin-left: 0;
+  margin-left: -15px;
+  text-align: right;
 }
 
 .dark-footer .widget-title h4 {
@@ -4141,6 +4142,7 @@ footer .about-widget img {
 
 footer .info {
   margin-bottom: 10px;
+  text-align: center;
 }
 
 footer .contact-widget i {
@@ -4168,6 +4170,17 @@ footer #newsletter .form-control {
   margin-bottom: 12px;
   padding: 5px 20px;
   min-height: 42px;
+}
+
+.widget-area .flex-container {
+  display: flex;
+  flex-flow: column, wrap;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.widget-area .flex-container > * {
+  flex-basis: 50%;
 }
 
 /* End Footer Widgets */

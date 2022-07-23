@@ -3,60 +3,43 @@
     <div class="widget-area">
         <div class="container">
             <div class="row">
-
-                <!--<div class="col-sm-6 col-md-4 widget">
-                    <div class="about-widget">
-                        <div class="widget-title-image">
-                            <img src="images/logo.png" alt="">
-                        </div>
-                        <p>Praesent sed congue ipsum. Nullam tempus ornare est, non aliquet velit tincidunt elementum. Nulla at risus ut felis eleifend. Nulla non lacinia. Integer est lacus, ultricies sed feugiat id, maximus nec.</p>
-                    </div><! -- / about-widget -->
-                <!--</div><! -- / widget -->
-                
-
-                <div class="col-sm-6 col-md-2 widget">
+                <div class="col-sm-6 col-md-4 widget">
                     <div class="widget-title">
                         <h4>Doorbells</h4>
                     </div>
                     <div class="link-widget">
-                        <div class="info">
-                            <a href="doorbells.php">All</a>
-                        </div>
-                        <div class="info">
-                            <a href="doorbells.php?category=beachy">Beachy</a>
-                        </div>
-                        <div class="info">
-                            <a href="doorbells.php?category=contemporary">Contemporary</a>
-                        </div>
-                        <div class="info">
-                            <a href="doorbells.php?category=dog">Dog Lovers</a>
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-2 widget">
-                <div class="widget-title">
-                        <h4></h4>
-                    </div>
-                    <div class="link-widget">
-                        <div class="info">
-                            <a href="doorbells.php?category=animals">Animals</a>
-                        </div>
-                        <div class="info">
-                            <a href="doorbells.php?category=petroglyphs">Petroglyph</a>
-                        </div>
-                        <div class="info">
-                            <a href="doorbells.php?category=plants">Plants</a>
-                        </div>
-                        <div class="info">
-                            <a href="doorbells.php?category=southwest">Southwest</a>
-                        </div>
-                        <div class="info">
-                            <a href="doorbells.php?category=misc">Miscellaneous</a>
-                        </div>
+                            <div class="flex-container">
+                                <div class="info">
+                                <a href="doorbells.php">All</a>
+                            </div>
+                                <div class="info">
+                                    <a href="doorbells.php?category=beachy">Beachy</a>
+                                </div>
+                                <div class="info">
+                                    <a href="doorbells.php?category=contemporary">Contemporary</a>
+                                </div>
+                                <div class="info">
+                                    <a href="doorbells.php?category=dog">Dog Lovers</a>
+                                </div>
+                                <div class="info">
+                                    <a href="doorbells.php?category=animals">Animals</a>
+                                </div>
+                                <div class="info">
+                                    <a href="doorbells.php?category=petroglyphs">Petroglyph</a>
+                                </div>
+                                <div class="info">
+                                    <a href="doorbells.php?category=plants">Plants</a>
+                                </div>
+                                <div class="info">
+                                    <a href="doorbells.php?category=southwest">Southwest</a>
+                                </div>
+                                <div class="info">
+                                    <a href="doorbells.php?category=misc">Miscellaneous</a>
+                                </div>
+                            </div>
                     </div>
                 </div><!-- / widget -->
+                    
                 <!-- / first widget -->
                 <div class="col-sm-6 col-md-2 widget">
                     <div class="widget-title">
