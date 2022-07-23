@@ -83,17 +83,17 @@ async function addToCartSingle(event) {
 
 // Get the product list
 async function getProductList() {
-    // try{
+    try{
         const response = await fetch ('./includes/get-product-list.inc.php');
         data = await response.json();
         console.log(data);
         ls.set('productList', data, 86400000)
         productList = JSON.parse(localStorage.getItem('productList'))
         console.log('product list set');
-    // } 
-    // catch(error) {
-    //     console.error(`Could not get product list: ${error}`);
-    // }
+    } 
+    catch(error) {
+        console.error(`Could not get product list: ${error.message}, ${error.stack}`);
+    }
 }
 
 //Clear the shopping cart on confirmation of a succesful checkout.
