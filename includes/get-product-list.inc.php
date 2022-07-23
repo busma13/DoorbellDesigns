@@ -9,13 +9,14 @@ try
 {
     $res = $pdo->prepare($get_product_list_sql);
     $res->execute();
-
+    $rows = 0;
     $productList = array();
     while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
         $productList[] = $row;
+        $rows++;
     }
 
-    $response = 'testing';
+    $response = $rows;
 }
 catch (PDOException $e)
 {
