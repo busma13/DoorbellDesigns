@@ -15,7 +15,7 @@ try
     while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
         $productList[] = $row;
         $rows++;
-        $str .= $rows . ' ' . implode(', ', $row) . "----";
+        $str .= $rows . ' ' . 'line' . "----"; //implode(', ', $row)
     }
 
     $response = $str;
