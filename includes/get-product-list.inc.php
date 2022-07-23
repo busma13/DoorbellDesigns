@@ -9,11 +9,11 @@ try
 {
     $res = $pdo->prepare($get_product_list_sql);
     $res->execute();
-    $rows = 0;
+    $rows = '';
     $productList = array();
     while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
         $productList[] = $row;
-        $rows++;
+        $rows.= implode(', ', $row) . "----";
     }
 
     $response = $rows;
