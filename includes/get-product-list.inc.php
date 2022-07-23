@@ -14,11 +14,11 @@ try
     $productList = array();
     while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
         $productList[] = $row;
-        $rows++;
-        $str .= $rows . ' ' . 'line' . "----"; //implode(', ', $row)
+        // $rows++;
+        // $str .= $rows . ' ' . 'line' . "----"; //implode(', ', $row)
     }
 
-    $response = $str;
+    $response = $productList;
 }
 catch (PDOException $e)
 {
