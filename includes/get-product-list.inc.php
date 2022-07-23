@@ -16,6 +16,7 @@ try
     }
 
     $response = $productList;
+    echo var_dump($response);
 }
 catch (PDOException $e)
 {
@@ -23,9 +24,5 @@ catch (PDOException $e)
     $response = $msg;
 }
 
-
-
-
-
 /* Send success to fetch API */
-die(json_encode($response));
+//die(json_encode($response));
