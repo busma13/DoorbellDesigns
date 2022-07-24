@@ -18,8 +18,7 @@ try
         // $str .= $rows . ' ' . 'line' . "----"; //implode(', ', $row)
     }
 
-    $response = array();
-    $response[] = $productList;
+    $response = $productList;
 }
 catch (PDOException $e)
 {
@@ -27,9 +26,5 @@ catch (PDOException $e)
     $response = $msg;
 }
 
-$json = json_encode($response);
-if (!$json) {
-    die(json_encode(json_last_error()));
-}
 /* Send success to fetch API */
-die($json);
+die(json_encode($response));
