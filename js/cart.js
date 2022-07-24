@@ -86,10 +86,10 @@ async function getProductList() {
     try{
         const response = await fetch ('./includes/get-product-list.inc.php');
         console.log(response);
-        // data = await response.text();
+        data = await response.text();
+        console.log(data);
+        // data = await response.json();
         // console.log(data);
-        data2 = await response.json();
-        console.log(data2);
 
         // ls.set('productList', data, 86400000)
         // productList = JSON.parse(localStorage.getItem('productList'))
