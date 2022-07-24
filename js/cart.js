@@ -89,18 +89,16 @@ async function getProductList() {
             contentType: 'application/json',
             mimeType: 'application/json'
         });
-        console.log(response);
         data = await response.json();
-        console.log(data);
-        // data = await response.json();
+        data = await response.json();
         // console.log(data);
 
-        // ls.set('productList', data, 86400000)
-        // productList = JSON.parse(localStorage.getItem('productList'))
+        ls.set('productList', data, 86400000)
+        productList = JSON.parse(localStorage.getItem('productList'))
         console.log('product list set');
     } 
     catch(error) {
-        console.error(`Could not get product list: ${error.message}, ${error.stack}`);
+        console.error(`Could not get product list: ${error}`);
     }
 }
 
