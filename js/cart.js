@@ -84,7 +84,11 @@ async function addToCartSingle(event) {
 // Get the product list
 async function getProductList() {
     try{
-        const response = await fetch ('./includes/get-product-list.inc.php');
+        const response = await fetch ('./includes/get-product-list.inc.php', {
+            dataType: "json",
+            contentType: 'application/json',
+            mimeType: 'application/json'
+        });
         console.log(response);
         data = await response.json();
         console.log(data);
