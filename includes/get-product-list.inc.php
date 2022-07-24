@@ -18,7 +18,7 @@ try
         // $str .= $rows . ' ' . 'line' . "----"; //implode(', ', $row)
     }
 
-    $response = $productList[0];
+    $response = $productList;
 }
 catch (PDOException $e)
 {
