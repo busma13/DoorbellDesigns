@@ -85,9 +85,13 @@ async function addToCartSingle(event) {
 async function getProductList() {
     try{
         const response = await fetch ('./includes/get-product-list.inc.php');
-        data = await response.json();
-        console.log(data);
-        ls.set('productList', data, 86400000)
+        console.log(response);
+        // data = await response.text();
+        // console.log(data);
+        data2 = await response.json();
+        console.log(data2);
+
+        // ls.set('productList', data, 86400000)
         // productList = JSON.parse(localStorage.getItem('productList'))
         console.log('product list set');
     } 
