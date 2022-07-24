@@ -86,7 +86,7 @@ async function getProductList() {
     try{
         const response = await fetch ('./includes/get-product-list.inc.php');
         console.log(response);
-        data = await response.text();
+        data = await response.json();
         console.log(data);
         // data = await response.json();
         // console.log(data);
