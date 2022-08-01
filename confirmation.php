@@ -1,4 +1,5 @@
 <?php
+include_once './includes/dbh.inc.php';
 require 'vendor/autoload.php';
 
 use Dotenv\Dotenv;
@@ -19,11 +20,10 @@ $client = new SquareClient([
   'environment' => $_ENV['ENVIRONMENT']
 ]);
 
-
-    include 'header-pt1.php';
-    $title = 'Checkout Confirmation - Doorbell Designs';
-    echo $title;
-    include 'header-pt2.php';
+include 'header-pt1.php';
+$title = 'Checkout Confirmation - Doorbell Designs';
+echo $title;
+include 'header-pt2.php';
 ?>
 
 
@@ -45,7 +45,6 @@ $client = new SquareClient([
 <?php
 $transaction_id = $_GET["transactionId"];
 
-//TODO: add transaction id and paid = yes to database
 if ($transaction_id === null) { ?>
   <p class="whitespace noTransId">There was an error.  No transaction ID found.</p> 
 <?php
@@ -69,10 +68,11 @@ else {
   } catch (Error $err) {
     echo 'Caught error';
     echo $err;
+    exit();
   }
   
   // If there was an error with the request we will
-  // print them to the browser screen here
+  // print it to the browser screen here
   if ($response->isError()) {
     echo 'Api response has Errors';
     $errors = $response->getErrors();
@@ -86,14 +86,34 @@ else {
     $order = $response->getResult()->getOrder();
   }
 
+  // Check that order has been paid for.
+  $tenders = $order->getTenders();
+  if ($tenders) {
+    $total_tenders = 0;
+    for ($i = 0; $i < count($tenders); $i++) {
+      $total_tenders += (int) $tenders[$i]->getAmountMoney()->getAmount();
+    }
+    if ($order->getTotalMoney()->getAmount() !== $total_tenders) { ?>
+      <p class="whitespace notPaid">There was an error. There is still a balance due on this order.</p> 
+      <?php
+    }  
+  }
+  else {
+    ?>
+      <p class="whitespace notPaid">There was an error. No record of payment for this order.</p> 
+      <?php
+  }
+  
 ?>
 
   <div class="container space-left space-right" id="confirmation">
     <div class="row">
+      <h2>Thank you for your purchase!</h2>      
       <h4 class="space-top">Your Order:</h4>
       <?php
+
       foreach ($order->getLineItems() as $line_item) {
-        // Display each line item in the order, you may want to consider formatting the money amount using different currencies
+        // Display each line item in the order
         echo ("
           <div class=\"item-line\">
             <div class=\"item-label\">" . $line_item->getName() . " x " . $line_item->getQuantity() . "</div>
@@ -101,7 +121,7 @@ else {
           </div>");
       }
 
-      // Display total amount paid for the order, you may want to consider formatting the money amount using different currencies
+      // Display total amount paid for the order
       echo ("
         <div>
           <div class=\"item-line total-line\">

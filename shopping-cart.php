@@ -47,7 +47,6 @@
             <div class="coupon col-sm-6">
                 <div class="input-group">
                     
-                    </span>
                 </div>
             </div><!-- / input-group -->
             <div class="update-cart col-sm-6">

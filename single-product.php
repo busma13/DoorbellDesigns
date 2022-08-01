@@ -143,6 +143,12 @@ if ($currentRow) {
                                 // echo $subCatArr;
                                 foreach($subCatArr as $i) { 
                                     // echo $i; 
+                                    if ($i === 'dog') {
+                                        $i = "dog lovers";
+                                    }
+                                    if ($i === 'one') {
+                                        $i = "one of a kind";
+                                    }
                                     ?>
                                     , <a href="<?php echo strtolower($currentRow['mainCategory'])?>.php?category=<?php echo $i?>"><?php echo ucfirst($i)?></a> <?php
                                 }
@@ -151,9 +157,11 @@ if ($currentRow) {
                             </span></p>
                         </div>
                         <div class="info">
-                            <p><img class="ruler" src="images/ruler.png"><span>Dimensions: <?php echo $currentRow['dimensions']?></span></p>
+                            <p><img class="ruler" src="images/ruler.png"><span>Dimensions**: <?php echo $currentRow['dimensions']?></span></p>
                         </div>
-                        
+                        <div class="info">
+                            <p>**All dimensions are approximate and can be up to 1/2" larger or smaller than stated.</p>
+                        </div>
                     </div><!-- / project-info -->
 
                     <div class="buy-product">
