@@ -41,8 +41,9 @@
                     <li><a href="#" data-group="petroglyphs">Petroglyphs</a></li>
                     <li><a href="#" data-group="plants">Plants</a></li>
                     <li><a href="#" data-group="southwest">Southwest</a></li>
-                    <li><a href="#" data-group="misc">Miscellaneous</a></li>
-                    <li><a href="#" data-group="custom">Custom Orders</a></li>
+                    <li><a href="#" data-group="one">One Of A Kind</a></li>
+                    <li><a href="#" data-group="miscellaneous">Miscellaneous</a></li>
+                    <li><a href="./custom-orders.php" data-group="custom">Custom Orders</a></li>
                 </ul>
                 <!-- / product filter -->
                 
@@ -63,7 +64,7 @@
                         throw new Exception('Database query error');
                         }
                         while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
-
+                            
                             <!-- product -->
                             <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
                                 <a href="single-product.php?category=doorbells&product=<?php echo $row['id'] ?>" class="product-link"></a>
@@ -72,14 +73,14 @@
                                 <!-- / product-image -->
 
                                 <!-- product-hover-tools -->
-                                <div class="product-hover-tools">
-                                    <a href="single-product.php?category=doorbells&product=<?php echo $row['id'] ?>" class="view-btn">
+                                <!-- <div class="product-hover-tools">
+                                    <a href="single-product.php?category=doorbells&product=< ?php echo $row['id'] ?>" class="view-btn">
                                         <i class="lnr lnr-eye"></i>
                                     </a>
-                                    <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
+                                    <a class="add-to-cart trigger" id="< ?php echo $row['itemName'] ?>">
                                         <i class="lnr lnr-cart"></i>
                                     </a>
-                                </div><!-- / product-hover-tools -->
+                                </div>/ product-hover-tools -->
 
                                 <!-- product-details -->
                                 <div class="product-details">
@@ -87,14 +88,15 @@
                                     <h6 class="product-price">$<?php echo $row['price'] ?></h6>
                                 </div><!-- / product-details -->
                             </div><!-- / product -->
-                                <?php   
+                            
+                    <?php   
                              
                         }
                     ?>
-                    
-                   
+
+
                     <!-- grid-resizer -->
-                    <div class="col-xs-6 col-md-3 shuffle_sizer"></div>
+                        <div class="col-xs-6 col-md-3 shuffle_sizer"></div>
                     <!-- / grid-resizer -->
 
                 </div><!-- / row -->
@@ -113,6 +115,13 @@
     include 'footer.php';
 ?>
 <!-- / footer -->
+
+<div class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h1>Hello, I am a modal!</h1>
+    </div>
+</div>
 
 <!-- javascript -->
 <script src="js/jquery.min.js"></script>

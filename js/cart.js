@@ -18,6 +18,8 @@ var ls = {
         return null;
     }
 };
+
+// load the product list from local storage or retrieve from database
 let productList = ls.get('productList')
 console.log(productList);
 if (productList === null) {
@@ -26,43 +28,44 @@ if (productList === null) {
 // console.log(productList[0])
 // console.log(Object.keys(productList))
 
-// Grab all the buttons that add items on a shop page
-let addToCartBtns = document.querySelectorAll('.add-to-cart');
+// // Grab all the buttons that add items on a shop page
+// let addToCartBtns = document.querySelectorAll('.add-to-cart');
 
-// Add event listeners to buttons
-for (let i = 0; i < addToCartBtns.length; i++) {
-    addToCartBtns[i].addEventListener('click', addToCart)
-}
+// // Add event listeners to buttons
+// for (let i = 0; i < addToCartBtns.length; i++) {
+//     addToCartBtns[i].addEventListener('click', addToCart)
+// }
 
-async function addToCart(event) {
-    let productName = event.currentTarget.id;
-    let product;
-    console.log(ls.get('productList'))
-    if (ls.get('productList') === null) {
-        console.log('if')
-        await getProductList();
-        console.log(ls.get('productList'))
-        product = ls.get('productList').find(product => product.itemName === productName);
-    } else {
-        console.log('else')
-        product = ls.get('productList').find(product => product.itemName === productName);
-    }
-    console.log(event.currentTarget);
-    cartItemCount(1, product);
-    updateTotalCost(1, product);
-}
-
+// async function addToCart(event) {
+//     let productName = event.currentTarget.id;
+//     let product;
+//     console.log(ls.get('productList'))
+//     if (ls.get('productList') === null) {
+//         console.log('if')
+//         await getProductList();
+//         console.log(ls.get('productList'))
+//         product = ls.get('productList').find(product => product.itemName === productName);
+//     } else {
+//         console.log('else')
+//         product = ls.get('productList').find(product => product.itemName === productName);
+//     }
+//     console.log(event.currentTarget);
+//     cartItemCount(1, product);
+//     updateTotalCost(1, product);
+// }
 
 // Grab the button that adds items on a single product page
 let addToCartBtnSinglePage = document.querySelector('.add-to-cart-single');
 
-// Add event listeners to buttons
+// Add event listener to button
 if (addToCartBtnSinglePage) {
     addToCartBtnSinglePage.addEventListener('click', addToCartSingle)
 }
     
 async function addToCartSingle(event) {
     let qty = Number(document.querySelector('.input-text').value);
+    let color = document.querySelector('.selectpicker').selectedOptions[0].innerText;
+    console.log(color);
     let productName = event.currentTarget.id;
     let product;
     console.log(ls.get('productList'))
@@ -75,6 +78,7 @@ async function addToCartSingle(event) {
         console.log('else')
         product = ls.get('productList').find(product => product.itemName === productName);
     }
+    product.baseColor = color;
     console.log(event.currentTarget);
     console.log(productName, product)
     cartItemCount(qty, product);
@@ -133,18 +137,33 @@ function cartItemCount(qty, product) {
 function setItems(qty, product) {
     let cartContents = JSON.parse(localStorage.getItem('cartProducts'));
     
-    if(cartContents) {
-        if(!cartContents[product.itemName]) {
+    if(cartContents) {//there are items in the cart
+        if (!cartContents[product.itemName+'Base'+product.baseColor]) {//no product with this name in cart
+            console.log(1)
+            product.qtyInCart = qty;
             cartContents = {
                 ...cartContents,
-                [product.itemName]: product
+                [product.itemName+'Base'+product.baseColor]: product
+            }
+        } else {//product with this name is in the cart
+
+            if (!cartContents[product.itemName+'Base'+product.baseColor]) {//no product with this base color
+                console.log(2)
+                product.qtyInCart = qty;
+                cartContents = {
+                    ...cartContents,
+                    [product.itemName]: product
+                }
+            } else {//product with this base color is in the cart
+                console.log(3)
+                cartContents[product.itemName+'Base'+product.baseColor].qtyInCart += qty;
             }
         }
-        cartContents[product.itemName].qtyInCart += qty;
-    } else {
+    } else {//there are no items in the cart
+        console.log(4)
         product.qtyInCart = qty;
         cartContents = {
-            [product.itemName]: product
+            [product.itemName+'Base'+product.baseColor]: product
         }
     }
     
@@ -180,7 +199,7 @@ function displayCart() {
             productTable.innerHTML += `
             <tr class="cart-item">
                 <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="${item.imgUrl}" alt=""></a></td>
-                <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemName}</a></td>
+                <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemNameString} ${item.baseColor}</a></td>
                 <td>$${item.price}</td>
                 <td class="qty"><input type="number" step="1" min="1" name="cart" value="${item.qtyInCart}" title="Qty" class="input-text qty text qty-input-box" size="4"></td>
                 <td>$${(item.price * item.qtyInCart).toFixed(2)}</td>

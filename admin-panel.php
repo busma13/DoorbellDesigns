@@ -343,6 +343,7 @@
                     }
                     elseif ($editProductCheck == "success") {
                         echo "<p class='success'>Product edited successfully.</p>";
+
                     }
                 }
             ?>
@@ -423,13 +424,9 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
-<!-- ajax -->
-<script src="js/ajax.js"></script>
-<!-- / ajax -->
-
-<!-- edit table -->
-<script src="js/edit-table.js"></script>
-<!-- / edit table -->
+<!-- admin-panel -->
+<script src="js/admin-panel.js"></script>
+<!-- / admin-panel -->
 
 <!-- preloader -->
 <script src="js/preloader.js"></script>

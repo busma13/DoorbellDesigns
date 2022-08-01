@@ -1,3 +1,142 @@
+
+// Update Product List
+let urlString = window.location.href;
+console.log(urlString);
+let paramString = urlString.split('?')[1];
+console.log(paramString);
+if (paramString && paramString.includes('success')) {
+    getProductList();
+}
+
+// Stores an item in local storage with an expiration
+var ls = {
+    set: function (variable, value, ttl_ms) {
+        var data = {value: value, expires_at: new Date().getTime() + ttl_ms / 1};
+        localStorage.setItem(variable.toString(), JSON.stringify(data));
+    },
+    get: function (variable) {
+        var data = JSON.parse(localStorage.getItem(variable.toString()));
+        if (data !== null) {
+            if (data.expires_at !== null && data.expires_at < new Date().getTime()) {
+                localStorage.removeItem(variable.toString());
+            } else {
+                return data.value;
+            }
+        }
+        return null;
+    }
+};
+
+// Get the product list
+async function getProductList() {
+    try{
+        const response = await fetch ('./includes/get-product-list.inc.php', {
+            dataType: "json",
+            contentType: 'application/json',
+            mimeType: 'application/json'
+        });
+        data = await response.json();
+        // console.log(data);
+
+        ls.set('productList', data, 86400000)
+        productList = JSON.parse(localStorage.getItem('productList'))
+        console.log('product list set');
+    } 
+    catch(error) {
+        console.error(`Could not get product list: ${error}`);
+    }
+}
+// End Update Product List
+
+// Ajax Request
+document.querySelector('#selectProduct').addEventListener('click', getProductInfo);
+
+async function getProductInfo() {
+    let productInput = document.querySelector("#selectProductName")
+    let productName = productInput.value;
+    let data;
+    if (productName !== '') {
+        editProduct = {
+            'name': productName
+        }
+        try{
+            const response = await fetch (
+            './includes/get-edit-product-info.inc.php', 
+                {
+                    method:'POST',
+                    mode: "same-origin",
+                    cache: 'no-cache',
+                    credentials: "same-origin",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept":       "application/json"
+                    },
+                    redirect: 'follow',
+                    referrerPolicy: 'no-referrer',
+                    body: JSON.stringify(editProduct)
+                }
+            )
+            data = await response.json();
+        
+            const errorLine = document.querySelector('#select-product-error');
+            const editForm = document.querySelector('#edit-product');
+            const tableContainer = document.querySelector('#table-container');
+            const tableRow = document.querySelector('.table-data');
+            if (data === 'not-found') {
+                errorLine.hidden = false;
+                errorLine.textContent = 'Product not found.';
+                editForm.hidden = true;
+                tableContainer.hidden = true;
+            } else if (data === 'retreive-fail') {
+                errorLine.hidden = false;
+                errorLine.textContent = 'Failed to retrieve item data. Please try again.'
+                editForm.hidden = true;
+                tableContainer.hidden = true;
+            } else {
+                productInput.value = '';
+                originalProductName.value = productName;
+                tableContainer.hidden = false;
+                errorLine.hidden = true;
+                errorLine.textContent = '';
+                editForm.hidden = false;
+                console.log(data);
+                let td = document.createElement('td');
+                td.textContent = data['itemNameString'];
+                tableRow.appendChild(td);
+                td = document.createElement('td');
+                td.textContent = data['mainCategory'];
+                tableRow.appendChild(td);
+                td = document.createElement('td');
+                td.textContent = data['subCategories'];
+                tableRow.appendChild(td);
+                td = document.createElement('td');
+                td.textContent = data['price'];
+                tableRow.appendChild(td);
+                td = document.createElement('td');
+                td.textContent = data['shipping'];
+                tableRow.appendChild(td);
+                td = document.createElement('td');
+                td.textContent = data['dimensions'];
+                tableRow.appendChild(td);
+                td = document.createElement('td');
+                td.textContent = data['imgUrl'];
+                tableRow.appendChild(td);
+                td = document.createElement('td');
+                td.textContent = data['active'] == 1 ? 'active' : 'inactive';
+                tableRow.appendChild(td);
+                td = document.createElement('td');
+                td.textContent = data['featured'] == 1 ? 'featured' : 'not featured';
+                tableRow.appendChild(td);
+            }
+        } 
+        catch(error) {
+            console.error(`Could not get product: ${error}`);
+        }
+    }
+}
+// End Ajax Request
+
+// Start Edit Show Table
 // (A) INITIALIZE - DOUBLE CLICK TO EDIT CELL
 window.addEventListener("DOMContentLoaded", () => {
   for (let cell of document.querySelectorAll(".editable td")) {
@@ -204,7 +343,7 @@ function addShow(event) {
   td4.ondblclick = () => { editable.edit(td4); };
   row.appendChild(td4);
                 
-  document.querySelector('#tableBody').appendChild(row);
-
-  
+  document.querySelector('#tableBody').appendChild(row); 
 }
+
+// End Edit Show Table

@@ -25,7 +25,7 @@
 <!-- faq -->
 <section id="about">
     <div class="container">
-        <h4 class="space-left space-bottom-2x">Frequently Asked Questions</h4>
+        <!-- <h4 class="space-left space-bottom-2x">Frequently Asked Questions</h4> -->
         <main>
             <p>
                 We do shows several times year and sell what we make there. The doorbells you see on this site probably belong to someone else by now. We have similar doorbells, but not exactly like anything you see here.
@@ -34,17 +34,11 @@
                 We make them all individually and never exactly the same even when we try! The colors, shapes and sizes will be a little different.
             </p>
             <p>
-                You can order exactly what you want or, a particular design and we'll e-mail you pictures of what we have from stock closest to your request. If we have to make you a doorbell, of course, it will take a little time. We are often away from home doing shows. We can give you an estimate at the time you order.
+                You can order exactly what you want, or a particular design and we'll e-mail you pictures of what we have from stock closest to your request. If we have to make you a doorbell, of course, it will take a little time. We are often away from home doing shows. We can give you an estimate at the time you order.
             </p>
-            <ul>
-                <li>All our doorbells are made from low-fire white clay.</li>
-                <li>They come in two background colors for the stone looking types, sandy (varying shades of a light brown) and gray-ish.</li>
-                <li>You may choose either of these background colors for any of the designs.</li>
-                <li>The designs come in various shapes and sizes.
-                If you need a particular size, you need to indicate that in your order.</li>
-                <li>You should also state if you prefer either a regular rectangular shape or an odd shape.</li>
-                <li>If there is a particular color you want, or do not want, on your doorbell you need to note that also.</li>
-            </ul>
+            <p>
+                All our doorbells are made from low-fire white clay. They come in two background colors for the stone looking types, sandy (varying shades of a light brown) and gray-ish.  You may choose either of these background colors for any of the designs.  The designs come in various shapes and sizes.  If you need a particular size, you need to indicate that in your order. You should also state if you prefer either a regular rectangular shape or an odd shape. If there is a particular color you want, or do not want, on your doorbell you need to note that also.
+            </p>
             <p> 
                 Because we make these doorbells ourselves, we can put the hole for the doorbell button any where you need it. For example if you have plenty of space for your new doorbell to the right of your button now, but your present button is only one inch from the door frame on the left ,we can put the button hole an inch from the left on your new dooorbell surround. Just tell us what you need and we'll see if we can do it for you.
             </p>
@@ -55,7 +49,7 @@
                 If you need the screw holes in a particular place we can do that for you.
             </p>
         </main>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-sm-6">
 
                 <div class="panel-group tabbed">
@@ -63,13 +57,13 @@
                     <div class="panel-heading">
                         <a class="panel-title collapsed" data-toggle="collapse" href="#panel1">How much will the delivery cost me?</a>
                     </div>
-                    <div id="panel1" class="panel-collapse collapse"> <!--in-->
+                    <div id="panel1" class="panel-collapse collapse"> <!--in- ->
                         <div class="panel-body text-gray">
                             <p>Duis faucibus dignissim nibh at venenatis. Integer lacus nibh, auctor non viverra at, iaculis eu nulla.</p>                            
                         </div>
                     </div>
-                    </div><!-- / panel -->
-                </div><!-- / panel-group -->
+                    </div>/ panel - ->
+                </div><!-- / panel-group - ->
 
                 <div class="panel-group tabbed">
                     <div class="panel">
@@ -86,8 +80,8 @@
                             <p>Please contact us if there are any concerns regarding our policies.</p>
                         </div>
                     </div>
-                    </div><!-- / panel -->
-                </div><!-- / panel-group -->
+                    </div><!-- / panel - ->
+                </div><!-- / panel-group - ->
 
                 <div class="panel-group tabbed">
                     <div class="panel">
@@ -99,8 +93,8 @@
                         Duis faucibus dignissim nibh at venenatis. Integer lacus nibh, auctor non viverra at, iaculis eu nulla. Integer sed enim vitae turpis finibus imperdiet in et turpis. Vestibulum vulputate consectetur hendrerit. Etiam egestas, dui ut luctus semper, libero neque interdum magna, sit amet tincidunt nisl lacus et tortor.
                         </div>
                     </div>
-                    </div><!-- / panel -->
-                </div><!-- / panel-group -->
+                    </div><!-- / panel - ->
+                </div><!-- / panel-group - ->
 
                 <div class="panel-group tabbed">
                     <div class="panel">
@@ -112,12 +106,12 @@
                         Etiam placerat, ante eu tempus tincidunt, ante purus interdum eros, non pulvinar libero risus at sapien. Nullam ex velit, semper quis dolor ac, aliquam fringilla urna. Duis vitae felis id odio cursus volutpat. Vestibulum tristique placerat leo. Ut dapibus vel diam at malesuada. Fusce commodo lorem posuere erat dapibus tincidunt. Morbi eget sapien sed tellus sodales porta.
                         </div>
                     </div>
-                    </div><!-- / panel -->
-                </div><!-- / panel-group -->
+                    </div><!-- / panel - ->
+                </div><!-- / panel-group - ->
 
                 
 
-            </div><!-- / accordions-left -->
+            </div><!-- / accordions-left - ->
 
             <div class="col-sm-6">
 
@@ -131,8 +125,8 @@
                         Fusce quam risus, tincidunt ac erat eu, condimentum vestibulum mauris.
                         </div>
                     </div>
-                    </div><!-- / panel -->
-                </div><!-- / panel-group -->
+                    </div><!-- / panel - ->
+                </div><!-- / panel-group - ->
 
                 <div class="panel-group tabbed">
                     <div class="panel">
@@ -144,8 +138,8 @@
                         All payments are processed through Square.  Square works with any US-issued and most internationally-issued magstripe or chip cards bearing a Visa, MasterCard, American Express, Discover, JCB, or UnionPay logo.
                         </div>
                     </div>
-                    </div><!-- / panel -->
-                </div><!-- / panel-group -->
+                    </div><!-- / panel - ->
+                </div><!-- / panel-group - ->
 
                 <div class="panel-group tabbed">
                     <div class="panel">
@@ -157,10 +151,10 @@
                         CCurabitur luctus luctus libero, nec dapibus risus congue in. Vivamus vehicula blandit mi sit amet mattis. Ut euismod, diam nec mollis posuere.
                         </div>
                     </div>
-                    </div><!-- / panel -->
-                </div><!-- / panel-group -->
+                    </div><!-- / panel - ->
+                </div><!-- / panel-group - ->
 
-                <!--  -->
+                
 
                 <div class="panel-group tabbed">
                     <div class="panel">
@@ -172,11 +166,11 @@
                         Vestibulum suscipit vehicula neque, in fringilla ligula. Sed non pellentesque ante.
                         </div>
                     </div>
-                    </div><!-- / panel -->
-                </div><!-- / panel-group -->
+                    </div><!-- / panel - ->
+                </div><!-- / panel-group - ->
 
-            </div><!-- / accordions-right -->
-        </div><!-- / row -->
+            </div><!-- / accordions-right - ->
+        </div><- -/ row -->
     </div><!-- / container -->
 </section>
 <!-- / about -->

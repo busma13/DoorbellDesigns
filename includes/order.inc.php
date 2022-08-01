@@ -39,30 +39,12 @@ if (isset($_POST['submit'])) {
             exit();
         }
         else {
-            if (strlen($tel) === 10) {
-                $tel = "1" . $tel;
-            }
             //create unique ID for the order
             $id = uniqid('ID', true);
 
-            // store order info in the orders database
-            $insert_sql = "INSERT INTO orders (id, first_name, last_name, tel, email, address_line, city, state, zip, cart_products, paid) VALUES (:id, :first, :last, :tel, :email, :address_line, :city, :state, :zip, :products, :paid);";
-            
-            /* Values array for PDO */
-            $values = array(':id' => $id, ':first' => $first, ':last' => $last, ':tel' => $tel, ':email' => $email, ':address_line' => $address_line, ':city' => $city, ':state' => $state, ':zip' => $zip, ':products' => $products, ':paid' => 'no');
-            
-            /* Execute the query */
-            try
-            {
-                $res = $pdo->prepare($insert_sql);
-                $res->execute($values);
-                $retVal = $pdo->lastInsertId();
+            if (strlen($tel) === 10) {
+                $tel = "1" . $tel;
             }
-            catch (PDOException $e)
-            {
-                header("Location: ../checkout.php?order=SQL-statement-failed");//work on this error on checkout.php
-            }
-            
 
             // Create a payment link.  This includes an order object.
             $products_array = json_decode($_POST['cart-list-input'], false);
@@ -221,8 +203,31 @@ if (isset($_POST['submit'])) {
             
             if ($api_response->isSuccess()) {
                 $result = $api_response->getResult();
+                $order_id = $result->getPaymentLink()->getOrderId();
                 $payment_link = json_encode($result->getPaymentLink()->getUrl());
                 $payment_link =  stripslashes($payment_link);
+
+                
+
+                // store order info in the orders database
+                $insert_sql = "INSERT INTO orders (id, first_name, last_name, tel, email, address_line, city, state, zip, cart_products, order_id, paid) VALUES (:id, :first, :last, :tel, :email, :address_line, :city, :state, :zip, :products, :order_id, :paid);";
+                
+                /* Values array for PDO */
+                $values = array(':id' => $id, ':first' => $first, ':last' => $last, ':tel' => $tel, ':email' => $email, ':address_line' => $address_line, ':city' => $city, ':state' => $state, ':zip' => $zip, ':products' => $products, ':order_id' => $order_id, ':paid' => 'no');
+                
+                /* Execute the query */
+                try
+                {
+                    $res = $pdo->prepare($insert_sql);
+                    $res->execute($values);
+                    $retVal = $pdo->lastInsertId();
+                }
+                catch (PDOException $e)
+                {
+                    header("Location: ../checkout.php?order=SQL-statement-failed");//work on this error on checkout.php
+                }
+
+
                 /* This delay ensures the payment link will be created by square before the user is redirected to it.
                 */
                 sleep(1);
