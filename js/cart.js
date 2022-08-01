@@ -97,7 +97,7 @@ async function getProductList() {
         // console.log(data);
 
         ls.set('productList', data, 86400000)
-        productList = JSON.parse(localStorage.getItem('productList'))
+        productList = JSON.parse(ls.get('productList'))
         console.log('product list set');
     } 
     catch(error) {
@@ -182,9 +182,9 @@ function updateCartCount() {
 function updateTotalCost(qty, product) {
     let cartTotal = Number(localStorage.getItem('cartTotal'));
     if (cartTotal) {
-        localStorage.setItem('cartTotal', cartTotal + product.price * qty)
+        localStorage.setItem('cartTotal', (cartTotal + product.price * qty).toFixed(2))
     } else {
-        localStorage.setItem('cartTotal', product.price * qty);
+        localStorage.setItem('cartTotal', (product.price * qty).toFixed(2));
     }
 }
 
@@ -197,7 +197,7 @@ function displayCart() {
         productTable.innerHTML = '';
         Object.values(productsInCart).map(item => {
             productTable.innerHTML += `
-            <tr class="cart-item">
+            <tr class="cart-item" id="${item.itemName}Base${item.baseColor}">
                 <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="${item.imgUrl}" alt=""></a></td>
                 <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemNameString} ${item.baseColor}</a></td>
                 <td>$${item.price}</td>
@@ -224,11 +224,11 @@ function updateSingleProductTotals() {
                 let cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
                 let tdQty = e.currentTarget.parentNode;
                 let tableRow = tdQty.parentNode;
-                let product = cartProducts[tableRow.childNodes[3].innerText]
+                let product = cartProducts[tableRow.id];
                 let qtyToAdd = qty - product.qtyInCart;
 
                 // Update the total price in the DOM
-                tdQty.nextElementSibling.textContent = `$${tdQty.previousElementSibling.textContent.slice(1) * qty}`;
+                tdQty.nextElementSibling.textContent = `$${(tdQty.previousElementSibling.textContent.slice(1) * qty).toFixed(2)}`;
                 
                 // Update the localStorage cartItemCount value
                 cartItemCount(qtyToAdd, product)
