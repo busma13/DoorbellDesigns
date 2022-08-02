@@ -10,7 +10,7 @@ function updateCartTotals() {
     document.querySelector('.total').textContent = `$${total.toFixed(2)}`;
 }
 
-//Creates a list of all items in the cart and saves tehm to local storage.
+//Creates a list of all items in the cart and saves them to local storage.
 //When user checks out this list is sent with the form.
 function createCartList() {
     let checkoutList = [];
@@ -24,6 +24,7 @@ function createCartList() {
         listItem.itemName = cartProducts[obj].itemName;
         listItem.itemNameString = cartProducts[obj].itemNameString;
         listItem.itemQty = cartProducts[obj].qtyInCart; 
+        listItem.baseColor = cartProducts[obj].baseColor; 
         checkoutList.push(listItem);
     }
     localStorage.setItem('cartList', JSON.stringify(checkoutList));

@@ -114,7 +114,7 @@ if (isset($_POST['submit'])) {
                 $base_price_money->setCurrency('USD');
 
                 $order_line_item = new \Square\Models\OrderLineItem($obj->itemQty);
-                $order_line_item->setName($obj->itemNameString);
+                $order_line_item->setName($obj->itemNameString . ", " . $obj->baseColor . " Base");
                 $order_line_item->setBasePriceMoney($base_price_money);
 
                 $order_line_item_applied_tax = new \Square\Models\OrderLineItemAppliedTax('state-sales-tax');
@@ -241,8 +241,6 @@ if (isset($_POST['submit'])) {
                 exit($json);
                 // header("Location: ./checkout.php?ex=" . $exception);
             }
-            
-
         }
     }
 }

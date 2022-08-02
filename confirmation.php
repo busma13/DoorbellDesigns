@@ -45,7 +45,8 @@ include 'header-pt2.php';
 <?php
 $transaction_id = $_GET["transactionId"];
 
-if ($transaction_id === null) { ?>
+if ($transaction_id === null) { 
+?>
   <p class="whitespace noTransId">There was an error.  No transaction ID found.</p> 
 <?php
 }
@@ -88,74 +89,73 @@ else {
 
   // Check that order has been paid for.
   $tenders = $order->getTenders();
-  if ($tenders) {
+  if (!$tenders) {
+?>
+      <p class="whitespace notPaid">There was an error. No record of payment for this order.</p> 
+<?php      
+  }
+  else {
     $total_tenders = 0;
     for ($i = 0; $i < count($tenders); $i++) {
       $total_tenders += (int) $tenders[$i]->getAmountMoney()->getAmount();
     }
-    if ($order->getTotalMoney()->getAmount() !== $total_tenders) { ?>
-      <p class="whitespace notPaid">There was an error. There is still a balance due on this order.</p> 
-      <?php
-    }  
-  }
-  else {
-    ?>
-      <p class="whitespace notPaid">There was an error. No record of payment for this order.</p> 
-      <?php
-  }
-  
+    if ($order->getTotalMoney()->getAmount() !== $total_tenders) { 
 ?>
+      <p class="whitespace notPaid">There was an error. There is still a balance due on this order.</p> 
+<?php
+    }
+    else { 
+?>
+      <div class="container space-left space-right" id="confirmation">
+        <div class="row">
+          <h2>Thank you for your purchase!</h2>      
+          <h4 class="space-top">Your Order:</h4>
+<?php
+          foreach ($order->getLineItems() as $line_item) {
+            // Display each line item in the order
+            echo ("
+              <div class=\"item-line\">
+                <div class=\"item-label\">" . $line_item->getName() . " x " . $line_item->getQuantity() . "</div>
+                <div class=\"item-amount\">$" . number_format((float)$line_item->getTotalMoney()->getAmount() / 100, 2, '.', '') . "</div>
+              </div>");
+          }
 
-  <div class="container space-left space-right" id="confirmation">
-    <div class="row">
-      <h2>Thank you for your purchase!</h2>      
-      <h4 class="space-top">Your Order:</h4>
-      <?php
-
-      foreach ($order->getLineItems() as $line_item) {
-        // Display each line item in the order
-        echo ("
-          <div class=\"item-line\">
-            <div class=\"item-label\">" . $line_item->getName() . " x " . $line_item->getQuantity() . "</div>
-            <div class=\"item-amount\">$" . number_format((float)$line_item->getTotalMoney()->getAmount() / 100, 2, '.', '') . "</div>
-          </div>");
-      }
-
-      // Display total amount paid for the order
-      echo ("
+          // Display total amount paid for the order
+          echo ("
+            <div>
+              <div class=\"item-line total-line\">
+                <div class=\"item-label\">Total</div>
+                <div class=\"item-amount\">$" . number_format((float)$order->getTotalMoney()->getAmount() / 100, 2, '.', '') . "</div>
+              </div>
+            </div>
+            ");
+?>
+        </div class="row">
+        <h4 class="space-top">Payment Successful!</h4>
         <div>
-          <div class=\"item-line total-line\">
-            <div class=\"item-label\">Total</div>
-            <div class=\"item-amount\">$" . number_format((float)$order->getTotalMoney()->getAmount() / 100, 2, '.', '') . "</div>
+          <div class="space-top">
+            <?php
+            echo ("Square Order Id: " . $order->getId());
+            ?>
           </div>
         </div>
-        ");
-      ?>
-    </div class="row">
-    <h4 class="space-top">Payment Successful!</h4>
-    <div>
-      <div class="space-top">
-        <?php
-        echo ("Square Order Id: " . $order->getId());
-        ?>
+        <div class="space-top">
+          <a href="http://localhost/doorbelldesigns">Back to home page</a>
+        </div>
       </div>
-    </div>
-    <div class="space-top">
-      <a href="http://localhost/doorbelldesigns">Back to home page</a>
-    </div>
-  </div>
-
-  <?php
-    }
-  ?>
+<?php
+    }  
+  }
+}
+?>
 
   <!-- footer -->
-  <?php
+<?php
     include 'footer.php';
-  ?>
+?>
   <!-- / footer -->
 
-  <!-- javascript -->
+<!-- javascript -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>

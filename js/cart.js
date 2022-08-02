@@ -199,7 +199,8 @@ function displayCart() {
             productTable.innerHTML += `
             <tr class="cart-item" id="${item.itemName}Base${item.baseColor}">
                 <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="${item.imgUrl}" alt=""></a></td>
-                <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemNameString} ${item.baseColor}</a></td>
+                <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemNameString}</a></td>
+                <td><span>${item.baseColor}</span></td>
                 <td>$${item.price}</td>
                 <td class="qty"><input type="number" step="1" min="1" name="cart" value="${item.qtyInCart}" title="Qty" class="input-text qty text qty-input-box" size="4"></td>
                 <td>$${(item.price * item.qtyInCart).toFixed(2)}</td>
