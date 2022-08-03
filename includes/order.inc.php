@@ -157,7 +157,6 @@ if (isset($_POST['submit'])) {
             $line_items[] = $order_line_item_shipping;
             
             $checkout_options = new \Square\Models\CheckoutOptions();
-            // $checkout_options->setAskForShippingAddress(true);
             $host = $_SERVER['HTTP_HOST'];
             if ($host === 'localhost') {
                 $checkout_options->setRedirectUrl("http://localhost/doorbelldesigns/confirmation.php");
@@ -204,6 +203,8 @@ if (isset($_POST['submit'])) {
             if ($api_response->isSuccess()) {
                 $result = $api_response->getResult();
                 $order_id = $result->getPaymentLink()->getOrderId();
+                $payment_link_id = $result->getPaymentLink()->getId();
+                // echo $result->getPaymentLink()->getCheckoutOptions();
                 $payment_link = json_encode($result->getPaymentLink()->getUrl());
                 $payment_link =  stripslashes($payment_link);
 
@@ -227,15 +228,45 @@ if (isset($_POST['submit'])) {
                     header("Location: ../checkout.php?order=SQL-statement-failed");//work on this error on checkout.php
                 }
 
+                // //Add the order id to the redirect url from Square to the confirmation page.
+                $checkout_options = new \Square\Models\CheckoutOptions();
+                $host = $_SERVER['HTTP_HOST'];
+                $url = '1';
+                if ($host === 'localhost') {
+                    $url = "http://localhost/doorbelldesigns/confirmation.php?orderId=" . $order_id;
+                    $checkout_options->setRedirectUrl($url);
+                } 
+                else {
+                    $url = "http://doorbelldesigns.herokuapp.com/confirmation.php?orderId=" . $order_id;
+                    $checkout_options->setRedirectUrl($url); //change for production server
+                }
+                
+                $payment_link = new \Square\Models\PaymentLink(1);
+                $payment_link->setCheckoutOptions($checkout_options);
+                
+                $body = new \Square\Models\UpdatePaymentLinkRequest($payment_link);
+                // checkoutAPI
+                $api_response = $client->getCheckoutApi()->updatePaymentLink($payment_link_id, $body);
 
-                /* This delay ensures the payment link will be created by square before the user is redirected to it.
-                */
-                sleep(1);
-                //Redirect user to square checkout page
-                header('Location: '.$result->getPaymentLink()->getUrl());
+                if ($api_response->isSuccess()) {
+                    $result = $api_response->getResult();
+                    $payment_link = json_encode($result->getPaymentLink()->getUrl());
+                    // $payment_link =  stripslashes($payment_link);
+                    // echo $payment_link;
+                    
+                    /* This delay ensures the payment link will be created by square before the user is redirected to it.
+                    */
+                    // sleep(1);
+                    //Redirect user to square checkout page
+                    header('Location: '.$result->getPaymentLink()->getUrl());
                 exit();
+                } else {
+                    $errors = $api_response->getErrors();
+                    $json = json_encode($errors);
+                    exit($json);
+                    // header("Location: ./checkout.php?ex=" . $exception);
+                }
             } else {
-                echo $id;
                 $errors = $api_response->getErrors();
                 $json = json_encode($errors);
                 exit($json);

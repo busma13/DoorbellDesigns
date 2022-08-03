@@ -43,17 +43,17 @@ include 'header-pt2.php';
 <!-- / header -->
 
 <?php
-$transaction_id = $_GET["transactionId"];
+$order_id = $_GET["orderId"];
 
-if ($transaction_id === null) { 
+if ($order_id === null) { 
 ?>
-  <p class="whitespace noTransId">There was an error.  No transaction ID found.</p> 
+  <p class="whitespace noTransId">There was an error.  No order ID found.</p> 
 <?php
 }
 else {
   try {
     $orders_api = $client->getOrdersApi();
-    $response = $orders_api->retrieveOrder($transaction_id);
+    $response = $orders_api->retrieveOrder($order_id);
   } catch (ApiException $e) {
     // If an error occurs, output the message
     echo 'Caught exception!<br/>';
@@ -105,6 +105,24 @@ else {
 <?php
     }
     else { 
+      //Set the order status to paid in the database
+      $query = "UPDATE orders SET paid = :paid
+                WHERE order_id = :order_id;"; 
+      
+      $values = array(':paid' => 'yes', ':order_id' => $order_id);
+
+      /* Execute the query */
+      try
+      {
+          $res = $pdo->prepare($query);
+          $success = $res->execute($values);
+          $response = $pdo->lastInsertId();
+      }
+      catch (PDOException $e)
+      {
+          $msg = $e->getMessage();
+          $response = $msg . ' ' . $query;
+      }     
 ?>
       <div class="container space-left space-right" id="confirmation">
         <div class="row">
@@ -115,7 +133,7 @@ else {
             // Display each line item in the order
             echo ("
               <div class=\"item-line\">
-                <div class=\"item-label\">" . $line_item->getName() . " x " . $line_item->getQuantity() . "</div>
+                <div class=\"item-label\"> (" . $line_item->getQuantity() . ") " . $line_item->getName() . "</div>
                 <div class=\"item-amount\">$" . number_format((float)$line_item->getTotalMoney()->getAmount() / 100, 2, '.', '') . "</div>
               </div>");
           }
