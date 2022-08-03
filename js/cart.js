@@ -254,8 +254,8 @@ function removeProductFromCart() {
         removeBtn.addEventListener('click', (e) => {
             let tableRow = e.currentTarget.parentNode.parentNode;
             let cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
-            let qty = tableRow.childNodes[7].firstElementChild.value;
-            let product = cartProducts[tableRow.childNodes[3].innerText]
+            let qty = tableRow.childNodes[9].firstElementChild.value;
+            let product = cartProducts[tableRow.id];
 
             //update the localStorage cartTotal value
             updateTotalCost(-qty, product)
@@ -264,7 +264,7 @@ function removeProductFromCart() {
             cartItemCount(-qty, product)
 
             // update the localStorage cartProducts value
-            delete cartProducts[tableRow.childNodes[3].innerText];
+            delete cartProducts[tableRow.id];
             localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
 
             // remove the tableRow that holds all the product info

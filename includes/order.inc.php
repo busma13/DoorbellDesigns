@@ -204,9 +204,8 @@ if (isset($_POST['submit'])) {
                 $result = $api_response->getResult();
                 $order_id = $result->getPaymentLink()->getOrderId();
                 $payment_link_id = $result->getPaymentLink()->getId();
-                // echo $result->getPaymentLink()->getCheckoutOptions();
-                $payment_link = json_encode($result->getPaymentLink()->getUrl());
-                $payment_link =  stripslashes($payment_link);
+                // $payment_link = json_encode($result->getPaymentLink()->getUrl());
+                // $payment_link =  stripslashes($payment_link);
 
                 
 
@@ -221,14 +220,14 @@ if (isset($_POST['submit'])) {
                 {
                     $res = $pdo->prepare($insert_sql);
                     $res->execute($values);
-                    $retVal = $pdo->lastInsertId();
+                    $returnVal = $pdo->lastInsertId();
                 }
                 catch (PDOException $e)
                 {
                     header("Location: ../checkout.php?order=SQL-statement-failed");//work on this error on checkout.php
                 }
 
-                // //Add the order id to the redirect url from Square to the confirmation page.
+                //Add the order id to the redirect url from Square to the confirmation page.
                 $checkout_options = new \Square\Models\CheckoutOptions();
                 $host = $_SERVER['HTTP_HOST'];
                 $url = '1';
