@@ -70,7 +70,7 @@ try
         // if ($row['itemNameString'] == '') {
         //     $response = 'not-found';
         // } else {
-            $response = $pdo->lastInsertId();
+            $response = 'success';
         // }
     // }
     // else {

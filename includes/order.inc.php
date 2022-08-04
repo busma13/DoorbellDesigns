@@ -42,10 +42,19 @@ if (isset($_POST['submit'])) {
             //create unique ID for the order
             $id = uniqid('ID', true);
 
+            //format telephone number
+            if (str_contains($tel, '-')) {
+                $tel = str_replace('-','',$tel);
+            }
+            if (str_contains($tel, '(')) {
+                $tel = str_replace('(','',$tel);
+            }
+            if (str_contains($tel, ')')) {
+                $tel = str_replace(')','',$tel);
+            }
             if (strlen($tel) === 10) {
                 $tel = "1" . $tel;
             }
-
             // Create a payment link.  This includes an order object.
             $products_array = json_decode($_POST['cart-list-input'], false);
             
@@ -255,7 +264,7 @@ if (isset($_POST['submit'])) {
                     
                     /* This delay ensures the payment link will be created by square before the user is redirected to it.
                     */
-                    // sleep(1);
+                    sleep(5);
                     //Redirect user to square checkout page
                     header('Location: '.$result->getPaymentLink()->getUrl());
                 exit();

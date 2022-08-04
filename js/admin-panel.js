@@ -48,7 +48,8 @@ async function getProductList() {
 }
 // End Update Product List
 
-// Ajax Request
+// Ajax Request for Edit Product info
+// This also loads that data into the DOM
 document.querySelector('#selectProduct').addEventListener('click', getProductInfo);
 
 async function getProductInfo() {
@@ -261,9 +262,6 @@ async function deleteShow(event) {
   let row = event.currentTarget.parentNode.parentNode;
   let rowId = event.currentTarget.parentNode.parentNode.id;
   console.log(rowId);
-  // if (rowId === '0000-00-00') {
-    
-  // }
 
   let obj = {
     'date': rowId
@@ -336,7 +334,6 @@ function addShow(event) {
   td3.ondblclick = () => { editable.edit(td3); };
   row.appendChild(td3);
 
-  
   td4 = document.createElement('td');
   td4.classList.add("scheduleLocation");
   td4.innerHTML = 'Location';
