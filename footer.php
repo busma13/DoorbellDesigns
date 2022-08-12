@@ -19,7 +19,7 @@
                                     <a href="doorbells.php?category=contemporary">Contemporary</a>
                                 </div>
                                 <div class="info">
-                                    <a href="doorbells.php?category=dog">Dog Lovers</a>
+                                    <a href="doorbells.php?category=dog%20lovers">Dog Lovers</a>
                                 </div>
                                 <div class="info">
                                     <a href="doorbells.php?category=animals">Animals</a>
@@ -34,7 +34,7 @@
                                     <a href="doorbells.php?category=southwest">Southwest</a>
                                 </div>
                                 <div class="info">
-                                    <a href="doorbells.php?category=misc">Miscellaneous</a>
+                                    <a href="doorbells.php?category=miscellaneous">Miscellaneous</a>
                                 </div>
                             </div>
                     </div>

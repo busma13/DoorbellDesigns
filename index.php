@@ -165,14 +165,14 @@
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
-                <div class="product-hover-tools">
+                <!-- <div class="product-hover-tools">
                     <a href="single-product.php?product=<?php echo $row['id'] ?>" class="view-btn">
                         <i class="lnr lnr-eye"></i>
                     </a>
                     <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
                         <i class="lnr lnr-cart"></i>
                     </a>
-                </div>
+                </div> -->
                 <!-- / product-hover-tools -->
 
                 <!-- product-details -->
@@ -255,14 +255,14 @@
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
-                <div class="product-hover-tools">
+                <!-- <div class="product-hover-tools">
                     <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>" class="view-btn">
                         <i class="lnr lnr-eye"></i>
                     </a>
                     <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
                         <i class="lnr lnr-cart"></i>
                     </a>
-                </div>
+                </div> -->
                 <!-- / product-hover-tools -->
 
                 <!-- product-details -->
