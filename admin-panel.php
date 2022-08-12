@@ -49,12 +49,45 @@
             </div><!-- / page-header-content -->
         </div><!-- / container -->
     <!-- </div>/ page-header -->
-
 </header>
 <!-- / header -->
 <hr>
-<!-- content -->
 
+<!-- <button class="trigger">Click here to trigger the modal!</button>
+<div class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h1>Hello, I am a modal!</h1>
+    </div>
+</div> -->
+
+
+<div id="deleteConfProduct" class="modal">
+    <span onclick="document.getElementById('deleteConfProduct').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <div class="modal-content">
+        <h1>Delete Product</h1>
+        <p>Are you sure you want to delete this product?</p>
+
+        <div class="flex-container modal-button-container">
+        <button type="button" class="btn btn-rounded btn-info btn-modal btn-cancel">Cancel</button>
+        <button type="button" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-product" data-id="0">Delete</button>
+        </div>
+    </div>
+</div>
+
+<div id="deleteConfShow" class="modal">
+    <span onclick="document.getElementById('deleteConfShow').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <div class="modal-content">
+        <h1>Delete Show</h1>
+        <p>Are you sure you want to delete this show?</p>
+
+        <div class="flex-container modal-button-container">
+        <button type="button" class="btn btn-rounded btn-info btn-modal btn-cancel">Cancel</button>
+        <button type="button" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-show" data-id="0">Delete</button>
+        </div>
+    </div>
+</div>
+<!-- content -->
 <div class="container">
     <div class="page-header-content text-center">
         <div class="page-header wsub">
@@ -67,7 +100,7 @@
 <div class="form-container">
     <!-- add product form -->
     <div id="add-form">
-        <form action="./includes/product-management.inc.php" method="POST" enctype="multipart/form-data">
+        <form action="./includes/add-product.inc.php" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-sm-6">
                     <p>Main category type: </p>
@@ -80,9 +113,17 @@
                         <label for="addArtwork">Artwork</label>
                     </fieldset>
                     <fieldset>
+                        <input type="radio" name="mainCategory" value="Ceiling Fan Pulls" id="addCeilingFanPulls">
+                        <label for="addCeilingFanPulls">Ceiling Fan Pulls</label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="radio" name="airPlantHolders" value="Air Plant Holders" id="addAirPlantHolders">
+                        <label for="addAirPlantHolders">Air Plant Holders</label>
+                    </fieldset>
+                    <!-- <fieldset>
                         <input type="radio" name="mainCategory" value="Miscellaneous" id="addMiscellaneous">
                         <label for="addMiscellaneous">Miscellaneous</label>
-                    <fieldset>
+                    </fieldset> -->
                 </div>
                 <div class="col-sm-6">
                     <label for="image">Image:</label>
@@ -97,10 +138,13 @@
                     <label for="subCategories">Subcategories:</label>
                     <input type="text" class="form-control" name="subCategories" placeholder="subcategories" id="subCategories">
                 </div>
-                
                 <div class="col-sm-6">
                     <label for="shipping">Shipping (xx.xx format):</label>
                     <input type="number" step="0.01" class="form-control" name="shipping" placeholder="Shipping" id="shipping">
+                </div>
+                <div class="col-sm-6">
+                    <label for="baseColorOptions">Base Color Options:</label>
+                    <input type="text" class="form-control" name="baseColorOptions" placeholder="Base Color Options" id="baseColorOptions">
                 </div>
                 <div class="col-sm-6">
                     <label for="itemNameString">Item name:</label>
@@ -162,195 +206,70 @@
 <div class="container">
     <div class="page-header-content text-center">
         <div class="page-header wsub">
-            <h1 class="page-title fadeInDown animated first">Delete Product</h1>
-        </div><!-- / page-header -->
-        <p class="slide-text fadeInUp animated second">Fill out this form to delete a product</p>
-    </div><!-- / page-header-content -->
-</div><!-- / container -->
-
-<div class="form-container">
-    <!-- delete form -->
-    <div id="delete-form">
-        <form action="./includes/product-management.inc.php" method="POST">
-            <div class="row">
-                <label for="deleteName">Product name:</label>
-                <input type="text" name="deleteProductName" class="form-control" id="deleteName" placeholder="Product name" required>
-                <div class="help-block with-errors"></div>
-            </div>
-            <div class="row">
-                <button type="submit" name="deleteProduct" id="delete-submit" class="btn btn-md btn-primary-filled btn-form-submit btn-rounded">Delete Product</button>
-            </div>
-            <div id="msgSubmit" class="h3 text-center hidden"></div>
-            <div class="clearfix"></div>  
-
-            <!-- Server side form validation notifications. -->
-            <?php
-                    if (!isset($_GET['deleteProduct'])) {
-                        //do nothing
-                    }
-                    else {
-                        $deleteProductCheck = $_GET['deleteProduct'];
-
-                        if ($deleteProductCheck == "query") {
-                            echo "<p class='error'>There was a database error. Please try again.</p>";
-                            if (isset($_GET['code'])) {
-                                echo "<p>Error: " . $_GET['code'] . "</p>";
-                            }
-                        }
-                        elseif ($deleteProductCheck == "empty") {
-                            echo "<p class='error'>Please fill out the form completely.</p>";
-                        }
-                        elseif ($deleteProductCheck == "error") {
-                            echo "<p class='error'>Form submission error. Please try again.</p>";
-                        }
-                        elseif ($deleteProductCheck == "fail") {
-                            echo "<p class='error'>The delete operation failed. Try again.</p>";
-                            //Product not found. Check your spelling.
-                        }
-                        elseif ($deleteProductCheck == "success") {
-                            echo "<p class='success'>Product deleted successfully.</p>";
-                        }
-                    }
-                ?>
-        </form>
-    </div><!-- / delete form -->
-</div><!-- / form-container -->
-
-<hr>
-
-<div class="container">
-    <div class="page-header-content text-center">
-        <div class="page-header wsub">
             <h1 class="page-title fadeInDown animated first">Edit Product</h1>
         </div><!-- / page-header -->
-        <p class="slide-text fadeInUp animated second">Fill out this form to edit a product</p>
+        <p class="slide-text fadeInUp animated second">Double click to edit a product value.</p>
     </div><!-- / page-header-content -->
 </div><!-- / container -->
 
-<div class="form-container">
-    <!-- edit product form -->
-    <div id="select-product">
-        <div class="row">
-            <label for="selectProductName">Name of product to edit:</label>
-            <input type="text" class="form-control" name="selectProductName" placeholder="Product name" id="selectProductName">
-            <div class="help-block with-errors"></div>
-        </div>
-        <div class="row">
-            <button name="selectProduct" id="selectProduct" class="btn btn-md btn-primary-filled btn-form-submit btn-rounded">Select Product</button>
-
-            <p id="select-product-error" hidden></p>   
-        </div>
-    </div>
-    <div id="table-container" hidden>
-        <table>
-            <tr>
+<!-- editable product table -->
+<div class="container full-width">
+    <div id="product-table-container">
+        <table class="editable">
+            <tbody id="product-table-body"> 
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Image Url</th>
                     <th>Product Name</th>
                     <th>Main Category</th>
                     <th>Subcategories</th>
                     <th>Price</th>
                     <th>Shipping</th>
+                    <th>Base color options</th>
                     <th>Dimensions</th>
-                    <th>Image Url</th>
                     <th>Active Status</th>
                     <th>Featured Status</th>
-            </tr>
-            <tr class="table-data"></tr>
+                </tr>
+<?php
+$get_products_sql = "SELECT * FROM products ORDER BY itemNameString;";
+
+/* Execute the query */
+try
+{
+    $res = $pdo->prepare($get_products_sql);
+    $res->execute();
+}
+catch (PDOException $e)
+{
+/* If there is a PDO exception, throw a standard exception */
+throw new Exception('Database query error');
+}
+while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
+                <tr id="<?php echo $row['id']?>">
+                    <td><button class="deleteProductButton"><i class="lnr lnr-trash"></i></button></td>
+                    <td class="img"><img src="images/<?php echo strtolower($row['mainCategory']) . '-small/' . $row['imgUrl'] ?>"></td>
+                    <td class="imgUrl"><?php echo $row['imgUrl']?></td>
+                    <td class="itemNameString"><?php echo $row['itemNameString']?></td>
+                    <td class="mainCategory"><?php echo $row['mainCategory']?></td>
+                    <td class="subCategories"><?php echo $row['subCategories']?></td>
+                    <td class="price"><?php echo $row['price']?></td>
+                    <td class="shipping"><?php echo $row['shipping']?></td>
+                    <td class="baseColor"><?php echo $row['baseColor']?></td>
+                    <td class="dimensions"><?php echo $row['dimensions']?></td>
+                    <td class="active"><?php echo $row['active']?></td>
+                    <td class="featured"><?php echo $row['featured']?></td>
+                </tr>
+<?php
+}
+?>
+            </tbody>
         </table>
     </div>
-    <?php 
-    if (isset($_GET['editProduct'])) {
-        echo '<div id="edit-product">';
-    } else {
-        echo '<div id="edit-product" hidden >';
-    }
-    ?>
-        <h3>Please make your changes below:</h3>
-        <form action="./includes/product-management.inc.php" method="POST" enctype="multipart/form-data" id="edit-form">
-            <div class="row">
-                <input type="hidden" name="originalProductName" id ="originalProductName" value="">
-                <div class="col-sm-6">
-                    <p>Main category type: </p>
-                    <fieldset>
-                        <input type="radio" name="mainCategory" value="Doorbells" id="editDoorbells">
-                        <label for="editDoorbells">Doorbells</label>
-                    </fieldset>
-                    <fieldset>
-                        <input type="radio" name="mainCategory" value="Artwork" id="editArtwork">
-                        <label for="editArtwork">Artwork</label>
-                    </fieldset>
-                    <fieldset>
-                        <input type="radio" name="mainCategory" value="Miscellaneous" id="editMiscellaneous">
-                        <label for="editMiscellaneous">Miscellaneous</label>
-                    <fieldset>
-                </div>
-                <div class="col-sm-6">
-                    <label for="image">Image:</label>
-                    <input type="file" class="form-control" name="image" placeholder="Image" id="image">
-                </div>
-                <div class="col-sm-6">
-                    <label for="price">Price (xx.xx format):</label>
-                    <input type="number" step="0.01" class="form-control" name="price" placeholder="Price" id="price">
-                </div>
-                <div class="col-sm-6">
-                    <label for="subCategories">Subcategories:</label>
-                    <input type="text" class="form-control" name="subCategories" placeholder="subcategories" id="subCategories">
-                </div>
-                
-                <div class="col-sm-6">
-                    <label for="shipping">Shipping (xx.xx format):</label>
-                    <input type="number" step="0.01" class="form-control" name="shipping" placeholder="Shipping" id="shipping">
-                </div>
-                <div class="col-sm-6">
-                    <label for="newNameString">New product name:</label>
-                    <input type="text" class="form-control" name="newNameString" placeholder="New product name" id="newNameString">
-                </div>
-                <div class="col-sm-6">
-                    <label for="dimensions">Dimensions:</label>
-                    <input type="text" class="form-control" name="dimensions" placeholder="Dimensions" id="dimensions">
-                </div>
-                <div class="col-sm-6">
-                    <input type="checkbox" name="editActive" id="editActive" value="1" checked>
-                    <label for="editActive">Active item?</label>
-                </div>
-                <div class="col-sm-6">
-                    <input type="checkbox" name="editFeatured" id="editFeatured" value="1">
-                    <label for="editFeatured">Featured item?</label>
-                </div>
-                <div class="row">
-                    <button type="submit" name="editProduct" id="edit-submit" class="btn btn-primary-filled btn-rounded">Submit Edit</button>
-                </div>
-            </div>
+    <p class="responseMessageProduct"></p>
 
-            <!-- Server side form validation notifications. -->
-            <?php
-                if (!isset($_GET['editProduct'])) {
-                    //do nothing
-                }
-                else {
-                    $editProductCheck = $_GET['editProduct'];
 
-                    if ($editProductCheck == "query") {
-                        echo "<p class='error'>There was a database error. Please try again.</p>";
-                        if (isset($_GET['code'])) {
-                            echo "<p>Error: " . $_GET['code'] . "</p>";
-                        }
-                    }
-                    elseif ($editProductCheck == "empty") {
-                        echo "<p class='error'>Please fill out all required fields.</p>";
-                    }
-                    elseif ($editProductCheck == "error") {
-                        echo "<p class='error'>Form submission error. Please try again.</p>";
-                    }
-                    elseif ($editProductCheck == "success") {
-                        echo "<p class='success'>Product edited successfully.</p>";
-
-                    }
-                }
-            ?>
-            
-        </form>
-    </div><!-- / edit product form -->
-</div><!-- / form-container -->
+</div><!-- / editable product table -->
 
 <hr>
 
@@ -365,9 +284,9 @@
 
 <div class="container">
     <h4 class="space-left">Current Schedule:</h4>
-    <div id="table-container">
+    <div id="show-table-container">
         <table class="editable">
-            <tbody id="tableBody"> 
+            <tbody id="show-table-body"> 
                 <tr>
                     <th></th>
                     <th class="show-date">Date</th>
@@ -404,7 +323,7 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
             </tbody>
         </table>
     </div>
-    <p class="responseMessage"></p>
+    <p id="responseMessageShow"></p>
 
     <button name="addShow" id="addShowButton" class="btn btn-primary-filled btn-rounded btn-edit-show">Add a Show</button>
 

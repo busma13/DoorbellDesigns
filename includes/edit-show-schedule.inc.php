@@ -1,8 +1,6 @@
 <?php
 include_once 'dbh.inc.php';
 require '../turbocommons-php-3.8.0.phar';
-use org\turbocommons\src\main\php\utils\StringUtils;
-
 
 /* Get content type */
 $contentType = trim($_SERVER["CONTENT_TYPE"] ?? ''); // PHP 8+
@@ -31,7 +29,6 @@ if(! is_array($decoded))
     'data' => null,
   ]));
 
-// $editColumn = $decoded['column'];
 $oldDate = $decoded['date'];
 $editDateString = $decoded['dateString'];
 $editName = $decoded['name'];
