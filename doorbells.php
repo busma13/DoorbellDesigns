@@ -69,7 +69,7 @@
                             <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
                                 <a href="single-product.php?category=doorbells&product=<?php echo $row['id'] ?>" class="product-link"></a>
                                 <!-- / product-link -->
-                                <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                                <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
                                 <!-- / product-image -->
 
                                 <!-- product-hover-tools -->

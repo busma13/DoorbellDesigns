@@ -240,6 +240,10 @@ strong {
   padding: 3px 4px;
 }
 
+.flex-container {
+  display: flex;
+}
+
 /* / End Typography */
 .row {
   margin-right: 0;
@@ -2185,7 +2189,6 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 /* Schedule Table */
 
 #schedule .flex-container {
-  display: flex;
   justify-content: space-evenly;
 }
 
@@ -2196,49 +2199,58 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 /* / Schedule Table */
 /* / End Tables */
 /* Modals */
+
+/* Add an equal width to buttons*/
+.btn-modal {
+  flex: 1 1 0%;
+}
+
+/* The Modal (background) */
 .modal {
-  position: fixed;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(1.1);
-  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #4cbbdb;
+  padding-top: 50px;
 }
 
+/* Modal Content/Box */
 .modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 1rem 1.5rem;
-  width: 24rem;
-  border-radius: 0.5rem;
-}
-
-.close-button {
-  float: right;
-  width: 1.5rem;
-  line-height: 1.5rem;
+  background-color: #fefefe;
   text-align: center;
+  padding: 2%;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #fefefe;
+  opacity: .9;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
   cursor: pointer;
-  border-radius: 0.25rem;
-  background-color: lightgray;
 }
 
-.close-button:hover {
-  background-color: darkgray;
-}
-
-.show-modal {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1.0);
-  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+  .modal-button-container {
+    flex-direction: column;
+  }
 }
 /* / Modals */
 /* End Base CSS */
@@ -3631,9 +3643,20 @@ section {
   padding-left: 15px;
   padding-right: 15px;
 }
-/* End Admin Forms */
 
+.imgUrl img{
+  display: inline;
+  max-width: 10%;
+  padding-right: 7px;
+}
+
+/* Makes The edit show schedule container full width */
+.container.full-width {
+  margin: 0;
+}
+/* End Admin Forms */
 /* End Forms */
+
 #shopping-cart {
   padding: 50px 0;
 }
@@ -4018,10 +4041,9 @@ a.btn-social {
   vertical-align: middle;
 }
 
-.show-header {
+/* .show-header {
   display: flex;
-
-}
+} */
 
 /* Checkout */
 
@@ -4218,7 +4240,6 @@ footer #newsletter .form-control {
 }
 
 .widget-area .flex-container {
-  display: flex;
   flex-flow: column, wrap;
   flex-wrap: wrap;
   align-content: flex-start;

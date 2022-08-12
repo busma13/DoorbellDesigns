@@ -80,7 +80,7 @@ if ($currentRow) {
                         <!-- wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img class="product-single-image" src="<?php echo $currentRow['imgUrl']?>" alt="<?php echo $currentRow['itemNameString']?>">
+                                <img class="product-single-image" src="images/<?php echo strtolower($currentRow['mainCategory']) . '-large/' . $currentRow['imgUrl']?>" alt="<?php echo $currentRow['itemNameString']?>">
                             </div>
                            
                         </div>
@@ -171,8 +171,16 @@ if ($currentRow) {
                             <span class="selectors">
                                 <select class="selectpicker">
                                     <optgroup label="Color:">
-                                        <option>Grey</option>
-                                        <option>Light Brown</option>
+    <!-- Loop through baseColor array. Add name of each color as an option.-->
+                                <?php 
+                                    $baseColorArr = JSON_decode($currentRow['baseColor']);
+                                    // echo $baseColorArr;
+                                    foreach($baseColorArr as $i) {
+                                ?>
+                                        <option><?php echo ucfirst($i)?></option>
+                                <?php 
+                                    } 
+                                ?>
                                     </optgroup>
                                 </select>
                                 <!-- <select class="selectpicker two">

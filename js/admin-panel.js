@@ -1,9 +1,9 @@
+const modal = document.querySelectorAll(".modal");
+const btnCancel = document.querySelectorAll(".btn-cancel");
+let urlString = window.location.href;
+let paramString = urlString.split('?')[1];
 
 // Update Product List
-let urlString = window.location.href;
-console.log(urlString);
-let paramString = urlString.split('?')[1];
-console.log(paramString);
 if (paramString && paramString.includes('success')) {
     getProductList();
 }
@@ -48,96 +48,7 @@ async function getProductList() {
 }
 // End Update Product List
 
-// Ajax Request for Edit Product info
-// This also loads that data into the DOM
-document.querySelector('#selectProduct').addEventListener('click', getProductInfo);
-
-async function getProductInfo() {
-    let productInput = document.querySelector("#selectProductName")
-    let productName = productInput.value;
-    let data;
-    if (productName !== '') {
-        editProduct = {
-            'name': productName
-        }
-        try{
-            const response = await fetch (
-            './includes/get-edit-product-info.inc.php', 
-                {
-                    method:'POST',
-                    mode: "same-origin",
-                    cache: 'no-cache',
-                    credentials: "same-origin",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept":       "application/json"
-                    },
-                    redirect: 'follow',
-                    referrerPolicy: 'no-referrer',
-                    body: JSON.stringify(editProduct)
-                }
-            )
-            data = await response.json();
-        
-            const errorLine = document.querySelector('#select-product-error');
-            const editForm = document.querySelector('#edit-product');
-            const tableContainer = document.querySelector('#table-container');
-            const tableRow = document.querySelector('.table-data');
-            if (data === 'not-found') {
-                errorLine.hidden = false;
-                errorLine.textContent = 'Product not found.';
-                editForm.hidden = true;
-                tableContainer.hidden = true;
-            } else if (data === 'retreive-fail') {
-                errorLine.hidden = false;
-                errorLine.textContent = 'Failed to retrieve item data. Please try again.'
-                editForm.hidden = true;
-                tableContainer.hidden = true;
-            } else {
-                productInput.value = '';
-                originalProductName.value = productName;
-                tableContainer.hidden = false;
-                errorLine.hidden = true;
-                errorLine.textContent = '';
-                editForm.hidden = false;
-                console.log(data);
-                let td = document.createElement('td');
-                td.textContent = data['itemNameString'];
-                tableRow.appendChild(td);
-                td = document.createElement('td');
-                td.textContent = data['mainCategory'];
-                tableRow.appendChild(td);
-                td = document.createElement('td');
-                td.textContent = data['subCategories'];
-                tableRow.appendChild(td);
-                td = document.createElement('td');
-                td.textContent = data['price'];
-                tableRow.appendChild(td);
-                td = document.createElement('td');
-                td.textContent = data['shipping'];
-                tableRow.appendChild(td);
-                td = document.createElement('td');
-                td.textContent = data['dimensions'];
-                tableRow.appendChild(td);
-                td = document.createElement('td');
-                td.textContent = data['imgUrl'];
-                tableRow.appendChild(td);
-                td = document.createElement('td');
-                td.textContent = data['active'] == 1 ? 'active' : 'inactive';
-                tableRow.appendChild(td);
-                td = document.createElement('td');
-                td.textContent = data['featured'] == 1 ? 'featured' : 'not featured';
-                tableRow.appendChild(td);
-            }
-        } 
-        catch(error) {
-            console.error(`Could not get product: ${error}`);
-        }
-    }
-}
-// End Ajax Request
-
-// Start Edit Show Table
+// Start Edit Show Table / Edit Product Table 
 // (A) INITIALIZE - DOUBLE CLICK TO EDIT CELL
 window.addEventListener("DOMContentLoaded", () => {
   for (let cell of document.querySelectorAll(".editable td")) {
@@ -171,71 +82,95 @@ var editable = {
   selected : null,  // current selected cell
   close : (evt) => { if (evt.target != editable.selected) {
     // (C1) send value to server
+    let date, dateString, name, location, id, value;
     let cell = editable.selected;
     let column = cell.classList[0];
-    let date = cell.parentNode.id;
-    let dateString = cell.parentNode.children[1].textContent;
-    let name = cell.parentNode.children[2].textContent;
-    let location = cell.parentNode.children[3].textContent;
-    console.log(cell);
-    console.log(column);
-    console.log(date);
-    console.log(dateString);
-    console.log(name);
-    console.log(location);
-
-    async function updateSchedule() {
-      let obj = {
-        'date': date,
-        'dateString': dateString,
-        'name': name,
-        'location': location,
-        'column': column
-      }
-      try{
-        const response = await fetch (
-        './includes/edit-show-schedule.inc.php', 
-            {
-                method:'POST',
-                mode: "same-origin",
-                cache: 'no-cache',
-                credentials: "same-origin",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept":       "application/json"
-                },
-                redirect: 'follow',
-                referrerPolicy: 'no-referrer',
-                body: JSON.stringify(obj)
-            }
-        )
-        data = await response.json();
-        console.log(data);
+    if (cell.parentNode.id.length > 4) {//cell is from show table
+        date = cell.parentNode.id;
+        dateString = cell.parentNode.children[1].textContent;
+        name = cell.parentNode.children[2].textContent;
+        location = cell.parentNode.children[3].textContent;
+        console.log(cell);
+        console.log(column);
+        console.log(date);
+        console.log(dateString);
+        console.log(name);
+        console.log(location);
+        updateSchedule();
+    } else {//cell is from product table
+        id = cell.parentNode.id;
+        value = cell.textContent;
+        console.log(column)
+        console.log(id)
+        console.log(value)
+        updateProduct();
+    }
     
-        // const errorLine = document.querySelector('#select-product-error');
-        // const editForm = document.querySelector('#edit-product');
-        // const tableContainer = document.querySelector('#table-container');
-        // const tableRow = document.querySelector('.table-data');
-        // if (data === 'not-found') {
-        //     errorLine.hidden = false;
-        //     errorLine.textContent = 'Product not found.';
-        //     editForm.hidden = true;
-        //     tableContainer.hidden = true;
-        // } else if (data === 'retreive-fail') {
-        //     errorLine.hidden = false;
-        //     errorLine.textContent = 'Failed to retrieve item data. Please try again.'
-        //     editForm.hidden = true;
-        //     tableContainer.hidden = true;
-        // } else {
-            
-        // }
-      } 
-      catch(error) {
-          console.error(`Could not update schedule: ${error}`);
-      }
+    async function updateSchedule() {
+        let obj = {
+            'date': date,
+            'dateString': dateString,
+            'name': name,
+            'location': location,
+            'column': column
+        }
+        try{
+            const response = await fetch (
+            './includes/edit-show-schedule.inc.php', 
+                {
+                    method:'POST',
+                    mode: "same-origin",
+                    cache: 'no-cache',
+                    credentials: "same-origin",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept":       "application/json"
+                    },
+                    redirect: 'follow',
+                    referrerPolicy: 'no-referrer',
+                    body: JSON.stringify(obj)
+                }
+            )
+            data = await response.json();
+            console.log(data);
+    
+        } 
+        catch(error) {
+            console.error(`Could not update schedule: ${error}`);
+        }
     }
 
-    updateSchedule()
+    async function updateProduct() {
+        let obj = {
+            'id': id,
+            'value': value,
+            'column': column
+        }
+        try{
+            const response = await fetch (
+            './includes/edit-product.inc.php', 
+                {
+                    method:'POST',
+                    mode: "same-origin",
+                    cache: 'no-cache',
+                    credentials: "same-origin",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept":       "application/json"
+                    },
+                    redirect: 'follow',
+                    referrerPolicy: 'no-referrer',
+                    body: JSON.stringify(obj)
+                }
+            )
+            data = await response.json();
+            console.log(data);
+    
+        } 
+        catch(error) {
+            console.error(`Could not update product: ${error}`);
+        }
+    }
 
     // (C2) REMOVE "EDITABLE"
     window.getSelection().removeAllRanges();
@@ -252,61 +187,132 @@ var editable = {
   }}
 };
 
-// Delete buttons
-let trashCans = document.querySelectorAll('.deleteShowButton')
-trashCans.forEach(can => {
-  can.addEventListener('click', deleteShow);
+// Delete show buttons
+let showTrashCans = document.querySelectorAll('.deleteShowButton')
+showTrashCans.forEach(can => {
+  can.addEventListener('click', openDeleteShowModal);
 })
+
+
+function openDeleteShowModal(event) {
+    document.getElementById('deleteConfShow').style.display='block';
+    let row = event.currentTarget.parentNode.parentNode;
+    let rowId = row.id;
+    console.log(rowId);
+    let showDelete = document.querySelector('#btn-delete-show');
+    showDelete.dataset['id'] = rowId;
+    showDelete.addEventListener('click', deleteShow);
+}
   
 async function deleteShow(event) {
-  let row = event.currentTarget.parentNode.parentNode;
-  let rowId = event.currentTarget.parentNode.parentNode.id;
-  console.log(rowId);
+    let rowId = event.currentTarget.dataset.id;
+    let row = document.getElementById(rowId);
+    console.log(rowId);
 
-  let obj = {
-    'date': rowId
-  }
-
-  try{
-    const response = await fetch (
-    './includes/delete-show.inc.php', 
-        {
-            method:'POST',
-            mode: "same-origin",
-            cache: 'no-cache',
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept":       "application/json"
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify(obj)
-        }
-    )
-    data = await response.json();
-    console.log(data);
-
-    const responseMessage = document.querySelector('.responseMessage');
-    // const editForm = document.querySelector('#edit-product');
-    // const tableContainer = document.querySelector('#table-container');
-    // const tableRow = document.querySelector('.table-data');
-    if (data === 'success') {
-        row.parentNode.removeChild(row);
-        responseMessage.textContent = 'Show successfully deleted.';
-    } else if (data === 'delete-failed') {
-        responseMessage.textContent = 'Failed to delete show. Please try again.'
-    } else {
-      responseMessage.textContent = 'Error deleting show';
+    let obj = {
+        'date': rowId
     }
-  } 
-  catch(error) {
-      console.error(`Could not delete show: ${error}`);
-  }
+
+    try{
+        const response = await fetch (
+        './includes/delete-show.inc.php', 
+            {
+                method:'POST',
+                mode: "same-origin",
+                cache: 'no-cache',
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept":       "application/json"
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(obj)
+            }
+        )
+        data = await response.json();
+        console.log(data);
+
+        const responseMessageShow = document.querySelector('#responseMessageShow');
+
+        if (data === 'success') {
+            row.parentNode.removeChild(row);
+            responseMessageShow.textContent = 'Show successfully deleted.';
+            modal[1].style.display = "none";
+        } else if (data === 'delete-failed') {
+            responseMessageShow.textContent = 'Failed to delete show. Please try again.'
+        } else {
+            responseMessageShow.textContent = 'Error deleting show';
+        }
+    } 
+    catch(error) {
+        console.error(`Could not delete show: ${error}`);
+    }
+}
+
+// Delete product buttons
+let productTrashCans = document.querySelectorAll('.deleteProductButton')
+productTrashCans.forEach(can => {
+  can.addEventListener('click', openDeleteProductModal);
+})
+
+function openDeleteProductModal(event) {
+    document.getElementById('deleteConfProduct').style.display='block';
+    let row = event.currentTarget.parentNode.parentNode;
+    let rowId = row.id;
+    console.log(rowId);
+    let productDelete = document.querySelector('#btn-delete-product');
+    productDelete.dataset['id'] = rowId;
+    productDelete.addEventListener('click', deleteProduct);
+}
+
+async function deleteProduct(event) {
+    let rowId = event.currentTarget.dataset.id;
+    let row = document.getElementById(rowId);
+    console.log(row);
+
+    let obj = {
+        'deletedId': rowId
+    }
+
+    try{
+        const response = await fetch (
+        './includes/delete-product.inc.php', 
+            {
+                method:'POST',
+                mode: "same-origin",
+                cache: 'no-cache',
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept":       "application/json"
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(obj)
+            }
+        )
+        data = await response.json();
+        console.log(data);
+
+        const responseMessageProduct = document.querySelector('.responseMessageProduct');
+
+        if (data === 'success') {
+            row.parentNode.removeChild(row);
+            responseMessageProduct.textContent = 'Product successfully deleted.';
+            modal[0].style.display = "none";
+        } else if (data === 'delete-failed') {
+            responseMessageProduct.textContent = 'Failed to delete product. Please try again.'
+        } else {
+            responseMessageProduct.textContent = 'Error deleting product';
+        }
+    } 
+    catch(error) {
+        console.error(`Could not delete product: ${error}`);
+    }
 }
 
 // Add show button
-
 document.querySelector('#addShowButton').addEventListener('click', addShow);
 
 function addShow(event) {
@@ -340,7 +346,22 @@ function addShow(event) {
   td4.ondblclick = () => { editable.edit(td4); };
   row.appendChild(td4);
                 
-  document.querySelector('#tableBody').appendChild(row); 
+  document.querySelector('#show-table-body').appendChild(row); 
 }
 
 // End Edit Show Table
+
+// Modal
+
+window.addEventListener("click", windowOnClick);
+
+// Exit the modal if the background or cancel button is clicked
+function windowOnClick(event) {
+    if (event.target === modal[0] || event.target === btnCancel[0]) {
+        modal[0].style.display = "none";
+    } else if (event.target === modal[1]  || event.target === btnCancel[1]) {
+        modal[1].style.display = "none";
+    }
+}
+
+// End Modal

@@ -161,7 +161,7 @@
                 <!-- / sale-label -->
                 <a href="single-product.php?product=<?php echo $row['id'] ?>" class="product-link"></a>
                 <!-- / product-link -->
-                <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
@@ -251,7 +251,7 @@
                 <!-- / sale-label -->
                 <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>" class="product-link"></a>
                 <!-- / product-link -->
-                <img src="<?php echo $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
