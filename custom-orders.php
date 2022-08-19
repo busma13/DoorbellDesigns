@@ -31,7 +31,7 @@
             </div><!-- / page-header -->
             <p class="large-p"> We do shows all year and sell what we make there. The doorbells you see on this site probably belong to someone else by now. We have similar doorbells, but not exactly like anything you see here.</p>
             <p>We make them all individually and never exactly the same. The colors, shapes and sizes will be a little different.</p>
-            <p>You can order exactly what you want or, a particular design and we'll e-mail you pictures of what we have from stock closest to your request. If we have to make you a doorbell, of course, it will take a little time. We are often away from home doing shows. We can give you an estimate at the time you order.</p>
+            <p>You can order exactly what you want, or a particular design and we'll e-mail you pictures of what we have from stock closest to your request. If we have to make you a doorbell, of course, it will take a little time. We are often away from home doing shows. We can give you an estimate at the time you order.</p>
             <p>There is no extra charge for particular colors, or doorbell button placement or sizes (except very large pieces).</p>
             <p>If you want a custom designed doorbell, something you don't see on the site, there will be a nominal design fee, usually just $5.00 for simple designs.</p>
             <p>Most doorbell designs can accommodate words, Welcome, Shalom, Aloha, Go Away, Mi Casa Su Casa, etc. That costs an extra $2.00.</p>

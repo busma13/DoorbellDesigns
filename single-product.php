@@ -170,9 +170,13 @@ if ($currentRow) {
                             <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
                             <span class="selectors">
                                 <select class="selectpicker">
-                                    <optgroup label="Color:">
-    <!-- Loop through baseColor array. Add name of each color as an option.-->
+                                    <!-- Loop through baseColor array. Add name of each color as an option.-->
                                 <?php 
+                                    if (strtolower($currentRow['mainCategory']) === 'fan-pulls') {
+                                        echo '<optgroup label="Chain Color:">';
+                                    } else if (strtolower($currentRow['mainCategory']) === 'doorbells') {
+                                        echo '<optgroup label="Base Color:">';
+                                    }
                                     $baseColorArr = JSON_decode($currentRow['baseColor']);
                                     // echo $baseColorArr;
                                     foreach($baseColorArr as $i) {

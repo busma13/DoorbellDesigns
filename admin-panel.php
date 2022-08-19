@@ -61,7 +61,7 @@
     </div>
 </div> -->
 
-
+<!-- Modal for confirming a product delete -->
 <div id="deleteConfProduct" class="modal">
     <span onclick="document.getElementById('deleteConfProduct').style.display='none'" class="close" title="Close Modal">&times;</span>
     <div class="modal-content">
@@ -75,6 +75,7 @@
     </div>
 </div>
 
+<!-- Modal for confirming a show delete -->
 <div id="deleteConfShow" class="modal">
     <span onclick="document.getElementById('deleteConfShow').style.display='none'" class="close" title="Close Modal">&times;</span>
     <div class="modal-content">
@@ -113,11 +114,11 @@
                         <label for="addArtwork">Artwork</label>
                     </fieldset>
                     <fieldset>
-                        <input type="radio" name="mainCategory" value="Ceiling Fan Pulls" id="addCeilingFanPulls">
+                        <input type="radio" name="mainCategory" value="Fan-Pulls" id="addCeilingFanPulls">
                         <label for="addCeilingFanPulls">Ceiling Fan Pulls</label>
                     </fieldset>
                     <fieldset>
-                        <input type="radio" name="airPlantHolders" value="Air Plant Holders" id="addAirPlantHolders">
+                        <input type="radio" name="mainCategory" value="Air-Plant-Holders" id="addAirPlantHolders">
                         <label for="addAirPlantHolders">Air Plant Holders</label>
                     </fieldset>
                     <!-- <fieldset>
@@ -206,7 +207,7 @@
 <div class="container">
     <div class="page-header-content text-center">
         <div class="page-header wsub">
-            <h1 class="page-title fadeInDown animated first">Edit Product</h1>
+            <h1 class="page-title fadeInDown animated first">Edit Products</h1>
         </div><!-- / page-header -->
         <p class="slide-text fadeInUp animated second">Double click to edit a product value.</p>
     </div><!-- / page-header-content -->
@@ -220,7 +221,7 @@
                 <tr>
                     <th></th>
                     <th></th>
-                    <th>Image Url</th>
+                    <th><span>Image Url</span></th>
                     <th>Product Name</th>
                     <th>Main Category</th>
                     <th>Subcategories</th>
@@ -249,7 +250,7 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                 <tr id="<?php echo $row['id']?>">
                     <td><button class="deleteProductButton"><i class="lnr lnr-trash"></i></button></td>
                     <td class="img"><img src="images/<?php echo strtolower($row['mainCategory']) . '-small/' . $row['imgUrl'] ?>"></td>
-                    <td class="imgUrl"><?php echo $row['imgUrl']?></td>
+                    <td class="imgUrl break-word"><?php echo $row['imgUrl']?></td>
                     <td class="itemNameString"><?php echo $row['itemNameString']?></td>
                     <td class="mainCategory"><?php echo $row['mainCategory']?></td>
                     <td class="subCategories"><?php echo $row['subCategories']?></td>

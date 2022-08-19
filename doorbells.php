@@ -43,7 +43,7 @@
                     <li><a href="#" data-group="southwest">Southwest</a></li>
                     <li><a href="#" data-group="one">One Of A Kind</a></li>
                     <li><a href="#" data-group="miscellaneous">Miscellaneous</a></li>
-                    <li><a href="./custom-orders.php" data-group="custom">Custom Orders</a></li>
+                    <!-- <li><a href="./custom-orders.php" data-group="custom">Custom Orders</a></li> -->
                 </ul>
                 <!-- / product filter -->
                 
@@ -63,37 +63,42 @@
                         /* If there is a PDO exception, throw a standard exception */
                         throw new Exception('Database query error');
                         }
-                        while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
-                            
-                            <!-- product -->
-                            <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
-                                <a href="single-product.php?category=doorbells&product=<?php echo $row['id'] ?>" class="product-link"></a>
-                                <!-- / product-link -->
-                                <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
-                                <!-- / product-image -->
+                        $rows = $res->rowCount();
+                        if ($rows === 0) {
+                            echo '<div class="col-xs-6 col-md-3 product">';
+                            echo '<p>There are no products of this type available currently.</p>
+                            </div>'; 
+                        } 
+                        else {
+                            while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
+                                
+                                <!-- product -->
+                                <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
+                                    <a href="single-product.php?category=doorbells&product=<?php echo $row['id'] ?>" class="product-link"></a>
+                                    <!-- / product-link -->
+                                    <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                                    <!-- / product-image -->
 
-                                <!-- product-hover-tools -->
-                                <!-- <div class="product-hover-tools">
-                                    <a href="single-product.php?category=doorbells&product=< ?php echo $row['id'] ?>" class="view-btn">
-                                        <i class="lnr lnr-eye"></i>
-                                    </a>
-                                    <a class="add-to-cart trigger" id="< ?php echo $row['itemName'] ?>">
-                                        <i class="lnr lnr-cart"></i>
-                                    </a>
-                                </div>/ product-hover-tools -->
+                                    <!-- product-hover-tools -->
+                                    <!-- <div class="product-hover-tools">
+                                        <a href="single-product.php?category=doorbells&product=< ?php echo $row['id'] ?>" class="view-btn">
+                                            <i class="lnr lnr-eye"></i>
+                                        </a>
+                                        <a class="add-to-cart trigger" id="< ?php echo $row['itemName'] ?>">
+                                            <i class="lnr lnr-cart"></i>
+                                        </a>
+                                    </div>/ product-hover-tools -->
 
-                                <!-- product-details -->
-                                <div class="product-details">
-                                    <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
-                                    <h6 class="product-price">$<?php echo $row['price'] ?></h6>
-                                </div><!-- / product-details -->
-                            </div><!-- / product -->
-                            
-                    <?php   
-                             
+                                    <!-- product-details -->
+                                    <div class="product-details">
+                                        <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
+                                        <h6 class="product-price">$<?php echo $row['price'] ?></h6>
+                                    </div><!-- / product-details -->
+                                </div><!-- / product -->   
+                    <?php                                
+                            }
                         }
                     ?>
-
 
                     <!-- grid-resizer -->
                         <div class="col-xs-6 col-md-3 shuffle_sizer"></div>

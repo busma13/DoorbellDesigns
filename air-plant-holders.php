@@ -10,7 +10,7 @@
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub">
-                    <h1 class="page-title fadeInDown animated first">Air PLant Holders</h1>
+                    <h1 class="page-title fadeInDown animated first">Air Plant Holders</h1>
                 </div><!-- / page-header -->
                 <p class="slide-text fadeInUp animated second">Your page's description goes here...</p>
             </div><!-- / page-header-content -->
@@ -29,38 +29,65 @@
 
             <div class="col-sm-12 content-area">
                 <!-- product filter -->
-                <ul class="product-filter list-inline text-center">
+                <!-- <ul class="product-filter list-inline text-center">
                     <li><a href="#" data-group="all" class="active">All</a></li>
                     
                     <li><a href="#" data-group="custom">Custom Orders</a></li>
-                </ul>
+                </ul> -->
                 <!-- / product filter -->
-                <div id="grid" class="row">
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["plants"]'>
-                        <a href="bamboo-doorbell.php" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.php" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="shopping-cart.php" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Air Plant Holder</h3>
-                            <h6 class="product-price">$59</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
                 
+                <div id="grid" class="row">
+
+                    <?php
+                        $get_doorbell_products_sql = "SELECT * FROM products WHERE mainCategory='Air-Plant-Holders' and active='1';";
+
+                        /* Execute the query */
+                        try
+                        {
+                            $res = $pdo->prepare($get_doorbell_products_sql);
+                            $res->execute();
+                        }
+                        catch (PDOException $e)
+                        {
+                        /* If there is a PDO exception, throw a standard exception */
+                        throw new Exception('Database query error');
+                        }
+                        $rows = $res->rowCount();
+                        if ($rows === 0) {
+                            echo '<div class="col-xs-6 col-md-3 product">';
+                            echo '<p>There are no products of this type available currently.</p>
+                            </div>'; 
+                        } 
+                        else {
+                            while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
+                                
+                                <!-- product -->
+                                <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
+                                    <a href="single-product.php?category=air-plant-holders&product=<?php echo $row['id'] ?>" class="product-link"></a>
+                                    <!-- / product-link -->
+                                    <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                                    <!-- / product-image -->
+
+                                    <!-- product-hover-tools -->
+                                    <!-- <div class="product-hover-tools">
+                                        <a href="single-product.php?category=doorbells&product=< ?php echo $row['id'] ?>" class="view-btn">
+                                            <i class="lnr lnr-eye"></i>
+                                        </a>
+                                        <a class="add-to-cart trigger" id="< ?php echo $row['itemName'] ?>">
+                                            <i class="lnr lnr-cart"></i>
+                                        </a>
+                                    </div>/ product-hover-tools -->
+
+                                    <!-- product-details -->
+                                    <div class="product-details">
+                                        <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
+                                        <h6 class="product-price">$<?php echo $row['price'] ?></h6>
+                                    </div><!-- / product-details -->
+                                </div><!-- / product -->        
+                    <?php                 
+                            }               
+                        }
+                    ?>
 
                     <!-- grid-resizer -->
                     <div class="col-xs-6 col-md-3 shuffle_sizer"></div>

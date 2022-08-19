@@ -36,139 +36,68 @@
                     <li><a href="#" data-group="hearts">Hearts</a></li>
                     <li><a href="#" data-group="rods">Rods</a></li>
                     <!-- <li><a href="#" data-group="misc">Miscellaneous</a></li> -->
-                    <li><a href="#" data-group="custom">Custom Orders</a></li>
+                    <!-- <li><a href="#" data-group="custom">Custom Orders</a></li> -->
                 </ul>
                 <!-- / product filter -->
                 <div id="grid" class="row">
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["saguaros"]'>
-                        <a href="bamboo-doorbell.php" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
-                        <!-- / product-image -->
 
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.php" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="shopping-cart.php" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
+                    <?php
+                        $get_fan_pull_products_sql = "SELECT * FROM products WHERE mainCategory='fan-pulls' and active='1';";
 
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Saguaro</h3>
-                            <h6 class="product-price">$59</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
+                        /* Execute the query */
+                        try
+                        {
+                            $res = $pdo->prepare($get_fan_pull_products_sql);
+                            $res->execute();
+                        }
+                        catch (PDOException $e)
+                        {
+                        /* If there is a PDO exception, throw a standard exception */
+                        throw new Exception('Database query error');
+                        }
+                        $rows = $res->rowCount();
+                        if ($rows === 0) {
+                            echo '<div class="col-xs-6 col-md-3 product">';
+                            echo '<p>There are no products of this type available currently.</p>
+                            </div>'; 
+                        } 
+                        else {
+                            while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
+                                
+                                <!-- product -->
+                                <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
+                                    <a href="single-product.php?category=fan-pulls&product=<?php echo $row['id'] ?>" class="product-link"></a>
+                                    <!-- / product-link -->
+                                    <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                                    <!-- / product-image -->
 
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["hamsas"]'>
-                        <a href="bamboo-doorbell.php" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
-                        <!-- / product-image -->
+                                    <!-- product-hover-tools -->
+                                    <!-- <div class="product-hover-tools">
+                                        <a href="single-product.php?category=doorbells&product=< ?php echo $row['id'] ?>" class="view-btn">
+                                            <i class="lnr lnr-eye"></i>
+                                        </a>
+                                        <a class="add-to-cart trigger" id="< ?php echo $row['itemName'] ?>">
+                                            <i class="lnr lnr-cart"></i>
+                                        </a>
+                                    </div>/ product-hover-tools -->
 
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.php" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="shopping-cart.php" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Hamsas</h3>
-                            <h6 class="product-price">$59</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["hearts"]'>
-                        <a href="bamboo-doorbell.php" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.php" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="shopping-cart.php" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Heart</h3>
-                            <h6 class="product-price">$59</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["rods"]'>
-                        <a href="bamboo-doorbell.php" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.php" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="shopping-cart.php" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Rod</h3>
-                            <h6 class="product-price">$59</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-
-                    <!-- product -->
-                    <div class="col-xs-6 col-md-3 product" data-groups='["custom"]'>
-                        <a href="bamboo-doorbell.php" class="product-link"></a>
-                        <!-- / product-link -->
-                        <img src="images/doorbells/bamboo_9to10.jpg" alt="Bamboo Doorbell">
-                        <!-- / product-image -->
-
-                        <!-- product-hover-tools -->
-                        <div class="product-hover-tools">
-                            <a href="bamboo-doorbell.php" class="view-btn">
-                                <i class="lnr lnr-eye"></i>
-                            </a>
-                            <a href="shopping-cart.php" class="add-to-cart">
-                                <i class="lnr lnr-cart"></i>
-                            </a>
-                        </div><!-- / product-hover-tools -->
-
-                        <!-- product-details -->
-                        <div class="product-details">
-                            <h3 class="product-title">Custom</h3>
-                            <h6 class="product-price">$59</h6>
-                        </div><!-- / product-details -->
-                    </div><!-- / product -->
-                
+                                    <!-- product-details -->
+                                    <div class="product-details">
+                                        <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
+                                        <h6 class="product-price">$<?php echo $row['price'] ?></h6>
+                                    </div><!-- / product-details -->
+                                </div><!-- / product -->
+                    <?php   
+                            }     
+                        }
+                    ?>
 
                     <!-- grid-resizer -->
                     <div class="col-xs-6 col-md-3 shuffle_sizer"></div>
                     <!-- / grid-resizer -->
 
                 </div><!-- / row -->
-
             </div><!-- / content-area -->
-
         </div><!-- / row -->
     </div><!-- / container -->
 </section>

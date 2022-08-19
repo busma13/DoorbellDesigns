@@ -244,6 +244,15 @@ strong {
   display: flex;
 }
 
+.keep-all {
+  word-break: keep-all;
+}
+
+.break-word {
+  word-break: break-word;
+  column-width: 35%;
+}
+
 /* / End Typography */
 .row {
   margin-right: 0;
@@ -2108,7 +2117,7 @@ table > thead > tr > th, table > thead > tr > td {
 }
 
 table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td, table > tfoot > tr > th, table > tr > td {
-  padding: 15px;
+  padding: 5px;
   line-height: 1.5;
   vertical-align: top;
   border-bottom: 1px solid #ebebeb;
@@ -2246,12 +2255,6 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
   cursor: pointer;
 }
 
-/* Change styles for cancel button and delete button on extra small screens */
-@media screen and (max-width: 300px) {
-  .modal-button-container {
-    flex-direction: column;
-  }
-}
 /* / Modals */
 /* End Base CSS */
 /* Headers */
@@ -3650,9 +3653,19 @@ section {
   padding-right: 7px;
 }
 
+#product-table-body th span {
+  white-space: nowrap;
+  padding-right: 150px;
+}
+
+#product-table-container table {
+  min-width: 100%;
+} 
+
 /* Makes The edit show schedule container full width */
 .container.full-width {
   margin: 0;
+  width: 100%;
 }
 /* End Admin Forms */
 /* End Forms */
@@ -4088,6 +4101,7 @@ footer .widget {
 
 .footer-info p {
   padding: 20px 0;
+  text-align: center;
 }
 
 .footer-info span img {
@@ -4166,7 +4180,6 @@ footer .social a {
 }
 
 footer .widget-title {
-  text-align: center;
   margin-bottom: 30px;
 }
 
@@ -4176,6 +4189,7 @@ footer .widget-title-image {
 
 footer .widget-title h4 {
   margin-bottom: 6px;
+  white-space: nowrap;
 }
 
 footer .widget-title:after {
@@ -4184,8 +4198,7 @@ footer .widget-title:after {
   position: absolute;
   height: 2px;
   width: 30px;
-  margin-left: -15px;
-  text-align: right;
+  margin-left: 0;
 }
 
 .dark-footer .widget-title h4 {
@@ -4209,7 +4222,7 @@ footer .about-widget img {
 
 footer .info {
   margin-bottom: 10px;
-  text-align: center;
+  /* text-align: center; */
 }
 
 footer .contact-widget i {
@@ -4361,7 +4374,7 @@ footer #newsletter .form-control {
   }
 
   .widget-area .col-md-4, .widget-area .col-md-3 {
-    padding: 15px;
+    /* padding: 15px; */
   }
 
   .post-footer .pull-left, .post-footer .pull-right {
@@ -4569,10 +4582,15 @@ footer #newsletter .form-control {
 
   .footer-info p {
     padding: 10px 0 0 0;
+    text-align: center;
   }
 
   .spinner {
     left: 46%;
+  }
+
+  footer .widget {
+    padding-bottom: 20px;
   }
 }
 @media only screen and (max-width: 600px) {
@@ -4705,6 +4723,18 @@ footer #newsletter .form-control {
   .navbar-nav > li > a {
     padding-top: 30px;
     padding-bottom: 30px;
+  }
+
+  footer .widget.pad-to-clear {
+    padding-bottom: 100px;
+  }
+
+}
+
+@media only screen and (max-width: 300px) {
+  /* Change styles for modal cancel button and delete button on extra small screens */
+  .modal-button-container {
+    flex-direction: column;
   }
 }
 /* End Min Widths */
