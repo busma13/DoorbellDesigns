@@ -41,7 +41,7 @@
                 </div><!-- / widget -->
                     
                 <!-- / first widget -->
-                <div class="col-sm-6 col-md-2 widget">
+                <div class="col-sm-6 col-md-3 widget pad-to-clear">
                     <div class="widget-title">
                         <h4>Miscellaneous</h4>
                     </div>
@@ -72,7 +72,7 @@
                 </div><!-- / widget -->
                 <!-- / second widget -->
 
-                <div class="col-sm-6 col-md-2 widget">
+                <div class="col-sm-6 col-md-2 widget pad-to-clear">
                     <div class="widget-title">
                         <h4>Support</h4>
                     </div>
@@ -96,7 +96,7 @@
                 </div><!-- / widget -->
                 <!-- / third widget -->
 
-                <div class="col-sm-6 col-md-2 widget">
+                <div class="col-sm-6 col-md-2 widget pad-to-clear">
                     <div class="widget-title">
                         <h4>Get in Touch</h4>
                     </div>
@@ -128,13 +128,11 @@
         </div><!-- / container -->
     </div><!-- / widget-area -->
     <div class="footer-info">
-        <div class="container">
-                <div class="pull-left">
+        <div class="row">
+                <div class="center-block">
                     <p>© 2022 - <strong>Cicada Ceramics</strong> </p>
                 </div>
-                <span class="pull-right">
-                    <span>???</span>
-                </span>
+                
         </div><!-- / container -->
     </div><!-- / footer-info -->
 </footer>

@@ -159,7 +159,7 @@
             <div class="item product">
                 <!-- <span class="sale-label">SALE</span> -->
                 <!-- / sale-label -->
-                <a href="single-product.php?product=<?php echo $row['id'] ?>" class="product-link"></a>
+                <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>" class="product-link"></a>
                 <!-- / product-link -->
                 <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
                 <!-- / product-image -->

@@ -48,6 +48,9 @@ $order_id = $_GET["orderId"];
 if ($order_id === null) { 
 ?>
   <p class="whitespace noTransId">There was an error.  No order ID found.</p> 
+  <div class="space-top text-center">
+    <a href="index.php">Back to home page</a>
+  </div>
 <?php
 }
 else {
@@ -92,6 +95,9 @@ else {
   if (!$tenders) {
 ?>
       <p class="whitespace notPaid">There was an error. No record of payment for this order.</p> 
+      <div class="space-top text-center">
+          <a href="index.php">Back to home page</a>
+      </div>
 <?php      
   }
   else {
@@ -102,6 +108,10 @@ else {
     if ($order->getTotalMoney()->getAmount() !== $total_tenders) { 
 ?>
       <p class="whitespace notPaid">There was an error. There is still a balance due on this order.</p> 
+
+      <div class="space-top text-center">
+          <a href="index.php">Back to home page</a>
+      </div>
 <?php
     }
     else { 
@@ -158,7 +168,7 @@ else {
           </div>
         </div>
         <div class="space-top">
-          <a href="http://localhost/doorbelldesigns">Back to home page</a>
+          <a href="index.php">Back to home page</a>
         </div>
       </div>
 <?php

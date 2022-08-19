@@ -23,7 +23,7 @@ if (isset($_POST['addProduct'])) {
         $itemName = StringUtils::formatCase($itemNameString, StringUtils::FORMAT_LOWER_CAMEL_CASE);
         $subCategories = json_encode(explode(' ', $_POST['subCategories']));
         $baseColorOptions = json_encode(explode(' ', $_POST['baseColorOptions']));
-        $imgUrl = 'images/' . strtolower($_POST['mainCategory']) . '/' . $itemName . '.jpg';
+        $imgUrl = $itemName . '.jpg';
         $addActive = $_POST['addActive'] ?? '0';
         $addFeatured = $_POST['addFeatured'] ?? '0';
 
@@ -51,14 +51,14 @@ if (isset($_POST['addProduct'])) {
                 $retVal = $pdo->lastInsertId();
                 echo $retVal;
 
-                $move_file = move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__, 2) . '/' . $imgUrl);
+                // $move_file = move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__, 2) . '/' . $imgUrl);
 
-                if ($move_file) {
+                // if ($move_file) {
                     header("Location: ../admin-panel.php?addProduct=success#add-form");
-                }
-                else {
-                    header("Location: ../admin-panel.php?addProduct=imageError#add-form");
-                }
+                // }
+                // else {
+                //     header("Location: ../admin-panel.php?addProduct=imageError#add-form");
+                // }
             }
             catch (PDOException $e)
             {
