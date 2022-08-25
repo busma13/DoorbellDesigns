@@ -168,10 +168,12 @@ if ($currentRow) {
                         <div class="options">
                             <span>Qty:</span>
                             <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
+                            <?php
+                            if (strtolower($currentRow['mainCategory']) !== 'air-plant-holders') { ?>
                             <span class="selectors">
                                 <select class="selectpicker">
-                                    <!-- Loop through baseColor array. Add name of each color as an option.-->
-                                <?php 
+                                    <?php 
+                                    // Loop through baseColor array. Add name of each color as an option.
                                     if (strtolower($currentRow['mainCategory']) === 'fan-pulls') {
                                         echo '<optgroup label="Chain Color:">';
                                     } else if (strtolower($currentRow['mainCategory']) === 'doorbells') {
@@ -187,14 +189,10 @@ if ($currentRow) {
                                 ?>
                                     </optgroup>
                                 </select>
-                                <!-- <select class="selectpicker two">
-                                    <optgroup label="Color:">
-                                        <option>Grey</option>
-                                        <option>Black</option>
-                                        <option>Blue</option>
-                                    </optgroup>
-                                </select> -->
                             </span>
+                            <?php
+                            }
+                            ?>
                         </div>
                         <!-- / options -->
 
