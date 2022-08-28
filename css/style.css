@@ -3102,27 +3102,38 @@ section {
 /* End Brands */
 /* Instructions */
 .inst-container {
-  width: 80%;
+  width: 95%;
   margin: 20px auto;
+  padding: 30px 50px;
+  border-radius: 15px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.inst-container:nth-child(even) {
+  background-color: #f8f8f8;
+  
 }
 
 .inst-container p{
+  line-height: 3rem;
   order: 0;
   padding: 30px;
   width: 60%;
+  margin-left: 10px;
   text-align: center;
 }
 
+.inst-container p:nth-child(even){
+  order: -1
+}
+
 .inst-img {
+  border-radius: 15px;
   width: 40%;
 }
 
-.left {
-  order: -1;
-}
 /* End Instructions */
 /* Single Page Headers */
 #page-header {
@@ -4592,6 +4603,11 @@ footer #newsletter .form-control {
   footer .widget {
     padding-bottom: 20px;
   }
+
+  .inst-container p{
+    font-size: 11px;
+    line-height: 2.5rem;
+  }
 }
 @media only screen and (max-width: 600px) {
   .title-description {
@@ -4628,6 +4644,11 @@ footer #newsletter .form-control {
   .spinner {
     left: 45%;
   }
+
+  .inst-container p{
+    line-height: 2rem;
+    font-size: 9px;
+  }
 }
 @media only screen and (max-width: 580px) {
   .product-hover-tools {
@@ -4636,6 +4657,15 @@ footer #newsletter .form-control {
 
   .product:hover .product-hover-tools {
     bottom: 100px;
+  }
+
+  .inst-container {
+    padding: 10px 30px;
+  }
+
+  .inst-container p{
+    line-height: 2rem;
+    font-size: 9px;
   }
 }
 @media only screen and (max-width: 480px) {
@@ -4692,6 +4722,21 @@ footer #newsletter .form-control {
 
   #map {
     height: 200px;
+  }
+  
+  .inst-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .inst-container p{
+    line-height: 1.5rem;
+    font-size: 9px;
+    width: 100%;
+  }
+
+  .inst-container p:nth-child(even){
+    order: 1;
   }
 }
 /* Min Widths */

@@ -82,18 +82,27 @@ if ($currentRow) {
                             <div class="item active">
                                 <img class="product-single-image" src="images/<?php echo strtolower($currentRow['mainCategory']) . '-large/' . $currentRow['imgUrl']?>" alt="<?php echo $currentRow['itemNameString']?>">
                             </div>
-                           
+                    <?php if (strtolower($currentRow['mainCategory']) === 'air-plant-holders') { ?>
+                            <div class="item">
+                                <img class="product-single-image" src="images/color-samples/<?php echo $currentRow['imgUrl']?>" alt="<?php echo $currentRow['itemNameString'] . ' color sample'?>">
+                            </div>
+                            <!-- <div class="item">
+                                <img src="images/product-slide3.jpg" alt="">
+                            </div> -->
                         </div>
                         <!-- / wrapper for slides -->
 
                         <!-- controls -->
-                        <!-- <a class="left carousel-control" href="#product-slider" role="button" data-slide="prev">
+                        <a class="left carousel-control" href="#product-slider" role="button" data-slide="prev">
                             <span class="lnr lnr-chevron-left" aria-hidden="true"></span>
                         </a>
                         <a class="right carousel-control" href="#product-slider" role="button" data-slide="next">
                             <span class="lnr lnr-chevron-right" aria-hidden="true"></span>
-                        </a> -->
+                        </a>
                         <!-- / controls -->
+                    <?php } else { ?>
+                        </div>
+                    <?php } ?>   
                     </div><!-- / product-slider -->
 
                     
@@ -160,7 +169,9 @@ if ($currentRow) {
                             <p><img class="ruler" src="images/ruler.png"><span>Dimensions**: <?php echo $currentRow['dimensions']?></span></p>
                         </div>
                         <div class="info">
+                            <?php if (strtolower($currentRow['mainCategory']) === 'doorbells') { ?>
                             <p>**All dimensions are approximate and can be up to 1/2" larger or smaller than stated.</p>
+                            <?php } ?>
                         </div>
                     </div><!-- / project-info -->
 
@@ -173,14 +184,14 @@ if ($currentRow) {
                             <span class="selectors">
                                 <select class="selectpicker">
                                     <?php 
-                                    // Loop through baseColor array. Add name of each color as an option.
+                                    
                                     if (strtolower($currentRow['mainCategory']) === 'fan-pulls') {
                                         echo '<optgroup label="Chain Color:">';
                                     } else if (strtolower($currentRow['mainCategory']) === 'doorbells') {
                                         echo '<optgroup label="Base Color:">';
                                     }
                                     $baseColorArr = JSON_decode($currentRow['baseColor']);
-                                    // echo $baseColorArr;
+       
                                     foreach($baseColorArr as $i) {
                                 ?>
                                         <option><?php echo ucfirst($i)?></option>

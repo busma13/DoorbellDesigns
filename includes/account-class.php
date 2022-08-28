@@ -148,7 +148,7 @@ class Account
     }
 
     /* Add a new account to the system and return its ID (the account_id column of the accounts table) */
-	public function addAccount(string $name, string $passwd): int
+	public function addAccount(string $name, string $passwd): string|bool
 	{
 		/* Global $pdo object */
 		global $pdo;
