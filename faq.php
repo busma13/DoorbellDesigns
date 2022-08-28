@@ -16,7 +16,7 @@
             </div><!-- / page-header-content -->
         </div><!-- / container -->
     </div><!-- / page-header -->
-
+    
 </header>
 <!-- / header -->
 
@@ -27,8 +27,15 @@
     <div class="container">
         <!-- <h4 class="space-left space-bottom-2x">Frequently Asked Questions</h4> -->
         <main>
+            <h4>Quick Links:</h4>
+            <ul>
+                <li><a href="/doorbelldesigns/instructions.php">Installation Instructions</a></li>
+                <li><a href="/doorbelldesigns/custom-orders.php">Custom Orders</a></li>
+            </ul>
+            
+            
             <p>
-                We do shows several times year and sell what we make there. The doorbells you see on this site probably belong to someone else by now. We have similar doorbells, but not exactly like anything you see here.
+                We do shows several times year and sell what we make there. The doorbells and other creations you see on this site probably belong to someone else by now. We have similar doorbells, but not exactly like anything you see here.
             </p>
             <p>
                 We make them all individually and never exactly the same even when we try! The colors, shapes and sizes will be a little different.
@@ -48,6 +55,7 @@
             <p>
                 If you need the screw holes in a particular place we can do that for you.
             </p>
+
         </main>
         <!-- <div class="row">
             <div class="col-sm-6">

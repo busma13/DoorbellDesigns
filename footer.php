@@ -84,7 +84,7 @@
                             <a href="#x">Shipping & Return</a>
                         </div> -->
                         <div class="info">
-                            <a href="faq.php">F.A.Q</a>
+                            <a href="faq.php">F.A.Q.</a>
                         </div>
                         <div class="info">
                             <a href="schedule.php">Show Schedule</a>

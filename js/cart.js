@@ -64,7 +64,12 @@ if (addToCartBtnSinglePage) {
     
 async function addToCartSingle(event) {
     let qty = Number(document.querySelector('.input-text').value);
-    let color = document.querySelector('.selectpicker').selectedOptions[0].innerText;
+    let color;
+    if (document.querySelector('.selectpicker')) {
+        color = document.querySelector('.selectpicker').selectedOptions[0].innerText;
+    } else {
+        color = 'N/A';
+    }
     console.log(color);
     let productName = event.currentTarget.id;
     let product;
@@ -198,7 +203,7 @@ function displayCart() {
         Object.values(productsInCart).map(item => {
             productTable.innerHTML += `
             <tr class="cart-item" id="${item.itemName}Base${item.baseColor}">
-                <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="${item.imgUrl}" alt=""></a></td>
+                <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="images/${(item.mainCategory).toLowerCase()}-small/${item.imgUrl}" alt="${item.itemNameString}"></a></td>
                 <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemNameString}</a></td>
                 <td><span>${item.baseColor}</span></td>
                 <td>$${item.price}</td>

@@ -31,9 +31,9 @@
                 <tr>
                     <th class="image">&nbsp;</th>
                     <th>Product</th>
-                    <th>Base Color</th>
+                    <th>Color Option</th>
                     <th>Price</th>
-                    <th>Quantity</th>
+                    <th>Qty</th>
                     <th>Total</th>
                     <th>&nbsp;</th>
                 </tr>
