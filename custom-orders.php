@@ -36,9 +36,7 @@
             <p>If you want a custom designed doorbell, something you don't see on the site, there will be a nominal design fee, usually just $5.00 for simple designs.</p>
             <p>Most doorbell designs can accommodate words, Welcome, Shalom, Aloha, Go Away, Mi Casa Su Casa, etc. That costs an extra $2.00.</p>
 
-            <div class="page-header text-center space-top-30">
-                <h3>Maybe delete this header???</h3>
-            </div><!-- / page-header -->
+            
             <p class="large-p">All our doorbells are made from low-fire white clay.</p>
             <p>They come in three background colors for the stone looking types; sandy, terra cotta, and taupe.</p>
             <p>You may choose any of these background colors for any of the designs.</p>

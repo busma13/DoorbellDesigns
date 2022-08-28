@@ -37,7 +37,7 @@
                 We are Ray and Colleen Dossey. We make decorative ceramic doorbells to enhance the entrance to your home. Everything is made right here at home in the USA. This ceramic artwork is only available online here or at Arts & Crafts Shows.
             </p>
             <p>    
-                You may also order doorbells custom made especially for you. All the colors we use are fired on underglazes and glazes and will not fade in the sun or be damaged by rain.
+                You may also order doorbells <a href="/doorbelldesigns/custom-orders.php">custom</a> made especially for you. All the colors we use are fired on underglazes and glazes and will not fade in the sun or be damaged by rain.
             </p>
             <p>    
                 All our door bells come with lighted buttons, screws and anchors, and instructions. They are for wired doorbells. They can replace any shape of wired door bell button. We can also make a decorative door bell surround for your wireless doorbell button.
