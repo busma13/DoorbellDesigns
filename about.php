@@ -92,23 +92,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
-<!-- sliders -->
-<script src="js/owl.carousel.min.js"></script>
-<!-- brands carousel -->
-<script>
-    $(document).ready(function() {
-      $("#brands-carousel").owlCarousel({
-        autoPlay: 5000, //set autoPlay to 5 seconds.
-        items : 5,
-        itemsDesktop : [1199,3],
-        itemsDesktopSmall : [979,3]
-      });
-
-    });
-</script>
-<!-- / brands carousel -->
-<!-- / sliders -->
-
 <!-- preloader -->
 <script src="js/preloader.js"></script>
 <!-- / preloader -->
