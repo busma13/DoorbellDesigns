@@ -3125,7 +3125,7 @@ section {
   text-align: center;
 }
 
-.inst-container p:nth-child(even){
+.inst-container:nth-child(even) img {
   order: -1
 }
 
@@ -4735,7 +4735,7 @@ footer #newsletter .form-control {
     width: 100%;
   }
 
-  .inst-container p:nth-child(even){
+  .inst-container:nth-child(even) img{
     order: 1;
   }
 }
