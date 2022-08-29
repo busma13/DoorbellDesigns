@@ -3647,6 +3647,11 @@ section {
 
 /* Admin Forms */
 
+.log-in {
+  flex-flow: column wrap;
+  align-items: center;
+}
+
 .btn-edit-show {
   margin-bottom: 16px;
 }
