@@ -47,7 +47,11 @@ $order_id = $_GET["orderId"];
 
 if ($order_id === null) { 
 ?>
-  <p class="whitespace noTransId">There was an error.  No order ID found.</p> 
+<div class="whitespace noTransId">
+  <p>There was an error.  No order ID found.</p> 
+  <p>Try reloading the page. If you still need help get in contact <a href="/doorbelldesigns/contact.php">here</a>.</p> 
+</div>
+  
   <div class="space-top text-center">
     <a href="index.php">Back to home page</a>
   </div>
@@ -94,7 +98,10 @@ else {
   $tenders = $order->getTenders();
   if (!$tenders) {
 ?>
-      <p class="whitespace notPaid">There was an error. No record of payment for this order.</p> 
+      <div class="whitespace noTransId">
+        <p>There was an error.  No record of payment for this order.</p> 
+        <p>Try reloading the page. If you still need help get in contact <a href="/doorbelldesigns/contact.php">here</a>.</p> 
+      </div>
       <div class="space-top text-center">
           <a href="index.php">Back to home page</a>
       </div>
@@ -107,7 +114,10 @@ else {
     }
     if ($order->getTotalMoney()->getAmount() !== $total_tenders) { 
 ?>
-      <p class="whitespace notPaid">There was an error. There is still a balance due on this order.</p> 
+      <div class="whitespace noTransId">
+        <p>There was an error.  There is still a balance due on this order.</p> 
+        <p>Try reloading the page. If you still need help get in contact <a href="/doorbelldesigns/contact.php">here</a>.</p> 
+      </div>
 
       <div class="space-top text-center">
           <a href="index.php">Back to home page</a>
@@ -136,7 +146,7 @@ else {
 ?>
       <div class="container space-left space-right" id="confirmation">
         <div class="row">
-          <h2>Thank you for your purchase!</h2>      
+          <h2 class="space-top">Thank you for your purchase!</h2>      
           <h4 class="space-top">Your Order:</h4>
 <?php
           foreach ($order->getLineItems() as $line_item) {

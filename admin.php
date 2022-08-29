@@ -43,32 +43,35 @@
     }
 
     if ($login)
-    {
-        echo 'You are logged in as: ' . $account->getName() . '<br>';
+    { ?>
+        
+        <div class="log-in flex-container">
+            <p class="space-top text-center">You are logged in as: <?php echo $account->getName() ?></p>
+            <div class="space-top flex-container logged-in">
+                <a href="./admin-panel.php" class="space-top-2x btn btn-primary-filled btn-rounded no-margin"></i><span>Go To Admin Panel</span></a>
 
-        ?>
-            <a href="./admin-panel.php" class="btn btn-primary-filled btn-rounded no-margin"></i><span>Go To Admin Panel</span></a>
-
-            <form action="./includes/admin-login.inc.php" method="POST">
-                <button type="submit" name="logout" id="checkout-btn" class="btn btn-primary-filled btn-rounded">Log out</button>
-            </form>
-        <?php
+                <form action="./includes/admin-login.inc.php" method="POST">
+                    <button type="submit" name="logout" id="checkout-btn" class="btn btn-primary-filled btn-rounded">Log out</button>
+                </form>
+            </div>
+        </div>
+<?php
     } 
     else {
         
 ?>
 
-
 <!-- content -->
 
-<form action="./includes/admin-login.inc.php" method="POST">
-    <label for="userName">User name:</label>
-    <input type="text" name="userName" placeholder="User name" id="userName">
-
-    <label for="password">Password:</label>
-    <input type="password" name="password" placeholder="Password" id="password">
-<!-- 
-    <input type="submit" name="submit" class="btn btn-default btn-rounded no-margin" value="Login"/> -->
+<form action="./includes/admin-login.inc.php" method="POST" class="log-in flex-container">
+    <fieldset class="space-top">
+        <label for="userName">User name:</label>
+        <input type="text" name="userName" placeholder="User name" id="userName">
+    </fieldset>
+    <fieldset class="space-top space-bottom">
+        <label for="password">Password:</label>
+        <input type="password" name="password" placeholder="Password" id="password">
+    </fieldset>
     <button type="submit" name="login" id="checkout-btn" class="btn btn-primary-filled btn-rounded">Log in</button>
 
 </form>

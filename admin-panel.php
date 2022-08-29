@@ -191,6 +191,9 @@
                         elseif ($addProductCheck == "imageError") {
                             echo "<p class='error'>Image upload error. Please try again.</p>";
                         }
+                        elseif ($addProductCheck == "imageResizeError") {
+                            echo "<p class='error'>Image resize error. Please try again.</p>";
+                        }
                         elseif ($addProductCheck == "success") {
                             echo "<p class='success'>Product added successfully.</p>";
                         }
