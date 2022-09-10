@@ -49,7 +49,7 @@ catch (PDOException $e)
 throw new Exception('Database query error');
 }
 
-//TODO: load the item we want.  On prev or next load the next/prev product.
+//load the item we want.  On prev or next load the next/prev product.
 $categoryProdIds = array();
 $currentRow;
 while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
@@ -82,7 +82,7 @@ if ($currentRow) {
                             <div class="item active">
                                 <img class="product-single-image" src="images/<?php echo strtolower($currentRow['mainCategory']) . '-large/' . $currentRow['imgUrl']?>" alt="<?php echo $currentRow['itemNameString']?>">
                             </div>
-                    <?php if (strtolower($currentRow['mainCategory']) === 'air-plant-holders') { ?>
+                    <?php if (strtolower($currentRow['mainCategory']) === 'air-plant-cradles') { ?>
                             <div class="item">
                                 <img class="product-single-image" src="images/color-samples/<?php echo $currentRow['imgUrl']?>" alt="<?php echo $currentRow['itemNameString'] . ' color sample'?>">
                             </div>
@@ -152,6 +152,9 @@ if ($currentRow) {
                                 // echo $subCatArr;
                                 foreach($subCatArr as $i) { 
                                     // echo $i; 
+                                    if ($i === '') {
+                                        continue;
+                                    }
                                     if ($i === 'dog') {
                                         $i = "dog lovers";
                                     }
@@ -166,11 +169,11 @@ if ($currentRow) {
                             </span></p>
                         </div>
                         <div class="info">
-                            <p><img class="ruler" src="images/ruler.png"><span>Dimensions**: <?php echo $currentRow['dimensions']?></span></p>
+                            <p><img class="ruler" src="images/ruler.png"><span>Dimensions: <?php echo $currentRow['dimensions']?></span></p>
                         </div>
                         <div class="info">
                             <?php if (strtolower($currentRow['mainCategory']) === 'doorbells') { ?>
-                            <p>**All dimensions are approximate and can be up to 1/2" larger or smaller than stated.</p>
+                            <p>All dimensions are approximate and can be up to 1/2" larger or smaller than stated.</p>
                             <?php } ?>
                         </div>
                     </div><!-- / project-info -->
@@ -180,7 +183,7 @@ if ($currentRow) {
                             <span>Qty:</span>
                             <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
                             <?php
-                            if (strtolower($currentRow['mainCategory']) !== 'air-plant-holders') { ?>
+                            if (strtolower($currentRow['mainCategory']) !== 'air-plant-cradles') { ?>
                             <span class="selectors">
                                 <select class="selectpicker">
                                     <?php 

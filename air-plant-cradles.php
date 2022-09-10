@@ -1,7 +1,7 @@
 <?php
     include_once 'includes/dbh.inc.php';
     include 'header-pt1.php';
-    $title = 'Doorbell Designs - Air Plant Holder';
+    $title = 'Doorbell Designs - Air Plant Cradles';
     echo $title;
     include 'header-pt2.php';
 ?>
@@ -10,7 +10,7 @@
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub">
-                    <h1 class="page-title fadeInDown animated first">Air Plant Holders</h1>
+                    <h1 class="page-title fadeInDown animated first">Air Plant Cradles</h1>
                 </div><!-- / page-header -->
                 <p class="slide-text fadeInUp animated second">Your page's description goes here...</p>
             </div><!-- / page-header-content -->
@@ -39,7 +39,7 @@
                 <div id="grid" class="row">
 
                     <?php
-                        $get_doorbell_products_sql = "SELECT * FROM products WHERE mainCategory='Air-Plant-Holders' and active='1';";
+                        $get_doorbell_products_sql = "SELECT * FROM products WHERE mainCategory='Air-Plant-Cradles' and active='1';";
 
                         /* Execute the query */
                         try
@@ -63,7 +63,7 @@
                                 
                                 <!-- product -->
                                 <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
-                                    <a href="single-product.php?category=air-plant-holders&product=<?php echo $row['id'] ?>" class="product-link"></a>
+                                    <a href="single-product.php?category=air-plant-cradles&product=<?php echo $row['id'] ?>" class="product-link"></a>
                                     <!-- / product-link -->
                                     <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
                                     <!-- / product-image -->

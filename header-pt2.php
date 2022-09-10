@@ -63,7 +63,7 @@
                             <li><a href="doorbells.php">Doorbells</a></li>
                             <li><a href="artwork.php">Artwork</a></li>
                             <li><a href="fan-pulls.php">Ceiling Fan Pulls</a></li>
-                            <li><a href="air-plant-holders.php">Air Plant Holders</a></li>
+                            <li><a href="air-plant-cradles.php">Air Plant Cradles</a></li>
                             <li><a href="custom-orders.php">Custom Orders</a></li>
                             <li><a href="shopping-cart.php">Shopping Cart</a></li>
                             <li><a href="checkout.php">Checkout</a></li>

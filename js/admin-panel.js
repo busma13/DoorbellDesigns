@@ -163,9 +163,19 @@ var editable = {
                     body: JSON.stringify(obj)
                 }
             )
+            console.log(response)
             data = await response.json();
             console.log(data);
-    
+                
+            const responseMessageProduct = document.querySelector('.responseMessageProduct');
+
+            if (data === 'success') {
+                responseMessageProduct.textContent = 'Product successfully edited.';
+            } else if (data === 'image-resize error') {
+                responseMessageProduct.textContent = 'Failed to resize images. Please try again.'
+            } else {
+                responseMessageProduct.textContent = 'Error editing product: ' + data;
+            }
         } 
         catch(error) {
             console.error(`Could not update product: ${error}`);
