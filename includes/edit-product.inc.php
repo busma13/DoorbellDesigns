@@ -1,6 +1,8 @@
 <?php
+use Unirest\Response;
 include_once 'dbh.inc.php';
 require '../turbocommons-php-3.8.0.phar';
+use org\turbocommons\src\main\php\utils\StringUtils;
 
 /* Get content type */
 $contentType = trim($_SERVER["CONTENT_TYPE"] ?? ''); // PHP 8+
@@ -32,10 +34,39 @@ if(! is_array($decoded))
 $id = $decoded['id'];
 $value = $decoded['value'];
 $column = $decoded['column'];
-//TODO - get values from updateProducts() and update a product
-$query = "UPDATE products SET $column = :newValue WHERE id = :id;";
 
-$values = array(':id' => $id, ':newValue' => $value, );
+// //If the image changed, get the picture from the main image folder and copy and resize it into the other folders.
+// if ($column === 'imgUrl') {
+//   //format image to the 3 needed sizes
+//   try {
+//     resizer($uploadedFile, dirname(__FILE__, 2) . '/images' . '/' . strtolower($_POST['mainCategory']) . "-small/" . $imgUrl, [180, 200]);
+//     resizer($uploadedFile, dirname(__FILE__, 2) . '/images' . '/' . strtolower($_POST['mainCategory']) . "-medium/" . $imgUrl, [720, 800]);
+//     resizer($uploadedFile, dirname(__FILE__, 2) . '/images' . '/' . strtolower($_POST['mainCategory']) . "-large/" . $imgUrl, [1080, 1200]);    
+//   } catch (Exception $err) {
+//       $response = "image-resize error: " + $err;
+//       die(json_encode($response));
+
+//   }
+// }
+//TODO - test this if/else block
+if ($column === 'itemNameString') {
+        $itemName = StringUtils::formatCase($value, StringUtils::FORMAT_LOWER_CAMEL_CASE);
+        $imgUrl = $itemName . '.jpg';
+
+        //get values from updateProducts() and update a product
+        $query = "UPDATE products SET itemNameString = :itemNameString, itemName = :itemName, imgUrl = :imgUrl WHERE id = :id;";
+
+        // UPDATE `products` SET `itemNameString` = 'Heart Doorbell - Thin', `itemName` = 'heartDoorbellThin', `imgUrl` = 'heartDoorbellThin.jpg' WHERE id = '27';
+
+        $values = array(':id' => $id, ':itemNameString' => $value, ':itemName' => $itemName, ':imgUrl' => $imgUrl);
+} else {
+        //get values from updateProducts() and update a product
+        $query = "UPDATE products SET $column = :newValue WHERE id = :id;";
+
+        $values = array(':id' => $id, ':newValue' => $value );
+
+}
+
 
 /* Execute the query */
 try

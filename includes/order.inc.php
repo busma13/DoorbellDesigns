@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
             $products_array = json_decode($_POST['cart-list-input'], false);
             
             $line_items = array();
-            $TAX_RATE = 7.75; // get this from database?
+            $TAX_RATE = 7.75; // get this from database call instead?
             $totalShippingCents = 0;
             $qtyAtEachShippingPrice = new stdClass;
 
@@ -123,7 +123,14 @@ if (isset($_POST['submit'])) {
                 $base_price_money->setCurrency('USD');
 
                 $order_line_item = new \Square\Models\OrderLineItem($obj->itemQty);
-                $order_line_item->setName($obj->itemNameString . ", " . $obj->baseColor . " Base");
+                if ($obj->mainCategory === 'Doorbells') {
+                    $order_line_item->setName($obj->itemNameString . ", " . $obj->baseColor . " Base");
+                } else if ($obj->mainCategory === 'Fan-Pulls') {
+                    $order_line_item->setName($obj->itemNameString . ", " . $obj->baseColor . " Chains");
+                } else {
+                    $order_line_item->setName($obj->itemNameString);
+
+                }
                 $order_line_item->setBasePriceMoney($base_price_money);
 
                 $order_line_item_applied_tax = new \Square\Models\OrderLineItemAppliedTax('state-sales-tax');

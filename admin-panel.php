@@ -88,6 +88,7 @@
         </div>
     </div>
 </div>
+
 <!-- content -->
 <div class="container">
     <div class="page-header-content text-center">
@@ -118,8 +119,8 @@
                         <label for="addCeilingFanPulls">Ceiling Fan Pulls</label>
                     </fieldset>
                     <fieldset>
-                        <input type="radio" name="mainCategory" value="Air-Plant-Holders" id="addAirPlantHolders">
-                        <label for="addAirPlantHolders">Air Plant Holders</label>
+                        <input type="radio" name="mainCategory" value="Air-Plant-Cradles" id="addAirPlantCradles">
+                        <label for="addAirPlantCradles">Air Plant Cradles</label>
                     </fieldset>
                     <!-- <fieldset>
                         <input type="radio" name="mainCategory" value="Miscellaneous" id="addMiscellaneous">
@@ -144,8 +145,8 @@
                     <input type="number" step="0.01" class="form-control" name="shipping" placeholder="Shipping" id="shipping">
                 </div>
                 <div class="col-sm-6">
-                    <label for="baseColorOptions">Base Color Options:</label>
-                    <input type="text" class="form-control" name="baseColorOptions" placeholder="Base Color Options" id="baseColorOptions">
+                    <label for="baseColorOptions">Color Options:</label>
+                    <input type="text" class="form-control" name="baseColorOptions" placeholder="Color Options" id="baseColorOptions">
                 </div>
                 <div class="col-sm-6">
                     <label for="itemNameString">Item name:</label>
@@ -224,7 +225,7 @@
                 <tr>
                     <th></th>
                     <th></th>
-                    <th><span>Image Url</span></th>
+                    <!-- <th><span>Image Url</span></th> -->
                     <th>Product Name</th>
                     <th>Main Category</th>
                     <th>Subcategories</th>
@@ -253,7 +254,7 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                 <tr id="<?php echo $row['id']?>">
                     <td><button class="deleteProductButton"><i class="lnr lnr-trash"></i></button></td>
                     <td class="img"><img src="images/<?php echo strtolower($row['mainCategory']) . '-small/' . $row['imgUrl'] ?>"></td>
-                    <td class="imgUrl break-word"><?php echo $row['imgUrl']?></td>
+                    <!-- <td class="imgUrl break-word"><?php echo $row['imgUrl']?></td> -->
                     <td class="itemNameString"><?php echo $row['itemNameString']?></td>
                     <td class="mainCategory"><?php echo $row['mainCategory']?></td>
                     <td class="subCategories"><?php echo $row['subCategories']?></td>

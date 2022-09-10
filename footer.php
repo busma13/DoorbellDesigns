@@ -53,7 +53,7 @@
                             <a href="fan-pulls.php">Ceiling Fan Pulls</a>
                         </div>
                         <div class="info">
-                            <a href="air-plant-holders.php">Air Plant Holders</a>
+                            <a href="air-plant-cradles.php">Air Plant Cradles</a>
                         </div>
                         <div class="info">
                             <a href="custom-orders.php">Custom Orders</a>

@@ -48,7 +48,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="address-line" placeholder="*Address Line" required>
-                            <select class="form-control" name="state" required>
+                            <select class="form-control stateSelect" name="state" required>
                                 <optgroup label="State:">
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -148,6 +148,7 @@
             <div class="col-sm-4 checkout-total">
                 <h4>Cart Total: <span class="total">$0</span></h4>
                 <p>Subtotal: <span class="subtotal">$0</span></p>
+                <p>Estimated tax: <span class="estimatedTax">$0</span></p>
                 <p>Shipping: <span class="shipping">$0</span></p>
 
                 

@@ -1,12 +1,25 @@
+let selectedState = document.querySelector('.stateSelect');
+
+//Update estimated tax when state selector is changed.
+selectedState.addEventListener('change', updateCartTotals);
+
 //Updates all the prices in the Cart Total area of the checkout page
 function updateCartTotals() {
     let subtotal = Number(localStorage.getItem('cartTotal'));
     document.querySelector('.subtotal').textContent = `$${subtotal.toFixed(2)}`;
 
+    let estimatedTax = 0;
+    let stateIndex = selectedState.selectedIndex;
+    console.log(stateIndex);
+    if (stateIndex === 4) {
+        estimatedTax = Number(Math.round(subtotal * 0.0775 + 'e2') + 'e-2');
+    }
+    document.querySelector('.estimatedTax').textContent = `$${estimatedTax.toFixed(2)}`;
+
     let shipping = Number(localStorage.getItem('shippingTotal'));
 
     document.querySelector('.shipping').textContent = `$${shipping.toFixed(2)}`;
-    let total = subtotal + shipping;
+    let total = subtotal + estimatedTax + shipping;
     document.querySelector('.total').textContent = `$${total.toFixed(2)}`;
 }
 
@@ -25,6 +38,7 @@ function createCartList() {
         listItem.itemNameString = cartProducts[obj].itemNameString;
         listItem.itemQty = cartProducts[obj].qtyInCart; 
         listItem.baseColor = cartProducts[obj].baseColor; 
+        listItem.mainCategory = cartProducts[obj].mainCategory; 
         checkoutList.push(listItem);
     }
     localStorage.setItem('cartList', JSON.stringify(checkoutList));
@@ -36,69 +50,6 @@ function createCartList() {
 document.querySelector('#checkout-btn').addEventListener('click', (e) => {
     e.currentTarget.classList.add('disabled');
 })
-
-// function sendData () {
-//         // Get products from the cart
-//     let cartProducts = localStorage.getItem('cartProducts');
-//         // Check if there are items in the cart
-//         // console.log(cartProducts)
-//     if (cartProducts) { 
-//         //GET FORM DATA
-//         var data = new FormData(document.getElementById("orderForm"));
-//         data.append("state", document.querySelector('select').value);
-//         data.append("cart-products", cartProducts);
-//         data.append("submit", "submit");
-    
-//         // INIT FETCH POST
-//         fetch("./includes/order.inc.php", {
-//         method: "POST",
-//         body: data
-//         })
-
-//         // RETURN SERVER RESPONSE AS TEXT
-//         .then((result) => {
-//             console.log(result)
-//             if (result.status != 200) { throw new Error("Bad Server Response"); }
-//             return result.json();
-//         })
-    
-//         // SERVER RESPONSE
-//         .then((response) => {
-//             // console.log(response.text());
-//             console.log(response);
-//             // fetch(response, {mode: "no-cors"})
-//             //     .then((res) => {
-//             //         console.log(res);
-//             //     })
-
-//             //     .catch(err => {
-//             //         console.log(err);
-//             //     })
-//             window.location.href = response;
-//         })
-
-//         .catch(err => {
-//             console.log(err);
-//         })
-    
-//         // // GET SERVER RESPONSE
-//         // .then((result) => {
-//         //     if (result.status != 200) { throw new Error("Bad Server Response"); }
-//         //     return result;
-//         // })
-    
-//         // // REDIRECT TO SQUARE CHECKOUT URL
-//         // .then((response) => {
-//         //     window.location.href = response.url;//TURN THIS INTO A FETCH?
-//         // })
-    
-//         // HANDLE ERRORS
-//         .catch((error) => { console.log(error); });
-    
-//         // PREVENT FORM SUBMIT
-//         return false;
-//     } 
-//   }
 
 updateCartTotals();
 createCartList();
