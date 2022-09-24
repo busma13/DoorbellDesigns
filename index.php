@@ -24,7 +24,7 @@
                                 <div class="col-md-12 slider-content">
                                     <h3 class="slide-title fadeInDown animated first">Doorbells</h3>
                                     <p class="slide-text flipInX animated second">Quisque vitae tempor libero. Cum sociis natoque penatibus et magnis dis parturient montes.</p>
-                                    <a href="#categories" class="page-scroll btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-cart"></i> <span>Shop Now</span></a>
+                                    <a href="doorbells.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-cart"></i> <span>Shop Now</span></a>
                                 </div><!-- slider-content -->
                             </div><!-- / row -->
                         </div><!-- / carousel-caption -->
@@ -39,7 +39,7 @@
                                 <div class="col-md-12 slider-content">
                                     <h3 class="slide-title fadeInDown animated first">Ceiling Fan Pulls</h3>
                                     <p class="slide-text flipInX animated second">Vivamus facilisis sapien enim, eget lobortis ante faucibus vel. In hendrerit arcu eget arcu fringilla.</p>
-                                    <a href="index2.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
+                                    <a href="fan-pulls.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
                                 </div><!-- slider-content -->
                             </div><!-- / row -->
                         </div><!-- / carousel-caption -->
@@ -52,9 +52,9 @@
                         <div class="carousel-caption">
                             <div class="row">
                                 <div class="col-md-12 slider-content">
-                                    <h3 class="slide-title fadeInDown animated first">Artwork</h3>
+                                    <h3 class="slide-title fadeInDown animated first">Air Plant Cradles</h3>
                                     <p class="slide-text flipInX animated second">Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus sapien libero.</p>
-                                    <a href="index3.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
+                                    <a href="air-plant-cradles.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
                                 </div><!-- slider-content -->
                             </div><!-- / row -->
                         </div><!-- / carousel-caption -->
@@ -113,12 +113,12 @@
             </div><!-- / category -->
 
             <div class="col-sm-4 category">
-                <a href="artwork.php">
+                <a href="air-plant-cradles.php">
                     <div class="category-item">
                         <img src="images/category3.jpg" alt="">
                         <div class="overlay">
                             <div class="caption">
-                                <h4>Artwork</h4>
+                                <h4>Air Plant Cradles</h4>
                             </div>
                         </div>
                     </div><!-- / category-item -->

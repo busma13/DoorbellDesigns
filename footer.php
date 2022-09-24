@@ -47,9 +47,6 @@
                     </div>
                     <div class="link-widget">
                         <div class="info">
-                            <a href="artwork.php">Artwork</a>
-                        </div>
-                        <div class="info">
                             <a href="fan-pulls.php">Ceiling Fan Pulls</a>
                         </div>
                         <div class="info">

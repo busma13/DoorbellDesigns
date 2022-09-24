@@ -86,6 +86,10 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
+
 <!-- contact-form -->
 <script src="js/validator.min.js" type="text/javascript"></script>
 <script src="js/form-scripts.js" type="text/javascript"></script>

@@ -34,27 +34,14 @@
             </ul>
             
             
-            <p>
-                We do shows several times year and sell what we make there. The doorbells and other creations you see on this site probably belong to someone else by now. We have similar doorbells, but not exactly like anything you see here.
-            </p>
-            <p>
-                We make them all individually and never exactly the same even when we try! The colors, shapes and sizes will be a little different.
-            </p>
-            <p>
-                You can order exactly what you want, or a particular design and we'll e-mail you pictures of what we have from stock closest to your request. If we have to make you a doorbell, of course, it will take a little time. We are often away from home doing shows. We can give you an estimate at the time you order.
-            </p>
-            <p>
-                All our doorbells are made from low-fire white clay. They come in two background colors for the stone looking types, sandy (varying shades of a light brown) and gray-ish.  You may choose either of these background colors for any of the designs.  The designs come in various shapes and sizes.  If you need a particular size, you need to indicate that in your order. You should also state if you prefer either a regular rectangular shape or an odd shape. If there is a particular color you want, or do not want, on your doorbell you need to note that also.
-            </p>
-            <p> 
-                Because we make these doorbells ourselves, we can put the hole for the doorbell button any where you need it. For example if you have plenty of space for your new doorbell to the right of your button now, but your present button is only one inch from the door frame on the left ,we can put the button hole an inch from the left on your new dooorbell surround. Just tell us what you need and we'll see if we can do it for you.
-            </p>
-            <p>
-                Many new homes in Florida, Arizona and other retirement communities have the doorbell in an electrical box. For that reason the doorbells you see here that are large enough to take the place of the switch-plate-like cover for those electrical boxes have the screw holes lined up to fit them. Otherwise, there is no standard for where the holes for the screws are placed, just where we think it interferes the least with the design.
-            </p>
-            <p>
-                If you need the screw holes in a particular place we can do that for you.
-            </p>
+            <p>We do art festivals several times a year and sell what we make there.</p>
+            <p>The doorbells you see on this site are samples of what you may order.</p>
+            <p>We make them all individually and never exactly the same, but close.</p>
+            <p>When you order we will email you pictures of choices that we have in stock.</p>
+            <p>If we have to make you a doorbell, it will take a little time, 2 or 3 weeks.</p>
+            <p>If you need the screw holes to be in a specific place (distance apart), tell us.</p>
+            <p>There is no standard distance for doorbell screw holes.</p>
+            <p>Our standard hole separation is 3 1/4 inches, which we use on our larger pieces.</p>
 
         </main>
         <!-- <div class="row">
@@ -196,22 +183,9 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
-<!-- sliders -->
-<script src="js/owl.carousel.min.js"></script>
-<!-- brands carousel -->
-<script>
-    $(document).ready(function() {
-      $("#brands-carousel").owlCarousel({
-        autoPlay: 5000, //set autoPlay to 5 seconds.
-        items : 5,
-        itemsDesktop : [1199,3],
-        itemsDesktopSmall : [979,3]
-      });
-
-    });
-</script>
-<!-- / brands carousel -->
-<!-- / sliders -->
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
 
 <!-- preloader -->
 <script src="js/preloader.js"></script>
