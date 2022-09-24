@@ -115,6 +115,10 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
+
 <!-- shuffle grid-resizer -->
 <script src="js/jquery.shuffle.min.js"></script>
 <script src="js/custom-air.js"></script>

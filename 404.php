@@ -40,6 +40,10 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
+
 <!-- preloader -->
 <script src="js/preloader.js"></script>
 <!-- / preloader -->

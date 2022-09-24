@@ -94,6 +94,10 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
+
 <!-- scrolling-nav -->
 <script src="js/scrolling-nav.js"></script>
 <!-- / scrolling-nav -->

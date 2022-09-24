@@ -348,6 +348,10 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
+<!-- cart -->
+<script src="js/cart.js"></script>
+<!-- / cart -->
+
 <!-- admin-panel -->
 <script src="js/admin-panel.js"></script>
 <!-- / admin-panel -->
