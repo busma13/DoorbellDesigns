@@ -41,7 +41,7 @@
             </ol>
             
             <h4 class="space-top-2x">Detailed Instructions</h4>
-            <p>You will need a drill with the appropriate drill bit (1/8" bit for wood or a 3/16" masonry bit for stucco or brick), a screw driver, a hammer and maybe a utility knife.</p>
+            <p>You will need a drill with the appropriate drill bit (1/8" bit for wood or a 3/16" masonry bit for stucco or brick), a screw driver, and maybe a utility knife.</p>
                     
             <p>Doorbells only use 9 to 14 volts of electricity, so you don't need to turn off the electricity.</p>
                 
