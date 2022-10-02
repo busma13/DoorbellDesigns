@@ -32,7 +32,91 @@
             <p class="large-p">We make custom orders:</p>
             <p>A design of your own - $50</p>
             <p>To replace an old intercom with one of our designs - $50</p>
-            <p>Words you would like added - varies, based on number of words and size necessary</p>
+            <!-- <p>Words you would like added - varies, based on number of words and size necessary.</p> -->
+            <p>Most doorbell designs can accommodate words, Welcome, Shalom, Aloha, Go Away, Mi Casa Su Casa, etc. That costs an extra $5.00.</p>
+            <p>If you would like a custom designed doorbell, the price will depend on the design. Let us know what you would like and we can give you a price.</p>
+            <p><a href="./contact.php">Contact us</a> to place a custom order.</p>
+
+            <h4 class="space-top-2x text-center">Examples of Custom Orders:</h4>
+            <div id="grid" class="row">
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/palms-and-shells.jpg" class="img-rounded">
+                </div>   
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/flip-flop.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/heron.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/bird-of-paradise.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/martini.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/dog-pound.jpg" class="img-rounded">
+                </div>   
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/home.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/pugpeo.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/spoke.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/welcome.jpg" class="img-rounded">
+                </div> 
+            </div>  
+            <h4 class="space-top-2x text-center">Match A Photo:</h4>
+            <div id="grid" class="row">
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/lighthouse.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/lighthouse-real.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/dog.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/dog-real.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/bird.jpg" class="img-rounded">
+                </div>   
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/bird-real.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/sailboat.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/sailboat-real.jpg" class="img-rounded">
+                </div>
+            </div>                
+            <h4 class="space-top-2x text-center">Custom Intercom Covers:</h4>
+            <div id="grid" class="row">
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/intercom1.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/intercom2.jpg" class="img-rounded">
+                </div>
+                <div class="col-xs-6 col-md-3 space-bottom">
+                    <img src="images/custom-square/mermaid.jpg" class="img-rounded">
+                </div>
+
+                <!-- grid-resizer -->
+                    <div class="col-xs-6 col-md-3 shuffle_sizer"></div>
+                <!-- / grid-resizer -->
+
+            </div><!-- / row -->
+
+
+
             <!-- <p class="large-p"> We do shows all year and sell what we make there. The doorbells you see on this site probably belong to someone else by now. We have similar doorbells, but not exactly like anything you see here.</p>
             <p>We make them all individually and never exactly the same. The colors, shapes and sizes will be a little different.</p>
             <p>You can order exactly what you want, or a particular design and we'll e-mail you pictures of what we have from stock closest to your request. If we have to make you a doorbell, of course, it will take a little time. We are often away from home doing shows. We can give you an estimate at the time you order.</p>
