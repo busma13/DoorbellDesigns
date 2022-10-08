@@ -35,43 +35,76 @@ $id = $decoded['id'];
 $value = $decoded['value'];
 $column = $decoded['column'];
 
-// //If the image changed, get the picture from the main image folder and copy and resize it into the other folders.
-// if ($column === 'imgUrl') {
-//   //format image to the 3 needed sizes
-//   try {
-//     resizer($uploadedFile, dirname(__FILE__, 2) . '/images' . '/' . strtolower($_POST['mainCategory']) . "-small/" . $imgUrl, [180, 200]);
-//     resizer($uploadedFile, dirname(__FILE__, 2) . '/images' . '/' . strtolower($_POST['mainCategory']) . "-medium/" . $imgUrl, [720, 800]);
-//     resizer($uploadedFile, dirname(__FILE__, 2) . '/images' . '/' . strtolower($_POST['mainCategory']) . "-large/" . $imgUrl, [1080, 1200]);    
-//   } catch (Exception $err) {
-//       $response = "image-resize error: " + $err;
-//       die(json_encode($response));
-
-//   }
-// }
-//TODO - test this if/else block
 if ($column === 'itemNameString') {
-        $itemName = StringUtils::formatCase($value, StringUtils::FORMAT_LOWER_CAMEL_CASE);
-        $imgUrl = $itemName . '.jpg';
+    $originalItemName = '';
+    $mainCategory = '';
+    // Get the product we are editing from database
+    $query1 = "SELECT * FROM `products` WHERE id = :id;";
 
-        //get values from updateProducts() and update a product
-        $query = "UPDATE products SET itemNameString = :itemNameString, itemName = :itemName, imgUrl = :imgUrl WHERE id = :id;";
+    /* Execute the get product query */
+    try
+    {
+        $res = $pdo->prepare($query1);
+        $res->bindParam(':id', $id);
+        $success = $res->execute();
+        if ($success) {
+            $row = $res->fetch(PDO::FETCH_ASSOC);
+            if ($row['itemNameString'] == '') {
+                $response = 'not-found';
+            } else {
+                $originalItemName = $row['itemName'];
+                $mainCategory = $row['mainCategory'];
+            }
+        }
+        else {
+            $response = 'server-error';
+            die(json_encode($response));
+        }
+    }
+    catch (PDOException $e)
+    {
+        $msg = $e->getMessage();
+        $response = $msg;
+        // header("Location: ../admin-panel.php?editProduct=query&code=" . $msg . "#edit-form");
+        // exit();
+    }
 
-        // UPDATE `products` SET `itemNameString` = 'Heart Doorbell - Thin', `itemName` = 'heartDoorbellThin', `imgUrl` = 'heartDoorbellThin.jpg' WHERE id = '27';
+    $itemName = StringUtils::formatCase($value, StringUtils::FORMAT_LOWER_CAMEL_CASE);
+    $imgUrl = $itemName . '.jpg';
+    $pictureRoute = dirname(__FILE__, 2) . '/images' . '/' . strtolower($mainCategory);
 
-        $values = array(':id' => $id, ':itemNameString' => $value, ':itemName' => $itemName, ':imgUrl' => $imgUrl);
+    // Rename each photo 
+    if (!rename($pictureRoute . "-original/" . $originalItemName . '.jpg', $pictureRoute . "-original/" . $imgUrl)) {
+      $response = "image-rename error original";
+      die(json_encode($response));
+    }
+    if (!rename($pictureRoute . "-small/" . $originalItemName . '.jpg', $pictureRoute . "-small/" . $imgUrl)) {
+        $response = "image-rename error small";
+        die(json_encode($response));
+    }
+    if (!rename($pictureRoute . "-medium/" . $originalItemName . '.jpg', $pictureRoute . "-medium/" . $imgUrl)) {
+      $response = "image-rename error medium";
+      die(json_encode($response));
+    }
+    if (!rename($pictureRoute . "-large/" . $originalItemName . '.jpg', $pictureRoute . "-large/" . $imgUrl)) {
+      $response = "image-rename error large";
+      die(json_encode($response));
+    }
+    //get values from updateProducts() and update a product
+    $query2 = "UPDATE products SET itemNameString = :itemNameString, itemName = :itemName, imgUrl = :imgUrl WHERE id = :id;";
+
+    $values = array(':id' => $id, ':itemNameString' => $value, ':itemName' => $itemName, ':imgUrl' => $imgUrl);
 } else {
-        //get values from updateProducts() and update a product
-        $query = "UPDATE products SET $column = :newValue WHERE id = :id;";
+    //get values from updateProducts() and update a product
+    $query2 = "UPDATE products SET $column = :newValue WHERE id = :id;";
 
-        $values = array(':id' => $id, ':newValue' => $value );
-
+    $values = array(':id' => $id, ':newValue' => $value );
 }
 
-
-/* Execute the query */
+/* Execute the update product query */
 try
 {
-    $res = $pdo->prepare($query);
+    $res = $pdo->prepare($query2);
     $success = $res->execute($values);
     // if ($success) {
     //     $row = $res->fetch(PDO::FETCH_ASSOC);
@@ -93,15 +126,6 @@ catch (PDOException $e)
     // header("Location: ../admin-panel.php?editProduct=query&code=" . $msg . "#edit-form");
     // exit();
 }
-
-
-
-/* Do something with received data and include it in response */
-// dumb e.g.
-// $response = $editProductName; 
-
-/* Perhaps database manipulation here? */
-// query, etc.
 
 /* Send success to fetch API */
 die(json_encode($response));

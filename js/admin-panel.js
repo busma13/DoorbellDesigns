@@ -51,7 +51,7 @@ async function getProductList() {
 // Start Edit Show Table / Edit Product Table 
 // (A) INITIALIZE - DOUBLE CLICK TO EDIT CELL
 window.addEventListener("DOMContentLoaded", () => {
-  for (let cell of document.querySelectorAll(".editable td")) {
+  for (let cell of document.querySelectorAll(".editable td.can-edit")) {
     cell.ondblclick = () => { editable.edit(cell); };
   }
 });
@@ -81,8 +81,8 @@ var editable = {
   // (C) END "EDIT MODE"
   selected : null,  // current selected cell
   close : (evt) => { if (evt.target != editable.selected) {
-    // (C1) send value to server
-    let date, dateString, name, location, id, value;
+      // (C1) send value to server
+      let date, dateString, name, location, id, value;
     let cell = editable.selected;
     let column = cell.classList[0];
     if (cell.parentNode.id.length > 4) {//cell is from show table
