@@ -254,16 +254,15 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                 <tr id="<?php echo $row['id']?>">
                     <td><button class="deleteProductButton"><i class="lnr lnr-trash"></i></button></td>
                     <td class="img"><img src="images/<?php echo strtolower($row['mainCategory']) . '-small/' . $row['imgUrl'] ?>"></td>
-                    <!-- <td class="imgUrl break-word"><?php echo $row['imgUrl']?></td> -->
-                    <td class="itemNameString"><?php echo $row['itemNameString']?></td>
-                    <td class="mainCategory"><?php echo $row['mainCategory']?></td>
-                    <td class="subCategories"><?php echo $row['subCategories']?></td>
-                    <td class="price"><?php echo $row['price']?></td>
-                    <td class="shipping"><?php echo $row['shipping']?></td>
-                    <td class="baseColor"><?php echo $row['baseColor']?></td>
-                    <td class="dimensions"><?php echo $row['dimensions']?></td>
-                    <td class="active"><?php echo $row['active']?></td>
-                    <td class="featured"><?php echo $row['featured']?></td>
+                    <td class="itemNameString can-edit"><?php echo $row['itemNameString']?></td>
+                    <td class="mainCategory can-edit"><?php echo $row['mainCategory']?></td>
+                    <td class="subCategories can-edit"><?php echo $row['subCategories']?></td>
+                    <td class="price can-edit"><?php echo $row['price']?></td>
+                    <td class="shipping can-edit"><?php echo $row['shipping']?></td>
+                    <td class="baseColor can-edit"><?php echo $row['baseColor']?></td>
+                    <td class="dimensions can-edit"><?php echo $row['dimensions']?></td>
+                    <td class="active can-edit"><?php echo $row['active']?></td>
+                    <td class="featured can-edit"><?php echo $row['featured']?></td>
                 </tr>
 <?php
 }
