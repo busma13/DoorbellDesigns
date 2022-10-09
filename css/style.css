@@ -31,7 +31,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 36px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 }
 
 h2 {
@@ -45,7 +45,7 @@ h3 {
 }
 
 h4 {
-  font-size: 22px;
+  font-size: 40px;
   margin-bottom: 18px;
 }
 
@@ -2382,7 +2382,7 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 .navbar {
   border: 0;
   border-radius: 0;
-  margin-bottom: 0;
+  margin-bottom: 30;
 }
 
 .navbar i {
@@ -2789,7 +2789,8 @@ section {
 
 .category h4 {
   color: white;
-  font-weight: 400;
+  -webkit-text-stroke: 0.75px black;
+  font-weight: 800;
   margin: 0;
 }
 
@@ -2804,6 +2805,7 @@ section {
   -moz-transition: .3s ease-in-out;
   -ms-transition: .3s ease-in-out;
   transition: .3s ease-in-out;
+  color: black;
 }
 
 .category .overlay:hover {
@@ -3142,6 +3144,7 @@ section {
   background-size: cover;
   background-position: center;
   background-color: #f8f8f8;
+  min-height: 200px;
 }
 
 #page-header.dark {
@@ -3149,7 +3152,7 @@ section {
 }
 
 .page-header-content {
-  padding: 50px 0;
+  /* padding: 20px 0; */
 }
 
 .page-header-content h1 {
@@ -3168,7 +3171,7 @@ section {
   color: #ebebeb;
 }
 
-#page-header.shop-right {
+#page-header.confirmation {
   background-image: url("../images/page-header.jpg");
 }
 
@@ -3200,34 +3203,22 @@ section {
   background-image: url("../images/page-header.jpg");
 }
 
+#page-header.shopping-cart {
+  background-image: url("../images/page-header.jpg");
+}
+
+#page-header.checkout {
+  background-image: url("../images/page-header.jpg");
+}
+
+#page-header.faq {
+  background-image: url("../images/page-header.jpg");
+}
 /* No Image by Default */
 #page-header.single-product {
   background-image: none;
 }
 
-#page-header.shopping-cart {
-  background-image: none;
-}
-
-#page-header.checkout {
-  background-image: none;
-}
-
-#page-header.my-account {
-  background-image: none;
-}
-
-#page-header.single-post {
-  background-image: none;
-}
-
-#page-header.faq {
-  background-image: none;
-}
-
-#page-header.components {
-  background-image: none;
-}
 
 /* End No Image by Default */
 /* End Single Page Headers */

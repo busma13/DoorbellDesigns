@@ -15,7 +15,7 @@
                 <div class="page-header wsub">
                     <h1 class="page-title fadeInDown animated first">Doorbells</h1>
                 </div><!-- / page-header -->
-                <p class="slide-text fadeInUp animated second">Your page's description goes here...</p>
+                <!-- <p class="slide-text fadeInUp animated second">Your page's description goes here...</p> -->
             </div><!-- / page-header-content -->
         </div><!-- / container -->
     </div><!-- / page-header -->
