@@ -115,7 +115,7 @@
             <div class="col-sm-4 category">
                 <a href="air-plant-cradles.php">
                     <div class="category-item">
-                        <img src="images/homepage/lotusBlossomCradle.jpg" alt="">
+                        <img src="images/homepage/lotusBlossomCradleSquare.jpg" alt="">
                         <div class="overlay">
                             <div class="caption">
                                 <h4>Air Plant Cradles</h4>

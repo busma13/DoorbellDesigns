@@ -28,13 +28,13 @@ include 'header-pt2.php';
 
 
 
-    <div id="page-header" class="complete">
+    <div id="page-header" class="confirmation">
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub">
                     <h1 class="page-title fadeInDown animated first">Checkout Complete</h1>
                 </div><!-- / page-header -->
-                <p class="slide-text fadeInUp animated second"></p>
+                <!-- <p class="slide-text fadeInUp animated second"></p> -->
             </div><!-- / page-header-content -->
         </div><!-- / container -->
     </div><!-- / page-header -->

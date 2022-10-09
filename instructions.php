@@ -12,7 +12,7 @@
                 <div class="page-header wsub">
                     <h1 class="page-title fadeInDown animated first">Instructions</h1>
                 </div><!-- / page-header -->
-                <p class="slide-text fadeInUp animated second"></p>
+                <!-- <p class="slide-text fadeInUp animated second"></p> -->
             </div><!-- / page-header-content -->
         </div><!-- / container -->
     </div><!-- / page-header -->

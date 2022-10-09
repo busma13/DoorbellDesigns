@@ -12,7 +12,7 @@
                 <div class="page-header wsub">
                     <h1 class="page-title fadeInDown animated first">Custom Orders</h1>
                 </div><!-- / page-header -->
-                <p class="slide-text fadeInUp animated second"></p>
+                <!-- <p class="slide-text fadeInUp animated second"></p> -->
             </div><!-- / page-header-content -->
         </div><!-- / container -->
     </div><!-- / page-header -->
@@ -27,9 +27,8 @@
     <div class="container">
         <div class="text-wrap">
             <div class="page-header text-center space-top-30">
-                <h3>Custom Orders</h3>
+                <h3>We make custom orders:</h3>
             </div><!-- / page-header -->
-            <p class="large-p">We make custom orders:</p>
             <p>A design of your own - $50</p>
             <p>To replace an old intercom with one of our designs - $50</p>
             <!-- <p>Words you would like added - varies, based on number of words and size necessary.</p> -->
