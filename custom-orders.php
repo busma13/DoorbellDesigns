@@ -31,9 +31,8 @@
             </div><!-- / page-header -->
             <p>A design of your own - $50</p>
             <p>To replace an old intercom with one of our designs - $50</p>
-            <!-- <p>Words you would like added - varies, based on number of words and size necessary.</p> -->
-            <p>Most doorbell designs can accommodate words, Welcome, Shalom, Aloha, Go Away, Mi Casa Su Casa, etc. That costs an extra $5.00.</p>
-            <p>If you would like a custom designed doorbell, the price will depend on the design. Let us know what you would like and we can give you a price.</p>
+            <p>Words you would like added - varies, based on number of words and size necessary.</p>
+            
             <p><a href="./contact.php">Contact us</a> to place a custom order.</p>
 
             <h4 class="space-top-2x text-center">Examples of Custom Orders:</h4>
