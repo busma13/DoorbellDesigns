@@ -4102,6 +4102,7 @@ footer .widget {
   border: none;
 }
 
+
 .footer-info span {
   vertical-align: middle;
   padding: 10px 0;
@@ -4222,6 +4223,11 @@ footer .widget-area {
   padding: 50px 0;
 }
 
+footer .widget-area > .container > .flex-container {
+  justify-content: space-around;
+
+}
+
 footer .about-widget img {
   width: auto;
   max-height: 20px;
@@ -4260,14 +4266,14 @@ footer #newsletter .form-control {
   min-height: 42px;
 }
 
-.widget-area .flex-container {
-  flex-flow: column, wrap;
-  flex-wrap: wrap;
+.link-widget .flex-container {
+  flex-flow: column wrap;
   align-content: flex-start;
 }
 
-.widget-area .flex-container > * {
-  flex-basis: 50%;
+.link-widget .info {
+  /* flex-basis: 50%; */
+
 }
 
 /* End Footer Widgets */
@@ -4381,8 +4387,12 @@ footer #newsletter .form-control {
     padding-left: 8px;
   }
 
-  .widget-area .col-md-4, .widget-area .col-md-3 {
-    /* padding: 15px; */
+  footer .widget-title h4 {
+    font-size: 30px;
+  }
+
+  footer a {
+    font-size: 12px;
   }
 
   .post-footer .pull-left, .post-footer .pull-right {
@@ -4601,6 +4611,14 @@ footer #newsletter .form-control {
     padding-bottom: 20px;
   }
 
+  footer .widget-title h4 {
+    font-size: 26px;
+  }
+
+  footer a {
+    font-size: 11px;
+  }
+
   .inst-container p{
     /* font-size: 11px; */
     line-height: 2.5rem;
@@ -4644,6 +4662,17 @@ footer #newsletter .form-control {
 
   .inst-container p{
     line-height: 2rem;
+  }
+
+  footer .widget-area > .container > .flex-container {
+    flex-wrap: wrap;
+  }
+  footer .widget {
+    width: 40%;
+  }
+
+  footer a {
+    font-size: 14px;
   }
 }
 @media only screen and (max-width: 580px) {
@@ -4737,8 +4766,9 @@ footer #newsletter .form-control {
     height: 200px;
   }
   
-
-
+  footer .widget {
+    width: 100%;
+  }
 
 }
 /* Min Widths */
