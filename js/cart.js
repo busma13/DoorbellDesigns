@@ -196,27 +196,31 @@ function updateTotalCost(qty, product) {
 // Loads all of the products into the shopping cart table and updates the cart totals
 function displayCart() {
     let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
-    //console.log(productsInCart);
+    console.log(Object.entries(productsInCart).length);
     let productTable = document.querySelector('.cart-table-body')
-    if ( productsInCart && productTable ) {
-        productTable.innerHTML = '';
-        Object.values(productsInCart).map(item => {
-            productTable.innerHTML += `
-            <tr class="cart-item" id="${item.itemName}Base${item.baseColor}">
-                <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="images/${(item.mainCategory).toLowerCase()}-small/${item.imgUrl}" alt="${item.itemNameString}"></a></td>
-                <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemNameString}</a></td>
-                <td><span>${item.baseColor}</span></td>
-                <td>$${item.price}</td>
-                <td class="qty"><input type="number" step="1" min="1" name="cart" value="${item.qtyInCart}" title="Qty" class="input-text qty text qty-input-box" size="4"></td>
-                <td>$${(item.price * item.qtyInCart).toFixed(2)}</td>
-                <td class="remove"><a href="#x" class="btn btn-danger-filled x-remove">×</a></td>
-            </tr>
-            `; 
-        });
-        
-        updateSingleProductTotals()
-        removeProductFromCart()
-        updateCartTotals()
+    if ( productTable) {
+        if (Object.entries(productsInCart).length > 0){
+            productTable.innerHTML = '';
+            Object.values(productsInCart).map(item => {
+                productTable.innerHTML += `
+                <tr class="cart-item" id="${item.itemName}Base${item.baseColor}">
+                    <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="images/${(item.mainCategory).toLowerCase()}-small/${item.imgUrl}" alt="${item.itemNameString}"></a></td>
+                    <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemNameString}</a></td>
+                    <td><span>${item.baseColor}</span></td>
+                    <td>$${item.price}</td>
+                    <td class="qty"><input type="number" step="1" min="1" name="cart" value="${item.qtyInCart}" title="Qty" class="input-text qty text qty-input-box" size="4"></td>
+                    <td>$${(item.price * item.qtyInCart).toFixed(2)}</td>
+                    <td class="remove"><a href="#x" class="btn btn-danger-filled x-remove">×</a></td>
+                </tr>
+                `; 
+            });
+            
+            updateSingleProductTotals()
+            removeProductFromCart()
+            updateCartTotals()
+        } else {
+            productTable.innerHTML += '<tr><td>Your cart is empty</td></tr>'
+        }
     }
 }
 
@@ -342,4 +346,4 @@ function updateCartTotals() {
 }
 
 updateCartCount();
-displayCart()
+displayCart();
