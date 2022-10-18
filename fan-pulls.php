@@ -16,7 +16,7 @@
             </div><!-- / page-header-content -->
         </div><!-- / container -->
     </div><!-- / page-header -->
-
+    <hr>
 </header>
 <!-- / header -->
 
@@ -29,15 +29,13 @@
 
             <div class="col-sm-12 content-area">
                 <!-- product filter -->
-                <ul class="product-filter list-inline text-center">
+                <!-- <ul class="product-filter list-inline text-center">
                     <li><a href="#" data-group="all" class="active">All</a></li>
                     <li><a href="#" data-group="saguaros">Saguaros</a></li>
                     <li><a href="#" data-group="hamsas">Hamsas</a></li>
                     <li><a href="#" data-group="hearts">Hearts</a></li>
                     <li><a href="#" data-group="rods">Rods</a></li>
-                    <!-- <li><a href="#" data-group="misc">Miscellaneous</a></li> -->
-                    <!-- <li><a href="#" data-group="custom">Custom Orders</a></li> -->
-                </ul>
+                </ul> -->
                 <!-- / product filter -->
                 <div id="grid" class="row">
 
