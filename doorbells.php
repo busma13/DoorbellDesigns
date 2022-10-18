@@ -19,7 +19,7 @@
             </div><!-- / page-header-content -->
         </div><!-- / container -->
     </div><!-- / page-header -->
-
+    <hr>
 </header>
 <!-- / header -->
 
@@ -40,7 +40,7 @@
                     <li><a href="#" data-group="animals">Animals</a></li>
                     <li><a href="#" data-group="petroglyphs">Petroglyphs</a></li>
                     <li><a href="#" data-group="plants">Plants</a></li>
-                    <li><a href="#" data-group="southwest">Southwest</a></li>
+                    <!-- <li><a href="#" data-group="southwest">Southwest</a></li> -->
                     <li><a href="#" data-group="one">One Of A Kind</a></li>
                     <li><a href="#" data-group="miscellaneous">Miscellaneous</a></li>
                     <!-- <li><a href="./custom-orders.php" data-group="custom">Custom Orders</a></li> -->

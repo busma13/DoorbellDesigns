@@ -11,12 +11,12 @@
 
 
 
-    <div id="header-sliders">
-        <!-- slider -->
+    <!-- <div id="header-sliders">
+        <!-- slider -- >
         <div id="slider" class="carousel slide">  
             <div class="carousel-inner">
 
-                <!-- slide 1 -->
+                <!-- slide 1 -- >
                 <div class="item active slide1 fashion">
                     <div class="container">
                         <div class="carousel-caption">
@@ -25,13 +25,13 @@
                                     <h3 class="slide-title fadeInDown animated first">Doorbells</h3>
                                     <p class="slide-text flipInX animated second">Quisque vitae tempor libero. Cum sociis natoque penatibus et magnis dis parturient montes.</p>
                                     <a href="doorbells.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-cart"></i> <span>Shop Now</span></a>
-                                </div><!-- slider-content -->
-                            </div><!-- / row -->
-                        </div><!-- / carousel-caption -->
-                    </div><!-- / container -->
-                </div><!-- / slide 1 -->
+                                </div><!-- slider-content -- >
+                            </div><!-- / row -- >
+                        </div><!-- / carousel-caption -- >
+                    </div><!-- / container -- >
+                </div><!-- / slide 1 -- >
 
-                <!-- slide 2 -->
+                <!-- slide 2 -- >
                 <div class="item slide2 furniture">
                     <div class="container">
                         <div class="carousel-caption">
@@ -40,13 +40,13 @@
                                     <h3 class="slide-title fadeInDown animated first">Ceiling Fan Pulls</h3>
                                     <p class="slide-text flipInX animated second">Vivamus facilisis sapien enim, eget lobortis ante faucibus vel. In hendrerit arcu eget arcu fringilla.</p>
                                     <a href="fan-pulls.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
-                                </div><!-- slider-content -->
-                            </div><!-- / row -->
-                        </div><!-- / carousel-caption -->
-                    </div><!-- / container -->
-                </div><!-- / slide 2 -->
+                                </div><!-- slider-content -- >
+                            </div><!-- / row -- >
+                        </div><!-- / carousel-caption -- >
+                    </div><!-- / container -- >
+                </div><!-- / slide 2 -- >
 
-                <!-- slide 3 -->
+                <!-- slide 3 -- >
                 <div class="item slide3 art">
                     <div class="container">
                         <div class="carousel-caption">
@@ -55,23 +55,33 @@
                                     <h3 class="slide-title fadeInDown animated first">Air Plant Cradles</h3>
                                     <p class="slide-text flipInX animated second">Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus sapien libero.</p>
                                     <a href="air-plant-cradles.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
-                                </div><!-- slider-content -->
-                            </div><!-- / row -->
-                        </div><!-- / carousel-caption -->
-                    </div><!-- / container -->
-                </div><!-- / slide 3 -->
+                                </div><!-- slider-content -- >
+                            </div><!-- / row -- >
+                        </div><!-- / carousel-caption -- >
+                    </div><!-- / container -- >
+                </div><!-- / slide 3 -- >
 
-            </div><!-- /carousel-inner -->
+            </div><!-- /carousel-inner -- >
 
-            <!-- controls -->
+            <!-- controls -- >
             <a class="left carousel-control" href="#slider" data-slide="prev"><span class="lnr lnr-chevron-left"></span></a>
             <a class="right carousel-control" href="#slider" data-slide="next"><span class="lnr lnr-chevron-right"></span></a>
-            <!-- / controls -->
+            <!-- / controls -- >
 
         </div>
-        <!-- / slider-->
-    </div><!-- / sliders -->
-
+        <!-- / slider-- >
+    </div>/ sliders -->
+    <div id="page-header" class="about">
+        <div class="container">
+            <div class="page-header-content text-center">
+                <div class="page-header wsub">
+                    <h1 class="page-title fadeInDown animated first">Doorbell Designs</h1>
+                </div><!-- / page-header -->
+                <!-- <p class="slide-text fadeInUp animated second"></p> -->
+            </div><!-- / page-header-content -->
+        </div><!-- / container -->
+    </div><!-- / page-header -->
+    <hr>
 </header>
 <!-- / header -->
 
@@ -83,7 +93,7 @@
         <div class="page-header text-center wsub">
             <h2>Shop Categories</h2>
         </div><!--/ page-header -->
-        <p class="title-description text-center">Proin malesuada commodo magna, eu porta nulla luctus id. Integer bibendum dolor id mi dignissim pulvinar. Proin tincidunt elit in augue congue efficitur.</p>
+        <p class="title-description text-center"></p>
         <div class="row">
 
             <div class="col-sm-4 category">

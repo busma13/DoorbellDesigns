@@ -2,48 +2,49 @@
 <footer class="light-footer">
     <div class="widget-area">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-md-4 widget">
+            <div class="flex-container">
+                <!-- first widget -->
+                <div class="widget">
                     <div class="widget-title">
                         <h4>Doorbells</h4>
                     </div>
                     <div class="link-widget">
-                            <div class="flex-container">
-                                <div class="info">
+                        <div class="flex-container">
+                            <div class="info">
                                 <a href="doorbells.php">All</a>
                             </div>
-                                <div class="info">
-                                    <a href="doorbells.php?category=beachy">Beachy</a>
-                                </div>
-                                <div class="info">
-                                    <a href="doorbells.php?category=contemporary">Contemporary</a>
-                                </div>
-                                <div class="info">
-                                    <a href="doorbells.php?category=dog%20lovers">Dog Lovers</a>
-                                </div>
-                                <div class="info">
-                                    <a href="doorbells.php?category=animals">Animals</a>
-                                </div>
-                                <div class="info">
-                                    <a href="doorbells.php?category=petroglyphs">Petroglyph</a>
-                                </div>
-                                <div class="info">
-                                    <a href="doorbells.php?category=plants">Plants</a>
-                                </div>
-                                <div class="info">
-                                    <a href="doorbells.php?category=southwest">Southwest</a>
-                                </div>
-                                <div class="info">
-                                    <a href="doorbells.php?category=miscellaneous">Miscellaneous</a>
-                                </div>
+                            <div class="info">
+                                <a href="doorbells.php?category=dog%20lovers">Dog Lovers</a>
                             </div>
+                            <div class="info">
+                                <a href="doorbells.php?category=beachy">Beachy</a>
+                            </div>
+                            <div class="info">
+                                <a href="doorbells.php?category=contemporary">Contemporary</a>
+                            </div>
+                            <div class="info">
+                                <a href="doorbells.php?category=animals">Animals</a>
+                            </div>
+                            <div class="info">
+                                <a href="doorbells.php?category=petroglyphs">Petroglyph</a>
+                            </div>
+                            <div class="info">
+                                <a href="doorbells.php?category=plants">Plants</a>
+                            </div>
+                            <!-- <div class="info">
+                                <a href="doorbells.php?category=southwest">Southwest</a>
+                            </div> -->
+                            <div class="info">
+                                <a href="doorbells.php?category=miscellaneous">Miscellaneous</a>
+                            </div>
+                        </div>
                     </div>
                 </div><!-- / widget -->
                     
-                <!-- / first widget -->
-                <div class="col-sm-6 col-md-3 widget pad-to-clear">
+                <!-- second widget -->
+                <div class="widget pad-to-clear">
                     <div class="widget-title">
-                        <h4>Miscellaneous</h4>
+                        <h4>Misc</h4>
                     </div>
                     <div class="link-widget">
                         <div class="info">
@@ -67,9 +68,9 @@
                         </div> -->
                     </div>
                 </div><!-- / widget -->
-                <!-- / second widget -->
 
-                <div class="col-sm-6 col-md-2 widget pad-to-clear">
+                <!-- third widget -->
+                <div class="widget pad-to-clear">
                     <div class="widget-title">
                         <h4>Support</h4>
                     </div>
@@ -91,21 +92,21 @@
                         </div>
                     </div>
                 </div><!-- / widget -->
-                <!-- / third widget -->
 
-                <div class="col-sm-6 col-md-2 widget pad-to-clear">
+                <!-- contact-widget -->
+                <div class="widget pad-to-clear">
                     <div class="widget-title">
                         <h4>Get in Touch</h4>
                     </div>
                     <div class="contact-widget">
                         <div class="info">
-                            <p><i class="lnr lnr-map-marker"></i><span>11885 Rocoso Road<br> Lakeside, CA 92040-1035</span></p>
+                            <p><i class="lnr lnr-map-marker"></i><span>11885 Rocoso Road<br> Lakeside, CA 92040</span></p>
                         </div>
                         <div class="info space-top">
                             <a href="tel:6194431872"><i class="lnr lnr-phone-handset"></i><span>619-443-1872</span></a>
                         </div>
                         <div class="info">
-                            <a href="mailto:info@cicadaceramics.com"><i class="lnr lnr-envelope"></i><span>info@cicadaceramics.com</span></a>
+                            <a href="mailto:info@cicadaceramics.com"><i class="lnr lnr-envelope"></i><span>info@cicada<wbr>ceramics.com</span></a>
                         </div>
                         <!-- <div class="info">
                             <p class="social pull-left">
@@ -117,9 +118,8 @@
                                 <a href="#"><i class="fa fa-dribbble"></i></a>
                             </p>
                         </div> -->
-                    </div><!-- / contact-widget -->
-                </div><!-- / widget -->
-                <!-- / fourth widget -->
+                    </div>
+                </div><!-- / contact-widget -->
 
             </div><!-- / row -->
         </div><!-- / container -->
@@ -127,7 +127,7 @@
     <div class="footer-info">
         <div class="row">
                 <div class="center-block">
-                    <p>© 2022 - <strong>Cicada Ceramics</strong> </p>
+                    <p>© <?php echo date("Y")?> - <strong>Cicada Ceramics</strong> </p>
                 </div>
                 
         </div><!-- / container -->

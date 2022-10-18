@@ -38,7 +38,7 @@ include 'header-pt2.php';
             </div><!-- / page-header-content -->
         </div><!-- / container -->
     </div><!-- / page-header -->
-
+    <hr>
 </header>
 <!-- / header -->
 
