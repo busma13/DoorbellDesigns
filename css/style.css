@@ -2143,10 +2143,9 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
   font-size: 16px;
   line-height: 30px;
 }
-
 .shopping-cart tbody td {
   color: #666666;
-  padding: 10px 0;
+  padding: 10px 3px;
   vertical-align: middle;
   font-size: 14px;
 }
@@ -4676,6 +4675,10 @@ footer #newsletter .form-control {
 
   .inst-container p{
     line-height: 2rem;
+  }
+
+  .shopping-cart tbody td.image {
+    display: none;
   }
 
   footer .widget-area > .container > .flex-container {
