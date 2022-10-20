@@ -25,12 +25,11 @@
 <!-- faq -->
 <section id="about">
     <div class="container">
-        <!-- <h4 class="space-left space-bottom-2x">Frequently Asked Questions</h4> -->
         <main>
             <h4>Quick Links:</h4>
             <ul>
-                <li><a href="/doorbelldesigns/instructions.php">Installation Instructions</a></li>
-                <li><a href="/doorbelldesigns/custom-orders.php">Custom Orders</a></li>
+                <li><a href="instructions.php">Installation Instructions</a></li>
+                <li><a href="custom-orders.php">Custom Orders</a></li>
             </ul>
             
             
