@@ -3144,6 +3144,7 @@ section {
   background-size: cover;
   background-position: center;
   background-color: #f8f8f8;
+  background-image: url("../images/page-header.jpg");
   min-height: 200px;
 }
 
@@ -3171,23 +3172,23 @@ section {
   color: #ebebeb;
 }
 
-#page-header.confirmation {
+/* #page-header.confirmation {
   background-image: url("../images/page-header.jpg");
-}
+} */
 
-#page-header.shop-left {
+/* #page-header.shop-left {
   background-image: url("../images/page-header.jpg");
-}
+} */
 
-#page-header.shop-full {
+/* #page-header.shop-full {
   background-image: url("../images/page-header.jpg");
-}
+} */
 
-#page-header.shop-filter {
+/* #page-header.shop-filter {
   background-image: url("../images/page-header.jpg");
-}
+} */
 
-#page-header.about {
+/* #page-header.about {
   background-image: url("../images/page-header.jpg");
 }
 
@@ -3213,7 +3214,7 @@ section {
 
 #page-header.faq {
   background-image: url("../images/page-header.jpg");
-}
+} */
 /* No Image by Default */
 #page-header.single-product {
   background-image: none;
@@ -3233,6 +3234,10 @@ section {
   border: 1px solid #ebebeb;
   height: 30px;
   margin-top: -10px;
+}
+
+#shop {
+  padding-top: 0;
 }
 
 #shop .pagination {
@@ -4405,6 +4410,11 @@ footer #newsletter .form-control {
     height: 400px;
   }
 }
+@media only screen and (max-width: 900px) {
+  #page-header {
+    background-image: url(../images/page-header-900.jpg);
+  }
+}
 @media only screen and (max-width: 767px) {
   .title-description {
     width: 80%;
@@ -4628,6 +4638,10 @@ footer #newsletter .form-control {
   .title-description {
     width: 100%;
     margin: 15px auto 30px auto;
+  }
+
+  #page-header {
+    background-image: url(../images/page-header-600.jpg);
   }
 
   #contactForm .form-control {
