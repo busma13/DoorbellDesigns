@@ -196,7 +196,7 @@ function updateTotalCost(qty, product) {
 // Loads all of the products into the shopping cart table and updates the cart totals
 function displayCart() {
     let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
-    console.log(Object.entries(productsInCart).length);
+    if (productsInCart) console.log(Object.entries(productsInCart).length);
     let productTable = document.querySelector('.cart-table-body')
     if ( productTable) {
         if (Object.entries(productsInCart).length > 0){

@@ -3239,6 +3239,9 @@ section {
   padding-top: 0;
 }
 
+#shop .container {
+  width: 100%
+}
 #shop .pagination {
   padding: 0 10px;
   width: 100%;
