@@ -21,8 +21,8 @@
 
 <?php
 
-//Retrieve all products in category
-$get_category_products_sql = 'SELECT * FROM products WHERE mainCategory = "'.$_GET['category'].'";';
+//Retrieve all active products in category
+$get_category_products_sql = 'SELECT * FROM products WHERE mainCategory = "'.$_GET['category'].'" AND active = 1;';
 // $productCountQueryResult = mysqli_query($conn, $get_count_sql);
 // $productCountResultCheck = mysqli_num_rows($productCountQueryResult);
 
