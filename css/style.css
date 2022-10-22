@@ -3459,7 +3459,7 @@ section {
 
 .buy-product .selectors {
   display: inline;
-  position: relative;
+  /* position: relative; */
   width: 100%;
 }
 
