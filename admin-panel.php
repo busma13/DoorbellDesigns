@@ -316,9 +316,9 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                     
                 <tr id="<?php echo $row['date']?>">
                     <td><button class="deleteShowButton"><i class="lnr lnr-trash"></i></button></td>
-                    <td class="scheduleDateString"><time><?php echo $row['dateString']?></time></td>
-                    <td class="scheduleName"><?php echo $row['name']?></td>
-                    <td class="scheduleLocation"><?php echo $row['location']?></td>
+                    <td class="scheduleDateString can-edit"><time><?php echo $row['dateString']?></time></td>
+                    <td class="scheduleName can-edit"><?php echo $row['name']?></td>
+                    <td class="scheduleLocation can-edit"><?php echo $row['location']?></td>
                 </tr>
                 
 <?php
