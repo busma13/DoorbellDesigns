@@ -293,9 +293,11 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
             <tbody id="show-table-body"> 
                 <tr>
                     <th></th>
-                    <th class="show-date">Date</th>
+                    <th class="show-start-date">Start Date</th>
+                    <th class="show-end-date">End Date</th>
                     <th class="show-name">Name</th>
                     <th class="show-location">Location</th>
+                    <th class="show-booth">Booth</th>
                 </tr>
             
 <?php
@@ -316,9 +318,11 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                     
                 <tr id="<?php echo $row['date']?>">
                     <td><button class="deleteShowButton"><i class="lnr lnr-trash"></i></button></td>
-                    <td class="scheduleDateString can-edit"><time><?php echo $row['dateString']?></time></td>
+                    <td class="scheduleStartDateString can-edit"><time><?php echo $row['startDateString']?></time></td>
+                    <td class="scheduleEndDateString can-edit"><time><?php echo $row['endDateString']?></time></td>
                     <td class="scheduleName can-edit"><?php echo $row['name']?></td>
                     <td class="scheduleLocation can-edit"><?php echo $row['location']?></td>
+                    <td class="scheduleBooth can-edit"><?php echo $row['booth']?></td>
                 </tr>
                 
 <?php

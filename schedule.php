@@ -36,6 +36,7 @@
                         <th class="show-date">Date</th>
                         <th class="show-name">Name</th>
                         <th class="show-location">Location</th>
+                        <th class="show-booth">Booth</th>
                     </tr>
 
 <?php
@@ -52,12 +53,20 @@ catch (PDOException $e)
 /* If there is a PDO exception, throw a standard exception */
 throw new Exception('Database query error');
 }
-while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
+while ($row = $res->fetch(PDO::FETCH_ASSOC)) { 
+    if ($row['startDateString'] == $row['endDateString']) {
+        $dateString = $row['startDateString'];
+    } else {
+        $dateString = $row['startDateString'] . ' - ' . $row['endDateString'];
+    }
+    
+?>
                     
                     <tr class="flex-container">
-                        <td><time><?php echo $row['dateString']?></time></td>
+                        <td><time><?php echo $dateString?></time></td>
                         <td><?php echo $row['name']?></td>
                         <td><?php echo $row['location']?></td>
+                        <td><?php echo $row['booth']?></td>
                     </tr>
                 
 <?php

@@ -82,20 +82,24 @@ var editable = {
   selected : null,  // current selected cell
   close : (evt) => { if (evt.target != editable.selected) {
       // (C1) send value to server
-      let date, dateString, name, location, id, value;
+      let date, startDateString, endDateString, name, location, id, value;
     let cell = editable.selected;
     let column = cell.classList[0];
     if (cell.parentNode.id.length > 4) {//cell is from show table
         date = cell.parentNode.id;
-        dateString = cell.parentNode.children[1].textContent;
-        name = cell.parentNode.children[2].textContent;
-        location = cell.parentNode.children[3].textContent;
+        startDateString = cell.parentNode.children[1].textContent;
+        endDateString = cell.parentNode.children[2].textContent;
+        name = cell.parentNode.children[3].textContent;
+        location = cell.parentNode.children[4].textContent;
+        booth = cell.parentNode.children[5].textContent;
         console.log(cell);
         console.log(column);
         console.log(date);
-        console.log(dateString);
+        console.log(startDateString);
+        console.log(endDateString);
         console.log(name);
         console.log(location);
+        console.log(booth);
         updateSchedule();
     } else {//cell is from product table
         id = cell.parentNode.id;
@@ -109,9 +113,11 @@ var editable = {
     async function updateSchedule() {
         let obj = {
             'date': date,
-            'dateString': dateString,
+            'startDateString': startDateString,
+            'endDateString': endDateString,
             'name': name,
             'location': location,
+            'booth': booth,
             'column': column
         }
         try{
@@ -339,23 +345,35 @@ function addShow(event) {
   row.appendChild(td1);
 
   td2 = document.createElement('td');
-  td2.classList.add("scheduleDateString");
+  td2.classList.add("scheduleStartDateString");
   td2.innerHTML = '<time>Date</time>';
   td2.ondblclick = () => { editable.edit(td2); };
   row.appendChild(td2);
-
-  td3= document.createElement('td');
-  td3.classList.add("scheduleName");
-  td3.innerHTML = 'Show Name';
+  
+  td3 = document.createElement('td');
+  td3.classList.add("scheduleEndDateString");
+  td3.innerHTML = '<time>Date</time>';
   td3.ondblclick = () => { editable.edit(td3); };
   row.appendChild(td3);
 
-  td4 = document.createElement('td');
-  td4.classList.add("scheduleLocation");
-  td4.innerHTML = 'Location';
+  td4= document.createElement('td');
+  td4.classList.add("scheduleName");
+  td4.innerHTML = 'Show Name';
   td4.ondblclick = () => { editable.edit(td4); };
   row.appendChild(td4);
-                
+
+  td5 = document.createElement('td');
+  td5.classList.add("scheduleLocation");
+  td5.innerHTML = 'Location';
+  td5.ondblclick = () => { editable.edit(td5); };
+  row.appendChild(td5);
+  
+  td6 = document.createElement('td');
+  td6.classList.add("scheduleBooth");
+  td6.innerHTML = 'Booth';
+  td6.ondblclick = () => { editable.edit(td6); };
+  row.appendChild(td6);
+
   document.querySelector('#show-table-body').appendChild(row); 
 }
 
