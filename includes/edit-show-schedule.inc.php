@@ -30,32 +30,43 @@ if(! is_array($decoded))
   ]));
 
 $oldDate = $decoded['date'];
-$editDateString = $decoded['dateString'];
+$editStartDateString = $decoded['startDateString'];
+$editEndDateString = $decoded['endDateString'];
 $editName = $decoded['name'];
 $editLocation = $decoded['location'];
-$newDate = date("Y-m-d", strtotime($decoded['dateString']));
+$editBooth = $decoded['booth'];
+$newDate = date("Y-m-d", strtotime($decoded['startDateString']));
 
-if ($decoded['column'] === 'scheduleDateString') {
-    
+if ($decoded['column'] === 'scheduleStartDateString') {   
     $query = "INSERT INTO shows
-                VALUES (:newDate, :editDateString, :editName, :editLocation)
+                VALUES (:newDate, :editStartDateString, :editEndDateString, :editName, :editLocation, :editBooth)
                 ON DUPLICATE KEY UPDATE
                   date = :newDate, 
-                  dateString = :editDateString;
+                  startDateString = :editStartDateString;
               DELETE FROM shows WHERE date = :oldDate;";
+} else if ($decoded['column'] === 'scheduleEndDateString') {   
+    $query = "INSERT INTO shows
+                VALUES (:newDate, :editStartDateString, :editEndDateString, :editName, :editLocation, :editBooth)
+                ON DUPLICATE KEY UPDATE
+                  endDateString = :editEndDateString;";
 } else if ($decoded['column'] === 'scheduleName') {
     $query = "INSERT INTO shows
-                VALUES (:newDate, :editDateString, :editName, :editLocation)
+                VALUES (:newDate, :editStartDateString, :editEndDateString, :editName, :editLocation, :editBooth)
                 ON DUPLICATE KEY UPDATE
                   name = :editName;";
 } else if ($decoded['column'] === 'scheduleLocation') {
     $query = "INSERT INTO shows
-                VALUES (:newDate, :editDateString, :editName, :editLocation)
+                VALUES (:newDate, :editStartDateString, :editEndDateString, :editName, :editLocation)
                 ON DUPLICATE KEY UPDATE
                   location = :editLocation;";
+} else if ($decoded['column'] === 'scheduleBooth') {
+  $query = "INSERT INTO shows
+              VALUES (:newDate, :editStartDateString, :editEndDateString, :editName, :editLocation, :editBooth)
+              ON DUPLICATE KEY UPDATE
+                booth = :editBooth;";
 }
 
-$values = array(':newDate' => $newDate, ':oldDate' => $oldDate, ':editDateString' => $editDateString, ':editName' => $editName, ':editLocation' => $editLocation);
+$values = array(':newDate' => $newDate, ':oldDate' => $oldDate, ':editStartDateString' => $editStartDateString, ':editEndDateString' => $editEndDateString, ':editName' => $editName, ':editLocation' => $editLocation, ':editBooth' => $editBooth);
 
 /* Execute the query */
 try
