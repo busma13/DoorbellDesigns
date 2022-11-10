@@ -32,11 +32,11 @@
             </div><!-- / page-header -->
             <table>
                 <tbody class="show">
-                    <tr class="flex-container">
+                    <tr class="flex-container header">
                         <th class="show-date">Date</th>
                         <th class="show-name">Name</th>
                         <th class="show-location">Location</th>
-                        <th class="show-booth">Booth</th>
+                        <th class="show-booth booth">Booth</th>
                     </tr>
 
 <?php
@@ -66,7 +66,7 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
                         <td><time><?php echo $dateString?></time></td>
                         <td><?php echo $row['name']?></td>
                         <td><?php echo $row['location']?></td>
-                        <td><?php echo $row['booth']?></td>
+                        <td class="booth"><?php echo $row['booth']?></td>
                     </tr>
                 
 <?php
@@ -77,6 +77,7 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
                         <td></td>
                         <td>* Denotes confirmed show</td>
                         <td></td>
+                        <td class="booth"></td>
                     </tr>
                 </tbody>
             </table>

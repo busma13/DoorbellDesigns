@@ -2202,7 +2202,15 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 }
 
 #schedule .flex-container > * {
-  flex-basis: 25%;
+  text-align: center;
+}
+
+#schedule .flex-container > * {
+  flex: 1 25%;
+}
+
+#schedule .booth {
+  flex: 1 2
 }
 
 /* / Schedule Table */
