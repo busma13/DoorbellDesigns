@@ -370,7 +370,7 @@ function addShow(event) {
   
   td6 = document.createElement('td');
   td6.classList.add("scheduleBooth");
-  td6.innerHTML = 'Booth';
+  td6.innerHTML = 'TBD';
   td6.ondblclick = () => { editable.edit(td6); };
   row.appendChild(td6);
 

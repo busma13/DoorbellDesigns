@@ -56,7 +56,7 @@ if ($decoded['column'] === 'scheduleStartDateString') {
                   name = :editName;";
 } else if ($decoded['column'] === 'scheduleLocation') {
     $query = "INSERT INTO shows
-                VALUES (:newDate, :editStartDateString, :editEndDateString, :editName, :editLocation)
+                VALUES (:newDate, :editStartDateString, :editEndDateString, :editName, :editLocation, :editBooth)
                 ON DUPLICATE KEY UPDATE
                   location = :editLocation;";
 } else if ($decoded['column'] === 'scheduleBooth') {
