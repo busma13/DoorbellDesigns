@@ -3145,6 +3145,12 @@ section {
 }
 
 /* End Instructions */
+/* Custom Orders */
+#custom .flex-container {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* End Custom Orders */
 /* Single Page Headers */
 #page-header {
   background-repeat: no-repeat;
@@ -4702,6 +4708,8 @@ footer #newsletter .form-control {
   footer a {
     font-size: 14px;
   }
+
+
 }
 @media only screen and (max-width: 580px) {
   .product-hover-tools {
@@ -4798,7 +4806,19 @@ footer #newsletter .form-control {
     width: 100%;
   }
 
+  .col-xs-6 {
+    width: 100%;
+  }
 }
+
+@media only screen and (max-width: 300px) {
+  /* Change styles for modal cancel button and delete button on extra small screens */
+  .modal-button-container {
+    flex-direction: column;
+  }
+}
+/* End Max Widths */
+
 /* Min Widths */
 @media only screen and (min-width: 1200px) {
   .container {
@@ -4836,12 +4856,6 @@ footer #newsletter .form-control {
 
 }
 
-@media only screen and (max-width: 300px) {
-  /* Change styles for modal cancel button and delete button on extra small screens */
-  .modal-button-container {
-    flex-direction: column;
-  }
-}
 /* End Min Widths */
 /* / End Media Screens */
 
