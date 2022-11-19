@@ -20,6 +20,15 @@
 </header>
 <!-- / header -->
 
+<!-- Modal between submit and redirect -->
+<div id="waitForRedirect" class="modal">
+    <span onclick="document.getElementById('waitForRedirect').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <div class="modal-content">
+        <h1>Just a moment...</h1>
+        <p>Redirecting to Square Checkout</p>   
+    </div>
+</div>
+
 <!-- content -->
 
 <!-- shopping-cart -->
@@ -29,7 +38,7 @@
             <div class="col-sm-8 checkout-form">
                 <h4 class="space-left">Checkout</h4>
                 <!-- <p class="space-left have-account">Already have an account? <a href="login-register.html" class="btn btn-link"><i class="lnr lnr-enter"></i><span>Login</span></a></p> -->
-                <form action="./includes/order.inc.php" method="POST">
+                <form action="./includes/order.inc.php" method="POST" onsubmit="openSubmitOrderModal()">
                     <div class="row">
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="first-name" placeholder="*First name" required>

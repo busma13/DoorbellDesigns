@@ -21,43 +21,12 @@ var ls = {
 
 // load the product list from local storage or retrieve from database
 let productList = ls.get('productList')
-console.log(productList);
 if (productList === null) {
     getProductList();   
 }
-// console.log(productList[0])
-// console.log(Object.keys(productList))
 
-// // Grab all the buttons that add items on a shop page
-// let addToCartBtns = document.querySelectorAll('.add-to-cart');
-
-// // Add event listeners to buttons
-// for (let i = 0; i < addToCartBtns.length; i++) {
-//     addToCartBtns[i].addEventListener('click', addToCart)
-// }
-
-// async function addToCart(event) {
-//     let productName = event.currentTarget.id;
-//     let product;
-//     console.log(ls.get('productList'))
-//     if (ls.get('productList') === null) {
-//         console.log('if')
-//         await getProductList();
-//         console.log(ls.get('productList'))
-//         product = ls.get('productList').find(product => product.itemName === productName);
-//     } else {
-//         console.log('else')
-//         product = ls.get('productList').find(product => product.itemName === productName);
-//     }
-//     console.log(event.currentTarget);
-//     cartItemCount(1, product);
-//     updateTotalCost(1, product);
-// }
-
-// Grab the button that adds items on a single product page
 let addToCartBtnSinglePage = document.querySelector('.add-to-cart-single');
 
-// Add event listener to button
 if (addToCartBtnSinglePage) {
     addToCartBtnSinglePage.addEventListener('click', addToCartSingle)
 }
@@ -70,22 +39,13 @@ async function addToCartSingle(event) {
     } else {
         color = 'N/A';
     }
-    console.log(color);
     let productName = event.currentTarget.id;
     let product;
-    console.log(ls.get('productList'))
     if (ls.get('productList') === null) {
-        console.log('if')
-        await getProductList();
-        console.log(ls.get('productList'))
-        product = ls.get('productList').find(product => product.itemName === productName);
-    } else {
-        console.log('else')
-        product = ls.get('productList').find(product => product.itemName === productName);
-    }
+        getProductList();
+    } 
+    product = ls.get('productList').find(product => product.itemName === productName);
     product.baseColor = color;
-    console.log(event.currentTarget);
-    console.log(productName, product)
     cartItemCount(qty, product);
     updateTotalCost(qty, product);
 }
@@ -98,11 +58,10 @@ async function getProductList() {
             contentType: 'application/json',
             mimeType: 'application/json'
         });
+        
         data = await response.json();
-        // console.log(data);
-
         ls.set('productList', data, 86400000)
-        productList = JSON.parse(ls.get('productList'))
+        productList = ls.get('productList')
         console.log('product list set');
     } 
     catch(error) {
@@ -143,26 +102,16 @@ function setItems(qty, product) {
     let cartContents = JSON.parse(localStorage.getItem('cartProducts'));
     
     if(cartContents) {//there are items in the cart
-        if (!cartContents[product.itemName+'Base'+product.baseColor]) {//no product with this name in cart
+        if (!cartContents[product.itemName+'Base'+product.baseColor]) {//no product with this name & base color in cart
             console.log(1)
             product.qtyInCart = qty;
             cartContents = {
                 ...cartContents,
                 [product.itemName+'Base'+product.baseColor]: product
             }
-        } else {//product with this name is in the cart
-
-            if (!cartContents[product.itemName+'Base'+product.baseColor]) {//no product with this base color
-                console.log(2)
-                product.qtyInCart = qty;
-                cartContents = {
-                    ...cartContents,
-                    [product.itemName]: product
-                }
-            } else {//product with this base color is in the cart
-                console.log(3)
-                cartContents[product.itemName+'Base'+product.baseColor].qtyInCart += qty;
-            }
+        } else {//product with this name & base color is in the cart
+            console.log(3)
+            cartContents[product.itemName+'Base'+product.baseColor].qtyInCart += qty;
         }
     } else {//there are no items in the cart
         console.log(4)

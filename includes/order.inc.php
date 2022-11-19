@@ -213,18 +213,13 @@ if (isset($_POST['submit'])) {
             $body->setOrder($order);
             $body->setCheckoutOptions($checkout_options);
             
-            // checkoutAPI
             $api_response = $client->getCheckoutApi()->createPaymentLink($body);
             
             if ($api_response->isSuccess()) {
                 $result = $api_response->getResult();
                 $order_id = $result->getPaymentLink()->getOrderId();
                 $payment_link_id = $result->getPaymentLink()->getId();
-                // $payment_link = json_encode($result->getPaymentLink()->getUrl());
-                // $payment_link =  stripslashes($payment_link);
-
-                
-
+               
                 // store order info in the orders database
                 $insert_sql = "INSERT INTO orders (id, first_name, last_name, tel, email, address_line, city, state, zip, cart_products, order_id, paid) VALUES (:id, :first, :last, :tel, :email, :address_line, :city, :state, :zip, :products, :order_id, :paid);";
                 
@@ -279,13 +274,11 @@ if (isset($_POST['submit'])) {
                     $errors = $api_response->getErrors();
                     $json = json_encode($errors);
                     exit($json);
-                    // header("Location: ./checkout.php?ex=" . $exception);
                 }
             } else {
                 $errors = $api_response->getErrors();
                 $json = json_encode($errors);
                 exit($json);
-                // header("Location: ./checkout.php?ex=" . $exception);
             }
         }
     }

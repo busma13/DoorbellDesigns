@@ -1,7 +1,11 @@
 let selectedState = document.querySelector('.stateSelect');
+let checkoutBtn = document.querySelector('#checkout-btn')
 
 //Update estimated tax when state selector is changed.
 selectedState.addEventListener('change', updateCartTotals);
+
+//Disable Checkout button after first click
+// checkoutBtn.addEventListener('click', disableCheckoutButton)
 
 //Updates all the prices in the Cart Total area of the checkout page
 function updateCartTotals() {
@@ -43,13 +47,22 @@ function createCartList() {
     }
     localStorage.setItem('cartList', JSON.stringify(checkoutList));
     document.querySelector('#cart-list-input').value = JSON.stringify(checkoutList);
-    // console.log(checkoutList)
+
+    //Disable Checkout button if cart is empty
+    if (checkoutList.length === 0) {
+        disableCheckoutButton()
+    }
 }
 
-//Disable Checkout button after first click
-document.querySelector('#checkout-btn').addEventListener('click', (e) => {
-    e.currentTarget.classList.add('disabled');
-})
+function disableCheckoutButton() {
+    checkoutBtn.classList.add('disabled');
+}
+
+document.querySelector("#checkout-btn").addEventListener('submit', openSubmitOrderModal)
+
+function openSubmitOrderModal(event) {
+    document.getElementById('waitForRedirect').style.display='block';
+}
 
 updateCartTotals();
 createCartList();
