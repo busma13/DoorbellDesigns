@@ -53,14 +53,6 @@
 <!-- / header -->
 <hr>
 
-<!-- <button class="trigger">Click here to trigger the modal!</button>
-<div class="modal">
-    <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h1>Hello, I am a modal!</h1>
-    </div>
-</div> -->
-
 <!-- Modal for confirming a product delete -->
 <div id="deleteConfProduct" class="modal">
     <span onclick="document.getElementById('deleteConfProduct').style.display='none'" class="close" title="Close Modal">&times;</span>
