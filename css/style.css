@@ -4094,6 +4094,18 @@ a.btn-social {
   text-align: center;
 }
 
+#waitForRedirect {
+  left: 20%;
+  top: 20%;
+  width: 60%;
+  height: 60%;
+}
+
+.holdSpace {
+  height: 200px;
+  position: fixed;
+}
+
 /* / Checkout */
 
 /* Confirmation */
@@ -4694,7 +4706,7 @@ footer #newsletter .form-control {
     line-height: 2rem;
   }
 
-  .shopping-cart tbody td.image {
+  .shopping-cart .image {
     display: none;
   }
 
@@ -4786,9 +4798,6 @@ footer #newsletter .form-control {
     display: block;
   }
 
-  .selectpicker {
-    /* margin-top: 15px; */
-  }
 
   .product-hover-tools {
     bottom: 80px;
@@ -4808,6 +4817,10 @@ footer #newsletter .form-control {
 
   .col-xs-6 {
     width: 100%;
+  }
+
+  .shopping-cart thead th {
+    font-size: 12px;
   }
 }
 

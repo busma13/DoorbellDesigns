@@ -1,5 +1,8 @@
 // This script file controls all shopping cart functionality
 
+const goToCheckoutBtn = document.querySelector('.go-to-checkout')
+const addToCartBtnSinglePage = document.querySelector('.add-to-cart-single');
+
 // Stores an item in local storage with an expiration
 var ls = {
     set: function (variable, value, ttl_ms) {
@@ -24,8 +27,6 @@ let productList = ls.get('productList')
 if (productList === null) {
     getProductList();   
 }
-
-let addToCartBtnSinglePage = document.querySelector('.add-to-cart-single');
 
 if (addToCartBtnSinglePage) {
     addToCartBtnSinglePage.addEventListener('click', addToCartSingle)
@@ -129,6 +130,13 @@ function updateCartCount() {
     let numOfItems = Number(localStorage.getItem('cartItemCount'));
     if(numOfItems != undefined) {
         document.querySelector('.cartCount').textContent = numOfItems;
+        if (goToCheckoutBtn) {
+            if (numOfItems === 0) {
+                goToCheckoutBtn.classList.add('disabled');
+            } else {
+                goToCheckoutBtn.classList.remove('disabled');
+            }
+        }
     }
 }
 

@@ -4,9 +4,6 @@ let checkoutBtn = document.querySelector('#checkout-btn')
 //Update estimated tax when state selector is changed.
 selectedState.addEventListener('change', updateCartTotals);
 
-//Disable Checkout button after first click
-// checkoutBtn.addEventListener('click', disableCheckoutButton)
-
 //Updates all the prices in the Cart Total area of the checkout page
 function updateCartTotals() {
     let subtotal = Number(localStorage.getItem('cartTotal'));
@@ -14,7 +11,6 @@ function updateCartTotals() {
 
     let estimatedTax = 0;
     let stateIndex = selectedState.selectedIndex;
-    console.log(stateIndex);
     if (stateIndex === 4) {
         estimatedTax = Number(Math.round(subtotal * 0.0775 + 'e2') + 'e-2');
     }
@@ -61,7 +57,8 @@ function disableCheckoutButton() {
 document.querySelector("#checkout-btn").addEventListener('submit', openSubmitOrderModal)
 
 function openSubmitOrderModal(event) {
-    document.getElementById('waitForRedirect').style.display='block';
+    document.getElementById('preloader').style.display='block';
+    // document.getElementById('waitForRedirect').style.display='block';
 }
 
 updateCartTotals();

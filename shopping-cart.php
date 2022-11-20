@@ -63,7 +63,7 @@
 
             <div class="col-sm-6 cart-checkout">
                 <a href="index.php#categories" class="btn btn-default-filled btn-rounded"><i class="lnr lnr-cart"></i> <span>Continue Shopping</span></a>
-                <a href="checkout.php" class="btn btn-primary-filled btn-rounded"><i class="lnr lnr-exit"></i> <span>Proceed to Checkout</span></a>
+                <a href="checkout.php" class="btn btn-primary-filled btn-rounded go-to-checkout"><i class="lnr lnr-exit"></i> <span>Proceed to Checkout</span></a>
             </div><!-- / cart-checkout -->
 
 

@@ -22,10 +22,12 @@
 
 <!-- Modal between submit and redirect -->
 <div id="waitForRedirect" class="modal">
-    <span onclick="document.getElementById('waitForRedirect').style.display='none'" class="close" title="Close Modal">&times;</span>
     <div class="modal-content">
         <h1>Just a moment...</h1>
-        <p>Redirecting to Square Checkout</p>   
+        <p>Redirecting to Square Payment Page</p>   
+    </div>
+    <div class="holdSpace">
+        <div class="spinner spinner-round"></div>
     </div>
 </div>
 
