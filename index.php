@@ -99,7 +99,7 @@
             <div class="col-sm-4 category">
                 <a href="doorbells.php">
                     <div class="category-item">
-                        <img src="images/homepage/welcomeDoorbell.jpg" alt="">
+                        <img src="images/homepage/welcomeDoorbell.jpg" alt="Doorbells">
                         <div class="overlay">
                             <div class="caption">
                                 <h4>Doorbells</h4>
@@ -112,7 +112,7 @@
             <div class="col-sm-4 category">
                 <a href="fan-pulls.php">
                     <div class="category-item">
-                        <img src="images/homepage/fan-pulls.jpg" alt="">
+                        <img src="images/homepage/fan-pulls.jpg" alt="Fan Pulls">
                         <div class="overlay">
                             <div class="caption">
                                 <h4>Ceiling Fan Pulls</h4>
@@ -125,7 +125,7 @@
             <div class="col-sm-4 category">
                 <a href="air-plant-cradles.php">
                     <div class="category-item">
-                        <img src="images/homepage/lotusBlossomCradleSquare.jpg" alt="">
+                        <img src="images/homepage/lotusBlossomCradleSquare.jpg" alt="Air Plant Cradles">
                         <div class="overlay">
                             <div class="caption">
                                 <h4>Air Plant Cradles</h4>

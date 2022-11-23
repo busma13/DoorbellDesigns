@@ -1,13 +1,8 @@
 <?php
     session_start();
     include_once './includes/dbh.inc.php';
-
-    /* Include the Account class file */
     include './includes/account-class.php';
-
-    /* Create a new Account object */
     $account = new Account();
-    
     include_once 'includes/dbh.inc.php';
     include 'header-pt1.php';
     $title = 'Doorbell Designs Admin - Login';
@@ -48,7 +43,7 @@
         <div class="log-in flex-container">
             <p class="space-top text-center">You are logged in as: <?php echo $account->getName() ?></p>
             <div class="space-top flex-container logged-in">
-                <a href="./admin-panel.php" class="space-top-2x btn btn-primary-filled btn-rounded no-margin"></i><span>Go To Admin Panel</span></a>
+                <a href="./admin-panel.php" class="btn btn-primary-filled btn-rounded"><span>Go To Admin Panel</span></a>
 
                 <form action="./includes/admin-login.inc.php" method="POST">
                     <button type="submit" name="logout" id="checkout-btn" class="btn btn-primary-filled btn-rounded">Log out</button>
