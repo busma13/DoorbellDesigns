@@ -16,7 +16,6 @@
                 <div class="page-header wsub">
                     <h1 class="page-title fadeInDown animated first">Admin Login</h1>
                 </div><!-- / page-header -->
-                <p class="slide-text fadeInUp animated second">Please log in to acces your admin panel</p>
             </div><!-- / page-header-content -->
         </div><!-- / container -->
     </div><!-- / page-header -->
@@ -40,7 +39,7 @@
     if ($login)
     { ?>
         
-        <div class="log-in flex-container">
+        <div class="log-in flex-container space-top-2x space-bottom-2x">
             <p class="space-top text-center">You are logged in as: <?php echo $account->getName() ?></p>
             <div class="space-top flex-container logged-in">
                 <a href="./admin-panel.php" class="btn btn-primary-filled btn-rounded"><span>Go To Admin Panel</span></a>
@@ -58,7 +57,7 @@
 
 <!-- content -->
 
-<form action="./includes/admin-login.inc.php" method="POST" class="log-in flex-container">
+<form action="./includes/admin-login.inc.php" method="POST" class="log-in flex-container space-top-2x space-bottom-2x">
     <fieldset class="space-top">
         <label for="userName">User name:</label>
         <input type="text" name="userName" placeholder="User name" id="userName">
@@ -71,6 +70,9 @@
 
 </form>
 
+<?php
+    }
+?>
 
 <!-- / content -->
 
@@ -79,10 +81,6 @@
     include 'footer.php';
 ?>
 <!-- / footer -->
-
-<?php
-    }
-?>
 
 <!-- javascript -->
 <script src="js/jquery.min.js"></script>
