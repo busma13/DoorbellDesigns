@@ -2,9 +2,7 @@
 include_once 'dbh.inc.php';
 
 /* Get content type */
-$contentType = trim($_SERVER["CONTENT_TYPE"] ?? ''); // PHP 8+
-// Otherwise:
-// $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+$contentType = trim($_SERVER["CONTENT_TYPE"] ?? ''); 
 
 /* Send error to Fetch API, if unexpected content type */
 if ($contentType !== "application/json")
@@ -21,26 +19,34 @@ $content = trim(file_get_contents("php://input"));
 $decoded = json_decode($content, true);
 
 /* Send error to Fetch API, if JSON is broken */
-if(! is_array($decoded))
+if(! is_array($decoded)) {
   exit(json_encode([
     'value' => 0,
     'error' => 'Received JSON is improperly formatted',
     'data' => null,
   ]));
+}
 
-$deleteId = $decoded['deletedId'];
+$deletedId = $decoded['deletedId'];
+$deletedImgUrl = $decoded['deletedImgUrl'];
+$deletedMainCategory = $decoded['deletedMainCategory'];
 
-// $response = $editColumn;
-$query = "DELETE FROM products WHERE id = :deleteId;";
+$query = "DELETE FROM products WHERE id = :deletedId;";
 
-/* Execute the query */
 try
 {
   $res = $pdo->prepare($query);
-  $res->bindParam(':deleteId', $deleteId);
+  $res->bindParam(':deletedId', $deletedId);
   $success = $res->execute();
     
     if ($success) {
+     unlink(dirname(__FILE__, 2) . '/images/' . strtolower($deletedMainCategory) . '-small/' . $deletedImgUrl);
+      unlink(dirname(__FILE__, 2) . '/images/' . strtolower($deletedMainCategory) . '-medium/' . $deletedImgUrl);
+      unlink(dirname(__FILE__, 2) . '/images/' . strtolower($deletedMainCategory) . '-large/' . $deletedImgUrl);
+      if (strtolower($deletedMainCategory) === 'air-plant-cradles') {
+        unlink(dirname(__FILE__, 2) . '/images/color-samples/' . $deletedImgUrl);
+      }
+
       $response = 'success';
     }
     else {
