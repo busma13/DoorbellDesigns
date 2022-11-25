@@ -274,22 +274,34 @@ productTrashCans.forEach(can => {
 
 function openDeleteProductModal(event) {
     document.getElementById('deleteConfProduct').style.display='block';
-    let row = event.currentTarget.parentNode.parentNode;
-    let rowId = row.id;
+    let rowId = event.currentTarget.id;
     console.log(rowId);
+    let imgUrl = event.currentTarget.dataset.imgUrl;
+    console.log(imgUrl);
+    let mainCategory = event.currentTarget.dataset.mainCategory;
+    console.log(mainCategory);
+
     let productDelete = document.querySelector('#btn-delete-product');
     productDelete.dataset['id'] = rowId;
+    productDelete.dataset['imgUrl'] = imgUrl;
+    productDelete.dataset['mainCategory'] = mainCategory;
     productDelete.addEventListener('click', deleteProduct);
 }
 
 async function deleteProduct(event) {
     let rowId = event.currentTarget.dataset.id;
+    let imgUrl = event.currentTarget.dataset.imgUrl;
+    let mainCategory = event.currentTarget.dataset.mainCategory;
+
     let row = document.getElementById(rowId);
-    console.log(row);
 
     let obj = {
-        'deletedId': rowId
+        'deletedId': rowId,
+        'deletedImgUrl': imgUrl,
+        'deletedMainCategory': mainCategory
     }
+
+    console.log(obj)//TODO: check this
 
     try{
         const response = await fetch (

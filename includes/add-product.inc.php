@@ -36,13 +36,13 @@ if (isset($_POST['addProduct'])) {
 
     //Check that the file was uploaded properly
     if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-      $uploadedFile = dirname(__FILE__, 2) . '/images' . '/' . strtolower($_POST['mainCategory']) . '-original/' . $imgUrl;
+      $uploadedFile = dirname(__FILE__, 2) . '/images/' . strtolower($_POST['mainCategory']) . '-original/' . $imgUrl;
       if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadedFile)) {
         //format image to the 3 needed sizes
         try {
-          resizer($uploadedFile, dirname(__FILE__, 2) . '/images' . '/' . strtolower($_POST['mainCategory']) . "-small/" . $imgUrl, [180, 200]);
-          resizer($uploadedFile, dirname(__FILE__, 2) . '/images' . '/' . strtolower($_POST['mainCategory']) . "-medium/" . $imgUrl, [720, 800]);
-          resizer($uploadedFile, dirname(__FILE__, 2) . '/images' . '/' . strtolower($_POST['mainCategory']) . "-large/" . $imgUrl, [1080, 1200]);
+          resizer($uploadedFile, dirname(__FILE__, 2) . '/images/' . strtolower($_POST['mainCategory']) . "-small/" . $imgUrl, [180, 200]);
+          resizer($uploadedFile, dirname(__FILE__, 2) . '/images/' . strtolower($_POST['mainCategory']) . "-medium/" . $imgUrl, [720, 800]);
+          resizer($uploadedFile, dirname(__FILE__, 2) . '/images/' . strtolower($_POST['mainCategory']) . "-large/" . $imgUrl, [1080, 1200]);
         } catch (Exception $err) {
           header("Location: ../admin-panel.php?addProduct=imageResizeError#add-form");
         }

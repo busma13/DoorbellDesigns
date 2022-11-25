@@ -23,6 +23,10 @@
 
     if ($login)
     {
+        include 'header-pt1.php';
+        $title = 'Doorbell Designs Admin - Admin Panel';
+        echo $title;
+        include 'header-pt2.php';
         // echo 'Authentication successful.';
         // echo 'Account ID: ' . $account->getId() . '<br>';
         echo 'Logged in as: ' . $account->getName() . '<br>';
@@ -30,14 +34,7 @@
             <form action="./includes/admin-login.inc.php" method="POST">
                 <button type="submit" name="logout" id="checkout-btn" class="btn btn-primary-filled btn-rounded">Log out</button>
             </form>
-        <?php
-    
 
-        include 'header-pt1.php';
-        $title = 'Doorbell Designs Admin - Admin Panel';
-        echo $title;
-        include 'header-pt2.php';
-?>
 
     <!-- <div id="page-header" class=""> -->
         <div class="container">
@@ -244,7 +241,7 @@ throw new Exception('Database query error');
 }
 while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                 <tr id="<?php echo $row['id']?>">
-                    <td><button class="deleteProductButton"><i class="lnr lnr-trash"></i></button></td>
+                    <td><button id="<?php echo $row['id']?>" class="deleteProductButton" data-img-url="<?php echo $row['imgUrl']?>" data-main-category="<?php echo $row['mainCategory']?>"><i class="lnr lnr-trash"></i></button></td>
                     <td class="img"><img src="images/<?php echo strtolower($row['mainCategory']) . '-small/' . $row['imgUrl'] ?>"></td>
                     <td class="itemNameString can-edit"><?php echo $row['itemNameString']?></td>
                     <td class="mainCategory can-edit"><?php echo $row['mainCategory']?></td>
@@ -279,7 +276,6 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
 </div><!-- / container -->
 
 <div class="container">
-    <h4 class="space-left">Current Schedule:</h4>
     <div id="show-table-container">
         <table class="editable">
             <tbody id="show-table-body"> 
@@ -325,7 +321,7 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
     </div>
     <p id="responseMessageShow"></p>
 
-    <button name="addShow" id="addShowButton" class="btn btn-primary-filled btn-rounded btn-edit-show">Add a Show</button>
+    <button name="addShow" id="addShowButton" class="btn btn-primary-filled btn-rounded btn-edit-show">Add Show</button>
 
 
 </div><!-- / edit schedule -->
