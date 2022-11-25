@@ -155,8 +155,8 @@ function displayCart() {
     let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
     if (productsInCart) console.log(Object.entries(productsInCart).length);
     let productTable = document.querySelector('.cart-table-body')
-    if ( productTable) {
-        if (Object.entries(productsInCart).length > 0){
+    if (productTable) {
+        if (productsInCart && Object.entries(productsInCart).length > 0){
             productTable.innerHTML = '';
             Object.values(productsInCart).map(item => {
                 productTable.innerHTML += `
