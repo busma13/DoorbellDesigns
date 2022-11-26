@@ -61,7 +61,11 @@ if (isset($_POST['submit'])) {
             $line_items = array();
             $TAX_RATE = 7.75; // get this from database call instead?
             $totalShippingCents = 0;
-            $qtyAtEachShippingPrice = new stdClass;
+            $shippingQuantities = new stdClass;
+            $shippingQuantities->doorbells5 = 0;
+            $shippingQuantities->doorbells3fifty = 0;
+            $shippingQuantities->fanPulls = 0;
+            $shippingQuantities->airPlantCradles = 0;
 
              // add California tax if applicable
              if ($state === 'CA') {
@@ -69,7 +73,7 @@ if (isset($_POST['submit'])) {
                 $order_line_item_tax->setName('State Sales Tax');
                 $order_line_item_tax->setUid('state-sales-tax');
                 $order_line_item_tax->setPercentage($TAX_RATE);
-                $order_line_item_tax->setScope('LINE_ITEM');//????
+                $order_line_item_tax->setScope('LINE_ITEM');
 
                 $taxes = [$order_line_item_tax];
             }
@@ -86,10 +90,7 @@ if (isset($_POST['submit'])) {
 
                 $prodId = $obj->id;
                 $get_products_sql = "SELECT * FROM products WHERE id=$prodId;";
-                // $queryResult = mysqli_query($conn, $get_products_sql);
-                // $resultCheck = mysqli_num_rows($queryResult);
 
-                /* Execute the query */
                 try
                 {
                     $res2 = $pdo->prepare($get_products_sql);
@@ -100,22 +101,30 @@ if (isset($_POST['submit'])) {
                     header("Location: ../checkout.php?order=SQL-statement-failed");
                 }
                 while ($row = $res2->fetch(PDO::FETCH_ASSOC)) { 
+                    $priceCents = $row['price'] * 100;
+                    $shippingCents = $row['shipping'] * 100;
+                    $mainCategory = $row['mainCategory'];
+                    // echo $priceCents;
+                    // echo '<br>';
+                    // echo $shippingCents;
+                    // echo '<br>';
+                    // echo $mainCategory;
+                    // echo '<br>';
 
-                // if ($resultCheck > 0) {
-                //     while ($row = mysqli_fetch_assoc($queryResult)) {
-                        $priceCents = $row['price'] * 100;
-                        $shippingCents = $row['shipping'] * 100;
-                        // echo $priceCents;
-                        // echo '<br>';
-                        // echo$shippingCents;
-                        // echo '<br>';
-
-                        if (!$qtyAtEachShippingPrice->$shippingCents) {
-                            $qtyAtEachShippingPrice->$shippingCents = $obj->itemQty;
-                        } else {
-                            $qtyAtEachShippingPrice->$shippingCents += $obj->itemQty;
+                    if ($mainCategory === 'Air-Plant-Cradles') {
+                        $shippingQuantities->airPlantCradles += $obj->itemQty;
+                    }
+                    if ($mainCategory === 'Doorbells') {
+                        if ($shippingCents == 350) {
+                            $shippingQuantities->doorbells3fifty += $obj->itemQty;
+                        } else if ($shippingCents == 500) {
+                            $shippingQuantities->doorbells5 += $obj->itemQty;
                         }
-                    
+                    }
+                    if ($mainCategory === 'Fan-Pulls') {
+                        $shippingQuantities->fanPulls += $obj->itemQty;
+                    }
+                    // print_r($shippingQuantities);
                 }
 
                 $base_price_money = new \Square\Models\Money();
@@ -123,13 +132,13 @@ if (isset($_POST['submit'])) {
                 $base_price_money->setCurrency('USD');
 
                 $order_line_item = new \Square\Models\OrderLineItem($obj->itemQty);
+
                 if ($obj->mainCategory === 'Doorbells') {
                     $order_line_item->setName($obj->itemNameString . ", " . $obj->baseColor . " Base");
                 } else if ($obj->mainCategory === 'Fan-Pulls') {
                     $order_line_item->setName($obj->itemNameString . ", " . $obj->baseColor . " Chains");
                 } else {
                     $order_line_item->setName($obj->itemNameString);
-
                 }
                 $order_line_item->setBasePriceMoney($base_price_money);
 
@@ -144,22 +153,20 @@ if (isset($_POST['submit'])) {
             }
 
             // add shipping cost
-
-            // print_r($qtyAtEachShippingPrice);
-
-            foreach ($qtyAtEachShippingPrice as $price => $qty) {
-                // echo "$price => $qty <br>";
-                if ($price == 350) {
+            foreach ($shippingQuantities as $category => $qty) {
+                if ($category == 'doorbells3fifty') {
                     if($qty % 2 === 0) {
-                        $totalShippingCents += $price * $qty / 2;
-                        // echo $totalShippingCents . '<br>';
+                        $totalShippingCents += 350 * $qty / 2;
                     } else {
-                        $totalShippingCents += $price * ($qty + 1) / 2;
-                        // echo $totalShippingCents . '<br>';
+                        $totalShippingCents += 350 * ($qty + 1) / 2;
                     }
-                } else {
-                    $totalShippingCents += $price * $qty; // fix for other shipping prices
-                    // echo $totalShippingCents . '<br>';
+                } else if ($category === 'doorbells5') {
+                    // console.log(`${qtyAtEachShippingPrice[price]}`)
+                    $totalShippingCents += 500 * $qty;
+                } else if ($category === 'airPlantCradles') {
+                    $totalShippingCents += 600 * $qty;//TODO: update
+                } else if ($category === 'fanPulls') {
+                    if ($qty > 0) $totalShippingCents += 500;
                 }
             }
             

@@ -250,38 +250,53 @@ function calculateShippingTotal() {
     let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
     // console.log('productsInCart', productsInCart.bambooDoorbell);
     let shippingTotal = 0;
-    let qtyAtEachShippingPrice = {};
+    let shippingQuantities = {'doorbells5': 0, 'doorbells3.5': 0, 'fanPulls': 0, 'airPlantCradles': 0};
     for (let product in productsInCart) {
         // console.log(product);
         // console.log(`${productsInCart[product].shipping}`);
+        let itemCategory = productsInCart[product].mainCategory;
         let itemShipping = productsInCart[product].shipping;
         let itemQty = productsInCart[product].qtyInCart;
 
-        if (!qtyAtEachShippingPrice[itemShipping]) {
-            qtyAtEachShippingPrice[itemShipping] = 0;
+        if (itemCategory === 'Air-Plant-Cradles') {
+            shippingQuantities['airPlantCradles'] += itemQty;
         }
-        qtyAtEachShippingPrice[itemShipping] += itemQty;
+        if (itemCategory === 'Doorbells') {
+            if (itemShipping === '3.50') {
+                shippingQuantities['doorbells3.5'] += itemQty;
+            } else if (itemShipping === '5.00') {
+                shippingQuantities['doorbells5'] += itemQty;
+            }
+        }
+        if (itemCategory === 'Fan-Pulls') {
+            shippingQuantities['fanPulls'] += itemQty;
+        }
 
     }
-    console.table(qtyAtEachShippingPrice)
+    console.table(shippingQuantities)
 
     //update for fan pulls, artwork, etc
-    for (let price in qtyAtEachShippingPrice) {
-        // console.log(`${qtyAtEachShippingPrice[price]}`)
-        if (price == 3.5) {
-            if(qtyAtEachShippingPrice[price] % 2 === 0) {
-                // console.log('even')
-                // console.log(Number(price) * qtyAtEachShippingPrice[price] / 2)
-                shippingTotal += Number(price) * qtyAtEachShippingPrice[price] / 2;
+    for (let category in shippingQuantities) {
+        console.log('category: ',category);
+        if (category == 'doorbells3.5') {
+            if(shippingQuantities[category] % 2 === 0) {
+                console.log('even')
+                console.log(3.5 * shippingQuantities[category] / 2)
+                shippingTotal += 3.5 * shippingQuantities[category] / 2;
                 console.log(shippingTotal)
             } else {
-                // console.log('odd')
-                shippingTotal += Number(price) * (qtyAtEachShippingPrice[price] + 1) / 2;
+                console.log('odd')
+                shippingTotal += 3.5 * (shippingQuantities[category] + 1) / 2;
                 console.log(shippingTotal)
             }
-        } else {
+        } else if (category === 'doorbells5') {
             // console.log(`${qtyAtEachShippingPrice[price]}`)
-            shippingTotal += Number(price) * qtyAtEachShippingPrice[price]; // fix for other prices
+            shippingTotal += 5 * shippingQuantities[category];
+            console.log(shippingTotal)
+        } else if (category === 'airPlantCradles') {
+            shippingTotal += 6 * shippingQuantities[category];//TODO: update
+        } else if (category === 'fanPulls') {
+            if (shippingQuantities[category] > 0) shippingTotal += 5;
             console.log(shippingTotal)
         }
     }
