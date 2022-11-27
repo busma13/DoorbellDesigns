@@ -1,2 +1,3 @@
 ErrorDocument 404 /doorbelldesigns/404.php
 ErrorDocument 500 /doorbelldesigns/500.php
+Options +MultiViews
