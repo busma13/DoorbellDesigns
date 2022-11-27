@@ -2837,8 +2837,8 @@ section {
 }
 
 #featured-products .item {
-  margin: 10px;
-  padding: 0 30px;
+  margin-bottom: 0;
+  /* padding: 0 30px; */
 }
 
 #products-carousel .item img {
@@ -2864,11 +2864,23 @@ section {
 .product-details {
   display: table;
   width: 100%;
-  padding: 15px 0;
+  padding: 5px 10px;
+  border: 1px solid #4cbbdb;
+  border-top: none;
 }
 
 .product .product-title {
   height: 73px;
+}
+
+.product {
+  margin-bottom: 25px;
+}
+
+.shuffle-item a {
+  width: auto;
+  left: 15px;
+  right: 15px;
 }
 
 .product img {
@@ -2876,6 +2888,8 @@ section {
   -webkit-transition: ease-in-out 0.3s;
   -moz-transition: ease-in-out 0.3s;
   transition: ease-in-out 0.3s;
+  border: 1px solid #4cbbdb;
+  border-bottom: none;
 }
 
 .product:hover img {

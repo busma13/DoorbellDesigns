@@ -264,17 +264,6 @@
                 <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
                 <!-- / product-image -->
 
-                <!-- product-hover-tools -->
-                <!-- <div class="product-hover-tools">
-                    <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>" class="view-btn">
-                        <i class="lnr lnr-eye"></i>
-                    </a>
-                    <a class="add-to-cart" id="<?php echo $row['itemName'] ?>">
-                        <i class="lnr lnr-cart"></i>
-                    </a>
-                </div> -->
-                <!-- / product-hover-tools -->
-
                 <!-- product-details -->
                 <div class="product-details">
                     <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
@@ -287,33 +276,6 @@
             
         }
    ?>
-
-            
-            
-            <!-- product -->
-            <!-- <div class="col-xs-6 col-md-4 product">
-                <span class="sale-label">SALE</span>
-                <a href="single-product.php" class="product-link"></a>
-                <! -- / product-link -- >
-                <img src="images/f-product.jpg" alt="">
-                <! -- / product-image -->
-
-                <!-- product-hover-tools -- >
-                <div class="product-hover-tools">
-                    <a href="single-product.php" class="view-btn">
-                        <i class="lnr lnr-eye"></i>
-                    </a>
-                    <a href="shopping-cart.php" class="add-to-cart">
-                        <i class="lnr lnr-cart"></i>
-                    </a>
-                </div><! -- / product-hover-tools -->
-
-                <!-- product-details -- >
-                <div class="product-details">
-                    <h3 class="product-title">Leather Bag</h3>
-                    <h6 class="product-price"><del>$149</del> <span class="sale-price">$79</span></h6>
-                </div><!-- / product-details -- >
-            </div>/ product -->
 
             <!-- grid-resizer -->
             <div class="col-xs-6 col-md-4 shuffle_sizer"></div>
