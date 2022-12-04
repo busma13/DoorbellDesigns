@@ -9,7 +9,7 @@
 	global $pdo;
 ?>
 
-    <div id="page-header" class="shop-full">
+    <div id="page-header" class="doorbells">
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub">

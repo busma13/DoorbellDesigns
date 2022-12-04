@@ -2428,7 +2428,7 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 
 .navbar-brand > img {
   width: auto;
-  max-height: 20px;
+  max-height: 70px;
 }
 
 .navbar-toggle {
@@ -3207,13 +3207,17 @@ section {
   background-image: url("../images/page-header.jpg");
 } */
 
-/* #page-header.shop-full {
-  background-image: url("../images/page-header.jpg");
-} */
+#page-header.air-plant-cradles {
+  background-image: url("../images/air-plant-cradles-header.jpg");
+  min-height: auto;
+  background-color: #FFF;
+}
 
-/* #page-header.shop-filter {
-  background-image: url("../images/page-header.jpg");
-} */
+#page-header.fan-pulls {
+  background-image: url("../images/fan-pulls-header.jpg");
+  min-height: auto;
+  background-color: #FFF;
+}
 
 /* #page-header.about {
   background-image: url("../images/page-header.jpg");
@@ -4395,6 +4399,16 @@ footer #newsletter .form-control {
   #newsletter .input-group {
     width: 80%;
   }
+
+  .navbar-brand .cicada-logo {
+    width: auto;
+    max-height: 70px;
+  }
+
+  .navbar-brand > img {
+    width: auto;
+    max-height: 45px;
+  }
 }
 @media only screen and (max-width: 991px) {
   .split-menu .pull-left {
@@ -4450,6 +4464,16 @@ footer #newsletter .form-control {
 
   #map {
     height: 400px;
+  }
+
+  .navbar-brand .cicada-logo {
+    width: auto;
+    max-height: 45px;
+  }
+
+  .navbar-brand > img {
+    width: auto;
+    max-height: 24px;
   }
 }
 @media only screen and (max-width: 900px) {
@@ -4735,7 +4759,10 @@ footer #newsletter .form-control {
     font-size: 14px;
   }
 
-
+  .navbar-brand .cicada-logo {
+    width: auto;
+    max-height: 30px;
+  }
 }
 @media only screen and (max-width: 580px) {
   .product-hover-tools {
