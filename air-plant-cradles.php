@@ -1,12 +1,12 @@
 <?php
     include_once 'includes/dbh.inc.php';
     include 'header-pt1.php';
-    $title = 'Doorbell Designs - Air Plant Cradles';
+    $title = 'Cicada Ceramics - Air Plant Cradles';
     echo $title;
     include 'header-pt2.php';
 ?>
 
-    <div id="page-header" class="shop-full">
+    <div id="page-header" class="air-plant-cradles">
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub">

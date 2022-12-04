@@ -1,12 +1,12 @@
 <?php
     include_once 'includes/dbh.inc.php';
     include 'header-pt1.php';
-    $title = 'Doorbell Designs - Ceiling Fan Pulls';
+    $title = 'Cicada Ceramics - Ceiling Fan Pulls';
     echo $title;
     include 'header-pt2.php';
 ?>
 
-    <div id="page-header" class="shop-full">
+    <div id="page-header" class="fan-pulls">
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub">
