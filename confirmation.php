@@ -198,10 +198,6 @@ else {
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
-<!-- scrolling-nav -->
-<script src="js/scrolling-nav.js"></script>
-<!-- / scrolling-nav -->
-
 <!-- shuffle grid-resizer -->
 <script src="js/jquery.shuffle.min.js"></script>
 <script src="js/custom.js"></script>

@@ -91,10 +91,6 @@
 <script src="js/cart.js"></script>
 <!-- / cart -->
 
-<!-- scrolling-nav -->
-<script src="js/scrolling-nav.js"></script>
-<!-- / scrolling-nav -->
-
 <!-- shuffle grid-resizer -->
 <script src="js/jquery.shuffle.min.js"></script>
 <script src="js/custom.js"></script>

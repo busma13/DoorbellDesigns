@@ -1,5 +1,6 @@
 const modal = document.querySelectorAll(".modal");
 const btnCancel = document.querySelectorAll(".btn-cancel");
+const scheduleDatePickers = document.querySelectorAll('.scheduleDate');
 let urlString = window.location.href;
 let paramString = urlString.split('?')[1];
 
@@ -48,7 +49,9 @@ async function getProductList() {
 }
 // End Update Product List
 
-// Start Edit Show Table / Edit Product Table 
+// Start Edit Show Table / Edit Product Table
+
+// Controls cells that are editable (not date cells)
 // (A) INITIALIZE - DOUBLE CLICK TO EDIT CELL
 window.addEventListener("DOMContentLoaded", () => {
   for (let cell of document.querySelectorAll(".editable td.can-edit")) {
@@ -81,14 +84,52 @@ var editable = {
   // (C) END "EDIT MODE"
   selected : null,  // current selected cell
   close : (evt) => { if (evt.target != editable.selected) {
-      // (C1) send value to server
-      let date, startDateString, endDateString, name, location, id, value;
-    let cell = editable.selected;
+    // (C1) send values to server
+    sendValuesToServer(editable.selected);
+
+    // (C2) REMOVE "EDITABLE"
+    window.getSelection().removeAllRanges();
+    editable.selected.contentEditable = false;
+
+    // (C3) RESTORE CLICK LISTENERS
+    window.removeEventListener("click", editable.close);
+    // let cell = editable.selected;
+    editable.selected.ondblclick = () => { editable.edit(cell); };
+
+    // (C4) "UNMARK" CURRENT SELECTED CELL
+    editable.selected.classList.remove("edit");
+    editable.selected = null;
+  }}
+};
+
+// controls date cells
+scheduleDatePickers.forEach(picker => {
+    picker.addEventListener('focusout', pickerFocusOut);
+    picker.addEventListener('keydown', pickerKeyDown);
+}); 
+
+function pickerFocusOut(event) {
+    cell = event.currentTarget;
+    console.log(cell)
+    sendValuesToServer(cell);
+}
+
+function pickerKeyDown(event) {
+    if (event.key === 'Enter') {
+        cell = event.currentTarget;
+        sendValuesToServer(cell)
+    }
+}
+
+//choose which table is being updated and send info to the proper function
+function sendValuesToServer(cell) {
+    let date, startDateString, endDateString, name, location, id, value;
     let column = cell.classList[0];
+    console.log(cell.parentNode.id.length);
     if (cell.parentNode.id.length > 4) {//cell is from show table
         date = cell.parentNode.id;
-        startDateString = cell.parentNode.children[1].textContent;
-        endDateString = cell.parentNode.children[2].textContent;
+        startDateString = cell.parentNode.children[1].children[0].value;
+        endDateString = cell.parentNode.children[2].children[0].value;
         name = cell.parentNode.children[3].textContent;
         location = cell.parentNode.children[4].textContent;
         booth = cell.parentNode.children[5].textContent;
@@ -100,17 +141,6 @@ var editable = {
         console.log(name);
         console.log(location);
         console.log(booth);
-        updateSchedule();
-    } else {//cell is from product table
-        id = cell.parentNode.id;
-        value = cell.textContent;
-        console.log(column)
-        console.log(id)
-        console.log(value)
-        updateProduct();
-    }
-    
-    async function updateSchedule() {
         let obj = {
             'date': date,
             'startDateString': startDateString,
@@ -120,88 +150,86 @@ var editable = {
             'booth': booth,
             'column': column
         }
-        try{
-            const response = await fetch (
-            './includes/edit-show-schedule.inc.php', 
-                {
-                    method:'POST',
-                    mode: "same-origin",
-                    cache: 'no-cache',
-                    credentials: "same-origin",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept":       "application/json"
-                    },
-                    redirect: 'follow',
-                    referrerPolicy: 'no-referrer',
-                    body: JSON.stringify(obj)
-                }
-            )
-            data = await response.json();
-            console.log(data);
-    
-        } 
-        catch(error) {
-            console.error(`Could not update schedule: ${error}`);
-        }
-    }
-
-    async function updateProduct() {
+        updateSchedule(obj);
+    } else {//cell is from product table
+        id = cell.parentNode.id;
+        value = cell.textContent;
+        console.log(column)
+        console.log(id)
+        console.log(value)
         let obj = {
             'id': id,
             'value': value,
             'column': column
         }
-        try{
-            const response = await fetch (
-            './includes/edit-product.inc.php', 
-                {
-                    method:'POST',
-                    mode: "same-origin",
-                    cache: 'no-cache',
-                    credentials: "same-origin",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept":       "application/json"
-                    },
-                    redirect: 'follow',
-                    referrerPolicy: 'no-referrer',
-                    body: JSON.stringify(obj)
-                }
-            )
-            console.log(response)
-            data = await response.json();
-            console.log(data);
-                
-            const responseMessageProduct = document.querySelector('.responseMessageProduct');
-
-            if (data === 'success') {
-                responseMessageProduct.textContent = 'Product successfully edited.';
-            } else if (data === 'image-resize error') {
-                responseMessageProduct.textContent = 'Failed to resize images. Please try again.'
-            } else {
-                responseMessageProduct.textContent = 'Error editing product: ' + data;
-            }
-        } 
-        catch(error) {
-            console.error(`Could not update product: ${error}`);
-        }
+        updateProduct(obj);
     }
+}
 
-    // (C2) REMOVE "EDITABLE"
-    window.getSelection().removeAllRanges();
-    editable.selected.contentEditable = false;
+async function updateSchedule(obj) {
+    try{
+        const response = await fetch (
+        './includes/edit-show-schedule.inc.php', 
+            {
+                method:'POST',
+                mode: "same-origin",
+                cache: 'no-cache',
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept":       "application/json"
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(obj)
+            }
+        )
+        data = await response.json();
+        console.log(data);
+        location.reload();
 
-    // (C3) RESTORE CLICK LISTENERS
-    window.removeEventListener("click", editable.close);
-    // let cell = editable.selected;
-    cell.ondblclick = () => { editable.edit(cell); };
+    } 
+    catch(error) {
+        console.error(`Could not update schedule: ${error}`);
+    }
+}
 
-    // (C4) "UNMARK" CURRENT SELECTED CELL
-    editable.selected.classList.remove("edit");
-    editable.selected = null;
-  }}
-};
+async function updateProduct(obj) {
+    try{
+        const response = await fetch (
+        './includes/edit-product.inc.php', 
+            {
+                method:'POST',
+                mode: "same-origin",
+                cache: 'no-cache',
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept":       "application/json"
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(obj)
+            }
+        )
+        console.log(response)
+        data = await response.json();
+        console.log(data);
+            
+        const responseMessageProduct = document.querySelector('.responseMessageProduct');
+
+        if (data === 'success') {
+            responseMessageProduct.textContent = 'Product successfully edited.';
+        } else if (data === 'image-resize error') {
+            responseMessageProduct.textContent = 'Failed to resize images. Please try again.'
+        } else {
+            responseMessageProduct.textContent = 'Error editing product: ' + data;
+        }
+    } 
+    catch(error) {
+        console.error(`Could not update product: ${error}`);
+    }
+}
 
 // Delete show buttons
 let showTrashCans = document.querySelectorAll('.deleteShowButton')
@@ -301,8 +329,6 @@ async function deleteProduct(event) {
         'deletedMainCategory': mainCategory
     }
 
-    console.log(obj)//TODO: check this
-
     try{
         const response = await fetch (
         './includes/delete-product.inc.php', 
@@ -357,14 +383,14 @@ function addShow(event) {
   row.appendChild(td1);
 
   td2 = document.createElement('td');
-  td2.classList.add("scheduleStartDateString");
-  td2.innerHTML = '<time>Date</time>';
+  td2.classList.add("scheduleStartDate");
+  td2.innerHTML = '<input type="date"/>';
   td2.ondblclick = () => { editable.edit(td2); };
   row.appendChild(td2);
   
   td3 = document.createElement('td');
-  td3.classList.add("scheduleEndDateString");
-  td3.innerHTML = '<time>Date</time>';
+  td3.classList.add("scheduleEndDate");
+  td3.innerHTML = '<input type="date"/>';
   td3.ondblclick = () => { editable.edit(td3); };
   row.appendChild(td3);
 

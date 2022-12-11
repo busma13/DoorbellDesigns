@@ -32,8 +32,8 @@ if (empty($_POST["message"])) {
 }
  
 //Add your email here
-$EmailTo = "peterluitjens@gmail.com";
-$Subject = "New Message Received";
+$EmailTo = "info@cicadaceramics.com";
+$Subject = "New Message From Website Form";
  
 // prepare email body text
 $Body = "";

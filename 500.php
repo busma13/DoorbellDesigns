@@ -6,7 +6,7 @@
     include 'header-pt2.php';
 ?>
 
-    <div id="page-header" class="about">
+    <div id="page-header" class="server-error">
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub">

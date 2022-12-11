@@ -3199,13 +3199,13 @@ section {
   color: #ebebeb;
 }
 
-/* #page-header.confirmation {
-  background-image: url("../images/page-header.jpg");
-} */
+#page-header.not-found {
+  background-image: none;
+}
 
-/* #page-header.shop-left {
-  background-image: url("../images/page-header.jpg");
-} */
+#page-header.server-error {
+  background-image: none;
+}
 
 #page-header.air-plant-cradles {
   background-image: url("../images/air-plant-cradles-header.jpg");
@@ -3449,6 +3449,7 @@ section {
 .product-sidebar .product-details {
   background-color: #f8f8f8;
   padding: 30px;
+  border: none;
 }
 
 .product-info .info {
