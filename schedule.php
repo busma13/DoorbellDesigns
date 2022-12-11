@@ -40,7 +40,7 @@
                     </tr>
 
 <?php
-$get_shows_sql = "SELECT * FROM shows ORDER BY date;";
+$get_shows_sql = "SELECT * FROM shows ORDER BY startDate;";
 
 /* Execute the query */
 try

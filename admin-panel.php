@@ -289,7 +289,7 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                 </tr>
             
 <?php
-$get_shows_sql = "SELECT * FROM shows ORDER BY date;";
+$get_shows_sql = "SELECT * FROM shows ORDER BY startDate;";
 
 /* Execute the query */
 try
@@ -302,12 +302,19 @@ catch (PDOException $e)
 /* If there is a PDO exception, throw a standard exception */
 throw new Exception('Database query error');
 }
-while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
+while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        $startDate = date_create($row['startDate']);
+        $startDateString = date_format($startDate, "Y-m-d");
+        $endDate = date_create($row['endDate']);
+        $endDateString = date_format($endDate, "Y-m-d");
+    ?>
                     
-                <tr id="<?php echo $row['date']?>">
+                <tr id="<?php echo $row['startDate']?>">
                     <td><button class="deleteShowButton"><i class="lnr lnr-trash"></i></button></td>
-                    <td class="scheduleStartDateString can-edit"><time><?php echo $row['startDateString']?></time></td>
-                    <td class="scheduleEndDateString can-edit"><time><?php echo $row['endDateString']?></time></td>
+                    <!-- <td class="scheduleStartDateString can-edit"><time>< ?php echo $row['startDateString']?></time></td> -->
+                    <td class="scheduleStartDate scheduleDate"><input type="date" value="<?php echo $startDateString ?>"/></td>
+                    <!-- <td class="scheduleEndDateString can-edit"><time>< ?php echo $row['endDateString']?></time></td> -->
+                    <td class="scheduleEndDate scheduleDate"><input type="date" value="<?php echo $endDateString ?>" /></td>
                     <td class="scheduleName can-edit"><?php echo $row['name']?></td>
                     <td class="scheduleLocation can-edit"><?php echo $row['location']?></td>
                     <td class="scheduleBooth can-edit"><?php echo $row['booth']?></td>

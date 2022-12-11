@@ -12,8 +12,8 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 $client = new SquareClient([
-    'accessToken' => $_ENV['SQUARE_ACCESS_TOKEN'] , //update for production
-    'environment' => $_ENV['ENVIRONMENT'], // update for production
+    'accessToken' => $_ENV['SQUARE_ACCESS_TOKEN'] , //TODO: update for production
+    'environment' => $_ENV['ENVIRONMENT'], //TODO: update for production
 ]);
 
 if (isset($_POST['submit'])) {
@@ -185,7 +185,7 @@ if (isset($_POST['submit'])) {
                 $checkout_options->setRedirectUrl("http://localhost/doorbelldesigns/confirmation.php");
             } 
             else {
-                $checkout_options->setRedirectUrl("http://doorbelldesigns.herokuapp.com/confirmation.php"); //change for production server
+                $checkout_options->setRedirectUrl("http://doorbelldesigns.herokuapp.com/confirmation.php"); //TODO: change for production server
             }
             
             $address = new \Square\Models\Address();
@@ -209,7 +209,7 @@ if (isset($_POST['submit'])) {
             $order_fulfillment->setShipmentDetails($shipment_details);
             
             $fulfillments = [$order_fulfillment];
-            $order = new Order('L20MQK5M4PT2Z'); //location - change from sandbox to real location
+            $order = new Order('L20MQK5M4PT2Z'); //TODO: location - change from sandbox to real location
             
             $order->setLineItems($line_items);
             $order->setTaxes($taxes);
@@ -255,7 +255,7 @@ if (isset($_POST['submit'])) {
                 } 
                 else {
                     $url = "http://doorbelldesigns.herokuapp.com/confirmation.php?orderId=" . $order_id;
-                    $checkout_options->setRedirectUrl($url); //change for production server
+                    $checkout_options->setRedirectUrl($url); //TODO: change for production server
                 }
                 
                 $payment_link = new \Square\Models\PaymentLink(1);

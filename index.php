@@ -304,10 +304,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 
-<!-- scrolling-nav -->
-<script src="js/scrolling-nav.js"></script>
-<!-- / scrolling-nav -->
-
 <!-- cart -->
 <script src="js/cart.js"></script>
 <!-- / cart -->
