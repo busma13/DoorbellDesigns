@@ -271,7 +271,7 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
         <div class="page-header wsub">
             <h1 class="page-title fadeInDown animated first">Edit Show Schedule</h1>
         </div><!-- / page-header -->
-        <p class="slide-text fadeInUp animated second">Double click a date, name, or location to edit the content.  Click a trashcan to delete the whole show. Click the Add Show button to add a new row.</p>
+        <p class="slide-text fadeInUp animated second">Click the calander icon to open the date picker. Double click a name, location, or booth to edit the content. Press enter or click outside of a field to submit the filed data. Click a trashcan to delete the whole show. Click the Add Show button to add a new row.</p>
     </div><!-- / page-header-content -->
 </div><!-- / container -->
 

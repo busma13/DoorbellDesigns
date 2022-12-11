@@ -31,7 +31,7 @@ if(! is_array($decoded))
 $deleteDate = $decoded['date'];
 
 // $response = $editColumn;
-$query = "DELETE FROM shows WHERE date = :deleteDate;";
+$query = "DELETE FROM shows WHERE startDate = :deleteDate;";
 
 /* Execute the query */
 try
