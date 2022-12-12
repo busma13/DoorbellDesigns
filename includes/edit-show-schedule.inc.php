@@ -1,11 +1,10 @@
 <?php
 include_once 'dbh.inc.php';
-require '../turbocommons-php-3.8.0.phar';
 
 /* Get content type */
-$contentType = trim($_SERVER["CONTENT_TYPE"] ?? ''); // PHP 8+
+// $contentType = trim($_SERVER["CONTENT_TYPE"] ?? ''); // PHP 8+
 // Otherwise:
-// $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+$contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
 /* Send error to Fetch API, if unexpected content type */
 if ($contentType !== "application/json")

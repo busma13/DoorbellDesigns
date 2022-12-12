@@ -70,6 +70,29 @@
 
 </form>
 
+<div>
+    <!-- Server side form validation notifications. -->
+    <?php
+                    if (!isset($_GET['login'])) {
+                        //do nothing
+                    }
+                    else {
+                        $loginError = $_GET['login'];
+
+                        if ($loginError == "fail") {
+                            echo "<p class='error'>Your username or password was incorrect. Please try again.</p>";
+                        }
+                        elseif ($loginError == "empty") {
+                            echo "<p class='error'>Please fill out the form completely.</p>";
+                        }
+                        elseif ($addProductCheck == "error") {
+                            echo "<p class='error'>Login error. Please try again.</p>";
+                            echo $_GET('msg');
+                        }
+                    }
+                ?>
+</div>
+
 <?php
     }
 ?>

@@ -1,6 +1,6 @@
 <?php
 include_once 'dbh.inc.php';
-require '../turbocommons-php-3.8.0.phar';
+require './stringUtils.php';
 use org\turbocommons\src\main\php\utils\StringUtils;
 
 if (isset($_POST['addProduct'])) {
@@ -67,7 +67,6 @@ if (isset($_POST['addProduct'])) {
           $res = $pdo->prepare($query);
           $res->execute($values);
           $retVal = $pdo->lastInsertId();
-          echo $retVal;
 
           header("Location: ../admin-panel.php?addProduct=success#add-form");
 
@@ -170,12 +169,3 @@ function resizer($source, $destination, $size, $quality = null)
   imagedestroy($original);
   imagedestroy($resized);
 }
-
-// (EX) EXAMPLE USAGE
-// Percentage resize
-// resizer("Acate.jpg", "resized-A.jpg", 50);
-// resizer("Bdoge.png", "resized-B.png", 25);
-
-// Fixed dimension resize + quality
-// resizer("Acate.jpg", "resized-AA.jpg", [200, 400], 20);
-// resizer("Bdoge.png", "resized-BB.png", [300, 250], 1);
