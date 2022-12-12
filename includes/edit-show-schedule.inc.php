@@ -1,6 +1,5 @@
 <?php
 include_once 'dbh.inc.php';
-require '../turbocommons-php-3.8.0.phar';
 
 /* Get content type */
 $contentType = trim($_SERVER["CONTENT_TYPE"] ?? ''); // PHP 8+
