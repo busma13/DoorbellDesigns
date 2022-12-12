@@ -180,13 +180,8 @@ if (isset($_POST['submit'])) {
             $line_items[] = $order_line_item_shipping;
             
             $checkout_options = new \Square\Models\CheckoutOptions();
-            $host = $_SERVER['HTTP_HOST'];
-            if ($host === 'localhost') {
-                $checkout_options->setRedirectUrl("http://localhost/doorbelldesigns/confirmation.php");
-            } 
-            else {
-                $checkout_options->setRedirectUrl("http://doorbelldesigns.herokuapp.com/confirmation.php"); //TODO: change for production server
-            }
+            
+            $checkout_options->setRedirectUrl("https://releasethehoundsdoorbell.com/confirmation.php"); //TODO: change for production server
             
             $address = new \Square\Models\Address();
             $address->setAddressLine1($address_line);
@@ -248,15 +243,10 @@ if (isset($_POST['submit'])) {
                 //Add the order id to the redirect url from Square to the confirmation page.
                 $checkout_options = new \Square\Models\CheckoutOptions();
                 $host = $_SERVER['HTTP_HOST'];
-                $url = '1';
-                if ($host === 'localhost') {
-                    $url = "http://localhost/doorbelldesigns/confirmation.php?orderId=" . $order_id;
-                    $checkout_options->setRedirectUrl($url);
-                } 
-                else {
-                    $url = "http://doorbelldesigns.herokuapp.com/confirmation.php?orderId=" . $order_id;
-                    $checkout_options->setRedirectUrl($url); //TODO: change for production server
-                }
+                
+                $url = "https://releasethehoundsdoorbell.com/confirmation.php?orderId=" . $order_id;//TODO: change for production server
+
+                $checkout_options->setRedirectUrl($url); 
                 
                 $payment_link = new \Square\Models\PaymentLink(1);
                 $payment_link->setCheckoutOptions($checkout_options);
