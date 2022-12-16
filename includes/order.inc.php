@@ -1,6 +1,6 @@
 <?php
 
-require '../vendor/autoload.php'; 
+require '__DIR__/../vendor/autoload.php'; 
 include_once 'dbh.inc.php';
 
 use Dotenv\Dotenv;
@@ -164,7 +164,7 @@ if (isset($_POST['submit'])) {
                     // console.log(`${qtyAtEachShippingPrice[price]}`)
                     $totalShippingCents += 500 * $qty;
                 } else if ($category === 'airPlantCradles') {
-                    $totalShippingCents += 600 * $qty;//TODO: update
+                    $totalShippingCents += 500 * $qty;
                 } else if ($category === 'fanPulls') {
                     if ($qty > 0) $totalShippingCents += 500;
                 }
@@ -204,10 +204,12 @@ if (isset($_POST['submit'])) {
             $order_fulfillment->setShipmentDetails($shipment_details);
             
             $fulfillments = [$order_fulfillment];
-            $order = new Order('L20MQK5M4PT2Z'); //TODO: location - change from sandbox to real location
+            $order = new Order($_ENV['SQUARE_LOCATION_ID']); //TODO: location - change from sandbox to real location
             
             $order->setLineItems($line_items);
-            $order->setTaxes($taxes);
+            if ($state === 'CA') {
+                $order->setTaxes($taxes);
+            }
             $order->setFulfillments($fulfillments);
             
             $body = new \Square\Models\CreatePaymentLinkRequest();
