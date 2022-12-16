@@ -294,7 +294,7 @@ function calculateShippingTotal() {
             shippingTotal += 5 * shippingQuantities[category];
             console.log(shippingTotal)
         } else if (category === 'airPlantCradles') {
-            shippingTotal += 6 * shippingQuantities[category];//TODO: update
+            shippingTotal += 5 * shippingQuantities[category];
         } else if (category === 'fanPulls') {
             if (shippingQuantities[category] > 0) shippingTotal += 5;
             console.log(shippingTotal)

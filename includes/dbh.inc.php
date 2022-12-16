@@ -1,16 +1,29 @@
 <?php
-// database handler includes folder = dbh.inc.php
 
-$dbServername = "colleendossey.ipowermysql.com";
-$dbUsername = "peterluitjens"; 
-$dbPassword = "bUqp3rn@N"; 
-$dbName = "doorbell_designs";
+require '__DIR__/../vendor/autoload.php'; 
+// database handler includes folder = dbh.inc.php
+use Dotenv\Dotenv;
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+$host = $_SERVER['HTTP_HOST'];
+if ($host === 'localhost') {
+    $dbServername = "localhost"; //needs to point to actual online server 
+    $dbUsername = "root"; //will be different for online server
+    $dbPassword = ""; //xampp has no default pw
+    $dbName = "doorbell_designs";
+}
+else {
+   $dbServername = getenv('DB_SERVER_NAME');
+   $dbUsername = getenv('DB_USER_NAME');
+   $dbPassword = getenv('DB_PASSWORD');
+   $dbName = getenv('DB_NAME');
+}
 
 $pdo = NULL;
 
 /* Connection string, or "data source name" */
 $dsn = 'mysql:host=' . $dbServername . ';dbname=' . $dbName . ';**charset=utf8**';
-
 /* Connection inside a try/catch block */
 try
 {  
