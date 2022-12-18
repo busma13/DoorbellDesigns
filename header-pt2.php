@@ -17,9 +17,9 @@
 <body>
 
 <!-- preloader -->
-<div id="preloader">
+<!-- <div id="preloader">
     <div class="spinner spinner-round"></div>
-</div>
+</div> -->
 <!-- / preloader -->
 
 <!-- header -->
