@@ -59,6 +59,10 @@ h6 {
   margin-bottom: 12px;
 }
 
+hr {
+  margin-bottom: 0;
+}
+
 a {
   color: #4cbbdb;
   -moz-transition: 0.2s ease-in;
@@ -3222,6 +3226,12 @@ section {
   background-color: #FFF;
 }
 
+#page-header.doorbells,
+#page-header.fan-pulls,
+.page-header.air-plant-cradles {
+  margin-bottom: 15px;
+}
+
 #page-header.fan-pulls {
   background-image: url("../images/fan-pulls-header.jpg");
   min-height: auto;
@@ -3277,7 +3287,7 @@ section {
 }
 
 #shop {
-  padding-top: 0;
+  padding-top: 20px;
 }
 
 #shop .container {
