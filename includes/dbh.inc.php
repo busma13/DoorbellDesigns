@@ -1,6 +1,6 @@
 <?php
 
-require '__DIR__/../vendor/autoload.php'; 
+require __DIR__ . '/../vendor/autoload.php';
 // database handler includes folder = dbh.inc.php
 use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
@@ -14,10 +14,11 @@ if ($host === 'localhost') {
     $dbName = "doorbell_designs";
 }
 else {
-   $dbServername = getenv('DB_SERVER_NAME');
-   $dbUsername = getenv('DB_USER_NAME');
-   $dbPassword = getenv('DB_PASSWORD');
-   $dbName = getenv('DB_NAME');
+   $dbServername = $_ENV['DB_SERVER_NAME'];
+   $dbUsername = $_ENV['DB_USER_NAME'];
+   $dbPassword = $_ENV['DB_PASSWORD'];
+   $dbName = $_ENV['DB_NAME'];
+
 }
 
 $pdo = NULL;

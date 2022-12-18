@@ -1,6 +1,6 @@
 <?php
 
-require '__DIR__/../vendor/autoload.php'; 
+require __DIR__ . '/../vendor/autoload.php';
 include_once 'dbh.inc.php';
 
 use Dotenv\Dotenv;

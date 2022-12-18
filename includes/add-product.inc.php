@@ -20,8 +20,8 @@ if (isset($_POST['addProduct'])) {
   } else {
     $itemNameString = $_POST['itemNameString'];
     $itemName = StringUtils::formatCase($itemNameString, StringUtils::FORMAT_LOWER_CAMEL_CASE);
-    $subCategories = json_encode(explode(' ', $_POST['subCategories'])) ?? '';
-    $baseColorOptions = json_encode(explode(' ', $_POST['baseColorOptions'])) ?? '';
+    $subCategories = json_encode(explode(', ', $_POST['subCategories'])) ?? '';
+    $baseColorOptions = json_encode(explode(', ', $_POST['baseColorOptions'])) ?? '';
 
     /* get file type for a specific file */
     $finfo = new finfo(FILEINFO_MIME);
