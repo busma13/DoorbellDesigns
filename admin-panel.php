@@ -126,7 +126,7 @@
                     <input type="number" step="0.01" class="form-control" name="price" placeholder="Price" id="price">
                 </div>
                 <div class="col-sm-6">
-                    <label for="subCategories">Subcategories:</label>
+                    <label for="subCategories">Subcategories (comma separated):</label>
                     <input type="text" class="form-control" name="subCategories" placeholder="subcategories" id="subCategories">
                 </div>
                 <div class="col-sm-6">
@@ -134,7 +134,7 @@
                     <input type="number" step="0.01" class="form-control" name="shipping" placeholder="Shipping" id="shipping">
                 </div>
                 <div class="col-sm-6">
-                    <label for="baseColorOptions">Color Options:</label>
+                    <label for="baseColorOptions">Color Options (comma separated):</label>
                     <input type="text" class="form-control" name="baseColorOptions" placeholder="Color Options" id="baseColorOptions">
                 </div>
                 <div class="col-sm-6">
