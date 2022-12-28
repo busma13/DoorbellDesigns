@@ -1,11 +1,9 @@
 <?php
     include_once 'includes/dbh.inc.php';
     include 'header-pt1.php';
-    $title = 'Doorbell Designs - ';//Add product name
+    $title = 'Doorbell Designs';
     echo $title;
     include 'header-pt2.php';
-
-    /* Global $pdo object */
 	global $pdo;
 ?>
 
@@ -15,7 +13,7 @@
 <!-- content -->
 
 <!-- shop single-product -->
-<section id="shop">
+<section id="single-product-page">
     <div class="container">
         <div class="row">
 
@@ -23,8 +21,6 @@
 
 //Retrieve all active products in category
 $get_category_products_sql = 'SELECT * FROM products WHERE mainCategory = "'.$_GET['category'].'" AND active = 1;';
-// $productCountQueryResult = mysqli_query($conn, $get_count_sql);
-// $productCountResultCheck = mysqli_num_rows($productCountQueryResult);
 
 /* Execute the query */
 try
@@ -38,7 +34,7 @@ catch (PDOException $e)
 throw new Exception('Database query error');
 }
 
-//load the item we want.  On prev or next load the next/prev product.
+//Load the item we want.  On prev or next load the next/prev product.
 $categoryProdIds = array();
 $currentRow;
 while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
@@ -75,9 +71,6 @@ if ($currentRow) {
                             <div class="item">
                                 <img class="product-single-image" src="images/color-samples/<?php echo $currentRow['imgUrl']?>" alt="<?php echo $currentRow['itemNameString'] . ' color sample'?>">
                             </div>
-                            <!-- <div class="item">
-                                <img src="images/product-slide3.jpg" alt="">
-                            </div> -->
                         </div>
                         <!-- / wrapper for slides -->
 
@@ -93,19 +86,15 @@ if ($currentRow) {
                         </div>
                     <?php } ?>   
                     </div><!-- / product-slider -->
-
-                    
-                    
                 </div><!-- / product-content-area -->
 
-                
                 <!-- product pagination -->
                 <div class="pagination no-padding">
                     <a href="single-product.php?category=<?php echo $currentRow['mainCategory']?>&product=<?php 
                         if ($currentRowIndex == 0) {
-                            echo $categoryProdIds[count($categoryProdIds)-1];//fix
+                            echo $categoryProdIds[count($categoryProdIds)-1];
                         } else {
-                            echo $categoryProdIds[$currentRowIndex - 1];//fix
+                            echo $categoryProdIds[$currentRowIndex - 1];
                         }
                     ?>
                     " class="btn btn-default btn-rounded no-margin"><i class="fa fa-long-arrow-left"></i><span>Previous</span></a>
@@ -126,8 +115,7 @@ if ($currentRow) {
             <div class="col-sm-6 col-md-5 product-sidebar">
                 <div class="product-details">
                     <h4 class="product-name"><?php echo $currentRow['itemNameString']?></h4>
-                    <!-- <p>Maecenas bibendum erat in erat maximus, vel imperdiet leo mattis. Integer vitae pellentesque massa. Fusce ac suscipit neque. Etiam justo risus, tristique id feugiat a venenatis.</p> -->
-                    <!-- <h4 class="space-top-30">Product Info</h4> -->
+                 
                     <div class="product-info">
                         <div class="info">
                             <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $currentRow['price'] ?></span></p>
@@ -138,9 +126,7 @@ if ($currentRow) {
                             <!-- Loop through subcategory array. Add name of each subcategory with link to subcategory page.-->
                             <?php 
                                 $subCatArr = JSON_decode($currentRow['subCategories']);
-                                // echo $subCatArr;
                                 foreach($subCatArr as $i) { 
-                                    // echo $i; 
                                     if ($i === '') {
                                         continue;
                                     }
@@ -204,17 +190,11 @@ if ($currentRow) {
                         <a class="btn btn-primary-filled btn-rounded add-to-cart-single" id="<?php echo $currentRow['itemName']?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></a>
                         <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
                     </div>
-
-                    
-
                 </div><!-- product-details -->
-
             </div><!-- / col-sm-4 col-md-3 -->
             <!-- / project sidebar area -->
-
         </div><!-- / row -->
     
-
 <?php
         
     }
@@ -244,10 +224,6 @@ if ($currentRow) {
 <!-- cart -->
 <script src="js/cart.js"></script>
 <!-- / cart -->
-
-<!-- preloader -->
-<script src="js/preloader.js"></script>
-<!-- / preloader -->
 
 <!-- / javascript -->
 </body>
