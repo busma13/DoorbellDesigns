@@ -1,6 +1,5 @@
 <?php
 include_once 'dbh.inc.php';
-
 //Retrieve product list
 $get_product_list_sql = 'SELECT * FROM products;';
 

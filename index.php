@@ -9,68 +9,6 @@
 	global $pdo;
 ?>
 
-
-
-    <!-- <div id="header-sliders">
-        <!-- slider -- >
-        <div id="slider" class="carousel slide">  
-            <div class="carousel-inner">
-
-                <!-- slide 1 -- >
-                <div class="item active slide1 fashion">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <div class="row">
-                                <div class="col-md-12 slider-content">
-                                    <h3 class="slide-title fadeInDown animated first">Doorbells</h3>
-                                    <p class="slide-text flipInX animated second">Quisque vitae tempor libero. Cum sociis natoque penatibus et magnis dis parturient montes.</p>
-                                    <a href="doorbells.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-cart"></i> <span>Shop Now</span></a>
-                                </div><!-- slider-content -- >
-                            </div><!-- / row -- >
-                        </div><!-- / carousel-caption -- >
-                    </div><!-- / container -- >
-                </div><!-- / slide 1 -- >
-
-                <!-- slide 2 -- >
-                <div class="item slide2 furniture">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <div class="row">
-                                <div class="col-md-12 slider-content">
-                                    <h3 class="slide-title fadeInDown animated first">Ceiling Fan Pulls</h3>
-                                    <p class="slide-text flipInX animated second">Vivamus facilisis sapien enim, eget lobortis ante faucibus vel. In hendrerit arcu eget arcu fringilla.</p>
-                                    <a href="fan-pulls.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
-                                </div><!-- slider-content -- >
-                            </div><!-- / row -- >
-                        </div><!-- / carousel-caption -- >
-                    </div><!-- / container -- >
-                </div><!-- / slide 2 -- >
-
-                <!-- slide 3 -- >
-                <div class="item slide3 art">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <div class="row">
-                                <div class="col-md-12 slider-content">
-                                    <h3 class="slide-title fadeInDown animated first">Air Plant Cradles</h3>
-                                    <p class="slide-text flipInX animated second">Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus sapien libero.</p>
-                                    <a href="air-plant-cradles.php" class="btn btn-lg btn-primary-filled btn-pill fadeInUp animated third"><i class="lnr lnr-store"></i> <span>Visit Shop</span></a>
-                                </div><!-- slider-content -- >
-                            </div><!-- / row -- >
-                        </div><!-- / carousel-caption -- >
-                    </div><!-- / container -- >
-                </div><!-- / slide 3 -- >
-
-            </div><!-- /carousel-inner -- >
-
-            <!-- controls -- >
-            <a class="left carousel-control" href="#slider" data-slide="prev"><span class="lnr lnr-chevron-left"></span></a>
-            <a class="right carousel-control" href="#slider" data-slide="next"><span class="lnr lnr-chevron-right"></span></a>
-            <!-- / controls -- >
-
-        </div>
-        <!-- / slider-- >
-    </div>/ sliders -->
     <div id="page-header" class="about">
         <div class="container">
             <div class="page-header-content text-center">
@@ -331,7 +269,7 @@
 <!-- / shuffle grid-resizer -->
 
 <!-- preloader -->
-<script src="js/preloader.js"></script>
+<!-- <script src="js/preloader.js"></script> -->
 <!-- / preloader -->
 
 <!-- / javascript -->

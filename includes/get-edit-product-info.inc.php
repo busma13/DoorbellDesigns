@@ -1,6 +1,6 @@
 <?php
 include_once 'dbh.inc.php';
-require '../turbocommons-php-3.8.0.phar';
+require './stringUtils.php';
 use org\turbocommons\src\main\php\utils\StringUtils;
 
 

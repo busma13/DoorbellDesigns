@@ -54,7 +54,7 @@ async function getProductList() {
 // Controls cells that are editable (not date cells)
 // (A) INITIALIZE - DOUBLE CLICK TO EDIT CELL
 window.addEventListener("DOMContentLoaded", () => {
-  for (let cell of document.querySelectorAll(".editable td.can-edit")) {
+  for (let cell of document.querySelectorAll(".can-edit")) {
     cell.ondblclick = () => { editable.edit(cell); };
   }
 });
@@ -93,7 +93,7 @@ var editable = {
 
     // (C3) RESTORE CLICK LISTENERS
     window.removeEventListener("click", editable.close);
-    // let cell = editable.selected;
+    let cell = editable.selected;
     editable.selected.ondblclick = () => { editable.edit(cell); };
 
     // (C4) "UNMARK" CURRENT SELECTED CELL
@@ -110,7 +110,6 @@ scheduleDatePickers.forEach(picker => {
 
 function pickerFocusOut(event) {
     cell = event.currentTarget;
-    console.log(cell)
     sendValuesToServer(cell);
 }
 
