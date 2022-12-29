@@ -1,8 +1,12 @@
 <?php
+
+require __DIR__ . '/../vendor/autoload.php';
 // database handler includes folder = dbh.inc.php
+use Dotenv\Dotenv;
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 $host = $_SERVER['HTTP_HOST'];
-
 if ($host === 'localhost') {
     $dbServername = "localhost"; //needs to point to actual online server 
     $dbUsername = "root"; //will be different for online server
@@ -10,25 +14,22 @@ if ($host === 'localhost') {
     $dbName = "doorbell_designs";
 }
 else {
-    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+   $dbServername = $_ENV['DB_SERVER_NAME'];
+   $dbUsername = $_ENV['DB_USER_NAME'];
+   $dbPassword = $_ENV['DB_PASSWORD'];
+   $dbName = $_ENV['DB_NAME'];
 
-    $dbServername = $url["host"];
-    $dbUsername = $url["user"];
-    $dbPassword = $url["pass"];
-    $dbName = substr($url["path"], 1);
 }
 
 $pdo = NULL;
 
 /* Connection string, or "data source name" */
 $dsn = 'mysql:host=' . $dbServername . ';dbname=' . $dbName . ';**charset=utf8**';
-
 /* Connection inside a try/catch block */
 try
 {  
    /* PDO object creation */
    $pdo = new PDO($dsn, $dbUsername,  $dbPassword);
-   
    /* Enable exceptions on errors */
    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
