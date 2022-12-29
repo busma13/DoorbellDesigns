@@ -1,6 +1,6 @@
 <?php
 
-require '../vendor/autoload.php'; 
+require __DIR__ . '/../vendor/autoload.php';
 include_once 'dbh.inc.php';
 
 use Dotenv\Dotenv;
@@ -164,7 +164,7 @@ if (isset($_POST['submit'])) {
                     // console.log(`${qtyAtEachShippingPrice[price]}`)
                     $totalShippingCents += 500 * $qty;
                 } else if ($category === 'airPlantCradles') {
-                    $totalShippingCents += 600 * $qty;//TODO: update
+                    $totalShippingCents += 500 * $qty;
                 } else if ($category === 'fanPulls') {
                     if ($qty > 0) $totalShippingCents += 500;
                 }
@@ -180,13 +180,8 @@ if (isset($_POST['submit'])) {
             $line_items[] = $order_line_item_shipping;
             
             $checkout_options = new \Square\Models\CheckoutOptions();
-            $host = $_SERVER['HTTP_HOST'];
-            if ($host === 'localhost') {
-                $checkout_options->setRedirectUrl("http://localhost/doorbelldesigns/confirmation.php");
-            } 
-            else {
-                $checkout_options->setRedirectUrl("http://doorbelldesigns.herokuapp.com/confirmation.php"); //TODO: change for production server
-            }
+            
+            $checkout_options->setRedirectUrl("https://releasethehoundsdoorbell.com/confirmation.php"); //TODO: change for production server
             
             $address = new \Square\Models\Address();
             $address->setAddressLine1($address_line);
@@ -209,10 +204,12 @@ if (isset($_POST['submit'])) {
             $order_fulfillment->setShipmentDetails($shipment_details);
             
             $fulfillments = [$order_fulfillment];
-            $order = new Order('L20MQK5M4PT2Z'); //TODO: location - change from sandbox to real location
+            $order = new Order($_ENV['SQUARE_LOCATION_ID']); //TODO: location - change from sandbox to real location
             
             $order->setLineItems($line_items);
-            $order->setTaxes($taxes);
+            if ($state === 'CA') {
+                $order->setTaxes($taxes);
+            }
             $order->setFulfillments($fulfillments);
             
             $body = new \Square\Models\CreatePaymentLinkRequest();
@@ -248,15 +245,10 @@ if (isset($_POST['submit'])) {
                 //Add the order id to the redirect url from Square to the confirmation page.
                 $checkout_options = new \Square\Models\CheckoutOptions();
                 $host = $_SERVER['HTTP_HOST'];
-                $url = '1';
-                if ($host === 'localhost') {
-                    $url = "http://localhost/doorbelldesigns/confirmation.php?orderId=" . $order_id;
-                    $checkout_options->setRedirectUrl($url);
-                } 
-                else {
-                    $url = "http://doorbelldesigns.herokuapp.com/confirmation.php?orderId=" . $order_id;
-                    $checkout_options->setRedirectUrl($url); //TODO: change for production server
-                }
+                
+                $url = "https://releasethehoundsdoorbell.com/confirmation.php?orderId=" . $order_id;//TODO: change for production server
+
+                $checkout_options->setRedirectUrl($url); 
                 
                 $payment_link = new \Square\Models\PaymentLink(1);
                 $payment_link->setCheckoutOptions($checkout_options);

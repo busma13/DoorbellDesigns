@@ -113,7 +113,7 @@ class Account
         return $id;
     }
 
-	public function addAccount(string $name, string $passwd): string|bool
+	public function addAccount(string $name, string $passwd): int
 	{
 		global $pdo;
 		
@@ -354,13 +354,13 @@ class Account
         }
     }
 
-    public function logout(): string
+    public function logout()
     {
         global $pdo;	
         
         if (is_null($this->id))
         {
-            return 'no logged in user';
+            return;
         }
         
         $this->id = NULL;
@@ -382,10 +382,6 @@ class Account
             {
             throw new Exception('Database query error');
             }
-            return 'should have deleted';
-        }
-        else {
-            return 'no open session';
         }
     }
 }
