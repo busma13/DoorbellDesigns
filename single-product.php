@@ -118,7 +118,7 @@ if ($currentRow) {
                  
                     <div class="product-info">
                         <div class="info">
-                            <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $currentRow['price'] ?></span></p>
+                            <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $currentRow['price'] ?> ea.</span></p>
                         </div>
                         <div class="info">
                             <p><i class="lnr lnr-heart"></i><span>Category: <a href="<?php echo strtolower($currentRow['mainCategory'])?>.php"> <?php echo $currentRow['mainCategory']?></a>
