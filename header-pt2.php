@@ -36,7 +36,7 @@
                 <?php if ($title === 'Cicada Ceramics - Ceiling Fan Pulls' || $title === 'Cicada Ceramics - Air Plant Cradles') {
                     echo '<a class="navbar-brand" href="index.php"><img class="cicada-logo" src="images/logo-cc.jpeg" alt="Cicada Ceramics logo"></a>';
                 } else {
-                    echo '<a class="navbar-brand" href="index.php"><img src="images/logo-dd.jpg" alt="Doorbell Designs logo"></a>';
+                    echo '<a class="navbar-brand" href="index.php"><img class="doorbell-designs-logo" src="images/logo-dd.jpg" alt="Doorbell Designs logo"></a>';
                 } ?>
                 
             </div><!-- / navbar-header -->

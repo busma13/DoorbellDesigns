@@ -2423,7 +2423,7 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
   line-height: 20px;
   font-weight: 500;
   height: 80px;
-  padding: 30px 15px;
+  padding: 22px 15px;
 }
 
 .navbar-brand span {
@@ -2436,7 +2436,7 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 }
 
 .navbar-toggle {
-  margin: 8px 0px 8px 8px;
+  margin: 20px 0px 20px 8px;
   padding-right: 15px;
 }
 
@@ -4500,15 +4500,18 @@ footer #newsletter .form-control {
     height: 400px;
   }
 
-  .navbar-brand .cicada-logo {
-    width: auto;
-    max-height: 45px;
+  .navbar-brand {
+    padding: 26px 0;
+  }
+  .navbar-brand > img {
+    max-height: 29px;
   }
 
-  .navbar-brand > img {
+  .navbar-brand .cicada-logo {
     width: auto;
-    max-height: 24px;
+    max-height: 50px;
   }
+
 }
 @media only screen and (max-width: 900px) {
   #page-header {
@@ -4543,7 +4546,7 @@ footer #newsletter .form-control {
     line-height: 20px;
     font-weight: 700;
     height: 50px;
-    padding: 15px 15px;
+    padding: 23px 15px;
   }
 
   .open .dropdown-menu > li > a {
@@ -4797,9 +4800,8 @@ footer #newsletter .form-control {
     font-size: 14px;
   }
 
-  .navbar-brand .cicada-logo {
-    width: auto;
-    max-height: 30px;
+  .navbar-brand .doorbell-designs-logo {
+    padding-top: 13px;
   }
 }
 @media only screen and (max-width: 580px) {
