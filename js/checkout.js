@@ -57,8 +57,8 @@ function disableCheckoutButton() {
 document.querySelector("#checkout-btn").addEventListener('submit', openSubmitOrderModal)
 
 function openSubmitOrderModal(event) {
-    document.getElementById('preloader').style.display='block';
-    // document.getElementById('waitForRedirect').style.display='block';
+    document.getElementById('waitForRedirect').style.display='block';
+    // document.querySelector('body').css({'overflow':'visible'});
 }
 
 updateCartTotals();

@@ -20,16 +20,15 @@
 </header>
 <!-- / header -->
 
-<!-- Modal between submit and redirect -->
-<div id="waitForRedirect" class="modal">
+<!-- preloader -->
+<div id="waitForRedirect">
+    <div class="spinner spinner-round"></div>
     <div class="modal-content">
         <h1>Just a moment...</h1>
         <p>Redirecting to Square Payment Page</p>   
     </div>
-    <div class="holdSpace">
-        <div class="spinner spinner-round"></div>
-    </div>
 </div>
+<!-- / preloader -->
 
 <!-- content -->
 
@@ -45,13 +44,10 @@
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="first-name" placeholder="*First name" required>
                             <input type="text" class="form-control" name="last-name" placeholder="*Last name" required>
-                            
-                            
                         </div>
                         <div class="col-sm-6">
-                            <input type="tel" class="form-control" name="tel" placeholder="*Phone" required>
+                            <input type="tel" class="form-control" name="tel" placeholder="*Mobile Phone" required>
                             <input type="email" class="form-control" name="email" placeholder="*Email" required>
-                            <!-- <input type="text" class="form-control" name="company" placeholder="Company"> -->
                             
                         </div>
                     </div><!-- / row -->
@@ -140,16 +136,16 @@
                         $orderCheck = $_GET['order'];
                         
                         if ($orderCheck == "empty") {
-                            echo "<p class='error'>Please fill out all required fields.</p>";
+                            echo "<p id='message' class='text-danger space-left'>Please fill out all required fields.</p>";
                         }
                         elseif ($orderCheck == "email") {
-                            echo "<p class='error'>Please enter a valid email.</p>";
+                            echo "<p id='message' class='text-danger space-left'>Please enter a valid email.</p>";
                         }
                         elseif ($orderCheck == "error") {
-                            echo "<p class='error'>Form submission error. Please try again.</p>";
+                            echo "<p id='message' class='text-danger space-left'>Form submission error. Please try again.</p>";
                         }
-                        elseif ($orderCheck == "success") {
-                            echo "<p class='success'>Order submitted.</p>";
+                        elseif ($orderCheck == "SQL-statement-failed") {
+                            echo "<p id='message' class='text-danger space-left'>Server error.</p>";
                         }
                     }
                 ?>
@@ -194,10 +190,6 @@
 <!-- cart -->
 <script src="js/cart.js"></script>
 <!-- / cart -->
-
-<!-- preloader -->
-<script src="js/preloader.js"></script>
-<!-- / preloader -->
 
 <!-- / javascript -->
 </body>

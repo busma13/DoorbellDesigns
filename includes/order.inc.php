@@ -12,8 +12,8 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 $client = new SquareClient([
-    'accessToken' => $_ENV['SQUARE_ACCESS_TOKEN'] , //TODO: update for production
-    'environment' => $_ENV['ENVIRONMENT'], //TODO: update for production
+    'accessToken' => $_ENV['SQUARE_ACCESS_TOKEN'] , 
+    'environment' => $_ENV['ENVIRONMENT'], 
 ]);
 
 if (isset($_POST['submit'])) {
@@ -29,13 +29,13 @@ if (isset($_POST['submit'])) {
     $products = $_POST['cart-list-input'];
 
     if (empty($first) || empty($last) || empty($tel) || empty($email) || empty($address_line) || empty($city) || empty($state) || empty($zip) || empty($products)) {
-        header("Location: ../checkout.php?order=empty");
+        header("Location: ../checkout.php?order=empty#message");
         exit();
     }
     else {
         // Check for valid email address
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            header("Location: ../checkout.php?order=email");
+            header("Location: ../checkout.php?order=email#message");
             exit();
         }
         else {
@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
                 }
                 catch (PDOException $e)
                 {
-                    header("Location: ../checkout.php?order=SQL-statement-failed");
+                    header("Location: ../checkout.php?order=SQL-statement-failed#message");
                 }
                 while ($row = $res2->fetch(PDO::FETCH_ASSOC)) { 
                     $priceCents = $row['price'] * 100;
@@ -181,7 +181,7 @@ if (isset($_POST['submit'])) {
             
             $checkout_options = new \Square\Models\CheckoutOptions();
             
-            $checkout_options->setRedirectUrl("https://releasethehoundsdoorbell.com/confirmation.php"); //TODO: change for production server
+            $checkout_options->setRedirectUrl($_ENV['REDIRECT_URL']); //TODO: change in env for production server
             
             $address = new \Square\Models\Address();
             $address->setAddressLine1($address_line);
@@ -204,7 +204,7 @@ if (isset($_POST['submit'])) {
             $order_fulfillment->setShipmentDetails($shipment_details);
             
             $fulfillments = [$order_fulfillment];
-            $order = new Order($_ENV['SQUARE_LOCATION_ID']); //TODO: location - change from sandbox to real location
+            $order = new Order($_ENV['SQUARE_LOCATION_ID']);
             
             $order->setLineItems($line_items);
             if ($state === 'CA') {
@@ -239,14 +239,14 @@ if (isset($_POST['submit'])) {
                 }
                 catch (PDOException $e)
                 {
-                    header("Location: ../checkout.php?order=SQL-statement-failed");//work on this error on checkout.php
+                    header("Location: ../checkout.php?order=SQL-statement-failed#message");//work on this error on checkout.php
                 }
 
                 //Add the order id to the redirect url from Square to the confirmation page.
                 $checkout_options = new \Square\Models\CheckoutOptions();
                 $host = $_SERVER['HTTP_HOST'];
                 
-                $url = "https://releasethehoundsdoorbell.com/confirmation.php?orderId=" . $order_id;//TODO: change for production server
+                $url = $_ENV['REDIRECT_URL'] . "?orderId=" . $order_id;//TODO: change for production server
 
                 $checkout_options->setRedirectUrl($url); 
                 
@@ -283,6 +283,6 @@ if (isset($_POST['submit'])) {
     }
 }
 else {
-    header("Location: ../checkout.php?order=error");
+    header("Location: ../checkout.php?order=error#message");
     exit();
 }
