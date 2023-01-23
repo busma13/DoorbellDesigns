@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'account-class.php';
+include 'account-class.inc.php';
 // require '../vendor/autoload.php'; 
 include_once 'dbh.inc.php';
 

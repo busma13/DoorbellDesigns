@@ -3,7 +3,7 @@
     include_once './includes/dbh.inc.php';
 
     /* Include the Account class file */
-    include './includes/account-class.php';
+    include './includes/account-class.inc.php';
 
     /* Create a new Account object */
     $account = new Account();
@@ -99,10 +99,10 @@
                         <input type="radio" name="mainCategory" value="Doorbells" id="addDoorbells">
                         <label for="addDoorbells">Doorbells</label>
                     </fieldset>
-                    <fieldset>
+                    <!-- <fieldset>
                         <input type="radio" name="mainCategory" value="Artwork" id="addArtwork">
                         <label for="addArtwork">Artwork</label>
-                    </fieldset>
+                    </fieldset> -->
                     <fieldset>
                         <input type="radio" name="mainCategory" value="Fan-Pulls" id="addCeilingFanPulls">
                         <label for="addCeilingFanPulls">Ceiling Fan Pulls</label>
@@ -116,22 +116,22 @@
                         <label for="addMiscellaneous">Miscellaneous</label>
                     </fieldset> -->
                 </div>
-                <div class="col-sm-6">
+                <!-- <div class="col-sm-6">
                     <label for="image">Image:</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
                     <input type="file" class="form-control" name="image" placeholder="Image" id="image">
-                </div>
+                </div> -->
                 <div class="col-sm-6">
                     <label for="price">Price (xx.xx format):</label>
                     <input type="number" step="0.01" class="form-control" name="price" placeholder="Price" id="price">
                 </div>
                 <div class="col-sm-6">
-                    <label for="subCategories">Subcategories (comma separated):</label>
-                    <input type="text" class="form-control" name="subCategories" placeholder="subcategories" id="subCategories">
-                </div>
-                <div class="col-sm-6">
                     <label for="shipping">Shipping (xx.xx format):</label>
                     <input type="number" step="0.01" class="form-control" name="shipping" placeholder="Shipping" id="shipping">
+                </div>
+                <div class="col-sm-6">
+                    <label for="subCategories">Subcategories (comma separated):</label>
+                    <input type="text" class="form-control" name="subCategories" placeholder="subcategories" id="subCategories">
                 </div>
                 <div class="col-sm-6">
                     <label for="baseColorOptions">Color Options (comma separated):</label>
@@ -178,12 +178,6 @@
                         elseif ($addProductCheck == "error") {
                             echo "<p class='error'>Form submission error. Please try again.</p>";
                         }
-                        elseif ($addProductCheck == "imageError") {
-                            echo "<p class='error'>Image upload error. Please try again.</p>";
-                        }
-                        elseif ($addProductCheck == "imageResizeError") {
-                            echo "<p class='error'>Image resize error. Please try again.</p>";
-                        }
                         elseif ($addProductCheck == "success") {
                             echo "<p class='success'>Product added successfully.</p>";
                         }
@@ -194,6 +188,44 @@
         </form>
     </div><!-- / add product form -->
 </div><!-- / form-container -->
+
+<hr>
+
+<div class="container">
+    <div class="page-header-content text-center">
+        <div class="page-header wsub">
+            <h1 class="page-title fadeInDown animated first">Add Product Images</h1>
+        </div><!-- / page-header -->
+        <p class="slide-text fadeInUp animated second">Choose product from dropdown menu then click on "Add Images" button.</p>
+    </div><!-- / page-header-content -->
+</div><!-- / container -->
+<div class="container add-images">
+    <div class="flex-container">
+        <select name="productImageUploadSelect" id="productImageUploadSelect">
+        <?php
+        $get_products_sql = "SELECT * FROM products ORDER BY itemNameString;";
+
+        /* Execute the query */
+        try
+        {
+            $res = $pdo->prepare($get_products_sql);
+            $res->execute();
+        }
+        catch (PDOException $e)
+        {
+        /* If there is a PDO exception, throw a standard exception */
+        throw new Exception('Database query error');
+        }
+        while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
+            <option value="<?php echo $row['itemName']?>" data-numpics="<?php echo $row['numberOfPics']?>" data-id="<?php echo $row['id']?>"><?php echo $row['itemNameString']?></option>
+        <?php
+        }
+        ?>
+        </select>
+        <button id="upload_widget" class="btn btn-primary-filled btn-rounded">Add Images</button>
+    </div>
+    <p class="responseMessageAddImage"></p>
+</div>
 
 <hr>
 
@@ -241,8 +273,11 @@ throw new Exception('Database query error');
 }
 while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                 <tr id="<?php echo $row['id']?>">
-                    <td><button id="<?php echo $row['id']?>" class="deleteProductButton" data-img-url="<?php echo $row['imgUrl']?>" data-main-category="<?php echo $row['mainCategory']?>"><i class="lnr lnr-trash"></i></button></td>
-                    <td class="img"><img src="images/<?php echo strtolower($row['mainCategory']) . '-small/' . $row['imgUrl'] ?>"></td>
+                <!-- update data-img-url -->
+                    <td><button id="<?php echo $row['id']?>" class="deleteProductButton" data-img-url="<?php echo $row['imgUrl']?>" data-main-category="<?php echo $row ['mainCategory']?>"><i class="lnr lnr-trash"></i></button></td>
+                    <td class="img"><img src="
+                    https://res.cloudinary.com/doorbelldesigns/image/upload/v1674425263/products/blueAzureOnBlackCradle/y9adegfzauh9ngcbw0ep.jpg"></td>
+                    <!-- <td class="img"><img src="images/<?php echo strtolower($row['mainCategory']) . '-small/' . $row['imgUrl'] ?>"></td> -->
                     <td class="itemNameString can-edit"><?php echo $row['itemNameString']?></td>
                     <td class="mainCategory can-edit"><?php echo $row['mainCategory']?></td>
                     <td class="subCategories can-edit"><?php echo $row['subCategories']?></td>
@@ -349,6 +384,10 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
 <!-- cart -->
 <script src="js/cart.js"></script>
 <!-- / cart -->
+
+<!-- cloudinary -->
+<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>  
+<!-- /cloudinary -->
 
 <!-- admin-panel -->
 <script src="js/admin-panel.js"></script>

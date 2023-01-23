@@ -102,14 +102,5 @@ try {
   // exit();
 }
 
-
-
-/* Do something with received data and include it in response */
-// dumb e.g.
-// $response = $editProductName; 
-
-/* Perhaps database manipulation here? */
-// query, etc.
-
 /* Send success to fetch API */
 die(json_encode($response));

@@ -64,6 +64,7 @@ if ($currentRow) {
                     <div id="product-slider" class="carousel slide" data-ride="carousel">
                         <!-- wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
+                            <!-- TODO: remove if/else below. Add loop here to cycle through img array and load each img & alt -->
                             <div class="item active">
                                 <img class="product-single-image" src="images/<?php echo strtolower($currentRow['mainCategory']) . '-large/' . $currentRow['imgUrl']?>" alt="<?php echo $currentRow['itemNameString']?>">
                             </div>

@@ -3717,6 +3717,10 @@ section#single-product-page {
   align-items: center;
 }
 
+.add-images > .flex-container {
+  justify-content: center;
+}
+
 .btn-edit-show {
   margin-bottom: 16px;
 }

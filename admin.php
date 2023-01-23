@@ -1,7 +1,7 @@
 <?php
     session_start();
     include_once './includes/dbh.inc.php';
-    include './includes/account-class.php';
+    include './includes/account-class.inc.php';
     $account = new Account();
     include_once 'includes/dbh.inc.php';
     include 'header-pt1.php';

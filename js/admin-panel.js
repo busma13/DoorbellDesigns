@@ -1,6 +1,7 @@
 const modal = document.querySelectorAll(".modal");
 const btnCancel = document.querySelectorAll(".btn-cancel");
 const scheduleDatePickers = document.querySelectorAll('.scheduleDate');
+const addImageSelect = document.querySelector('#productImageUploadSelect');
 let urlString = window.location.href;
 let paramString = urlString.split('?')[1];
 
@@ -48,6 +49,81 @@ async function getProductList() {
     }
 }
 // End Update Product List
+
+// Cloudinary Upload Widget
+var myWidget = cloudinary.createUploadWidget({
+    cloudName: 'doorbelldesigns', 
+    uploadPreset: 'preset1',
+    resourceType: 'image',
+    multiple: false,
+    cropping: true,
+    croppingAspectRatio: 0.9,}, (error, result) => { 
+        if (!error && result && result.event === "success") { 
+            // console.log('Done! Here is the image info: ', result.info); 
+            const selection = addImageSelect.options[addImageSelect.selectedIndex];
+            const picNumber = Number(selection.dataset.numpics) + 1;
+            selection.dataset.numpics = picNumber;
+            productId = selection.dataset.id;
+            console.log(productId); 
+            updateImageUrls(result.info, picNumber, productId);
+        }
+    }
+)
+  
+// Open Cloudinary upload widget
+document.getElementById("upload_widget").addEventListener("click", function(){
+    const productName = addImageSelect.value;
+    const alt = addImageSelect.options[addImageSelect.selectedIndex].innerText;
+    const picNumber = Number(addImageSelect.options[addImageSelect.selectedIndex].dataset.numpics) + 1;
+    console.log(productName, alt, picNumber)
+    myWidget.update({publicId: `${productName}${picNumber}`, folder: `products/${productName}`, context: { alt: alt}})
+    myWidget.open();
+}, false);
+
+async function updateImageUrls(picInfo, numberOfPics, productId) {
+    const obj = { 
+        picInfo: picInfo,
+        numberOfPics: numberOfPics,
+        productId: productId,
+    }
+
+    console.log(obj);
+    // add url to imgUrls
+    // increase numberOfPics by 1
+    try{
+        const response = await fetch (
+        './includes/add-image.inc.php', 
+            {
+                method:'POST',
+                mode: "same-origin",
+                cache: 'no-cache',
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept":       "application/json"
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(obj)
+            }
+        )
+        data = await response.json();
+        console.log(data);
+
+        const responseMessageAddImage = document.querySelector('.responseMessageAddImage');
+
+        if (data === 'success') {
+            responseMessageAddImage.textContent = 'Image successfully added.';
+        } else if (data === 'add-image-failed') {
+            responseMessageAddImage.textContent = 'Error adding image. Please try again.'
+        } else {
+            responseMessageAddImage.textContent = 'Error adding image';
+        }
+    } 
+    catch(error) {
+        console.error(`Error uploading image: ${error}`);
+    }
+}
 
 // Start Edit Show Table / Edit Product Table
 
@@ -235,7 +311,6 @@ let showTrashCans = document.querySelectorAll('.deleteShowButton')
 showTrashCans.forEach(can => {
   can.addEventListener('click', openDeleteShowModal);
 })
-
 
 function openDeleteShowModal(event) {
     document.getElementById('deleteConfShow').style.display='block';
