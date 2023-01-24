@@ -274,10 +274,10 @@ throw new Exception('Database query error');
 while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                 <tr id="<?php echo $row['id']?>">
                 <!-- update data-img-url -->
-                    <td><button id="<?php echo $row['id']?>" class="deleteProductButton" data-img-url="<?php echo $row['imgUrl']?>" data-main-category="<?php echo $row ['mainCategory']?>"><i class="lnr lnr-trash"></i></button></td>
+                    <td><button id="<?php echo $row['id']?>" class="deleteProductButton" data-img-url="<?php echo $row['numberOfPics']?>" data-main-category="<?php echo $row ['mainCategory']?>"><i class="lnr lnr-trash"></i></button></td>
                     <td class="img"><img src="
                     https://res.cloudinary.com/doorbelldesigns/image/upload/v1674425263/products/blueAzureOnBlackCradle/y9adegfzauh9ngcbw0ep.jpg"></td>
-                    <!-- <td class="img"><img src="images/<?php echo strtolower($row['mainCategory']) . '-small/' . $row['imgUrl'] ?>"></td> -->
+                    <!-- <td class="img"><img src="images/<?php echo strtolower($row['mainCategory']) . '-small/' . $row['numberOfPics'] ?>"></td> -->
                     <td class="itemNameString can-edit"><?php echo $row['itemNameString']?></td>
                     <td class="mainCategory can-edit"><?php echo $row['mainCategory']?></td>
                     <td class="subCategories can-edit"><?php echo $row['subCategories']?></td>

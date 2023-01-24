@@ -106,25 +106,14 @@ try
 {
     $res = $pdo->prepare($query2);
     $success = $res->execute($values);
-    // if ($success) {
-    //     $row = $res->fetch(PDO::FETCH_ASSOC);
-        // if ($row['itemNameString'] == '') {
-        //     $response = 'not-found';
-        // } else {
-            $response = 'success';
-        // }
-    // }
-    // else {
-    //     // header("Location: ../admin-panel.php?editProduct=retrieve-fail#edit-form");
-    //     $response = 'retrieve-fail';
-    // }
+    if ($success) {
+      $response = 'success';
+    }
 }
 catch (PDOException $e)
 {
     $msg = $e->getMessage();
     $response = $msg . ' ' . $query;
-    // header("Location: ../admin-panel.php?editProduct=query&code=" . $msg . "#edit-form");
-    // exit();
 }
 
 /* Send success to fetch API */

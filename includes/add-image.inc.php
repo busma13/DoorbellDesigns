@@ -35,21 +35,40 @@ $productId = $decoded['productId'];
 $response =  $productId;
 
 // Add url to imgUrls database
-$query = "INSERT INTO imgUrls
-              VALUES (:product_id, :url)";
+$id = uniqid('ID', true);
+$query1 = "INSERT INTO imgUrls (id, url, product_id)
+              VALUES (:id, :url, :product_id)";
 
-$values = array(':product_id' => $productId, ':url' => $url);
+$values1 = array(':id' => $id, ':url' => $url, ':product_id' => $productId);
 
 /* Execute the query */
 try {
-  $res = $pdo->prepare($query);
-  $success = $res->execute($values);
-  // TODO: Update image count in products database
+  $res1 = $pdo->prepare($query1);
+  $success1 = $res1->execute($values1);
+  if ($success1) {
+    $query2 = "UPDATE products SET numberOfPics = :newValue WHERE id = :product_id;";
 
+    $values2 = array(':product_id' => $productId, ':newValue' => $numberOfPics );
+    /* Execute the update image count query */
+    try
+    {
+        $res2 = $pdo->prepare($query2);
+        $success2 = $res2->execute($values2);
+        if ($success2) {
+          $response = 'success';
+        }
+    }
+    catch (PDOException $e)
+    {
+        $msg = $e->getMessage();
+        $response = 'Q2' . $msg . ' ' . $query2;
+    }
+  }
+ 
   $response = 'success';
 } catch (PDOException $e) {
   $msg = $e->getMessage();
-  $response = $msg . ' ' . $query;
+  $response = 'Q1' . $msg . ' ' . $query1;
 }
 
 /* Send success to fetch API */
