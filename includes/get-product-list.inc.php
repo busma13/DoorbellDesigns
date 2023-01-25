@@ -3,7 +3,6 @@ include_once 'dbh.inc.php';
 //Retrieve product list
 $get_product_list_sql = 'SELECT * FROM products;';
 
-/* Execute the query */
 try
 {
     $res = $pdo->prepare($get_product_list_sql);
@@ -12,6 +11,24 @@ try
     $str = '';
     $productList = array();
     while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        // retrieve image urls
+        $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " .$row['id'] . ";";
+
+        try
+        {
+            $res2 = $pdo->prepare($get_image_urls_sql);
+            $res2->execute();
+        }
+        catch (PDOException $e)
+        {
+        throw new Exception('Database query error');
+        }
+        $urlsArray = array();
+        while ($urlRow = $res2->fetch(PDO::FETCH_ASSOC)) {
+            $urlsArray[] = $urlRow['url'];
+        }
+        $row['urlsArray'] = $urlsArray;
+
         $productList[] = $row;
         // $rows++;
         // $str .= $rows . ' ' . 'line' . "----"; //implode(', ', $row)

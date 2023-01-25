@@ -3717,8 +3717,17 @@ section#single-product-page {
   align-items: center;
 }
 
+.add-images {
+  flex-direction: column;
+}
+
 .add-images > .flex-container {
   justify-content: center;
+}
+
+.responseMessageAddImage {
+  text-align: center;
+  color: red;
 }
 
 .btn-edit-show {
@@ -3732,10 +3741,9 @@ section#single-product-page {
   padding-right: 15px;
 }
 
-.imgUrl img{
-  display: inline;
-  max-width: 10%;
-  padding-right: 7px;
+.product-image-td{
+  min-width: 50px;
+  max-width: 100px;
 }
 
 #product-table-body th span {

@@ -161,7 +161,7 @@ function displayCart() {
             Object.values(productsInCart).map(item => {
                 productTable.innerHTML += `
                 <tr class="cart-item" id="${item.itemName}Base${item.baseColor}">
-                    <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="images/${(item.mainCategory).toLowerCase()}-small/${item.imgUrl}" alt="${item.itemNameString}"></a></td>
+                    <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="${item.urlsArray[0]}" alt="${item.itemNameString}"></a></td>
                     <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemNameString}</a></td>
                     <td><span>${item.baseColor}</span></td>
                     <td>$${item.price}</td>

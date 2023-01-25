@@ -28,7 +28,6 @@ if(! is_array($decoded)) {
 }
 
 $deletedId = $decoded['deletedId'];
-$deletedImgUrl = $decoded['deletedImgUrl'];
 $deletedMainCategory = $decoded['deletedMainCategory'];
 
 $query = "DELETE FROM products WHERE id = :deletedId;";
@@ -40,13 +39,6 @@ try
   $success = $res->execute();
     
     if ($success) {
-     unlink(dirname(__FILE__, 2) . '/images/' . strtolower($deletedMainCategory) . '-small/' . $deletedImgUrl);
-      unlink(dirname(__FILE__, 2) . '/images/' . strtolower($deletedMainCategory) . '-medium/' . $deletedImgUrl);
-      unlink(dirname(__FILE__, 2) . '/images/' . strtolower($deletedMainCategory) . '-large/' . $deletedImgUrl);
-      if (strtolower($deletedMainCategory) === 'air-plant-cradles') {
-        unlink(dirname(__FILE__, 2) . '/images/color-samples/' . $deletedImgUrl);
-      }
-
       $response = 'success';
     }
     else {

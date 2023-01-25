@@ -41,7 +41,6 @@ async function getProductList() {
         // console.log(data);
 
         ls.set('productList', data, 86400000)
-        productList = JSON.parse(localStorage.getItem('productList'))
         console.log('product list set');
     } 
     catch(error) {
@@ -65,7 +64,7 @@ var myWidget = cloudinary.createUploadWidget({
             selection.dataset.numpics = picNumber;
             productId = selection.dataset.id;
             console.log(productId); 
-            updateImageUrls(result.info, picNumber, productId);
+            updateImageUrl(result.info, picNumber, productId);
         }
     }
 )
@@ -80,16 +79,13 @@ document.getElementById("upload_widget").addEventListener("click", function(){
     myWidget.open();
 }, false);
 
-async function updateImageUrls(picInfo, numberOfPics, productId) {
+async function updateImageUrl(picInfo, numberOfPics, productId) {
     const obj = { 
         picInfo: picInfo,
         numberOfPics: numberOfPics,
         productId: productId,
     }
 
-    console.log(obj);
-    // add url to imgUrls
-    // increase numberOfPics by 1
     try{
         const response = await fetch (
         './includes/add-image.inc.php', 
@@ -113,7 +109,7 @@ async function updateImageUrls(picInfo, numberOfPics, productId) {
         const responseMessageAddImage = document.querySelector('.responseMessageAddImage');
 
         if (data === 'success') {
-            responseMessageAddImage.textContent = 'Image successfully added.';
+            responseMessageAddImage.textContent = 'Image successfully added. Refresh page to load thumbnail below.';
         } else if (data === 'add-image-failed') {
             responseMessageAddImage.textContent = 'Error adding image. Please try again.'
         } else {
@@ -378,28 +374,23 @@ function openDeleteProductModal(event) {
     document.getElementById('deleteConfProduct').style.display='block';
     let rowId = event.currentTarget.id;
     console.log(rowId);
-    let imgUrl = event.currentTarget.dataset.imgUrl;
-    console.log(imgUrl);
     let mainCategory = event.currentTarget.dataset.mainCategory;
     console.log(mainCategory);
 
     let productDelete = document.querySelector('#btn-delete-product');
     productDelete.dataset['id'] = rowId;
-    productDelete.dataset['imgUrl'] = imgUrl;
     productDelete.dataset['mainCategory'] = mainCategory;
     productDelete.addEventListener('click', deleteProduct);
 }
 
 async function deleteProduct(event) {
     let rowId = event.currentTarget.dataset.id;
-    let imgUrl = event.currentTarget.dataset.imgUrl;
     let mainCategory = event.currentTarget.dataset.mainCategory;
 
     let row = document.getElementById(rowId);
 
     let obj = {
         'deletedId': rowId,
-        'deletedImgUrl': imgUrl,
         'deletedMainCategory': mainCategory
     }
 

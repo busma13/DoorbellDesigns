@@ -70,30 +70,11 @@ if ($column === 'itemNameString') {
     }
 
     $itemName = StringUtils::formatCase($value, StringUtils::FORMAT_LOWER_CAMEL_CASE);
-    $imgUrl = $itemName . '.jpg';
-    $pictureRoute = dirname(__FILE__, 2) . '/images' . '/' . strtolower($mainCategory);
 
-    // Rename each photo 
-    if (!rename($pictureRoute . "-original/" . $originalItemName . '.jpg', $pictureRoute . "-original/" . $imgUrl)) {
-      $response = "image-rename error original";
-      die(json_encode($response));
-    }
-    if (!rename($pictureRoute . "-small/" . $originalItemName . '.jpg', $pictureRoute . "-small/" . $imgUrl)) {
-        $response = "image-rename error small";
-        die(json_encode($response));
-    }
-    if (!rename($pictureRoute . "-medium/" . $originalItemName . '.jpg', $pictureRoute . "-medium/" . $imgUrl)) {
-      $response = "image-rename error medium";
-      die(json_encode($response));
-    }
-    if (!rename($pictureRoute . "-large/" . $originalItemName . '.jpg', $pictureRoute . "-large/" . $imgUrl)) {
-      $response = "image-rename error large";
-      die(json_encode($response));
-    }
     //get values from updateProducts() and update a product
-    $query2 = "UPDATE products SET itemNameString = :itemNameString, itemName = :itemName, imgUrl = :imgUrl WHERE id = :id;";
+    $query2 = "UPDATE products SET itemNameString = :itemNameString, itemName = :itemName WHERE id = :id;";
 
-    $values = array(':id' => $id, ':itemNameString' => $value, ':itemName' => $itemName, ':imgUrl' => $imgUrl);
+    $values = array(':id' => $id, ':itemNameString' => $value, ':itemName' => $itemName);
 } else {
     //get values from updateProducts() and update a product
     $query2 = "UPDATE products SET $column = :newValue WHERE id = :id;";

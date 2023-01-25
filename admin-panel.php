@@ -194,12 +194,12 @@
 <div class="container">
     <div class="page-header-content text-center">
         <div class="page-header wsub">
-            <h1 class="page-title fadeInDown animated first">Add Product Images</h1>
+            <h1 class="page-title fadeInDown animated first">Add Product Image</h1>
         </div><!-- / page-header -->
-        <p class="slide-text fadeInUp animated second">Choose product from dropdown menu then click on "Add Images" button.</p>
+        <p class="slide-text fadeInUp animated second">Choose product from dropdown menu then click on "Add Image" button.</p>
     </div><!-- / page-header-content -->
 </div><!-- / container -->
-<div class="container add-images">
+<div class="container add-images flex-container ">
     <div class="flex-container">
         <select name="productImageUploadSelect" id="productImageUploadSelect">
         <?php
@@ -222,7 +222,7 @@
         }
         ?>
         </select>
-        <button id="upload_widget" class="btn btn-primary-filled btn-rounded">Add Images</button>
+        <button id="upload_widget" class="btn btn-primary-filled btn-rounded">Add Image</button>
     </div>
     <p class="responseMessageAddImage"></p>
 </div>
@@ -246,7 +246,6 @@
                 <tr>
                     <th></th>
                     <th></th>
-                    <!-- <th><span>Image Url</span></th> -->
                     <th>Product Name</th>
                     <th>Main Category</th>
                     <th>Subcategories</th>
@@ -256,28 +255,39 @@
                     <th>Dimensions</th>
                     <th>Active Status</th>
                     <th>Featured Status</th>
+                    <th>Number Of Pictures</th>
                 </tr>
 <?php
 $get_products_sql = "SELECT * FROM products ORDER BY itemNameString;";
 
-/* Execute the query */
 try
 {
-    $res = $pdo->prepare($get_products_sql);
-    $res->execute();
+    $res1 = $pdo->prepare($get_products_sql);
+    $res1->execute();
 }
 catch (PDOException $e)
 {
-/* If there is a PDO exception, throw a standard exception */
 throw new Exception('Database query error');
 }
-while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
+while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
+    $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " .$row['id'] . ";";
+
+    /* Execute the query */
+    try
+    {
+        $res2 = $pdo->prepare($get_image_urls_sql);
+        $res2->execute();
+    }
+    catch (PDOException $e)
+    {
+    throw new Exception('Database query error');
+    }
+    $urlRow = $res2->fetch(PDO::FETCH_ASSOC);
+    $urlThumb = str_replace('upload/', 'upload/c_fill,h_200/',$urlRow['url']); ?>
                 <tr id="<?php echo $row['id']?>">
                 <!-- update data-img-url -->
-                    <td><button id="<?php echo $row['id']?>" class="deleteProductButton" data-img-url="<?php echo $row['numberOfPics']?>" data-main-category="<?php echo $row ['mainCategory']?>"><i class="lnr lnr-trash"></i></button></td>
-                    <td class="img"><img src="
-                    https://res.cloudinary.com/doorbelldesigns/image/upload/v1674425263/products/blueAzureOnBlackCradle/y9adegfzauh9ngcbw0ep.jpg"></td>
-                    <!-- <td class="img"><img src="images/<?php echo strtolower($row['mainCategory']) . '-small/' . $row['numberOfPics'] ?>"></td> -->
+                    <td><button id="<?php echo $row['id']?>" class="deleteProductButton" data-main-category="<?php echo $row ['mainCategory']?>"><i class="lnr lnr-trash"></i></button></td>
+                    <td class="product-image-td"><img src="<?php echo $urlThumb ?>" alt="<?php echo $row['itemNameString'] ?>"></td>
                     <td class="itemNameString can-edit"><?php echo $row['itemNameString']?></td>
                     <td class="mainCategory can-edit"><?php echo $row['mainCategory']?></td>
                     <td class="subCategories can-edit"><?php echo $row['subCategories']?></td>
@@ -287,6 +297,7 @@ while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
                     <td class="dimensions can-edit"><?php echo $row['dimensions']?></td>
                     <td class="active can-edit"><?php echo $row['active']?></td>
                     <td class="featured can-edit"><?php echo $row['featured']?></td>
+                    <td class="number-of-pics"><?php echo $row['numberOfPics']?></td>
                 </tr>
 <?php
 }
