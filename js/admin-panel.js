@@ -38,7 +38,7 @@ async function getProductList() {
             mimeType: 'application/json'
         });
         data = await response.json();
-        // console.log(data);
+        console.log(data);
 
         ls.set('productList', data, 86400000)
         console.log('product list set');

@@ -41,8 +41,8 @@ if (isset($_POST['addProduct'])) {
 
     /* Execute the query */
     try {
-      $res = $pdo->prepare($query);
-      $res->execute($values);
+      $res1 = $pdo->prepare($query);
+      $res1->execute($values);
       $retVal = $pdo->lastInsertId();
 
       header("Location: ../admin-panel.php?addProduct=success#add-form");

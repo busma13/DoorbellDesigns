@@ -44,11 +44,11 @@ if ($column === 'itemNameString') {
     /* Execute the get product query */
     try
     {
-        $res = $pdo->prepare($query1);
-        $res->bindParam(':id', $id);
-        $success = $res->execute();
+        $res1 = $pdo->prepare($query1);
+        $res1->bindParam(':id', $id);
+        $success = $res1->execute();
         if ($success) {
-            $row = $res->fetch(PDO::FETCH_ASSOC);
+            $row = $res1->fetch(PDO::FETCH_ASSOC);
             if ($row['itemNameString'] == '') {
                 $response = 'not-found';
             } else {
@@ -85,8 +85,8 @@ if ($column === 'itemNameString') {
 /* Execute the update product query */
 try
 {
-    $res = $pdo->prepare($query2);
-    $success = $res->execute($values);
+    $res1 = $pdo->prepare($query2);
+    $success = $res1->execute($values);
     if ($success) {
       $response = 'success';
     }

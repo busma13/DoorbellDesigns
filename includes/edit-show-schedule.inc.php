@@ -81,8 +81,8 @@ $values = array(':newStartDate' => $newStartDate, ':newEndDate' => $newEndDate, 
 
 /* Execute the query */
 try {
-  $res = $pdo->prepare($query);
-  $success = $res->execute($values);
+  $res1 = $pdo->prepare($query);
+  $success = $res1->execute($values);
   // if ($success) {
   //     $row = $res->fetch(PDO::FETCH_ASSOC);
   // if ($row['itemNameString'] == '') {

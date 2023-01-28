@@ -45,15 +45,15 @@ $get_shows_sql = "SELECT * FROM shows ORDER BY startDate;";
 /* Execute the query */
 try
 {
-    $res = $pdo->prepare($get_shows_sql);
-    $res->execute();
+    $res1 = $pdo->prepare($get_shows_sql);
+    $res1->execute();
 }
 catch (PDOException $e)
 {
 /* If there is a PDO exception, throw a standard exception */
 throw new Exception('Database query error');
 }
-while ($row = $res->fetch(PDO::FETCH_ASSOC)) { 
+while ($row = $res1->fetch(PDO::FETCH_ASSOC)) { 
     if ($row['startDateString'] == $row['endDateString']) {
         $dateString = $row['startDateString'];
     } else {

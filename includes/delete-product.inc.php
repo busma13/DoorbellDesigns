@@ -34,9 +34,9 @@ $query = "DELETE FROM products WHERE id = :deletedId;";
 
 try
 {
-  $res = $pdo->prepare($query);
-  $res->bindParam(':deletedId', $deletedId);
-  $success = $res->execute();
+  $res1 = $pdo->prepare($query);
+  $res1->bindParam(':deletedId', $deletedId);
+  $success = $res1->execute();
     
     if ($success) {
       $response = 'success';

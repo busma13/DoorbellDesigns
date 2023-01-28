@@ -52,8 +52,8 @@ try {
     /* Execute the update image count query */
     try
     {
-        $res2 = $pdo->prepare($query2);
-        $success2 = $res2->execute($values2);
+        $res1 = $pdo->prepare($query2);
+        $success2 = $res1->execute($values2);
         if ($success2) {
           $response = 'success';
         }

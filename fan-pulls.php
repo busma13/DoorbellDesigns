@@ -44,28 +44,41 @@
                         /* Execute the query */
                         try
                         {
-                            $res = $pdo->prepare($get_fan_pull_products_sql);
-                            $res->execute();
+                            $res1 = $pdo->prepare($get_fan_pull_products_sql);
+                            $res1->execute();
                         }
                         catch (PDOException $e)
                         {
                         /* If there is a PDO exception, throw a standard exception */
                         throw new Exception('Database query error');
                         }
-                        $rows = $res->rowCount();
+                        $rows = $res1->rowCount();
                         if ($rows === 0) {
                             echo '<div class="col-xs-6 col-md-3 product">';
                             echo '<p>There are no products of this type available currently.</p>
                             </div>'; 
                         } 
                         else {
-                            while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
+                            while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
+                                $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " .$row['id'] . ";";
+
+                                try
+                                {
+                                    $res2 = $pdo->prepare($get_image_urls_sql);
+                                    $res2->execute();
+                                }
+                                catch (PDOException $e)
+                                {
+                                throw new Exception('Database query error');
+                                }
+                                $urlRow = $res2->fetch(PDO::FETCH_ASSOC); 
+                                $picUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']); ?>
                                 
                                 <!-- product -->
                                 <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
                                     <a href="single-product.php?category=fan-pulls&product=<?php echo $row['id'] ?>" class="product-link"></a>
                                     <!-- / product-link -->
-                                    <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                                    <img src="<?php echo $picUrl ?>" alt="<?php echo $row['itemNameString'] ?>">
                                     <!-- / product-image -->
 
                                     <!-- product-hover-tools -->

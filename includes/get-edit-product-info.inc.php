@@ -39,11 +39,11 @@ $query = "SELECT * FROM `products` WHERE itemName = :editProductName;";
 /* Execute the query */
 try
 {
-    $res = $pdo->prepare($query);
-    $res->bindParam(':editProductName', $editProductName);
-    $success = $res->execute();
+    $res1 = $pdo->prepare($query);
+    $res1->bindParam(':editProductName', $editProductName);
+    $success = $res1->execute();
     if ($success) {
-        $row = $res->fetch(PDO::FETCH_ASSOC);
+        $row = $res1->fetch(PDO::FETCH_ASSOC);
         if ($row['itemNameString'] == '') {
             $response = 'not-found';
         } else {

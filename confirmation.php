@@ -134,8 +134,8 @@ else {
       /* Execute the query */
       try
       {
-          $res = $pdo->prepare($query);
-          $success = $res->execute($values);
+          $res1 = $pdo->prepare($query);
+          $success = $res1->execute($values);
           $response = $pdo->lastInsertId();
       }
       catch (PDOException $e)

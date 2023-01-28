@@ -92,16 +92,28 @@
         /* Execute the query */
         try
         {
-            $res2 = $pdo->prepare($get_products_sql);
-            $res2->execute();
+            $res1 = $pdo->prepare($get_products_sql);
+            $res1->execute();
         }
         catch (PDOException $e)
         {
         /* If there is a PDO exception, throw a standard exception */
         throw new Exception('Database query error');
         }
+        while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
+            $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " .$row['id'] . ";";
 
-        while ($row = $res2->fetch(PDO::FETCH_ASSOC)) { ?>
+            try
+            {
+                $res2 = $pdo->prepare($get_image_urls_sql);
+                $res2->execute();
+            }
+            catch (PDOException $e)
+            {
+            throw new Exception('Database query error');
+            }
+            $urlRow = $res2->fetch(PDO::FETCH_ASSOC); 
+            $picUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']); ?>
 
             <!-- item -->
             <div class="item product">
@@ -109,7 +121,7 @@
                 <!-- / sale-label -->
                 <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>" class="product-link"></a>
                 <!-- / product-link -->
-                <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                <img src="<?php echo $picUrl ?>" alt="<?php echo $row['itemNameString'] ?>">
                 <!-- / product-image -->
 
                 <!-- product-hover-tools -->
@@ -182,8 +194,8 @@
         /* Execute the query */
         try
         {
-            $res4 = $pdo->prepare($get_products_sql);
-            $res4->execute();
+            $res3 = $pdo->prepare($get_products_sql);
+            $res3->execute();
         }
         catch (PDOException $e)
         {
@@ -191,7 +203,20 @@
         throw new Exception('Database query error');
         }
 
-        while ($row = $res4->fetch(PDO::FETCH_ASSOC)) { ?>
+        while ($row = $res3->fetch(PDO::FETCH_ASSOC)) {
+            $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " .$row['id'] . ";";
+
+            try
+            {
+                $res4 = $pdo->prepare($get_image_urls_sql);
+                $res4->execute();
+            }
+            catch (PDOException $e)
+            {
+            throw new Exception('Database query error');
+            }
+            $urlRow = $res4->fetch(PDO::FETCH_ASSOC); 
+            $newArrivalPicUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']); ?>
 
             <!-- product -->
             <div class="col-xs-6 col-md-4 product">
@@ -199,7 +224,7 @@
                 <!-- / sale-label -->
                 <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>" class="product-link"></a>
                 <!-- / product-link -->
-                <img src="images/<?php echo strtolower($row['mainCategory']) . '-medium/' . $row['imgUrl'] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                <img src="<?php echo $newArrivalPicUrl ?>" alt="<?php echo $row['itemNameString'] ?>">
                 <!-- / product-image -->
 
                 <!-- product-details -->

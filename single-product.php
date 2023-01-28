@@ -25,8 +25,8 @@ $get_category_products_sql = 'SELECT * FROM products WHERE mainCategory = "'.$_G
 /* Execute the query */
 try
 {
-    $res = $pdo->prepare($get_category_products_sql);
-    $res->execute();
+    $res1 = $pdo->prepare($get_category_products_sql);
+    $res1->execute();
 }
 catch (PDOException $e)
 {
@@ -36,11 +36,27 @@ throw new Exception('Database query error');
 
 //Load the item we want.  On prev or next load the next/prev product.
 $categoryProdIds = array();
+$picUrls = array();
 $currentRow;
-while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
     //Find the index where the current product's ID resides.
     if ($row['id'] == $_GET['product']) {
         $currentRow = $row;
+        $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " .$row['id'] . ";";
+
+        try
+        {
+            $res2 = $pdo->prepare($get_image_urls_sql);
+            $res2->execute();
+        }
+        catch (PDOException $e)
+        {
+        throw new Exception('Database query error');
+        }
+        while ($urlRow = $res2->fetch(PDO::FETCH_ASSOC)) {
+
+            $picUrls[] = str_replace('upload/', 'upload/c_fill,h_1200/',$urlRow['url']);
+        }
     }
     //Make an array of all the product IDs in the category
     $categoryProdIds[] = $row['id'];
@@ -66,11 +82,11 @@ if ($currentRow) {
                         <div class="carousel-inner" role="listbox">
                             <!-- TODO: remove if/else below. Add loop here to cycle through img array and load each img & alt -->
                             <div class="item active">
-                                <img class="product-single-image" src="images/<?php echo strtolower($currentRow['mainCategory']) . '-large/' . $currentRow['imgUrl']?>" alt="<?php echo $currentRow['itemNameString']?>">
+                            <img class="product-single-image" src="<?php echo $picUrls[0] ?>" alt="<?php echo $row['itemNameString'] ?>">
                             </div>
                     <?php if (strtolower($currentRow['mainCategory']) === 'air-plant-cradles') { ?>
                             <div class="item">
-                                <img class="product-single-image" src="images/color-samples/<?php echo $currentRow['imgUrl']?>" alt="<?php echo $currentRow['itemNameString'] . ' color sample'?>">
+                            <img class="product-single-image" src="<?php echo $picUrls[1] ?>" alt="<?php echo $row['itemNameString'] ?>">
                             </div>
                         </div>
                         <!-- / wrapper for slides -->

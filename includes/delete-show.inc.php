@@ -36,9 +36,9 @@ $query = "DELETE FROM shows WHERE startDate = :deleteDate;";
 /* Execute the query */
 try
 {
-  $res = $pdo->prepare($query);
-  $res->bindParam(':deleteDate', $deleteDate);
-  $success = $res->execute();
+  $res1 = $pdo->prepare($query);
+  $res1->bindParam(':deleteDate', $deleteDate);
+  $success = $res1->execute();
     
     if ($success) {
       $response = 'success';

@@ -93,14 +93,14 @@ if (isset($_POST['submit'])) {
 
                 try
                 {
-                    $res2 = $pdo->prepare($get_products_sql);
-                    $res2->execute();
+                    $res1 = $pdo->prepare($get_products_sql);
+                    $res1->execute();
                 }
                 catch (PDOException $e)
                 {
                     header("Location: ../checkout.php?order=SQL-statement-failed#message");
                 }
-                while ($row = $res2->fetch(PDO::FETCH_ASSOC)) { 
+                while ($row = $res1->fetch(PDO::FETCH_ASSOC)) { 
                     $priceCents = $row['price'] * 100;
                     $shippingCents = $row['shipping'] * 100;
                     $mainCategory = $row['mainCategory'];
@@ -233,8 +233,8 @@ if (isset($_POST['submit'])) {
                 /* Execute the query */
                 try
                 {
-                    $res = $pdo->prepare($insert_sql);
-                    $res->execute($values);
+                    $res1 = $pdo->prepare($insert_sql);
+                    $res1->execute($values);
                     $returnVal = $pdo->lastInsertId();
                 }
                 catch (PDOException $e)

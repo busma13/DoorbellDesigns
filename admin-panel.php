@@ -208,15 +208,15 @@
         /* Execute the query */
         try
         {
-            $res = $pdo->prepare($get_products_sql);
-            $res->execute();
+            $res1 = $pdo->prepare($get_products_sql);
+            $res1->execute();
         }
         catch (PDOException $e)
         {
         /* If there is a PDO exception, throw a standard exception */
         throw new Exception('Database query error');
         }
-        while ($row = $res->fetch(PDO::FETCH_ASSOC)) { ?>
+        while ($row = $res1->fetch(PDO::FETCH_ASSOC)) { ?>
             <option value="<?php echo $row['itemName']?>" data-numpics="<?php echo $row['numberOfPics']?>" data-id="<?php echo $row['id']?>"><?php echo $row['itemNameString']?></option>
         <?php
         }
@@ -262,32 +262,32 @@ $get_products_sql = "SELECT * FROM products ORDER BY itemNameString;";
 
 try
 {
-    $res1 = $pdo->prepare($get_products_sql);
-    $res1->execute();
+    $res2 = $pdo->prepare($get_products_sql);
+    $res2->execute();
 }
 catch (PDOException $e)
 {
 throw new Exception('Database query error');
 }
-while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
+while ($row = $res2->fetch(PDO::FETCH_ASSOC)) {
     $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " .$row['id'] . ";";
 
     /* Execute the query */
     try
     {
-        $res2 = $pdo->prepare($get_image_urls_sql);
-        $res2->execute();
+        $res3 = $pdo->prepare($get_image_urls_sql);
+        $res3->execute();
     }
     catch (PDOException $e)
     {
     throw new Exception('Database query error');
     }
-    $urlRow = $res2->fetch(PDO::FETCH_ASSOC);
-    $urlThumb = str_replace('upload/', 'upload/c_fill,h_200/',$urlRow['url']); ?>
+    $urlRow = $res3->fetch(PDO::FETCH_ASSOC);
+    $picUrl = str_replace('upload/', 'upload/c_fill,h_200/',$urlRow['url']); ?>
                 <tr id="<?php echo $row['id']?>">
                 <!-- update data-img-url -->
                     <td><button id="<?php echo $row['id']?>" class="deleteProductButton" data-main-category="<?php echo $row ['mainCategory']?>"><i class="lnr lnr-trash"></i></button></td>
-                    <td class="product-image-td"><img src="<?php echo $urlThumb ?>" alt="<?php echo $row['itemNameString'] ?>"></td>
+                    <td class="product-image-td"><img src="<?php echo $picUrl ?>" alt="<?php echo $row['itemNameString'] ?>"></td>
                     <td class="itemNameString can-edit"><?php echo $row['itemNameString']?></td>
                     <td class="mainCategory can-edit"><?php echo $row['mainCategory']?></td>
                     <td class="subCategories can-edit"><?php echo $row['subCategories']?></td>
@@ -340,15 +340,15 @@ $get_shows_sql = "SELECT * FROM shows ORDER BY startDate;";
 /* Execute the query */
 try
 {
-    $res = $pdo->prepare($get_shows_sql);
-    $res->execute();
+    $res4 = $pdo->prepare($get_shows_sql);
+    $res4->execute();
 }
 catch (PDOException $e)
 {
 /* If there is a PDO exception, throw a standard exception */
 throw new Exception('Database query error');
 }
-while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+while ($row = $res4->fetch(PDO::FETCH_ASSOC)) {
         $startDate = date_create($row['startDate']);
         $startDateString = date_format($startDate, "Y-m-d");
         $endDate = date_create($row['endDate']);
