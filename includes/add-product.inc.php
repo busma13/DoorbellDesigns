@@ -20,16 +20,16 @@ if (isset($_POST['addProduct'])) {
     $itemNameString = $_POST['itemNameString'];
     $itemName = StringUtils::formatCase($itemNameString, StringUtils::FORMAT_LOWER_CAMEL_CASE);
     $subCategories = json_encode(explode(', ', $_POST['subCategories'])) ?? '';
-    $baseColorOptions = json_encode(explode(', ', $_POST['baseColorOptions'])) ?? '';
+    $optionIDs = json_encode($_POST['optionIDs']);
     $addActive = $_POST['addActive'] ?? '0';
     $addFeatured = $_POST['addFeatured'] ?? '0';
 
     //Enter everything into the database
     $query =
-      "INSERT INTO products (itemName, itemNameString, mainCategory, subCategories, price, shipping, baseColor, qtyInCart, dimensions, active, featured) VALUES (:itemName,:itemNameString,:mainCategory,:subCategories,:price,:shipping, :baseColorOptions,:qtyInCart,:dimensions, :addActive, :addFeatured);";
+      "INSERT INTO products (itemName, itemNameString, mainCategory, subCategories, price, shipping, optionIDs, qtyInCart, dimensions, active, featured) VALUES (:itemName,:itemNameString,:mainCategory,:subCategories,:price,:shipping, :optionIDs,:qtyInCart,:dimensions, :addActive, :addFeatured);";
 
     /* Values array for PDO */
-    $values = array(':itemName' => $itemName, ':itemNameString' => $itemNameString, ':mainCategory' => $_POST['mainCategory'], ':subCategories' => $subCategories, ':price' => $_POST['price'], ':shipping' => $_POST['shipping'], 'baseColorOptions' => $baseColorOptions, ':qtyInCart' => 0, ':dimensions' => $_POST['dimensions'], ':addActive' => $addActive, ':addFeatured' => $addFeatured);
+    $values = array(':itemName' => $itemName, ':itemNameString' => $itemNameString, ':mainCategory' => $_POST['mainCategory'], ':subCategories' => $subCategories, ':price' => $_POST['price'], ':shipping' => $_POST['shipping'], 'optionIDs' => $optionIDs, ':qtyInCart' => 0, ':dimensions' => $_POST['dimensions'], ':addActive' => $addActive, ':addFeatured' => $addFeatured);
 
     // echo $_POST['itemNameString'] . '<br>';
     // echo $itemName . '<br>';

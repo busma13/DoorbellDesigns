@@ -35,6 +35,8 @@ if (addToCartBtnSinglePage) {
 async function addToCartSingle(event) {
     let qty = Number(document.querySelector('.input-text').value);
     let color;
+
+    // TODO: change for variable options 
     if (document.querySelector('.selectpicker')) {
         color = document.querySelector('.selectpicker').selectedOptions[0].innerText;
     } else {

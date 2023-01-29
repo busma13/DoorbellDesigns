@@ -134,8 +134,16 @@
                     <input type="text" class="form-control" name="subCategories" placeholder="subcategories" id="subCategories">
                 </div>
                 <div class="col-sm-6">
-                    <label for="baseColorOptions">Color Options (comma separated):</label>
-                    <input type="text" class="form-control" name="baseColorOptions" placeholder="Color Options" id="baseColorOptions">
+                    <label for="optionIDs">Option IDs (hold ctrl/cmd to select multiple):</label>
+                    <select class="form-control" name="optionIDs[]" id="optionIDs" multiple>
+                        <option value="">No Options</option>
+                        <option value="1">Base Color: ["Grey","Light Brown"]</option>
+                        <option value="2">Arrow Direction: ["Up","Down","Left","Right"]</option>
+                        <option value="3">Chain Color: ["Silver Tone","Brass Tone"]</option>
+                        <option value="4">Paw Color: ["Black","Blue","Brown"]</option>
+                        <option value="5">Combadge Color: ["Blue","Gold","Red"]</option>
+                        <option value="6">Boot Color: ["2 Tone Brown","Turquoise and Brown"]</option>
+                    </select>
                 </div>
                 <div class="col-sm-6">
                     <label for="itemNameString">Item name:</label>
@@ -251,7 +259,7 @@
                     <th>Subcategories</th>
                     <th>Price</th>
                     <th>Shipping</th>
-                    <th>Base color options</th>
+                    <th>Option IDs</th>
                     <th>Dimensions</th>
                     <th>Active Status</th>
                     <th>Featured Status</th>
@@ -293,11 +301,11 @@ while ($row = $res2->fetch(PDO::FETCH_ASSOC)) {
                     <td class="subCategories can-edit"><?php echo $row['subCategories']?></td>
                     <td class="price can-edit"><?php echo $row['price']?></td>
                     <td class="shipping can-edit"><?php echo $row['shipping']?></td>
-                    <td class="baseColor can-edit"><?php echo $row['baseColor']?></td>
+                    <td class="optionIDs can-edit"><?php echo $row['optionIDs']?></td>
                     <td class="dimensions can-edit"><?php echo $row['dimensions']?></td>
                     <td class="active can-edit"><?php echo $row['active']?></td>
                     <td class="featured can-edit"><?php echo $row['featured']?></td>
-                    <td class="number-of-pics"><?php echo $row['numberOfPics']?></td>
+                    <td class="numberOfPics can-edit"><?php echo $row['numberOfPics']?></td>
                 </tr>
 <?php
 }

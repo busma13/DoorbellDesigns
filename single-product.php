@@ -82,12 +82,14 @@ if ($currentRow) {
                         <div class="carousel-inner" role="listbox">
                             <!-- TODO: remove if/else below. Add loop here to cycle through img array and load each img & alt -->
                             <div class="item active">
-                            <img class="product-single-image" src="<?php echo $picUrls[0] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                                <img class="product-single-image" src="<?php echo $picUrls[0] ?>" alt="<?php echo $currentRow['itemNameString'] ?>">
                             </div>
-                    <?php if (strtolower($currentRow['mainCategory']) === 'air-plant-cradles') { ?>
+                    <?php if (count($picUrls) > 1) { 
+                        for ($i = 1; $i < count($picUrls); $i++) { ?>
                             <div class="item">
-                            <img class="product-single-image" src="<?php echo $picUrls[1] ?>" alt="<?php echo $row['itemNameString'] ?>">
+                                <img class="product-single-image" src="<?php echo $picUrls[$i] ?>" alt="<?php echo $currentRow['itemNameString'] . ' ' . $i + 1?>">
                             </div>
+                        <?php } ?>         
                         </div>
                         <!-- / wrapper for slides -->
 
@@ -174,31 +176,41 @@ if ($currentRow) {
                         <div class="options">
                             <span>Qty:</span>
                             <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
-                            <?php
-                            if (strtolower($currentRow['mainCategory']) !== 'air-plant-cradles') { ?>
                             <span class="selectors">
+
+                    <?php $get_options_sql = "SELECT * FROM options;";
+
+                    try
+                    {
+                        $res3 = $pdo->prepare($get_options_sql);
+                        $res3->execute();
+                    }
+                    catch (PDOException $e)
+                    {
+                    throw new Exception('Database query error');
+                    }
+                    while ($optionRow = $res3->fetch(PDO::FETCH_ASSOC)) { 
+                        $optionIDs = json_decode($currentRow['optionIDs']);
+                        if (in_array($optionRow['id'], $optionIDs)) {
+                        ?>
                                 <select class="selectpicker">
-                                    <?php 
+                                    <option disabled="disabled" selected="selected"><?php echo $optionRow['name'] ?>:</option>
+                                    <!-- <optgroup label="<?php echo $optionRow['name'] ?>:"> -->
                                     
-                                    if (strtolower($currentRow['mainCategory']) === 'fan-pulls') {
-                                        echo '<optgroup label="Chain Color:">';
-                                    } else if (strtolower($currentRow['mainCategory']) === 'doorbells') {
-                                        echo '<optgroup label="Base Color:">';
-                                    }
-                                    $baseColorArr = JSON_decode($currentRow['baseColor']);
-       
-                                    foreach($baseColorArr as $i) {
+                                <?php $optionValues = json_decode($optionRow['optionValues']);
+                                foreach($optionValues as $val) {
                                 ?>
-                                        <option><?php echo ucfirst($i)?></option>
+                                        <option><?php echo ucfirst($val)?></option>
                                 <?php 
                                     } 
                                 ?>
                                     </optgroup>
                                 </select>
+                        <?php
+                        }
+                    }
+                    ?>
                             </span>
-                            <?php
-                            }
-                            ?>
                         </div>
                         <!-- / options -->
 

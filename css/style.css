@@ -3524,8 +3524,9 @@ section#single-product-page {
 }
 
 .buy-product .selectors {
-  display: inline;
-  /* position: relative; */
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
   width: 100%;
 }
 
@@ -3533,9 +3534,9 @@ section#single-product-page {
   background: white;
   font-weight: 500;
   border: 1px solid #cccccc;
-  max-width: 100px;
+  /* max-width: 100px; */
   height: 40px;
-  position: absolute;
+  /* position: absolute; */
   margin-top: 0;
   margin-left: 10px;
 }
