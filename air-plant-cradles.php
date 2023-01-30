@@ -63,14 +63,14 @@
 
                                 try
                                 {
-                                    $res1 = $pdo->prepare($get_image_urls_sql);
-                                    $res1->execute();
+                                    $res2 = $pdo->prepare($get_image_urls_sql);
+                                    $res2->execute();
                                 }
                                 catch (PDOException $e)
                                 {
                                 throw new Exception('Database query error');
                                 }
-                                $urlRow = $res1->fetch(PDO::FETCH_ASSOC); 
+                                $urlRow = $res2->fetch(PDO::FETCH_ASSOC); 
                                 $picUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']); ?>
                                 
                                 <!-- product -->
@@ -93,7 +93,7 @@
                                     <!-- product-details -->
                                     <div class="product-details">
                                         <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
-                                        <h6 class="product-price">$<?php echo $row['price'] ?> ea.</h6>
+                                        <h6 class="product-price">$<?php echo $row['price'] ?></h6>
                                     </div><!-- / product-details -->
                                 </div><!-- / product -->        
                     <?php                 

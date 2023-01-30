@@ -137,7 +137,11 @@ if ($currentRow) {
                  
                     <div class="product-info">
                         <div class="info">
-                            <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $currentRow['price'] ?> ea.</span></p>
+                            <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $currentRow['price'];
+                            if ($currentRow['mainCategory'] === 'Fan-Pulls') {
+                                echo ' ea. / $15 per pair';
+                            } ?>
+                            </span></p>
                         </div>
                         <div class="info">
                             <p><i class="lnr lnr-heart"></i><span>Category: <a href="<?php echo strtolower($currentRow['mainCategory'])?>.php"> <?php echo $currentRow['mainCategory']?></a>
@@ -174,9 +178,11 @@ if ($currentRow) {
 
                     <div class="buy-product">
                         <div class="options">
-                            <span>Qty:</span>
-                            <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
-                            <span class="selectors">
+                            <div>
+                                <span class="qty-span">Qty:</span>
+                                <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
+                            </div>
+                            <!-- <span class="selectors"> -->
 
                     <?php $get_options_sql = "SELECT * FROM options;";
 
@@ -195,7 +201,6 @@ if ($currentRow) {
                         ?>
                                 <select class="selectpicker">
                                     <option disabled="disabled" selected="selected"><?php echo $optionRow['name'] ?>:</option>
-                                    <!-- <optgroup label="<?php echo $optionRow['name'] ?>:"> -->
                                     
                                 <?php $optionValues = json_decode($optionRow['optionValues']);
                                 foreach($optionValues as $val) {
@@ -210,14 +215,14 @@ if ($currentRow) {
                         }
                     }
                     ?>
-                            </span>
+                            <!-- </span> -->
                         </div>
                         <!-- / options -->
 
-                        <div class="space-25">&nbsp;</div>
-
-                        <a class="btn btn-primary-filled btn-rounded add-to-cart-single" id="<?php echo $currentRow['itemName']?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></a>
-                        <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
+                        <div class="btn-container">
+                            <a class="btn btn-primary-filled btn-rounded add-to-cart-single" id="<?php echo $currentRow['itemName']?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></a>
+                            <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
+                        </div>
                     </div>
                 </div><!-- product-details -->
             </div><!-- / col-sm-4 col-md-3 -->

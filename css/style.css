@@ -473,17 +473,17 @@ a:focus {
 
 input:focus {
   outline: none !important;
-  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 textarea:focus {
   outline: none !important;
-  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 select:focus {
   outline: none !important;
-  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .form-control:focus {
@@ -3206,10 +3206,6 @@ section#single-product-page {
   background-color: #222222;
 }
 
-.page-header-content {
-  /* padding: 20px 0; */
-}
-
 .page-header-content h1 {
   font-size: 30px;
 }
@@ -3508,7 +3504,16 @@ section#single-product-page {
 
 .buy-product {
   padding: 10px 0;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.options {
+  display: flex;
+  flex-flow: column wrap;
 }
 
 .options input[type="number"] {
@@ -3523,6 +3528,11 @@ section#single-product-page {
   outline: none !important;
 }
 
+.btn-container {
+  display: flex;
+  flex-flow: column wrap;
+}
+
 .buy-product .selectors {
   display: flex;
   flex-flow: row wrap;
@@ -3534,16 +3544,10 @@ section#single-product-page {
   background: white;
   font-weight: 500;
   border: 1px solid #cccccc;
-  /* max-width: 100px; */
+  max-width: 150px;
   height: 40px;
-  /* position: absolute; */
-  margin-top: 0;
-  margin-left: 10px;
-}
-
-.buy-product .selectpicker.two {
-  max-width: 100px;
-  left: 103px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .product-details .btn {
@@ -4183,14 +4187,6 @@ a.btn-social {
   padding: 15px;
 }
 
-.item-label {
-
-}
-
-.item-amount {
-
-}
-
 .total-line {
   font-weight: bold;
 }
@@ -4371,11 +4367,6 @@ footer #newsletter .form-control {
 .link-widget .flex-container {
   flex-flow: column wrap;
   align-content: flex-start;
-}
-
-.link-widget .info {
-  /* flex-basis: 50%; */
-
 }
 
 /* End Footer Widgets */
@@ -4980,9 +4971,10 @@ footer #newsletter .form-control {
 
 }
 
+@media only screen and (min-width: 350px) {
+  .buy-product {
+    flex-direction: row;
+  }
+}
 /* End Min Widths */
 /* / End Media Screens */
-
-* {
-  /* border: 1px solid red; */
-}

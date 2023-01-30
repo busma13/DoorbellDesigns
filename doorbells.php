@@ -105,7 +105,7 @@
                                     <!-- product-details -->
                                     <div class="product-details">
                                         <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
-                                        <h6 class="product-price">$<?php echo $row['price'] ?> ea.</h6>
+                                        <h6 class="product-price">$<?php echo $row['price'] ?></h6>
                                     </div><!-- / product-details -->
                                 </div><!-- / product -->   
                     <?php                                
