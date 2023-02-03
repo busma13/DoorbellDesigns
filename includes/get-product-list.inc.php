@@ -16,15 +16,15 @@ try
 
         try
         {
-            $res1 = $pdo->prepare($get_image_urls_sql);
-            $res1->execute();
+            $res2 = $pdo->prepare($get_image_urls_sql);
+            $res2->execute();
         }
         catch (PDOException $e)
         {
         throw new Exception('Database query error');
         }
         $urlsArray = array();
-        while ($urlRow = $res1->fetch(PDO::FETCH_ASSOC)) {
+        while ($urlRow = $res2->fetch(PDO::FETCH_ASSOC)) {
             $urlsArray[] = $urlRow['url'];
         }
         $row['urlsArray'] = $urlsArray;

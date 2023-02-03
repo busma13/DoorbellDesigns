@@ -176,54 +176,56 @@ if ($currentRow) {
                         </div>
                     </div><!-- / project-info -->
 
-                    <div class="buy-product">
-                        <div class="options">
-                            <div>
-                                <span class="qty-span">Qty:</span>
-                                <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
-                            </div>
-                            <!-- <span class="selectors"> -->
+                    <form onSubmit="return addToCartSingle(event)">
+                        <div class="buy-product">
+                            <div class="options">
+                                <div>
+                                    <span class="qty-span">Qty:</span>
+                                    <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
+                                </div>
+                                <!-- <span class="selectors"> -->
 
-                    <?php $get_options_sql = "SELECT * FROM options;";
+                        <?php $get_options_sql = "SELECT * FROM options;";
 
-                    try
-                    {
-                        $res3 = $pdo->prepare($get_options_sql);
-                        $res3->execute();
-                    }
-                    catch (PDOException $e)
-                    {
-                    throw new Exception('Database query error');
-                    }
-                    while ($optionRow = $res3->fetch(PDO::FETCH_ASSOC)) { 
-                        $optionIDs = json_decode($currentRow['optionIDs']);
-                        if (in_array($optionRow['id'], $optionIDs)) {
-                        ?>
-                                <select class="selectpicker">
-                                    <option disabled="disabled" selected="selected"><?php echo $optionRow['name'] ?>:</option>
-                                    
-                                <?php $optionValues = json_decode($optionRow['optionValues']);
-                                foreach($optionValues as $val) {
-                                ?>
-                                        <option><?php echo ucfirst($val)?></option>
-                                <?php 
-                                    } 
-                                ?>
-                                    </optgroup>
-                                </select>
-                        <?php
+                        try
+                        {
+                            $res3 = $pdo->prepare($get_options_sql);
+                            $res3->execute();
                         }
-                    }
-                    ?>
-                            <!-- </span> -->
-                        </div>
-                        <!-- / options -->
+                        catch (PDOException $e)
+                        {
+                        throw new Exception('Database query error');
+                        }
+                        while ($optionRow = $res3->fetch(PDO::FETCH_ASSOC)) { 
+                            $optionIDs = json_decode($currentRow['optionIDs']);
+                            if (in_array($optionRow['id'], $optionIDs)) {
+                            ?>
+                                    <select class="selectpicker" data-id="<?php echo $optionRow['id'] ?>" required>
+                                        <option hidden value=""><?php echo $optionRow['name'] ?>:</option>
+                                        
+                                    <?php $optionValues = json_decode($optionRow['optionValues']);
+                                    foreach($optionValues as $key => $val) {
+                                    ?>
+                                            <option data-id="<?php echo $key ?>"><?php echo ucfirst($val)?></option>
+                                    <?php 
+                                        } 
+                                    ?>
+                                        </optgroup>
+                                    </select>
+                            <?php
+                            }
+                        }
+                        ?>
+                                <!-- </span> -->
+                            </div>
+                            <!-- / options -->
 
-                        <div class="btn-container">
-                            <a class="btn btn-primary-filled btn-rounded add-to-cart-single" id="<?php echo $currentRow['itemName']?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></a>
-                            <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
+                            <div class="btn-container">
+                                <button type="submit" class="btn btn-primary-filled btn-rounded add-to-cart-single" id="<?php echo $currentRow['itemName']?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></button>
+                                <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div><!-- product-details -->
             </div><!-- / col-sm-4 col-md-3 -->
             <!-- / project sidebar area -->
@@ -231,10 +233,10 @@ if ($currentRow) {
     
 <?php
         
-    }
-    else {
-        echo 'Error retrieving product.';
-    }
+}
+else {
+    echo 'Error retrieving product.';
+}
 
 ?>    
             

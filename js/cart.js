@@ -28,29 +28,45 @@ if (productList === null) {
     getProductList();   
 }
 
-if (addToCartBtnSinglePage) {
-    addToCartBtnSinglePage.addEventListener('click', addToCartSingle)
-}
+// if (addToCartBtnSinglePage) {
+//     addToCartBtnSinglePage.addEventListener('click', addToCartSingle)
+// }
     
-async function addToCartSingle(event) {
+function addToCartSingle(event) {
+
     let qty = Number(document.querySelector('.input-text').value);
-    let color;
+    const options = { optionsIDString: '', optionsPairStrings: []};
+    console.log(options.optionsIDString)
 
     // TODO: change for variable options 
-    if (document.querySelector('.selectpicker')) {
-        color = document.querySelector('.selectpicker').selectedOptions[0].innerText;
-    } else {
-        color = 'N/A';
+    const selectPickers = document.querySelectorAll('.selectpicker');
+    if (selectPickers.length > 0) {
+        for (const select of selectPickers) {
+            console.log(select)
+            const optionKey = select.dataset.id; 
+            const newValue = Number(select.selectedOptions[0].dataset.id);
+            options.optionsIDString += newValue;
+            console.log(optionKey, newValue)
+            options[optionKey] = newValue;
+            const stringKey = select.childNodes[1].innerText;
+            console.log(select.childNodes[1])
+            const stringValue = select.selectedOptions[0].innerText;
+            console.log(stringKey, stringValue)
+            options.optionsPairStrings.push({ stringKey, stringValue })
+        }
+        console.log(options)
     }
-    let productName = event.currentTarget.id;
+    let productName = event.submitter.id;
     let product;
     if (ls.get('productList') === null) {
         getProductList();
     } 
     product = ls.get('productList').find(product => product.itemName === productName);
-    product.baseColor = color;
-    cartItemCount(qty, product);
+    product.options = options;
+    cartItemCount(qty);
+    setItems(qty, product)
     updateTotalCost(qty, product);
+    return false;
 }
 
 // Get the product list
@@ -84,9 +100,9 @@ if (confPage) {
 }
 
 
-// Update the localStorage cartItemCount and display to nav bar 
-function cartItemCount(qty, product) {
-    console.log(qty, product);
+// Update the localStorage cartItemCount
+function cartItemCount(qty) {
+    console.log(qty);
     let numOfItems = Number(localStorage.getItem('cartItemCount'));
 
     if (numOfItems) {
@@ -96,31 +112,30 @@ function cartItemCount(qty, product) {
         localStorage.setItem('cartItemCount', qty);
         document.querySelector('.cartCount').textContent = qty;
     }
-
-    setItems(qty, product)
 }
 
 // Add product to local storage and update quantity
 function setItems(qty, product) {
     let cartContents = JSON.parse(localStorage.getItem('cartProducts'));
-    
+    const optionsIDString = product.options.optionsIDString;
+    const key = product.itemName+optionsIDString;
     if(cartContents) {//there are items in the cart
-        if (!cartContents[product.itemName+'Base'+product.baseColor]) {//no product with this name & base color in cart
+        if (!cartContents[key]) {//no product with this name & options in cart
             console.log(1)
             product.qtyInCart = qty;
             cartContents = {
                 ...cartContents,
-                [product.itemName+'Base'+product.baseColor]: product
+                [key]: product
             }
-        } else {//product with this name & base color is in the cart
+        } else {//product with this name & options is in the cart
             console.log(3)
-            cartContents[product.itemName+'Base'+product.baseColor].qtyInCart += qty;
+            cartContents[key].qtyInCart += qty;
         }
     } else {//there are no items in the cart
         console.log(4)
         product.qtyInCart = qty;
         cartContents = {
-            [product.itemName+'Base'+product.baseColor]: product
+            [key]: product
         }
     }
     
@@ -161,11 +176,18 @@ function displayCart() {
         if (productsInCart && Object.entries(productsInCart).length > 0){
             productTable.innerHTML = '';
             Object.values(productsInCart).map(item => {
+                const pairsArray = item.options.optionsPairStrings;
+                console.log(pairsArray)
+                let pairsArrayString = '';
+                for (obj of pairsArray) {
+                    console.log(obj)
+                    pairsArrayString += `${obj.stringKey} ${obj.stringValue}\n`
+                }
                 productTable.innerHTML += `
-                <tr class="cart-item" id="${item.itemName}Base${item.baseColor}">
+                <tr class="cart-item" id="${item.itemName}${item.options.optionsIDString}">
                     <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="${item.urlsArray[0]}" alt="${item.itemNameString}"></a></td>
                     <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemNameString}</a></td>
-                    <td><span>${item.baseColor}</span></td>
+                    <td><span>${pairsArrayString}</span></td>
                     <td>$${item.price}</td>
                     <td class="qty"><input type="number" step="1" min="1" name="cart" value="${item.qtyInCart}" title="Qty" class="input-text qty text qty-input-box" size="4"></td>
                     <td>$${(item.price * item.qtyInCart).toFixed(2)}</td>
@@ -200,7 +222,8 @@ function updateSingleProductTotals() {
                 tdQty.nextElementSibling.textContent = `$${(tdQty.previousElementSibling.textContent.slice(1) * qty).toFixed(2)}`;
                 
                 // Update the localStorage cartItemCount value
-                cartItemCount(qtyToAdd, product)
+                cartItemCount(qtyToAdd)
+                setItems(qty, product)
                 
                 //Update the localStorage cartTotal value
                 updateTotalCost(qtyToAdd, product)
@@ -229,7 +252,8 @@ function removeProductFromCart() {
             updateTotalCost(-qty, product)
 
             // update the localStorage cartItemCount value
-            cartItemCount(-qty, product)
+            cartItemCount(-qty)
+            setItems(qty, product)
 
             // update the localStorage cartProducts value
             delete cartProducts[tableRow.id];

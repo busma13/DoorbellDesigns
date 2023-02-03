@@ -31,7 +31,7 @@
                 <tr>
                     <th class="image">&nbsp;</th>
                     <th>Product</th>
-                    <th>Color Option</th>
+                    <th>Options</th>
                     <th>Price</th>
                     <th>Qty</th>
                     <th>Total</th>
@@ -51,7 +51,7 @@
                 </div>
             </div><!-- / input-group -->
             <div class="update-cart col-sm-6">
-                <!-- <button class="btn btn-default-filled btn-rounded" type="button"><i class="lnr lnr-sync"></i> <span>Update Cart</span></button> -->
+            
             </div><!-- / update-cart -->
 
             <div class="col-sm-6 cart-total">
