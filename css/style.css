@@ -249,6 +249,10 @@ strong {
   display: flex;
 }
 
+.col {
+  flex-direction: column;
+}
+
 .keep-all {
   word-break: keep-all;
 }

@@ -145,7 +145,7 @@
                             echo "<p id='message' class='text-danger space-left'>Form submission error. Please try again.</p>";
                         }
                         elseif ($orderCheck == "SQL-statement-failed") {
-                            echo "<p id='message' class='text-danger space-left'>Server error.</p>";
+                            echo "<p id='message' class='text-danger space-left'>Server error. Please try again.</p>";
                         }
                     }
                 ?>

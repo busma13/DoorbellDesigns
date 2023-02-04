@@ -37,7 +37,7 @@ function createCartList() {
         listItem.itemName = cartProducts[obj].itemName;
         listItem.itemNameString = cartProducts[obj].itemNameString;
         listItem.itemQty = cartProducts[obj].qtyInCart; 
-        listItem.baseColor = cartProducts[obj].baseColor; 
+        listItem.options = cartProducts[obj].options; 
         listItem.mainCategory = cartProducts[obj].mainCategory; 
         checkoutList.push(listItem);
     }
@@ -58,7 +58,6 @@ document.querySelector("#checkout-btn").addEventListener('submit', openSubmitOrd
 
 function openSubmitOrderModal(event) {
     document.getElementById('waitForRedirect').style.display='block';
-    // document.querySelector('body').css({'overflow':'visible'});
 }
 
 updateCartTotals();

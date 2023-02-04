@@ -133,13 +133,8 @@ if (isset($_POST['submit'])) {
 
                 $order_line_item = new \Square\Models\OrderLineItem($obj->itemQty);
 
-                if ($obj->mainCategory === 'Doorbells') {
-                    $order_line_item->setName($obj->itemNameString . ", " . $obj->baseColor . " Base");
-                } else if ($obj->mainCategory === 'Fan-Pulls') {
-                    $order_line_item->setName($obj->itemNameString . ", " . $obj->baseColor . " Chains");
-                } else {
-                    $order_line_item->setName($obj->itemNameString);
-                }
+                $itemNameWithOptions = setItemName($obj);
+                $order_line_item->setName($itemNameWithOptions);
                 $order_line_item->setBasePriceMoney($base_price_money);
 
                 $order_line_item_applied_tax = new \Square\Models\OrderLineItemAppliedTax('state-sales-tax');
@@ -229,22 +224,21 @@ if (isset($_POST['submit'])) {
                 
                 /* Values array for PDO */
                 $values = array(':id' => $id, ':first' => $first, ':last' => $last, ':tel' => $tel, ':email' => $email, ':address_line' => $address_line, ':city' => $city, ':state' => $state, ':zip' => $zip, ':products' => $products, ':order_id' => $order_id, ':paid' => 'no');
-                
                 /* Execute the query */
                 try
                 {
-                    $res1 = $pdo->prepare($insert_sql);
-                    $res1->execute($values);
+                    $res2 = $pdo->prepare($insert_sql);
+                    $res2->execute($values);
                     $returnVal = $pdo->lastInsertId();
                 }
                 catch (PDOException $e)
                 {
-                    header("Location: ../checkout.php?order=SQL-statement-failed#message");//work on this error on checkout.php
+                    header("Location: ../checkout.php?order=SQL-statement-failed#message" . $returnVal);//work on this error on checkout.php
                 }
+                print_r($returnVal);
 
                 //Add the order id to the redirect url from Square to the confirmation page.
                 $checkout_options = new \Square\Models\CheckoutOptions();
-                $host = $_SERVER['HTTP_HOST'];
                 
                 $url = $_ENV['REDIRECT_URL'] . "?orderId=" . $order_id;//TODO: change for production server
 
@@ -268,7 +262,7 @@ if (isset($_POST['submit'])) {
                     sleep(5);
                     //Redirect user to square checkout page
                     header('Location: '.$result->getPaymentLink()->getUrl());
-                exit();
+                    exit();
                 } else {
                     $errors = $api_response->getErrors();
                     $json = json_encode($errors);
@@ -285,4 +279,12 @@ if (isset($_POST['submit'])) {
 else {
     header("Location: ../checkout.php?order=error#message");
     exit();
+}
+
+function setItemName($itemObj) {
+    $itemNameWithOptions = $itemObj->itemNameString;
+    foreach ($itemObj->options->optionsPairStrings as $obj) {
+        $itemNameWithOptions .= ', ' . $obj->stringKey . ' ' . $obj->stringValue;
+    }
+    return $itemNameWithOptions;
 }
