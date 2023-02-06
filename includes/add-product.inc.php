@@ -7,7 +7,7 @@ if (isset($_POST['addProduct'])) {
   // echo __DIR__ . '<br>';
   // print_r($_FILES);
   // echo $_FILES['image']['name'] . '<br>';
-  if (empty($_POST['itemNameString']) || empty($_POST['mainCategory']) || empty($_POST['price']) || empty($_POST['shipping']) || empty($_POST['dimensions'])) {
+  if (empty($_POST['itemNameString']) || empty($_POST['mainCategory']) || empty($_POST['priceSingle']) || empty($_POST['shipping']) || empty($_POST['dimensions'])) {
     header("Location: ../admin-panel.php?addProduct=empty#add-form");
     // echo $_POST['itemNameString'] . '<br>';
     // echo $_POST['mainCategory'] . '<br>';
@@ -21,15 +21,20 @@ if (isset($_POST['addProduct'])) {
     $itemName = StringUtils::formatCase($itemNameString, StringUtils::FORMAT_LOWER_CAMEL_CASE);
     $subCategories = json_encode(explode(', ', $_POST['subCategories'])) ?? '';
     $optionIDs = json_encode($_POST['optionIDs']);
+    $priceArray = array($_POST['priceSingle']);
+    if ($_POST['pricePair']) {
+      array_push($priceArray, $_POST['pricePair']);
+    }
+    $priceArray = json_encode($priceArray);
     $addActive = $_POST['addActive'] ?? '0';
     $addFeatured = $_POST['addFeatured'] ?? '0';
 
     //Enter everything into the database
     $query =
-      "INSERT INTO products (itemName, itemNameString, mainCategory, subCategories, price, shipping, optionIDs, qtyInCart, dimensions, active, featured) VALUES (:itemName,:itemNameString,:mainCategory,:subCategories,:price,:shipping, :optionIDs,:qtyInCart,:dimensions, :addActive, :addFeatured);";
+      "INSERT INTO products (itemName, itemNameString, mainCategory, subCategories, priceArray, shipping, optionIDs, qtyInCart, dimensions, active, featured) VALUES (:itemName,:itemNameString,:mainCategory,:subCategories,:priceArray,:shipping, :optionIDs,:qtyInCart,:dimensions, :addActive, :addFeatured);";
 
     /* Values array for PDO */
-    $values = array(':itemName' => $itemName, ':itemNameString' => $itemNameString, ':mainCategory' => $_POST['mainCategory'], ':subCategories' => $subCategories, ':price' => $_POST['price'], ':shipping' => $_POST['shipping'], 'optionIDs' => $optionIDs, ':qtyInCart' => 0, ':dimensions' => $_POST['dimensions'], ':addActive' => $addActive, ':addFeatured' => $addFeatured);
+    $values = array(':itemName' => $itemName, ':itemNameString' => $itemNameString, ':mainCategory' => $_POST['mainCategory'], ':subCategories' => $subCategories, ':priceArray' => $priceArray, ':shipping' => $_POST['shipping'], 'optionIDs' => $optionIDs, ':qtyInCart' => 0, ':dimensions' => $_POST['dimensions'], ':addActive' => $addActive, ':addFeatured' => $addFeatured);
 
     // echo $_POST['itemNameString'] . '<br>';
     // echo $itemName . '<br>';

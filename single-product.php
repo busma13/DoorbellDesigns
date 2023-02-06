@@ -71,6 +71,11 @@ for ($i = 0; $i < count($categoryProdIds); $i++) {
 }
 
 if ($currentRow) {
+    if ($currentRow['mainCategory'] === 'Fan-Pulls') {
+        $price = json_decode($currentRow['priceArray'])[0] . ' ea. / $' . json_decode($currentRow['priceArray'])[1] . ' per pair';
+    } else {
+        $price = json_decode($currentRow['priceArray'])[0];
+    }
  
 ?> 
 
@@ -137,11 +142,8 @@ if ($currentRow) {
                  
                     <div class="product-info">
                         <div class="info">
-                            <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $currentRow['price'];
-                            if ($currentRow['mainCategory'] === 'Fan-Pulls') {
-                                echo ' ea. / $15 per pair';
-                            } ?>
-                            </span></p>
+                            <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $price;?></span>
+                            </p>
                         </div>
                         <div class="info">
                             <p><i class="lnr lnr-heart"></i><span>Category: <a href="<?php echo strtolower($currentRow['mainCategory'])?>.php"> <?php echo $currentRow['mainCategory']?></a>
@@ -176,7 +178,7 @@ if ($currentRow) {
                         </div>
                     </div><!-- / project-info -->
 
-                    <form onSubmit="return addToCartSingle(event)">
+                    <form onSubmit="return addToCart(event)">
                         <div class="buy-product">
                             <div class="options">
                                 <div>
@@ -221,7 +223,7 @@ if ($currentRow) {
                             <!-- / options -->
 
                             <div class="btn-container">
-                                <button type="submit" class="btn btn-primary-filled btn-rounded add-to-cart-single" id="<?php echo $currentRow['itemName']?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></button>
+                                <button type="submit" class="btn btn-primary-filled btn-rounded" id="<?php echo $currentRow['itemName']?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></button>
                                 <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
                             </div>
                         </div>
@@ -252,10 +254,20 @@ else {
 ?>
 <!-- / footer -->
 
+<!-- toast -->
+
+
+
+<!-- / toast -->
+
 <!-- javascript -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
+
+<!-- toast -->
+<script src="js/bootoast.js"></script>
+<!-- / toast -->
 
 <!-- cart -->
 <script src="js/cart.js"></script>

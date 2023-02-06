@@ -6,6 +6,7 @@
 <link href="css/animate.css" rel="stylesheet">
 <link href="css/owl.carousel.css" rel="stylesheet">
 <link href="css/owl.theme.css" rel="stylesheet">
+<link href="css/bootoast.css" rel="stylesheet">
 <!-- fonts -->
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700" rel="stylesheet">
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">

@@ -93,7 +93,7 @@
     <div id="add-form">
         <form action="./includes/add-product.inc.php" method="POST" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6 mt-15">
                     <p>Main category type: </p>
                     <fieldset>
                         <input type="radio" name="mainCategory" value="Doorbells" id="addDoorbells">
@@ -116,24 +116,28 @@
                         <label for="addMiscellaneous">Miscellaneous</label>
                     </fieldset> -->
                 </div>
-                <!-- <div class="col-sm-6">
+                <!-- <div class="col-sm-6 mt-15">
                     <label for="image">Image:</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
                     <input type="file" class="form-control" name="image" placeholder="Image" id="image">
                 </div> -->
-                <div class="col-sm-6">
-                    <label for="price">Price (xx.xx format):</label>
-                    <input type="number" step="0.01" class="form-control" name="price" placeholder="Price" id="price">
+                <div class="col-sm-6 mt-15">
+                    <label for="priceSingle">Price (xx.xx format):</label>
+                    <input type="number" step="0.01" class="form-control" name="priceSingle" placeholder="Price for 1" id="priceSingle">
                 </div>
-                <div class="col-sm-6">
-                    <label for="shipping">Shipping (xx.xx format):</label>
-                    <input type="number" step="0.01" class="form-control" name="shipping" placeholder="Shipping" id="shipping">
+                <div class="col-sm-6 mt-15">
+                    <label for="pricePair">Price For A Pair (xx.xx format):</label>
+                    <input type="number" step="0.01" class="form-control" name="pricePair" placeholder="Price for 2" id="pricePair">
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 mt-15">
                     <label for="subCategories">Subcategories (comma separated):</label>
                     <input type="text" class="form-control" name="subCategories" placeholder="subcategories" id="subCategories">
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 mt-15">
+                    <label for="shipping">Shipping (xx.xx format):</label>
+                    <input type="number" step="0.01" class="form-control" name="shipping" placeholder="Shipping" id="shipping">
+                </div>
+                <div class="col-sm-6 mt-15">
                     <label for="optionIDs">Option IDs (hold ctrl/cmd to select multiple):</label>
                     <select class="form-control" name="optionIDs[]" id="optionIDs" multiple>
                         <option value="">No Options</option>
@@ -145,19 +149,19 @@
                         <option value="6">Boot Color: ["2 Tone Brown","Turquoise and Brown"]</option>
                     </select>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 mt-15">
                     <label for="itemNameString">Item name:</label>
                     <input type="text" class="form-control" name="itemNameString" placeholder="New item name" id="itemNameString">
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 mt-15">
                     <label for="dimensions">Dimensions:</label>
                     <input type="text" class="form-control" name="dimensions" placeholder="Dimensions" id="dimensions">
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 mt-15">
                     <input type="checkbox" name="addActive" id="addActive" value="1" checked>
                     <label for="addActive">Active item?</label>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 mt-15">
                     <input type="checkbox" name="addFeatured" id="addFeatured" value="1">
                     <label for="addFeatured">Featured item?</label>
                 </div>
@@ -257,7 +261,7 @@
                     <th>Product Name</th>
                     <th>Main Category</th>
                     <th>Subcategories</th>
-                    <th>Price</th>
+                    <th>Prices</th>
                     <th>Shipping</th>
                     <th>Option IDs</th>
                     <th>Dimensions</th>
@@ -299,7 +303,7 @@ while ($row = $res2->fetch(PDO::FETCH_ASSOC)) {
                     <td class="itemNameString can-edit"><?php echo $row['itemNameString']?></td>
                     <td class="mainCategory can-edit"><?php echo $row['mainCategory']?></td>
                     <td class="subCategories can-edit"><?php echo $row['subCategories']?></td>
-                    <td class="price can-edit"><?php echo $row['price']?></td>
+                    <td class="priceArray can-edit"><?php echo $row['priceArray']?></td>
                     <td class="shipping can-edit"><?php echo $row['shipping']?></td>
                     <td class="optionIDs can-edit"><?php echo $row['optionIDs']?></td>
                     <td class="dimensions can-edit"><?php echo $row['dimensions']?></td>

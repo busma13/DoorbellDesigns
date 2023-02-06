@@ -78,6 +78,8 @@ if (isset($_POST['submit'])) {
                 $taxes = [$order_line_item_tax];
             }
 
+            $discounts = array();
+
             for ($i = 0; $i < count($products_array); $i++) {
                 $priceCents = 0;
                 $obj = $products_array[$i];
@@ -101,15 +103,11 @@ if (isset($_POST['submit'])) {
                     header("Location: ../checkout.php?order=SQL-statement-failed#message");
                 }
                 while ($row = $res1->fetch(PDO::FETCH_ASSOC)) { 
-                    $priceCents = $row['price'] * 100;
+                    $priceArray = json_decode($row['priceArray']);
+                    $priceCents = (int) $priceArray[0] * 100;
+                    
                     $shippingCents = $row['shipping'] * 100;
                     $mainCategory = $row['mainCategory'];
-                    // echo $priceCents;
-                    // echo '<br>';
-                    // echo $shippingCents;
-                    // echo '<br>';
-                    // echo $mainCategory;
-                    // echo '<br>';
 
                     if ($mainCategory === 'Air-Plant-Cradles') {
                         $shippingQuantities->airPlantCradles += $obj->itemQty;
@@ -133,8 +131,51 @@ if (isset($_POST['submit'])) {
 
                 $order_line_item = new \Square\Models\OrderLineItem($obj->itemQty);
 
+                if (count($priceArray) === 2) {
+                    if ($obj->itemQty > 1) {
+                        // echo 'i: ' . $i;
+                        // echo '<br>';
+
+                        $order_line_item_applied_discount = new \Square\Models\OrderLineItemAppliedDiscount($i);
+
+                        $applied_discounts = [$order_line_item_applied_discount];
+
+                        $order_line_item->setAppliedDiscounts($applied_discounts);
+
+                        if ($obj->itemQty % 2 === 0) {
+                            $dollarsOff = $obj->itemQty / 2 * 100;
+                        } else {
+                            $dollarsOff = ($obj->itemQty - 1) / 2 * 100;
+                        }
+                        // echo 'dollarsOff: ' . $dollarsOff;
+                        // echo '<br>';
+
+                        $amount_money = new \Square\Models\Money();
+                        $amount_money->setAmount($dollarsOff);
+                        $amount_money->setCurrency('USD');
+
+                        $order_line_item_discount = new \Square\Models\OrderLineItemDiscount();
+                        $order_line_item_discount->setUid($i);
+
+                        // echo 'UID: ';
+                        // echo $order_line_item_discount->getUid();
+                        // echo '<br>';
+
+                        $order_line_item_discount->setName('Fan pull pair discount');
+                        $order_line_item_discount->setAmountMoney($amount_money);
+                        $order_line_item_discount->setScope('LINE_ITEM');
+
+                        
+                        $discounts[] = $order_line_item_discount;
+                        // print_r($discounts);
+                        // echo '<br>';
+                    }   
+                }
+
+
                 $itemNameWithOptions = setItemName($obj);
                 $order_line_item->setName($itemNameWithOptions);
+                $order_line_item->setBasePriceMoney($base_price_money);
                 $order_line_item->setBasePriceMoney($base_price_money);
 
                 $order_line_item_applied_tax = new \Square\Models\OrderLineItemAppliedTax('state-sales-tax');
@@ -206,7 +247,9 @@ if (isset($_POST['submit'])) {
                 $order->setTaxes($taxes);
             }
             $order->setFulfillments($fulfillments);
-            
+            $order->setDiscounts($discounts);
+            // echo 'discounts: ';
+            // echo count($discounts);
             $body = new \Square\Models\CreatePaymentLinkRequest();
             $body->setIdempotencyKey($id); 
             $body->setOrder($order);

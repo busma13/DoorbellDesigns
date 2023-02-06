@@ -72,7 +72,9 @@
                                 throw new Exception('Database query error');
                                 }
                                 $urlRow = $res2->fetch(PDO::FETCH_ASSOC); 
-                                $picUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']); ?>
+                                $picUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']);
+                                $price = json_decode($row['priceArray'])[0]; ?>
+                                
                                 
                                 <!-- product -->
                                 <div class="col-xs-6 col-md-3 product" data-groups=<?php echo $row['subCategories'] ?>>
@@ -94,7 +96,7 @@
                                     <!-- product-details -->
                                     <div class="product-details">
                                         <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
-                                        <h6 class="product-price">$<?php echo $row['price'] ?> ea.</h6>
+                                        <h6 class="product-price">$<?php echo $price ?> ea.</h6>
                                     </div><!-- / product-details -->
                                 </div><!-- / product -->
                     <?php   

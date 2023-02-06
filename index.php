@@ -113,7 +113,8 @@
             throw new Exception('Database query error');
             }
             $urlRow = $res2->fetch(PDO::FETCH_ASSOC); 
-            $picUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']); ?>
+            $picUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']); 
+            $price = json_decode($row['priceArray'])[0]; ?>
 
             <!-- item -->
             <div class="item product">
@@ -138,7 +139,11 @@
                 <!-- product-details -->
                 <div class="product-details">
                     <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
-                    <h6 class="product-price">$<?php echo $row['price'] ?></h6>
+                    <?php if ($row['mainCategory'] === 'Fan-Pulls') { ?>
+                        <h6 class="product-price">$<?php echo $price ?> ea.</h6>
+                    <?php } else { ?>
+                        <h6 class="product-price">$<?php echo $price ?></h6>
+                    <?php } ?>
                 </div>
                 <!-- / product-details -->
             </div>
@@ -147,34 +152,7 @@
             
         }
    ?>
-    
-
-        <!-- item -->
-        <!-- <div class="item product">
-            <a href="release-the-hounds.html" class="product-link"></a>
-            <! -- / product-link -- >
-            <img src="images/doorbells/to-release-the-hounds-1_9to10.jpg" alt="">
-            <! -- / product-image -->
-
-            <!-- product-hover-tools -- >
-            <div class="product-hover-tools">
-                <a href="release-the-hounds.html" class="view-btn">
-                    <i class="lnr lnr-eye"></i>
-                </a>
-                <a href="shopping-cart.html" class="add-to-cart">
-                    <i class="lnr lnr-cart"></i>
-                </a>
-            </div><! -- / product-hover-tools -- >
-
-            <! -- product-details -- >
-            <div class="product-details">
-                <h3 class="product-title">Release The Hounds Doorbell</h3>
-                <h6 class="product-price">$59</h6>
-            </div><! -- / product-details -- >
-        </div> -->
-        <!-- / item -->
-
-        
+           
     </div> <!-- / products-carousel -->
 </section>
 <!-- / featured-products -->
@@ -216,7 +194,9 @@
             throw new Exception('Database query error');
             }
             $urlRow = $res4->fetch(PDO::FETCH_ASSOC); 
-            $newArrivalPicUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']); ?>
+            $newArrivalPicUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']); 
+            $price = json_decode($row['priceArray'])[0]; ?>
+            
 
             <!-- product -->
             <div class="col-xs-6 col-md-4 product">
@@ -230,7 +210,11 @@
                 <!-- product-details -->
                 <div class="product-details">
                     <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
-                    <h6 class="product-price">$<?php echo $row['price'] ?></h6>
+                    <?php if ($row['mainCategory'] === 'Fan-Pulls') { ?>
+                        <h6 class="product-price">$<?php echo $price ?> ea.</h6>
+                    <?php } else { ?>
+                        <h6 class="product-price">$<?php echo $price ?></h6>
+                    <?php } ?>
                 </div>
                 <!-- / product-details -->
             </div>
