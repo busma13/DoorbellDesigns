@@ -4864,6 +4864,18 @@ footer #newsletter .form-control {
     font-size: 12px;
   }
 
+  .shopping-cart tbody td {
+    font-size: 10px;
+  }
+
+  .qty input[type="number"] {
+    max-width: 20px;
+  }
+
+  .x-remove {
+    margin-right: 0;
+  }
+
   #single-product-page .product-name {
     font-size: 28px;
   }

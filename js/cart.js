@@ -55,9 +55,7 @@ function addToCart(event) {
     updateLocalStorageCartItemCount(qty);
     updateLocalStorageCartContents(qty, product);
     const cartContents = JSON.parse(localStorage.getItem('cartProducts'));
-    console.log(cartContents)
     const cartProduct = cartContents[productName + options.optionsIDString];
-    console.log(cartProduct)
     updateLocalStorageCartTotal();
     bootoast.toast();
     return false;
@@ -85,7 +83,6 @@ async function getProductList() {
 //Clear the shopping cart on confirmation of a succesful checkout.
 const confPage = document.querySelector('#confirmation');
 if (confPage) {
-    console.log(confPage)
     localStorage.removeItem('cartList')
     localStorage.removeItem('shippingTotal')
     localStorage.removeItem('cartTotal')
@@ -96,7 +93,6 @@ if (confPage) {
 
 // Update the localStorage cartItemCount
 function updateLocalStorageCartItemCount(qty) {
-    console.log(qty);
     let numOfItems = Number(localStorage.getItem('cartItemCount'));
 
     if (numOfItems) {
@@ -110,7 +106,6 @@ function updateLocalStorageCartItemCount(qty) {
 
 // Add product to local storage and update quantity
 function updateLocalStorageCartContents(qtyToAdd, product) {
-    console.log(qtyToAdd, product);
     let cartContents = JSON.parse(localStorage.getItem('cartProducts'));
     const optionsIDString = product.options.optionsIDString;
     const key = product.itemName+optionsIDString;
@@ -155,20 +150,16 @@ function updateCartCountDisplay() {
 // Update local storage with the total cost of all items in the cart.
 function updateLocalStorageCartTotal() {
     let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
-    console.log('productsInCart: ', productsInCart)
     let newTotal = 0;
     for (let product in productsInCart) {
-        console.log('product: ', product)
         newTotal += Number(productsInCart[product].priceInCart);
     }
-    console.log('newTotal: ',newTotal)
     localStorage.setItem('cartTotal', (newTotal))
 
 }
 
 // Loads all of the products into the shopping cart table and updates the cart totals
 function displayCart() {
-    console.log('displayCart')
     let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
     let productTable = document.querySelector('.cart-table-body')
     if (productTable) {
@@ -182,8 +173,6 @@ function displayCart() {
                 }
                 const priceArray = JSON.parse(item.priceArray);
                 const priceTotal = calculateLineItemTotal(0, item);
-
-                console.log(priceTotal)
 
                 productTable.innerHTML += `
                 <tr class="cart-item" id="${item.itemName}${item.options.optionsIDString}">
@@ -205,7 +194,6 @@ function displayCart() {
             productTable.innerHTML += '<tr><td>Your cart is empty</td></tr>'
         }
     }
-    console.log('end DisplayCart')
 }
 
 function createEventListenersForQtyInputBoxes() {
@@ -217,7 +205,6 @@ function createEventListenersForQtyInputBoxes() {
 
 // Updates a single products total price when quantity is changed in the shopping cart. Updates the localStorage cartItemCount and qtyInCart
 function updateSingleProductTotals(e) {
-    console.log('updateSingleProductTotals')
     let newQty = Number(e.currentTarget.value);
     if (newQty != '') {
         let cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
@@ -225,12 +212,8 @@ function updateSingleProductTotals(e) {
         let tableRow = tdQty.parentNode;
         let cartProduct = cartProducts[tableRow.id];
         let qtyToAdd = newQty - cartProduct.qtyInCart;
-        console.log(cartProduct, qtyToAdd)
-        console.log(cartProduct, newQty)
-        console.log(cartProduct.qtyInCart)
 
         const priceTotal = calculateLineItemTotal(qtyToAdd, cartProduct);
-        console.log(priceTotal)
 
         // Update the total price in the DOM
         tdQty.nextElementSibling.textContent = `$${priceTotal}`;
@@ -248,7 +231,6 @@ function updateSingleProductTotals(e) {
         // update cart totals on the shupping cart page
         updateCartTotalDisplay()
     }
-    console.log('end updateSingleProductTotals')
 }
 
 function createEventListenersForRemoveBtns() {
@@ -287,12 +269,9 @@ function removeProductFromCart(e) {
 //Calculate shipping total
 function calculateShippingTotal() {
     let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
-    // console.log('productsInCart', productsInCart.bambooDoorbell);
     let shippingTotal = 0;
     let shippingQuantities = {'doorbells5': 0, 'doorbells3.5': 0, 'fanPulls': 0, 'airPlantCradles': 0};
     for (let product in productsInCart) {
-        // console.log(product);
-        // console.log(`${productsInCart[product].shipping}`);
         let itemCategory = productsInCart[product].mainCategory;
         let itemShipping = productsInCart[product].shipping;
         let itemQty = productsInCart[product].qtyInCart;
@@ -312,31 +291,21 @@ function calculateShippingTotal() {
         }
 
     }
-    console.table(shippingQuantities)
 
     //update for fan pulls, artwork, etc
     for (let category in shippingQuantities) {
-        // console.log('category: ',category);
         if (category == 'doorbells3.5') {
             if(shippingQuantities[category] % 2 === 0) {
-                // console.log('even')
-                // console.log(3.5 * shippingQuantities[category] / 2)
                 shippingTotal += 3.5 * shippingQuantities[category] / 2;
-                // console.log(shippingTotal)
             } else {
-                // console.log('odd')
                 shippingTotal += 3.5 * (shippingQuantities[category] + 1) / 2;
-                // console.log(shippingTotal)
             }
         } else if (category === 'doorbells5') {
-            // console.log(`${qtyAtEachShippingPrice[price]}`)
             shippingTotal += 5 * shippingQuantities[category];
-            // console.log(shippingTotal)
         } else if (category === 'airPlantCradles') {
             shippingTotal += 5 * shippingQuantities[category];
         } else if (category === 'fanPulls') {
             if (shippingQuantities[category] > 0) shippingTotal += 5;
-            // console.log(shippingTotal)
         }
     }
     localStorage.setItem('shippingTotal', shippingTotal);
@@ -357,12 +326,9 @@ function updateCartTotalDisplay() {
 }
 
 function calculateLineItemTotal(qtyToAdd, cartItem) {
-    console.log('calculateLineItemTotal')
-    console.log(cartItem)
     const priceArray = JSON.parse(cartItem.priceArray);
     const originalQty = cartItem.qtyInCart;
     const newQty = originalQty + qtyToAdd;
-    console.log(newQty)
 
     if (priceArray.length === 2) {
         if (newQty % 2 === 0) {
@@ -373,8 +339,6 @@ function calculateLineItemTotal(qtyToAdd, cartItem) {
     } else {
         priceTotal = (Number(priceArray[0]) * newQty).toFixed(2)
     }
-    console.log(priceTotal);
-    console.log('end calculateLineItemTotal')
 
     return priceTotal;
 }
