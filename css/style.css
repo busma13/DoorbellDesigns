@@ -284,11 +284,14 @@ img.btn-pill {
   border: 1px solid transparent;
 }
 
+
 .page-header {
   font-size: 30px;
   border: none;
   margin-top: 0;
-  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+  /* margin-bottom: 30px; */
 }
 
 .page-header:after {
@@ -318,6 +321,14 @@ img.btn-pill {
 
 .page-header.wsub h2 {
   margin-bottom: 17px;
+}
+
+.page-header.wsub.shift-down {
+  margin-bottom: -10px;
+}
+
+#page-header img {
+  max-width: 1200px;
 }
 
 .sub-title {
@@ -2465,7 +2476,8 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
   background-color: white;
 }
 
-.navbar-default .navbar-nav > li > a {
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-header > a {
   color: #666666;
   font-size: 13px;
   font-weight: 400;
@@ -2792,6 +2804,38 @@ section#single-product-page {
   padding: 10px 0;
 }
 
+.toast-container {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  width: 400px;
+  max-width: 95%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
+.toast-body {
+  color: white;
+  background-color: #44a1e1;
+  border: 2px solid #3379a9;
+  border-radius: 5px;
+  padding: 15px 35px 15px 15px;
+  text-align: center;
+}
+
+.close-toast {
+  cursor: pointer;
+  float: right;
+  position: relative;
+  font-size: 16px;
+  top: -14px;
+  right: -31px;
+  text-shadow: none;
+  color: #333333;
+  background-color: transparent;
+  border: none;
+}
 
 /* Categories */
 .category {
@@ -3202,12 +3246,12 @@ section#single-product-page {
 /* End Custom Orders */
 /* Single Page Headers */
 #page-header {
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-color: #f8f8f8;
-  background-image: url("../images/page-header.jpg");
-  min-height: 200px;
+  background-image: url("../images/page-header.jpg"); */
+  /* min-height: 200px; */
 }
 
 #page-header.dark {
@@ -3239,7 +3283,7 @@ section#single-product-page {
 }
 
 #page-header.air-plant-cradles {
-  background-image: url("../images/air-plant-cradles-header.jpg");
+  /* background-image: url("../images/air-plant-cradles-header.jpg"); */
   min-height: auto;
   background-color: #FFF;
 }
@@ -3251,7 +3295,7 @@ section#single-product-page {
 }
 
 #page-header.fan-pulls {
-  background-image: url("../images/fan-pulls-header.jpg");
+  /* background-image: url("../images/fan-pulls-header.jpg"); */
   min-height: auto;
   background-color: #FFF;
 }
@@ -4531,7 +4575,7 @@ footer #newsletter .form-control {
 }
 @media only screen and (max-width: 900px) {
   #page-header {
-    background-image: url(../images/page-header-900.jpg);
+    /* background-image: url(../images/page-header-900.jpg); */
   }
 }
 @media only screen and (max-width: 767px) {
@@ -4760,7 +4804,7 @@ footer #newsletter .form-control {
   }
 
   #page-header {
-    background-image: url(../images/page-header-600.jpg);
+    /* background-image: url(../images/page-header-600.jpg); */
   }
 
   #contactForm .form-control {
@@ -4958,6 +5002,7 @@ footer #newsletter .form-control {
 @media only screen and (min-width: 1200px) {
   .container {
     min-width: 1200px !important;
+    max-width: 1800px;
     padding: 0;
     margin: 0 auto;
   }

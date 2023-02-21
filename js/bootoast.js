@@ -78,7 +78,7 @@
 		}
 
 		// Adiciona o .alert ao .container conforme seu posicionamento.
-		this.$el = $('<div class="' + pluginName + ' alert alert-' + this.typeFor(this.settings.type) + '"><span class="glyphicon glyphicon-' + this.settings.icon + '"></span><span class="bootoast-alert-container"><span class="bootoast-alert-content">' + this.content + '</span></span></div>');
+		this.$el = $('<div class="' + pluginName + ' alert alert-' + this.typeFor(this.settings.type) + '"><span class="lnr lnr-' + this.settings.icon + '"></span><span class="bootoast-alert-container"><span class="bootoast-alert-content">' + this.content + '</span></span></div>');
 
 		this.init();
 	}

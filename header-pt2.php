@@ -23,11 +23,12 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
+                <a href="shopping-cart.php" class="navbar-toggle collapsed"><i class="lnr lnr-cart"></i><span> (<span class="cartCount">0</span>)</span></a>
                 <?php if ($title === 'Cicada Ceramics - Ceiling Fan Pulls' || $title === 'Cicada Ceramics - Air Plant Cradles') {
                     echo '<a class="navbar-brand" href="index.php"><img class="cicada-logo" src="images/logo-cc.jpeg" alt="Cicada Ceramics logo"></a>';
                 } else {
@@ -45,17 +46,14 @@
                             <li><a href="fan-pulls.php">Ceiling Fan Pulls</a></li>
                             <li><a href="air-plant-cradles.php">Air Plant Cradles</a></li>
                             <li><a href="custom-orders.php">Custom Orders</a></li>
-                            <li><a href="shopping-cart.php">Shopping Cart</a></li>
-                            <li><a href="checkout.php">Checkout</a></li>
                         </ul>
                     </li>
                     <li><a href="instructions.php">Instructions</a></li>
                     <li><a href="faq.php">FAQ</a></li>
                     <li><a href="about.php">About</a></li>
-                    <!-- <li><a href="blog.html">Blog</a></li> -->
                     <li><a href="contact.php">Contact</a></li>
                     
-                    <li><a href="shopping-cart.php"><i class="lnr lnr-cart"></i> <span>Shopping Cart (<span class="cartCount">0</span>)</span></a></li>
+                    <li><a href="shopping-cart.php"><i class="lnr lnr-cart"></i> <span>Cart (<span class="cartCount">0</span>)</span></a></li>
                 </ul>
             </div><!--/ nav-collapse -->
         </div><!-- / container -->

@@ -278,7 +278,6 @@ if (isset($_POST['submit'])) {
                 {
                     header("Location: ../checkout.php?order=SQL-statement-failed#message" . $returnVal);//work on this error on checkout.php
                 }
-                print_r($returnVal);
 
                 //Add the order id to the redirect url from Square to the confirmation page.
                 $checkout_options = new \Square\Models\CheckoutOptions();

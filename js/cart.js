@@ -1,18 +1,18 @@
 // This script file controls all shopping cart functionality
-
 const goToCheckoutBtn = document.querySelector('.go-to-checkout')
+const toastContainer = document.querySelector('.toast-container')
 
 // Stores an item in local storage with an expiration
 var ls = {
     set: function (variable, value, ttl_ms) {
         var data = {value: value, expires_at: new Date().getTime() + ttl_ms / 1};
-        localStorage.setItem(variable.toString(), JSON.stringify(data));
+        sessionStorage.setItem(variable.toString(), JSON.stringify(data));
     },
     get: function (variable) {
-        var data = JSON.parse(localStorage.getItem(variable.toString()));
+        var data = JSON.parse(sessionStorage.getItem(variable.toString()));
         if (data !== null) {
             if (data.expires_at !== null && data.expires_at < new Date().getTime()) {
-                localStorage.removeItem(variable.toString());
+                sessionStorage.removeItem(variable.toString());
             } else {
                 return data.value;
             }
@@ -52,13 +52,32 @@ function addToCart(event) {
     } 
     product = ls.get('productList').find(product => product.itemName === productName);
     product.options = options;
-    updateLocalStorageCartItemCount(qty);
-    updateLocalStorageCartContents(qty, product);
-    const cartContents = JSON.parse(localStorage.getItem('cartProducts'));
+    updateSessionStorageCartItemCount(qty);
+    updateSessionStorageCartContents(qty, product);
+    const cartContents = JSON.parse(sessionStorage.getItem('cartProducts'));
     const cartProduct = cartContents[productName + options.optionsIDString];
-    updateLocalStorageCartTotal();
-    bootoast.toast();
+    updateSessionStorageCartTotal();
+    toast()
     return false;
+}
+
+function toast() {
+    console.log(toastContainer)
+    toastContainer.style.display='block'
+
+    const toastBody = document.createElement('div')
+    toastBody.classList.add('toast-body')
+    toastBody.innerHTML = '<button type="button" class="close-toast aria-label="Close"><span aria-hidden="true">&times;</span></button> <span class="lnr lnr-cart"></span><span> Added To Cart!</span>'
+    toastContainer.appendChild(toastBody)
+    document.querySelector('.close-toast').addEventListener('click', hideToast)
+
+    //make toast disappear
+    setTimeout(hideToast, 3000)
+}
+
+function hideToast() {
+    toastContainer.style.display = 'none'
+    document.querySelector('.toast-body').remove()
 }
 
 // Get the product list
@@ -83,30 +102,29 @@ async function getProductList() {
 //Clear the shopping cart on confirmation of a succesful checkout.
 const confPage = document.querySelector('#confirmation');
 if (confPage) {
-    localStorage.removeItem('cartList')
-    localStorage.removeItem('shippingTotal')
-    localStorage.removeItem('cartTotal')
-    localStorage.removeItem('cartItemCount')
-    localStorage.removeItem('cartProducts')
+    sessionStorage.removeItem('cartList')
+    sessionStorage.removeItem('shippingTotal')
+    sessionStorage.removeItem('cartTotal')
+    sessionStorage.removeItem('cartItemCount')
+    sessionStorage.removeItem('cartProducts')
 }
 
 
-// Update the localStorage cartItemCount
-function updateLocalStorageCartItemCount(qty) {
-    let numOfItems = Number(localStorage.getItem('cartItemCount'));
+// Update the sessionStorage cartItemCount
+function updateSessionStorageCartItemCount(qty) {
+    let numOfItems = Number(sessionStorage.getItem('cartItemCount'));
 
     if (numOfItems) {
-        localStorage.setItem('cartItemCount', numOfItems + qty);
-        document.querySelector('.cartCount').textContent = numOfItems + qty;
+        sessionStorage.setItem('cartItemCount', numOfItems + qty);
     } else {
-        localStorage.setItem('cartItemCount', qty);
-        document.querySelector('.cartCount').textContent = qty;
+        sessionStorage.setItem('cartItemCount', qty);
     }
+    updateCartCountDisplay()
 }
 
 // Add product to local storage and update quantity
-function updateLocalStorageCartContents(qtyToAdd, product) {
-    let cartContents = JSON.parse(localStorage.getItem('cartProducts'));
+function updateSessionStorageCartContents(qtyToAdd, product) {
+    let cartContents = JSON.parse(sessionStorage.getItem('cartProducts'));
     const optionsIDString = product.options.optionsIDString;
     const key = product.itemName+optionsIDString;
     if(cartContents) {//there are items in the cart
@@ -129,14 +147,17 @@ function updateLocalStorageCartContents(qtyToAdd, product) {
         }
     }
     
-    localStorage.setItem('cartProducts', JSON.stringify(cartContents))
+    sessionStorage.setItem('cartProducts', JSON.stringify(cartContents))
 }
 
 // When page loads/changes get the number of items in the shopping cart and display it in the nav bar.
 function updateCartCountDisplay() {
-    let numOfItems = Number(localStorage.getItem('cartItemCount'));
+    let numOfItems = Number(sessionStorage.getItem('cartItemCount'));
     if(numOfItems != undefined) {
-        document.querySelector('.cartCount').textContent = numOfItems;
+        const cartCountItems = document.querySelectorAll('.cartCount')
+        for (item of cartCountItems) {
+            item.textContent = numOfItems;   
+        }
         if (goToCheckoutBtn) {
             if (numOfItems === 0) {
                 goToCheckoutBtn.classList.add('disabled');
@@ -148,19 +169,19 @@ function updateCartCountDisplay() {
 }
 
 // Update local storage with the total cost of all items in the cart.
-function updateLocalStorageCartTotal() {
-    let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
+function updateSessionStorageCartTotal() {
+    let productsInCart = JSON.parse(sessionStorage.getItem('cartProducts'));
     let newTotal = 0;
     for (let product in productsInCart) {
         newTotal += Number(productsInCart[product].priceInCart);
     }
-    localStorage.setItem('cartTotal', (newTotal))
+    sessionStorage.setItem('cartTotal', (newTotal))
 
 }
 
 // Loads all of the products into the shopping cart table and updates the cart totals
 function displayCart() {
-    let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
+    let productsInCart = JSON.parse(sessionStorage.getItem('cartProducts'));
     let productTable = document.querySelector('.cart-table-body')
     if (productTable) {
         if (productsInCart && Object.entries(productsInCart).length > 0){
@@ -203,11 +224,11 @@ function createEventListenersForQtyInputBoxes() {
     })
 }
 
-// Updates a single products total price when quantity is changed in the shopping cart. Updates the localStorage cartItemCount and qtyInCart
+// Updates a single products total price when quantity is changed in the shopping cart. Updates the sessionStorage cartItemCount and qtyInCart
 function updateSingleProductTotals(e) {
     let newQty = Number(e.currentTarget.value);
     if (newQty != '') {
-        let cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+        let cartProducts = JSON.parse(sessionStorage.getItem('cartProducts'));
         let tdQty = e.currentTarget.parentNode;
         let tableRow = tdQty.parentNode;
         let cartProduct = cartProducts[tableRow.id];
@@ -218,12 +239,12 @@ function updateSingleProductTotals(e) {
         // Update the total price in the DOM
         tdQty.nextElementSibling.textContent = `$${priceTotal}`;
 
-        // Update the localStorage cartItemCount value
-        updateLocalStorageCartItemCount(qtyToAdd)
-        updateLocalStorageCartContents(qtyToAdd, cartProduct)
+        // Update the sessionStorage cartItemCount value
+        updateSessionStorageCartItemCount(qtyToAdd)
+        updateSessionStorageCartContents(qtyToAdd, cartProduct)
         
-        //Update the localStorage cartTotal value
-        updateLocalStorageCartTotal()
+        //Update the sessionStorage cartTotal value
+        updateSessionStorageCartTotal()
 
         // update cart total in the nav bar
         updateCartCountDisplay()
@@ -243,19 +264,19 @@ function createEventListenersForRemoveBtns() {
 // Removes a product from the cart when you click the X button
 function removeProductFromCart(e) {
     let tableRow = e.currentTarget.parentNode.parentNode;
-    let cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    let cartProducts = JSON.parse(sessionStorage.getItem('cartProducts'));
     let qty = tableRow.childNodes[9].firstElementChild.value;
     let cartProduct = cartProducts[tableRow.id];
 
-    // update the localStorage cartProducts value
+    // update the sessionStorage cartProducts value
     delete cartProducts[tableRow.id];
-    localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+    sessionStorage.setItem('cartProducts', JSON.stringify(cartProducts));
 
-    // update the localStorage cartItemCount value
-    updateLocalStorageCartItemCount(-qty)
+    // update the sessionStorage cartItemCount value
+    updateSessionStorageCartItemCount(-qty)
 
-    //update the localStorage cartTotal value
-    updateLocalStorageCartTotal()
+    //update the sessionStorage cartTotal value
+    updateSessionStorageCartTotal()
 
     // remove the tableRow that holds all the product info
     tableRow.parentNode.removeChild(e.currentTarget.parentNode.parentNode);
@@ -268,7 +289,7 @@ function removeProductFromCart(e) {
 
 //Calculate shipping total
 function calculateShippingTotal() {
-    let productsInCart = JSON.parse(localStorage.getItem('cartProducts'));
+    let productsInCart = JSON.parse(sessionStorage.getItem('cartProducts'));
     let shippingTotal = 0;
     let shippingQuantities = {'doorbells5': 0, 'doorbells3.5': 0, 'fanPulls': 0, 'airPlantCradles': 0};
     for (let product in productsInCart) {
@@ -308,14 +329,14 @@ function calculateShippingTotal() {
             if (shippingQuantities[category] > 0) shippingTotal += 5;
         }
     }
-    localStorage.setItem('shippingTotal', shippingTotal);
+    sessionStorage.setItem('shippingTotal', shippingTotal);
 
     return shippingTotal;
 }
 
 //Updates all the prices in the Cart Total area of the shopping cart
 function updateCartTotalDisplay() {
-    let subtotal = Number(localStorage.getItem('cartTotal'));
+    let subtotal = Number(sessionStorage.getItem('cartTotal'));
     document.querySelector('.subtotal').textContent = `$${subtotal.toFixed(2)}`;
 
     let shipping = calculateShippingTotal();
