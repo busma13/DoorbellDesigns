@@ -2,6 +2,7 @@
 const goToCheckoutBtn = document.querySelector('.go-to-checkout')
 const toastContainer = document.querySelector('.toast-container')
 
+localStorage.clear()
 // Stores an item in local storage with an expiration
 var ls = {
     set: function (variable, value, ttl_ms) {

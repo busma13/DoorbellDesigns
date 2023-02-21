@@ -6,7 +6,7 @@ selectedState.addEventListener('change', updateCartTotals);
 
 //Updates all the prices in the Cart Total area of the checkout page
 function updateCartTotals() {
-    let subtotal = Number(localStorage.getItem('cartTotal'));
+    let subtotal = Number(sessionStorage.getItem('cartTotal'));
     document.querySelector('.subtotal').textContent = `$${subtotal.toFixed(2)}`;
 
     let estimatedTax = 0;
@@ -16,7 +16,7 @@ function updateCartTotals() {
     }
     document.querySelector('.estimatedTax').textContent = `$${estimatedTax.toFixed(2)}`;
 
-    let shipping = Number(localStorage.getItem('shippingTotal'));
+    let shipping = Number(sessionStorage.getItem('shippingTotal'));
 
     document.querySelector('.shipping').textContent = `$${shipping.toFixed(2)}`;
     let total = subtotal + estimatedTax + shipping;
@@ -27,7 +27,7 @@ function updateCartTotals() {
 //When user checks out this list is sent with the form.
 function createCartList() {
     let checkoutList = [];
-    let cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    let cartProducts = JSON.parse(sessionStorage.getItem('cartProducts'));
     // console.log(cartProducts);
     for (obj in cartProducts) {
         // console.log(cartProducts[obj]);
@@ -41,7 +41,7 @@ function createCartList() {
         listItem.mainCategory = cartProducts[obj].mainCategory; 
         checkoutList.push(listItem);
     }
-    localStorage.setItem('cartList', JSON.stringify(checkoutList));
+    sessionStorage.setItem('cartList', JSON.stringify(checkoutList));
     document.querySelector('#cart-list-input').value = JSON.stringify(checkoutList);
 
     //Disable Checkout button if cart is empty
