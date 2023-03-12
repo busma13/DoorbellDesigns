@@ -39,7 +39,7 @@
 <!-- faq -->
 <section id="about">
     <div class="container">
-        <main>
+        <main class="even-paragraphs">
             <h4>Quick Links:</h4>
             <ul>
                 <li><a href="instructions.php">Installation Instructions</a></li>

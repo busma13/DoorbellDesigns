@@ -3238,6 +3238,13 @@ section#single-product-page {
 }
 
 /* End Instructions */
+/*  FAQ */
+
+.even-paragraphs {
+  max-width: 550px;;
+}
+
+/*  End FAQ */
 /* Custom Orders */
 #custom .flex-container {
   justify-content: center;
