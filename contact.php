@@ -46,7 +46,7 @@
                 <p><a href="mailto:info@cicadaceramics.com">info@cicadaceramics.com</a></p>
 
                 <h4 class="space-top">Phone</h4>
-                <p><a href="tel:6194431872">619-443-1872</a></p>
+                <p><a href="tel:6194431872">619-368-5314</a></p>
 
                 <h4 class="space-top">Mailing Address</h4>
                 <address>

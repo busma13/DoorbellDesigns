@@ -54,7 +54,7 @@
             <p>If we have to make you a doorbell, it will take a little time, 2 or 3 weeks.</p>
             <p>If you need the screw holes to be in a specific place (distance apart), tell us.</p>
             <p>There is no standard distance for doorbell screw holes.</p>
-            <p>Our standard hole separation is 3 1/4 inches, which we use on our larger pieces.</p>
+            <p>Our standard hole separation is 3 1/4 inches, which we use on our larger pieces, which is the distance for mounting a doorbell in an electrical box.</p>
 
         </main>
         <!-- <div class="row">

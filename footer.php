@@ -103,7 +103,7 @@
                             <p><i class="lnr lnr-map-marker"></i><span>11885 Rocoso Road<br> Lakeside, CA 92040</span></p>
                         </div>
                         <div class="info space-top">
-                            <a href="tel:6194431872"><i class="lnr lnr-phone-handset"></i><span>619-443-1872</span></a>
+                            <a href="tel:6194431872"><i class="lnr lnr-phone-handset"></i><span>619-368-5314</span></a>
                         </div>
                         <div class="info">
                             <a href="mailto:info@cicadaceramics.com"><i class="lnr lnr-envelope"></i><span>info@cicada<wbr>ceramics.com</span></a>
