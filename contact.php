@@ -45,8 +45,11 @@
                 <h4>Email</h4>
                 <p><a href="mailto:info@cicadaceramics.com">info@cicadaceramics.com</a></p>
 
-                <h4 class="space-top">Phone</h4>
-                <p><a href="tel:6194431872">619-368-5314</a></p>
+                <h4 class="space-top">Studio Phone</h4>
+                <a href="tel:6194431872"><i class="lnr lnr-phone-handset"></i><span class="space-left">619-443-1872</span></a>
+
+                <h4 class="space-top">Weekends & Texts</h4>
+                <p><a href="tel:6193685314"><i class="lnr lnr-smartphone"></i><span class="space-left">619-368-5314</span></a></p>
 
                 <h4 class="space-top">Mailing Address</h4>
                 <address>

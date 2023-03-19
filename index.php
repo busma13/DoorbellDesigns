@@ -49,7 +49,7 @@
         <div class="row">
 
             <div class="col-sm-4 category">
-                <a href="doorbells.php">
+                <a href="doorbells.php?category=all">
                     <div class="category-item">
                         <img src="images/homepage/welcomeDoorbell.jpg" alt="Doorbells">
                         <div class="overlay">

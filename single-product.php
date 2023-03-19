@@ -20,7 +20,12 @@ global $pdo;
 <?php
 
 //Retrieve all active products in category
-$get_category_products_sql = 'SELECT * FROM products WHERE mainCategory = "' . $_GET['category'] . '" AND active = 1;';
+if (strtolower($_GET['category']) === 'doorbells') {
+    $get_category_products_sql = 'SELECT * FROM products WHERE mainCategory = "' . $_GET['category'] . '" AND subCategories LIKE "[\"' . $_GET['subcategory'] . '\"]" AND active = 1;';
+} else {
+    $get_category_products_sql = 'SELECT * FROM products WHERE mainCategory = "' . $_GET['category'] . '" AND active = 1;';
+}
+
 
 /* Execute the query */
 try {
@@ -76,10 +81,9 @@ if ($currentRow) {
                 <!-- product content area -->
                 <div class="col-sm-6 col-md-7 content-area">
                     <div class="product-content-area">
-                        <div id="product-slider" class="carousel slide" data-ride="carousel">
+                        <div id="product-slider" class="carousel slide" data-ride="carousel" data-interval="false">
                             <!-- wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
-                                <!-- TODO: remove if/else below. Add loop here to cycle through img array and load each img & alt -->
                                 <div class="item active">
                                     <img class="product-single-image" src="<?php echo $picUrls[0] ?>" alt="<?php echo $currentRow['itemNameString'] ?>">
                                 </div>
@@ -109,7 +113,10 @@ if ($currentRow) {
 
                     <!-- product pagination -->
                     <div class="pagination no-padding">
-                        <a href="single-product.php?category=<?php echo $currentRow['mainCategory'] ?>&product=<?php
+                        <a href="single-product.php?category=<?php echo $currentRow['mainCategory'];
+                         if (strtolower($_GET['category']) === 'doorbells') {
+                            echo '&subcategory=' . $_GET['subcategory'];
+                        } ?>&product=<?php
                           if ($currentRowIndex == 0) {
                               echo $categoryProdIds[count($categoryProdIds) - 1];
                           } else {
@@ -117,7 +124,10 @@ if ($currentRow) {
                           }
                           ?>
                         " class="btn btn-default btn-rounded no-margin"><i class="fa fa-long-arrow-left"></i><span>Previous</span></a>
-                         <a href="single-product.php?category=<?php echo $currentRow['mainCategory'] ?>&product=<?php
+                        <a href="single-product.php?category=<?php echo $currentRow['mainCategory']; 
+                        if (strtolower($_GET['category']) === 'doorbells' ) {
+                            echo '&subcategory=' . $_GET['subcategory'];
+                        } ?>&product=<?php
                            if ($currentRowIndex == count($categoryProdIds) - 1) {
                                echo $categoryProdIds[0];
                            } else {
@@ -158,7 +168,7 @@ if ($currentRow) {
                                         $i = "one of a kind";
                                     }
                                     ?>
-                                            , <a href="<?php echo strtolower($currentRow['mainCategory']) ?>.php?category=<?php echo $i ?>"><?php echo ucfirst($i) ?></a> <?php
+                                            , <a href="<?php echo strtolower($currentRow['mainCategory']) ?>.php#<?php echo $i ?>"><?php echo ucfirst($i) ?></a> <?php
                                 }
                                 ?>
 
@@ -259,6 +269,10 @@ include 'footer.php';
 <!-- cart -->
 <script src="js/cart.js"></script>
 <!-- / cart -->
+
+<!-- subcategory -->
+<script src="js/subcategory.js"></script>
+<!-- / subcategory -->
 
 <!-- / javascript -->
 </body>

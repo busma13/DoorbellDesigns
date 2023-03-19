@@ -11,7 +11,7 @@
                     <div class="link-widget">
                         <div class="flex-container">
                             <div class="info">
-                                <a href="doorbells.php">All</a>
+                                <a href="doorbells.php?category=all">All</a>
                             </div>
                             <div class="info">
                                 <a href="doorbells.php?category=dog%20lovers">Dog Lovers</a>
@@ -103,9 +103,12 @@
                             <p><i class="lnr lnr-map-marker"></i><span>11885 Rocoso Road<br> Lakeside, CA 92040</span></p>
                         </div>
                         <div class="info space-top">
-                            <a href="tel:6194431872"><i class="lnr lnr-phone-handset"></i><span>619-368-5314</span></a>
+                            <a href="tel:6194431872"><i class="lnr lnr-phone-handset space-right"></i><span>Studio: <br>619-443-1872</span></a>
                         </div>
-                        <div class="info">
+                        <div class="info space-top">
+                            <a href="tel:6193685314"><i class="lnr lnr-smartphone"></i><span>Weekends & texts: <br>619-368-5314</span></a>
+                        </div>
+                        <div class="info space-top">
                             <a href="mailto:info@cicadaceramics.com"><i class="lnr lnr-envelope"></i><span>info@cicada<wbr>ceramics.com</span></a>
                         </div>
                         <!-- <div class="info">

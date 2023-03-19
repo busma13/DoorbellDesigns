@@ -47,16 +47,16 @@ global $pdo;
             <div class="col-sm-12 content-area">
                 <!-- product filter -->
                 <ul class="product-filter list-inline text-center">
-                    <li><a href="#" data-group="all" class="active">All</a></li>
-                    <li><a href="#" data-group="beachy">Beachy</a></li>
-                    <li><a href="#" data-group="contemporary">Contemporary</a></li>
-                    <li><a href="#" data-group="dog">Dog Lovers</a></li>
-                    <li><a href="#" data-group="animals">Animals</a></li>
-                    <li><a href="#" data-group="petroglyphs">Petroglyphs</a></li>
-                    <li><a href="#" data-group="plants">Plants</a></li>
+                    <li><a href="#all" data-group="all" class="active">All</a></li>
+                    <li><a href="#beachy" data-group="beachy">Beachy</a></li>
+                    <li><a href="#contemporary" data-group="contemporary">Contemporary</a></li>
+                    <li><a href="#dog" data-group="dog">Dog Lovers</a></li>
+                    <li><a href="#animals" data-group="animals">Animals</a></li>
+                    <li><a href="#petroglyphs" data-group="petroglyphs">Petroglyphs</a></li>
+                    <li><a href="#plants" data-group="plants">Plants</a></li>
                     <!-- <li><a href="#" data-group="southwest">Southwest</a></li> -->
-                    <li><a href="#" data-group="one">One Of A Kind</a></li>
-                    <li><a href="#" data-group="miscellaneous">Miscellaneous</a></li>
+                    <li><a href="#one" data-group="one">One Of A Kind</a></li>
+                    <li><a href="#miscellaneous" data-group="miscellaneous">Miscellaneous</a></li>
                     <!-- <li><a href="./custom-orders.php" data-group="custom">Custom Orders</a></li> -->
                 </ul>
                 <!-- / product filter -->
@@ -142,13 +142,6 @@ include 'footer.php';
 ?>
 <!-- / footer -->
 
-<div class="modal">
-    <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h1>Hello, I am a modal!</h1>
-    </div>
-</div>
-
 <!-- javascript -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -157,6 +150,10 @@ include 'footer.php';
 <!-- cart -->
 <script src="js/cart.js"></script>
 <!-- / cart -->
+
+<!-- subcategory -->
+<script src="js/subcategory.js"></script>
+<!-- / subcategory -->
 
 <!-- shuffle grid-resizer -->
 <script src="js/jquery.shuffle.min.js"></script>

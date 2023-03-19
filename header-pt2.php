@@ -16,6 +16,14 @@
 
 <body>
 
+<?php if ($title === 'Doorbell Designs - Doorbells') { ?>
+    <!-- preloader -->
+    <div id="preloader">
+    <div class="spinner spinner-round"></div>
+    </div>
+    <!-- / preloader -->
+<?php } ?>
+
 <!-- header -->
 <header>
     <nav class="navbar navbar-default">
@@ -41,7 +49,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
-                            <li><a href="doorbells.php">Doorbells</a></li>
+                            <li><a href="doorbells.php?category=all">Doorbells</a></li>
                             <li><a href="fan-pulls.php">Ceiling Fan Pulls</a></li>
                             <li><a href="air-plant-cradles.php">Air Plant Cradles</a></li>
                             <li><a href="custom-orders.php">Custom Orders</a></li>

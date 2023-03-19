@@ -18,43 +18,11 @@ var shuffleme = (function( $ ) {
     });
 
     setTimeout(function() {
-      const params = new URLSearchParams(window.location.search);
-      const catName = params.get("category");
-      switch (catName) {
-        case 'beachy':
-          $grid.shuffle( 'shuffle', 'beachy' );
-          break;
-        case 'contemporary':
-          $grid.shuffle( 'shuffle', 'contemporary' );
-          break;
-        case 'dog lovers':
-          $grid.shuffle( 'shuffle', 'dog' );
-          break;
-        case 'animals':
-          $grid.shuffle( 'shuffle', 'animals' );
-          break;  
-        case 'petroglyphs':
-          $grid.shuffle( 'shuffle', 'petroglyphs' );
-          break;
-        case 'plants':
-          $grid.shuffle( 'shuffle', 'plants' );
-          break;
-        case 'southwest':
-          $grid.shuffle( 'shuffle', 'southwest' );
-          break;
-        case 'one of a kind':
-          $grid.shuffle( 'shuffle', 'one' );
-          break;
-        case 'miscellaneous':
-          $grid.shuffle( 'shuffle', 'miscellaneous' );
-          break;
-        case 'custom':
-          $grid.shuffle( 'shuffle', 'custom' );
-          break;
-        default:
-          break;  
-      }
-    }, 1000);
+      // On page load get the URL fragment and shuffle to that subcategory 
+      const subcategory = window.location.hash.substring(1);
+      $grid.shuffle( 'shuffle', subcategory );
+      
+    }, 500);
     
     
   },
@@ -65,7 +33,7 @@ var shuffleme = (function( $ ) {
   setupFilters = function() {
     var $btns = $filterOptions.children();
     $btns.on('click', function(e) {
-      e.preventDefault();
+      // e.preventDefault();
       var $this = $(this),
           isActive = $this.hasClass( 'active' ),
           group = isActive ? 'all' : $this.data('group');

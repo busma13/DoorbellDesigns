@@ -4102,6 +4102,10 @@ a.btn-social {
   line-height: 1.5em;
 }
 
+.space-left {
+  margin-leftt: 15px;
+}
+
 .shop-location {
   background-color: #f8f8f8;
   background-repeat: no-repeat !important;
