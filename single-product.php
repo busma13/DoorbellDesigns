@@ -5,19 +5,6 @@ $title = 'Doorbell Designs';
 echo $title;
 include 'header-pt2.php';
 global $pdo;
-?>
-
-</header>
-<!-- / header -->
-
-<!-- content -->
-
-<!-- shop single-product -->
-<section id="single-product-page">
-    <div class="container">
-        <div class="row">
-
-<?php
 
 //Retrieve all active products in category
 if (strtolower($_GET['category']) === 'doorbells') {
@@ -39,27 +26,29 @@ try {
 //Load the item we want.  On prev or next load the next/prev product.
 $categoryProdIds = array();
 $picUrls = array();
-$currentRow;
+$productRow = null;
 while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
-    //Find the index where the current product's ID resides.
-    if ($row['id'] == $_GET['product']) {
-        $currentRow = $row;
-        $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " . $row['id'] . ";";
-
-        try {
-            $res2 = $pdo->prepare($get_image_urls_sql);
-            $res2->execute();
-        } catch (PDOException $e) {
-            throw new Exception('Database query error');
-        }
-        while ($urlRow = $res2->fetch(PDO::FETCH_ASSOC)) {
-
-            $picUrls[] = str_replace('upload/', 'upload/c_fill,h_1200/', $urlRow['url']);
-        }
-    }
-    //Make an array of all the product IDs in the category
-    $categoryProdIds[] = $row['id'];
-    // echo print_r($categoryProdIds);
+  $currentRow = $row;  
+  //Find the index where the current product's ID resides.
+  if ($_GET['product'] != null && $row['id'] == $_GET['product']) {
+    $productRow = $row; 
+  }
+  //Make an array of all the product IDs in the category
+  $categoryProdIds[] = $row['id'];
+  // echo print_r($categoryProdIds);
+}
+if ($productRow != null) {
+  $currentRow = $productRow;
+}
+$get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " . $currentRow['id'] . ";";
+try {
+  $res2 = $pdo->prepare($get_image_urls_sql);
+  $res2->execute();
+} catch (PDOException $e) {
+  throw new Exception('Database query error');
+}
+while ($urlRow = $res2->fetch(PDO::FETCH_ASSOC)) {
+  $picUrls[] = str_replace('upload/', 'upload/c_fill,h_1200/', $urlRow['url']);
 }
 
 for ($i = 0; $i < count($categoryProdIds); $i++) {
@@ -68,6 +57,61 @@ for ($i = 0; $i < count($categoryProdIds); $i++) {
         break;
     }
 }
+
+?>
+<ol class="breadcrumb">
+  <li><a href="index.php">Home</a></li>
+  <li>
+    <div class="dropdown">
+      <div class="dropdown-toggle" type="button" data-toggle="dropdown">
+        <a href="<?php echo strtolower($_GET['category']) ?>.php"><?php echo ucfirst($_GET['category']) ?></a>
+        <span class="caret"></span>
+      </div>
+      <ul class="dropdown-menu">
+        <li><a href="doorbells.php">Doorbells</a></li>
+        <li><a href="fan-pulls.php">Fan Pulls</a></li>
+        <li><a href="air-plant-cradles.php">Air Plant Cradles</a></li>
+      </ul>
+    </div>
+  </li>
+<?php if ($_GET['subcategory'] != null) { 
+  $subcat = $subcatStr = $_GET['subcategory'];
+  if ($subcat === '%') {
+    $subcatStr = 'All'; 
+  } ?>
+  <li>
+    <div class="dropdown">
+      <div class="dropdown-toggle" type="button" data-toggle="dropdown">
+      <a href="<?php echo strtolower($_GET['category']) . '.php#' . strtolower($subcat) ?>"><?php echo ucfirst($subcatStr) ?></a>
+      <span class="caret"></span>
+      </div>
+      <ul class="dropdown-menu">
+        <li><a href="#all" data-group="all">All</a></li>
+        <li><a href="single-product.php?category=doorbells&subcategory=beachy" data-group="beachy">Beachy</a></li>
+        <li><a href="single-product.php?category=doorbells&subcategory=contemporary" data-group="contemporary">Contemporary</a></li>
+        <li><a href="single-product.php?category=doorbells&subcategory=dog" data-group="dog">Dog Lovers</a></li>
+        <li><a href="single-product.php?category=doorbells&subcategory=animals" data-group="animals">Animals</a></li>
+        <li><a href="single-product.php?category=doorbells&subcategory=petroglyphs" data-group="petroglyphs">Petroglyphs</a></li>
+        <li><a href="single-product.php?category=doorbells&subcategory=plants" data-group="plants">Plants</a></li>
+        <li><a href="single-product.php?category=doorbells&subcategory=one" data-group="one">One Of A Kind</a></li>
+        <li><a href="single-product.php?category=doorbells&subcategory=miscellaneous" data-group="miscellaneous">Miscellaneous</a></li>
+      </ul>
+    </div>
+  <?php } ?>
+  </li> 
+  <li class="active"><?php echo $currentRow['itemNameString'] ?></li>
+</ol>
+</header>
+<!-- / header -->
+
+<!-- content -->
+
+<!-- shop single-product -->
+<section id="single-product-page">
+    <div class="container">
+        <div class="row">
+
+<?php
 
 if ($currentRow) {
     if ($currentRow['mainCategory'] === 'Fan-Pulls') {

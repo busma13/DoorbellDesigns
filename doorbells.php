@@ -54,10 +54,8 @@ global $pdo;
                     <li><a href="#animals" data-group="animals">Animals</a></li>
                     <li><a href="#petroglyphs" data-group="petroglyphs">Petroglyphs</a></li>
                     <li><a href="#plants" data-group="plants">Plants</a></li>
-                    <!-- <li><a href="#" data-group="southwest">Southwest</a></li> -->
                     <li><a href="#one" data-group="one">One Of A Kind</a></li>
                     <li><a href="#miscellaneous" data-group="miscellaneous">Miscellaneous</a></li>
-                    <!-- <li><a href="./custom-orders.php" data-group="custom">Custom Orders</a></li> -->
                 </ul>
                 <!-- / product filter -->
                 

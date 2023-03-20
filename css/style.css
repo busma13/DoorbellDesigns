@@ -2804,6 +2804,10 @@ section#single-product-page {
   padding: 10px 0;
 }
 
+.breadcrumb .dropdown {
+  display: inline-block;
+}
+
 .toast-container {
   display: none;
   position: fixed;
