@@ -98,7 +98,7 @@
                 </div>
             </div>                
             <h4 class="space-top-2x text-center">Custom Wireless Doorbell Covers:</h4>
-            <div id="grid" class="row flex-container">
+            <div id="grid" class="row flex">
                 <div class="col-xs-6 col-md-3 space-bottom">
                     <img src="images/custom-square/intercom1.jpg" class="img-rounded">
                 </div>
@@ -107,7 +107,7 @@
                 </div>
             </div>
             <h4 class="space-top-2x text-center">Custom Intercom Covers:</h4>
-            <div id="grid" class="row flex-container">
+            <div id="grid" class="row flex">
                 <div class="col-xs-6 col-md-3 space-bottom">
                     <img src="images/custom-square/intercom2.jpg" class="img-rounded">
                 </div>

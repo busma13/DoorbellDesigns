@@ -13,7 +13,8 @@ global $pdo;
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub shift-down">
-                    <h1 class="page-title fadeInDown animated first">Doorbells</h1>
+                    <!-- <h1 class="page-title fadeInDown animated first">Doorbells</h1> -->
+                    <h1 class="page-title fadeInDown animated first"><img class="fullscreen-logo hide-logo-large"src="images/logo-dd.jpg"></h1>
                 </div><!-- / page-header -->
                 <p>
                     <img sizes="(max-width: 1400px) 98vw, 1400px"

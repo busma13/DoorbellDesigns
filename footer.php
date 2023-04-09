@@ -2,14 +2,14 @@
 <footer class="light-footer">
     <div class="widget-area">
         <div class="container">
-            <div class="flex-container">
+            <div class="flex">
                 <!-- first widget -->
                 <div class="widget">
                     <div class="widget-title">
                         <h4>Doorbells</h4>
                     </div>
                     <div class="link-widget">
-                        <div class="flex-container">
+                        <div class="flex">
                             <div class="info">
                                 <a href="doorbells.php?category=all">All</a>
                             </div>

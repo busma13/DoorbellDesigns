@@ -200,7 +200,7 @@ function displayCart() {
                 <tr class="cart-item" id="${item.itemName}${item.options.optionsIDString}">
                     <td class="image"><a href="single-product.php?category=${item.mainCategory}&product=${item.id}"><img src="${item.urlsArray[0]}" alt="${item.itemNameString}"></a></td>
                     <td><a href="single-product.php?category=${item.mainCategory}&product=${item.id}">${item.itemNameString}</a></td>
-                    <td><div class="flex-container col">${pairsArrayString}</div></td>
+                    <td><div class="flex col">${pairsArrayString}</div></td>
                     <td>$${priceArray[0]}</td>
                     <td class="qty"><input type="number" step="1" min="1" name="cart" value="${item.qtyInCart}" title="Qty" class="input-text qty text qty-input-box" size="4"></td>
                     <td>$${priceTotal}</td>

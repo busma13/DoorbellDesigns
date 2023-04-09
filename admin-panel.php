@@ -57,7 +57,7 @@
         <h1>Delete Product</h1>
         <p>Are you sure you want to delete this product?</p>
 
-        <div class="flex-container modal-button-container">
+        <div class="flex modal-button-container">
         <button type="button" class="btn btn-rounded btn-info btn-modal btn-cancel">Cancel</button>
         <button type="button" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-product" data-id="0">Delete</button>
         </div>
@@ -71,7 +71,7 @@
         <h1>Delete Show</h1>
         <p>Are you sure you want to delete this show?</p>
 
-        <div class="flex-container modal-button-container">
+        <div class="flex modal-button-container">
         <button type="button" class="btn btn-rounded btn-info btn-modal btn-cancel">Cancel</button>
         <button type="button" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-show" data-id="0">Delete</button>
         </div>
@@ -211,8 +211,8 @@
         <p class="slide-text fadeInUp animated second">Choose product from dropdown menu then click on "Add Image" button.</p>
     </div><!-- / page-header-content -->
 </div><!-- / container -->
-<div class="container add-images flex-container ">
-    <div class="flex-container">
+<div class="container add-images flex ">
+    <div class="flex">
         <select name="productImageUploadSelect" id="productImageUploadSelect">
         <?php
         $get_products_sql = "SELECT * FROM products ORDER BY itemNameString;";
