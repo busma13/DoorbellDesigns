@@ -2289,6 +2289,11 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 /* / Modals */
 /* End Base CSS */
 /* Headers */
+
+.fullscreen-logo {
+  width: 80%;
+}
+
 /* Navigation */
 /* Top Menus */
 .top-menu {

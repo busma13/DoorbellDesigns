@@ -7,7 +7,8 @@ include 'header-pt2.php';
 global $pdo;
 
 //Retrieve all active products in category
-if (strtolower($_GET['category']) === 'doorbells') {
+if (strtolower($_GET['category']) === 'doorbells' 
+            && $_GET['subcategory'] !== 'all') {
     $get_category_products_sql = 'SELECT * FROM products WHERE mainCategory = "' . $_GET['category'] . '" AND subCategories LIKE "[\"' . $_GET['subcategory'] . '\"]" AND active = 1;';
 } else {
     $get_category_products_sql = 'SELECT * FROM products WHERE mainCategory = "' . $_GET['category'] . '" AND active = 1;';
@@ -86,7 +87,7 @@ for ($i = 0; $i < count($categoryProdIds); $i++) {
       <span class="caret"></span>
       </div>
       <ul class="dropdown-menu">
-        <li><a href="#all" data-group="all">All</a></li>
+        <li><a href="single-product.php?category=doorbells&subcategory=all" data-group="all">All</a></li>
         <li><a href="single-product.php?category=doorbells&subcategory=beachy" data-group="beachy">Beachy</a></li>
         <li><a href="single-product.php?category=doorbells&subcategory=contemporary" data-group="contemporary">Contemporary</a></li>
         <li><a href="single-product.php?category=doorbells&subcategory=dog" data-group="dog">Dog Lovers</a></li>

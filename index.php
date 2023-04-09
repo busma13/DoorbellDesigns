@@ -13,7 +13,8 @@
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub shift-down">
-                    <h1 class="page-title fadeInDown animated first">Doorbell Designs</h1>
+                    <!-- <h1 class="page-title fadeInDown animated first">Doorbell Designs</h1> -->
+                    <h1 class="page-title fadeInDown animated first "><img class="fullscreen-logo"src="images/logo-dd.jpg"></h1>
                 </div><!-- / page-header -->
                 <p>
                     <img sizes="(max-width: 1400px) 98vw, 1400px"
@@ -134,7 +135,7 @@
             <div class="item product">
                 <!-- <span class="sale-label">SALE</span> -->
                 <!-- / sale-label -->
-                <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>" class="product-link"></a>
+                <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>&subcategory=%" class="product-link"></a>
                 <!-- / product-link -->
                 <img src="<?php echo $picUrl ?>" alt="<?php echo $row['itemNameString'] ?>">
                 <!-- / product-image -->
@@ -216,7 +217,7 @@
             <div class="col-xs-6 col-md-4 product">
                 <!-- <span class="sale-label">SALE</span> -->
                 <!-- / sale-label -->
-                <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>" class="product-link"></a>
+                <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>&subcategory=%" class="product-link"></a>
                 <!-- / product-link -->
                 <img src="<?php echo $newArrivalPicUrl ?>" alt="<?php echo $row['itemNameString'] ?>">
                 <!-- / product-image -->

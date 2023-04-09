@@ -292,7 +292,7 @@ function removeProductFromCart(e) {
 function calculateShippingTotal() {
     let productsInCart = JSON.parse(sessionStorage.getItem('cartProducts'));
     let shippingTotal = 0;
-    let shippingQuantities = {'doorbells5': 0, 'doorbells3.5': 0, 'fanPulls': 0, 'airPlantCradles': 0};
+    let shippingQuantities = {'doorbells5': 0, 'doorbells10': 0, 'fanPulls': 0, 'airPlantCradles': 0};
     for (let product in productsInCart) {
         let itemCategory = productsInCart[product].mainCategory;
         let itemShipping = productsInCart[product].shipping;
@@ -302,10 +302,10 @@ function calculateShippingTotal() {
             shippingQuantities['airPlantCradles'] += itemQty;
         }
         if (itemCategory === 'Doorbells') {
-            if (itemShipping === '3.50') {
-                shippingQuantities['doorbells3.5'] += itemQty;
-            } else if (itemShipping === '5.00') {
+            if (itemShipping === '5.00') {
                 shippingQuantities['doorbells5'] += itemQty;
+            } else if (itemShipping === '10.00') {
+                shippingQuantities['doorbells10'] += itemQty;
             }
         }
         if (itemCategory === 'Fan-Pulls') {
@@ -316,12 +316,8 @@ function calculateShippingTotal() {
 
     //update for fan pulls, artwork, etc
     for (let category in shippingQuantities) {
-        if (category == 'doorbells3.5') {
-            if(shippingQuantities[category] % 2 === 0) {
-                shippingTotal += 3.5 * shippingQuantities[category] / 2;
-            } else {
-                shippingTotal += 3.5 * (shippingQuantities[category] + 1) / 2;
-            }
+        if (category == 'doorbells10') {
+                shippingTotal += 10 * shippingQuantities[category]
         } else if (category === 'doorbells5') {
             shippingTotal += 5 * shippingQuantities[category];
         } else if (category === 'airPlantCradles') {
