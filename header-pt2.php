@@ -2,7 +2,7 @@
 <!-- bootstrap css -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- css -->
-<link href="css/style.css" rel="stylesheet">
+<link href="css/style_v2.css" rel="stylesheet">
 <link href="css/animate.css" rel="stylesheet">
 <link href="css/owl.carousel.css" rel="stylesheet">
 <link href="css/owl.theme.css" rel="stylesheet">
