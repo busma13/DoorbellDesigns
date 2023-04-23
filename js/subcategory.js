@@ -10,17 +10,14 @@ window.onload = (event) => {
         hash = "%";
     }
     links.forEach(el => el.href = el.href + '&subcategory=' + hash);
-    console.log('hash: ', hash);
 }
 
 window.addEventListener('hashchange', (event) => {
     const url = event.newURL;
     let hash = url.slice(url.lastIndexOf("#") + 1);
-    console.log(hash);
     if (hash === "all") {
         hash = "%";
     }
-    console.log(hash);
     links.forEach(el => {
         el.href = el.href.slice(0, el.href.lastIndexOf("&")) + '&subcategory=' + hash;
     })

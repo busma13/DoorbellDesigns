@@ -38,7 +38,6 @@ var shuffleme = (function( $ ) {
       var $this = $(this),
           isActive = $this.hasClass( 'active' ),
           group = isActive ? 'all' : $this.data('group');
-          console.log("group: " + group);
 
       // Hide current label, show current label in title
       if ( !isActive ) {
@@ -54,7 +53,6 @@ var shuffleme = (function( $ ) {
     $btns = null;
 
     var $footerBtns = $filterFooterLinks;
-    console.log($footerBtns)
     $footerBtns.on('click', function(e) {
       var $this = $(this),
           group = $this.data('group');
