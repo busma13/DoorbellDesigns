@@ -11,31 +11,31 @@
                     <div class="link-widget">
                         <div class="flex">
                             <div class="info">
-                                <a href="doorbells.php?category=all">All</a>
+                                <a href="doorbells.php#all" data-group="all" class="filterable">All</a>
                             </div>
                             <div class="info">
-                                <a href="doorbells.php?category=dog%20lovers">Dog Lovers</a>
+                                <a href="doorbells.php#dog" data-group="dog" class="filterable">Dog Lovers</a>
                             </div>
                             <div class="info">
-                                <a href="doorbells.php?category=beachy">Beachy</a>
+                                <a href="doorbells.php#beachy" data-group="beachy" class="filterable">Beachy</a>
                             </div>
                             <div class="info">
-                                <a href="doorbells.php?category=contemporary">Contemporary</a>
+                                <a href="doorbells.php#contemporary" data-group="contemporary" class="filterable">Contemporary</a>
                             </div>
                             <div class="info">
-                                <a href="doorbells.php?category=animals">Animals</a>
+                                <a href="doorbells.php#animals" data-group="animals" class="filterable">Animals</a>
                             </div>
                             <div class="info">
-                                <a href="doorbells.php?category=petroglyphs">Petroglyph</a>
+                                <a href="doorbells.php#petroglyphs" data-group="petroglyphs" class="filterable">Petroglyphs</a>
                             </div>
                             <div class="info">
-                                <a href="doorbells.php?category=plants">Plants</a>
+                                <a href="doorbells.php#plants" data-group="plants" class="filterable">Plants</a>
                             </div>
-                            <!-- <div class="info">
-                                <a href="doorbells.php?category=southwest">Southwest</a>
-                            </div> -->
                             <div class="info">
-                                <a href="doorbells.php?category=miscellaneous">Miscellaneous</a>
+                                <a href="doorbells.php#one" data-group="one" class="filterable">One Of A Kind</a>
+                            </div>
+                            <div class="info">
+                                <a href="doorbells.php#miscellaneous" data-group="miscellaneous" class="filterable">Miscellaneous</a>
                             </div>
                         </div>
                     </div>

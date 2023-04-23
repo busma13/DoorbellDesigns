@@ -2,6 +2,7 @@ var shuffleme = (function( $ ) {
   'use strict';
   var $grid = $('#grid'), //locate what we want to sort 
       $filterOptions = $('.product-filter li'),  //locate the filter categories
+      $filterFooterLinks = $('.filterable'),  //locate the filter categories
       $sizer = $grid.find('.shuffle_sizer'),    //sizer stores the size of the items
 
   init = function() {
@@ -37,7 +38,7 @@ var shuffleme = (function( $ ) {
       var $this = $(this),
           isActive = $this.hasClass( 'active' ),
           group = isActive ? 'all' : $this.data('group');
-          // console.log("group: " + group);
+          console.log("group: " + group);
 
       // Hide current label, show current label in title
       if ( !isActive ) {
@@ -51,6 +52,18 @@ var shuffleme = (function( $ ) {
     });
 
     $btns = null;
+
+    var $footerBtns = $filterFooterLinks;
+    console.log($footerBtns)
+    $footerBtns.on('click', function(e) {
+      var $this = $(this),
+          group = $this.data('group');
+
+      // Filter elements
+      $grid.shuffle( 'shuffle', group );
+    });
+
+    $footerBtns = null;
   },
 
   // Re layout shuffle when images load. This is only needed
