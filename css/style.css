@@ -249,8 +249,12 @@ strong {
   padding: 3px 4px;
 }
 
-.flex-container {
+.flex {
   display: flex;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .col {
@@ -2220,15 +2224,15 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 
 /* Schedule Table */
 
-#schedule .flex-container {
+#schedule .flex {
   justify-content: space-evenly;
 }
 
-#schedule .flex-container > * {
+#schedule .flex > * {
   text-align: center;
 }
 
-#schedule .flex-container > * {
+#schedule .flex > * {
   flex: 1 25%;
 }
 
@@ -2289,6 +2293,11 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 /* / Modals */
 /* End Base CSS */
 /* Headers */
+
+.fullscreen-logo {
+  width: 80%;
+}
+
 /* Navigation */
 /* Top Menus */
 .top-menu {
@@ -2442,7 +2451,7 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
   line-height: 20px;
   font-weight: 500;
   height: 80px;
-  padding: 22px 15px;
+  padding: 12px 15px;
 }
 
 .navbar-brand span {
@@ -2468,7 +2477,7 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
   -moz-border-radius: 5px;
 }
 
-.navbar-collapse {
+.navbar-collapse.collapse {
   text-align: center;
 }
 
@@ -3250,7 +3259,7 @@ section#single-product-page {
 
 /*  End FAQ */
 /* Custom Orders */
-#custom .flex-container {
+#custom .flex {
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -3789,7 +3798,7 @@ section#single-product-page {
   flex-direction: column;
 }
 
-.add-images > .flex-container {
+.add-images > .flex {
   justify-content: center;
 }
 
@@ -4388,7 +4397,7 @@ footer .widget-area {
   padding: 50px 0;
 }
 
-footer .widget-area > .container > .flex-container {
+footer .widget-area > .container > .flex {
   justify-content: space-around;
 
 }
@@ -4431,7 +4440,7 @@ footer #newsletter .form-control {
   min-height: 42px;
 }
 
-.link-widget .flex-container {
+.link-widget .flex {
   flex-flow: column wrap;
   align-content: flex-start;
 }
@@ -4621,7 +4630,12 @@ footer #newsletter .form-control {
     line-height: 20px;
     font-weight: 700;
     height: 50px;
-    padding: 23px 15px;
+    padding: 21px 15px;
+  }
+
+  .navbar-brand > img {
+    width: auto;
+    max-height: 45px;
   }
 
   .open .dropdown-menu > li > a {
@@ -4670,6 +4684,9 @@ footer #newsletter .form-control {
     margin: 7px 0 20px 0;
   }
 
+  .fullscreen-logo.hide-logo-large {
+    display: none;
+  }
   #slider .slider-content {
     padding: 130px 0;
   }
@@ -4808,7 +4825,6 @@ footer #newsletter .form-control {
   }
 
   .inst-container p{
-    /* font-size: 11px; */
     line-height: 2.5rem;
   }
 }
@@ -4864,7 +4880,7 @@ footer #newsletter .form-control {
     font-size: 32px;
   }
 
-  footer .widget-area > .container > .flex-container {
+  footer .widget-area > .container > .flex {
     flex-wrap: wrap;
   }
   footer .widget {
@@ -4876,7 +4892,7 @@ footer #newsletter .form-control {
   }
 
   .navbar-brand .doorbell-designs-logo {
-    padding-top: 13px;
+    /* padding-top: 13px; */
   }
 }
 @media only screen and (max-width: 580px) {
@@ -4998,6 +5014,38 @@ footer #newsletter .form-control {
   .shopping-cart thead th {
     font-size: 12px;
   }
+
+  .navbar-brand > .doorbell-designs-logo {
+    width: auto;
+    max-height: 45px;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .navbar-brand > .doorbell-designs-logo {
+    max-height: 40px;
+  }
+
+  .navbar-toggle {
+    padding-right: 8px;
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  .navbar-brand > .doorbell-designs-logo {
+    max-height: 32px;
+  }
+
+  .navbar-brand {
+    padding-top: 26px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .navbar-brand > .doorbell-designs-logo {
+    max-height: 30px;
+  }
 }
 
 @media only screen and (max-width: 300px) {
@@ -5008,6 +5056,10 @@ footer #newsletter .form-control {
 
   #single-product-page .product-name {
     font-size: 24px;
+  }
+
+  .navbar-brand > .doorbell-designs-logo {
+    max-height: 26px;
   }
 
 }
@@ -5021,10 +5073,18 @@ footer #newsletter .form-control {
     padding: 0;
     margin: 0 auto;
   }
+
+  .navbar-nav {
+    padding-top: 15px;
+  }
 }
 @media only screen and (min-width: 992px) {
   .container {
     min-width: 992px;
+  }
+
+  .navbar-brand {
+    padding: 19px 15px;
   }
 }
 @media only screen and (min-width: 768px) {
@@ -5032,6 +5092,9 @@ footer #newsletter .form-control {
     min-width: 768px;
   }
 
+  .doorbell-designs-logo.hide-logo-small {
+    display: none;
+  }
   .navbar-nav {
     float: right;
   }

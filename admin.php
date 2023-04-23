@@ -54,9 +54,9 @@
     if ($login)
     { ?>
         
-        <div class="log-in flex-container space-top-2x space-bottom-2x">
+        <div class="log-in flex space-top-2x space-bottom-2x">
             <p class="space-top text-center">You are logged in as: <?php echo $account->getName() ?></p>
-            <div class="space-top flex-container logged-in">
+            <div class="space-top flex logged-in">
                 <a href="./admin-panel.php" class="btn btn-primary-filled btn-rounded"><span>Go To Admin Panel</span></a>
 
                 <form action="./includes/admin-login.inc.php" method="POST">
@@ -72,7 +72,7 @@
 
 <!-- content -->
 
-<form action="./includes/admin-login.inc.php" method="POST" class="log-in flex-container space-top-2x space-bottom-2x">
+<form action="./includes/admin-login.inc.php" method="POST" class="log-in flex space-top-2x space-bottom-2x">
     <fieldset class="space-top">
         <label for="userName">User name:</label>
         <input type="text" name="userName" placeholder="User name" id="userName">

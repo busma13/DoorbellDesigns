@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
             $totalShippingCents = 0;
             $shippingQuantities = new stdClass;
             $shippingQuantities->doorbells5 = 0;
-            $shippingQuantities->doorbells3fifty = 0;
+            $shippingQuantities->doorbells10 = 0;
             $shippingQuantities->fanPulls = 0;
             $shippingQuantities->airPlantCradles = 0;
 
@@ -113,8 +113,8 @@ if (isset($_POST['submit'])) {
                         $shippingQuantities->airPlantCradles += $obj->itemQty;
                     }
                     if ($mainCategory === 'Doorbells') {
-                        if ($shippingCents == 350) {
-                            $shippingQuantities->doorbells3fifty += $obj->itemQty;
+                        if ($shippingCents == 1000) {
+                            $shippingQuantities->doorbells10 += $obj->itemQty;
                         } else if ($shippingCents == 500) {
                             $shippingQuantities->doorbells5 += $obj->itemQty;
                         }
@@ -190,12 +190,8 @@ if (isset($_POST['submit'])) {
 
             // add shipping cost
             foreach ($shippingQuantities as $category => $qty) {
-                if ($category == 'doorbells3fifty') {
-                    if($qty % 2 === 0) {
-                        $totalShippingCents += 350 * $qty / 2;
-                    } else {
-                        $totalShippingCents += 350 * ($qty + 1) / 2;
-                    }
+                if ($category == 'doorbells10') {
+                    $totalShippingCents += 1000 * $qty;
                 } else if ($category === 'doorbells5') {
                     // console.log(`${qtyAtEachShippingPrice[price]}`)
                     $totalShippingCents += 500 * $qty;

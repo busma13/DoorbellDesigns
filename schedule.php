@@ -46,7 +46,7 @@
             </div><!-- / page-header -->
             <table>
                 <tbody class="show">
-                    <tr class="flex-container header">
+                    <tr class="flex header">
                         <th class="show-date">Date</th>
                         <th class="show-name">Name</th>
                         <th class="show-location">Location</th>
@@ -76,7 +76,7 @@ while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
     
 ?>
                     
-                    <tr class="flex-container">
+                    <tr class="flex">
                         <td><time><?php echo $dateString?></time></td>
                         <td><?php echo $row['name']?></td>
                         <td><?php echo $row['location']?></td>
@@ -87,7 +87,7 @@ while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
 }
 ?>
                 
-                <tr class="flex-container">
+                <tr class="flex">
                         <td></td>
                         <td>* Denotes confirmed show</td>
                         <td></td>

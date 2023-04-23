@@ -13,7 +13,8 @@ global $pdo;
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub shift-down">
-                    <h1 class="page-title fadeInDown animated first">Doorbells</h1>
+                    <!-- <h1 class="page-title fadeInDown animated first">Doorbells</h1> -->
+                    <h1 class="page-title fadeInDown animated first"><img class="fullscreen-logo hide-logo-large"src="images/logo-dd.jpg"></h1>
                 </div><!-- / page-header -->
                 <p>
                     <img sizes="(max-width: 1400px) 98vw, 1400px"
@@ -47,15 +48,15 @@ global $pdo;
             <div class="col-sm-12 content-area">
                 <!-- product filter -->
                 <ul class="product-filter list-inline text-center">
-                    <li><a href="#all" data-group="all" class="active">All</a></li>
-                    <li><a href="#beachy" data-group="beachy">Beachy</a></li>
-                    <li><a href="#contemporary" data-group="contemporary">Contemporary</a></li>
-                    <li><a href="#dog" data-group="dog">Dog Lovers</a></li>
-                    <li><a href="#animals" data-group="animals">Animals</a></li>
-                    <li><a href="#petroglyphs" data-group="petroglyphs">Petroglyphs</a></li>
-                    <li><a href="#plants" data-group="plants">Plants</a></li>
-                    <li><a href="#one" data-group="one">One Of A Kind</a></li>
-                    <li><a href="#miscellaneous" data-group="miscellaneous">Miscellaneous</a></li>
+                    <li><a href="#all" id="all" data-group="all" class="active">All</a></li>
+                    <li><a href="#beachy" id="beachy" data-group="beachy">Beachy</a></li>
+                    <li><a href="#contemporary" id="contemporary" data-group="contemporary">Contemporary</a></li>
+                    <li><a href="#dog" id="dog" data-group="dog">Dog Lovers</a></li>
+                    <li><a href="#animals" id="animals" data-group="animals">Animals</a></li>
+                    <li><a href="#petroglyphs" id="petroglyphs" data-group="petroglyphs">Petroglyphs</a></li>
+                    <li><a href="#plants" id="plants" data-group="plants">Plants</a></li>
+                    <li><a href="#one" id="one" data-group="one">One Of A Kind</a></li>
+                    <li><a href="#miscellaneous" id="miscellaneous" data-group="miscellaneous">Miscellaneous</a></li>
                 </ul>
                 <!-- / product filter -->
                 
