@@ -1,20 +1,21 @@
 <?php
-    include_once 'includes/dbh.inc.php';
-    include 'header-pt1.php';
-    $title = 'Doorbell Designs';
-    echo $title;
-    include 'header-pt2.php';
+include_once 'includes/dbh.inc.php';
+include 'header-pt1.php';
+$title = 'Doorbell Designs';
+echo $title;
+include 'header-pt2.php';
 
-    /* Global $pdo object */
-	global $pdo;
+/* Global $pdo object */
+global $pdo;
 ?>
 
     <div id="page-header" class="index">
         <div class="container">
             <div class="page-header-content text-center">
                 <div class="page-header wsub shift-down">
-                    <!-- <h1 class="page-title fadeInDown animated first">Doorbell Designs</h1> -->
-                    <h1 class="page-title fadeInDown animated first"><img class="fullscreen-logo hide-logo-large"src="images/logo-dd.jpg"></h1>
+                    <h1 class="page-title fadeInDown animated first">
+                        <span class="fullscreen-logo hide-logo-large">CicadaCeramics.com</span>
+                    </h1>
                 </div><!-- / page-header -->
                 <p>
                     <img sizes="(max-width: 1400px) 98vw, 1400px"
@@ -101,47 +102,41 @@
     <div id="products-carousel" class="owl-carousel">
 
     <?php
-        // Retrieve featured products from database and insert into html
-        $get_products_sql = "SELECT * FROM products WHERE featured = '1';";
+    // Retrieve featured products from database and insert into html
+    $get_products_sql = "SELECT * FROM products WHERE featured = '1';";
 
-        /* Execute the query */
-        try
-        {
-            $res1 = $pdo->prepare($get_products_sql);
-            $res1->execute();
-        }
-        catch (PDOException $e)
-        {
+    /* Execute the query */
+    try {
+        $res1 = $pdo->prepare($get_products_sql);
+        $res1->execute();
+    } catch (PDOException $e) {
         /* If there is a PDO exception, throw a standard exception */
         throw new Exception('Database query error');
-        }
-        while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
-            $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " .$row['id'] . ";";
+    }
+    while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
+        $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " . $row['id'] . ";";
 
-            try
-            {
-                $res2 = $pdo->prepare($get_image_urls_sql);
-                $res2->execute();
-            }
-            catch (PDOException $e)
-            {
+        try {
+            $res2 = $pdo->prepare($get_image_urls_sql);
+            $res2->execute();
+        } catch (PDOException $e) {
             throw new Exception('Database query error');
-            }
-            $urlRow = $res2->fetch(PDO::FETCH_ASSOC); 
-            $picUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']); 
-            $price = json_decode($row['priceArray'])[0]; ?>
+        }
+        $urlRow = $res2->fetch(PDO::FETCH_ASSOC);
+        $picUrl = str_replace('upload/', 'upload/c_fill,h_800/', $urlRow['url']);
+        $price = json_decode($row['priceArray'])[0]; ?>
 
-            <!-- item -->
-            <div class="item product">
-                <!-- <span class="sale-label">SALE</span> -->
-                <!-- / sale-label -->
-                <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>&subcategory=%" class="product-link"></a>
-                <!-- / product-link -->
-                <img src="<?php echo $picUrl ?>" alt="<?php echo $row['itemNameString'] ?>">
-                <!-- / product-image -->
+                <!-- item -->
+                <div class="item product">
+                    <!-- <span class="sale-label">SALE</span> -->
+                    <!-- / sale-label -->
+                    <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>&subcategory=%" class="product-link"></a>
+                    <!-- / product-link -->
+                    <img src="<?php echo $picUrl ?>" alt="<?php echo $row['itemNameString'] ?>">
+                    <!-- / product-image -->
 
-                <!-- product-hover-tools -->
-                <!-- <div class="product-hover-tools">
+                    <!-- product-hover-tools -->
+                    <!-- <div class="product-hover-tools">
                     <a href="single-product.php?product=<?php echo $row['id'] ?>" class="view-btn">
                         <i class="lnr lnr-eye"></i>
                     </a>
@@ -149,24 +144,24 @@
                         <i class="lnr lnr-cart"></i>
                     </a>
                 </div> -->
-                <!-- / product-hover-tools -->
+                    <!-- / product-hover-tools -->
 
-                <!-- product-details -->
-                <div class="product-details">
-                    <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
-                    <?php if ($row['mainCategory'] === 'Fan-Pulls') { ?>
-                        <h6 class="product-price">$<?php echo $price ?> ea.</h6>
-                    <?php } else { ?>
-                        <h6 class="product-price">$<?php echo $price ?></h6>
-                    <?php } ?>
+                    <!-- product-details -->
+                    <div class="product-details">
+                        <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
+                        <?php if ($row['mainCategory'] === 'Fan-Pulls') { ?>
+                                <h6 class="product-price">$<?php echo $price ?> ea.</h6>
+                        <?php } else { ?>
+                                <h6 class="product-price">$<?php echo $price ?></h6>
+                        <?php } ?>
+                    </div>
+                    <!-- / product-details -->
                 </div>
-                <!-- / product-details -->
-            </div>
-            <!-- / item -->
-            <?php   
-            
-        }
-   ?>
+                <!-- / item -->
+            <?php
+
+    }
+    ?>
            
     </div> <!-- / products-carousel -->
 </section>
@@ -185,59 +180,53 @@
         $get_products_sql = "SELECT * FROM `products` ORDER BY id DESC LIMIT 9;";
 
         /* Execute the query */
-        try
-        {
+        try {
             $res3 = $pdo->prepare($get_products_sql);
             $res3->execute();
-        }
-        catch (PDOException $e)
-        {
-        /* If there is a PDO exception, throw a standard exception */
-        throw new Exception('Database query error');
+        } catch (PDOException $e) {
+            /* If there is a PDO exception, throw a standard exception */
+            throw new Exception('Database query error');
         }
 
         while ($row = $res3->fetch(PDO::FETCH_ASSOC)) {
-            $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " .$row['id'] . ";";
+            $get_image_urls_sql = "SELECT * FROM imgUrls WHERE product_id = " . $row['id'] . ";";
 
-            try
-            {
+            try {
                 $res4 = $pdo->prepare($get_image_urls_sql);
                 $res4->execute();
+            } catch (PDOException $e) {
+                throw new Exception('Database query error');
             }
-            catch (PDOException $e)
-            {
-            throw new Exception('Database query error');
-            }
-            $urlRow = $res4->fetch(PDO::FETCH_ASSOC); 
-            $newArrivalPicUrl = str_replace('upload/', 'upload/c_fill,h_800/',$urlRow['url']); 
+            $urlRow = $res4->fetch(PDO::FETCH_ASSOC);
+            $newArrivalPicUrl = str_replace('upload/', 'upload/c_fill,h_800/', $urlRow['url']);
             $price = json_decode($row['priceArray'])[0]; ?>
             
 
-            <!-- product -->
-            <div class="col-xs-6 col-md-4 product">
-                <!-- <span class="sale-label">SALE</span> -->
-                <!-- / sale-label -->
-                <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>&subcategory=%" class="product-link"></a>
-                <!-- / product-link -->
-                <img src="<?php echo $newArrivalPicUrl ?>" alt="<?php echo $row['itemNameString'] ?>">
-                <!-- / product-image -->
+                <!-- product -->
+                <div class="col-xs-6 col-md-4 product">
+                    <!-- <span class="sale-label">SALE</span> -->
+                    <!-- / sale-label -->
+                    <a href="single-product.php?category=<?php echo $row['mainCategory'] ?>&product=<?php echo $row['id'] ?>&subcategory=%" class="product-link"></a>
+                    <!-- / product-link -->
+                    <img src="<?php echo $newArrivalPicUrl ?>" alt="<?php echo $row['itemNameString'] ?>">
+                    <!-- / product-image -->
 
-                <!-- product-details -->
-                <div class="product-details">
-                    <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
-                    <?php if ($row['mainCategory'] === 'Fan-Pulls') { ?>
-                        <h6 class="product-price">$<?php echo $price ?> ea.</h6>
-                    <?php } else { ?>
-                        <h6 class="product-price">$<?php echo $price ?></h6>
-                    <?php } ?>
+                    <!-- product-details -->
+                    <div class="product-details">
+                        <h3 class="product-title"><?php echo $row['itemNameString'] ?></h3>
+                        <?php if ($row['mainCategory'] === 'Fan-Pulls') { ?>
+                                <h6 class="product-price">$<?php echo $price ?> ea.</h6>
+                        <?php } else { ?>
+                                <h6 class="product-price">$<?php echo $price ?></h6>
+                        <?php } ?>
+                    </div>
+                    <!-- / product-details -->
                 </div>
-                <!-- / product-details -->
-            </div>
-            <!-- / item -->
-            <?php   
-            
+                <!-- / item -->
+            <?php
+
         }
-   ?>
+        ?>
 
             <!-- grid-resizer -->
             <div class="col-xs-6 col-md-4 shuffle_sizer"></div>
@@ -252,7 +241,7 @@
 
 <!-- footer -->
 <?php
-    include 'footer.php';
+include 'footer.php';
 ?>
 <!-- / footer -->
 

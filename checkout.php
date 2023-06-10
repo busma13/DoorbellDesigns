@@ -1,9 +1,9 @@
 <?php
-    include_once 'includes/dbh.inc.php';
-    include 'header-pt1.php';
-    $title = 'Doorbell Designs - Checkout';
-    echo $title;
-    include 'header-pt2.php';
+include_once 'includes/dbh.inc.php';
+include 'header-pt1.php';
+$title = 'Doorbell Designs - Checkout';
+echo $title;
+include 'header-pt2.php';
 ?>
 
     <div id="page-header" class="checkout">
@@ -58,17 +58,13 @@
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="first-name" placeholder="*First name" required>
                             <input type="text" class="form-control" name="last-name" placeholder="*Last name" required>
-                        </div>
-                        <div class="col-sm-6">
                             <input type="tel" class="form-control" name="tel" placeholder="*Mobile Phone" required>
                             <input type="email" class="form-control" name="email" placeholder="*Email" required>
                             
                         </div>
-                    </div><!-- / row -->
-
-                    <div class="row">
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="address-line" placeholder="*Address Line" required>
+                            <input type="text" class="form-control" name="city" placeholder="*City" required>
                             <select class="form-control stateSelect" name="state" required>
                                 <optgroup label="State:">
                                 <option value="AL">Alabama</option>
@@ -123,10 +119,7 @@
                                 <option value="WI">Wisconsin</option>
                                 <option value="WY">Wyoming</option>
                                 </optgroup>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" name="city" placeholder="*City" required>
+                            </select>    
                             <input type="text" class="form-control" name="zip" placeholder="*ZIP Code" required>
                         </div>
                     </div><!-- / row -->
@@ -143,25 +136,21 @@
             
                 <!-- Server side form validation notifications. -->
                 <?php
-                    if (!isset($_GET['order'])) {
-                        //do nothing
+                if (!isset($_GET['order'])) {
+                    //do nothing
+                } else {
+                    $orderCheck = $_GET['order'];
+
+                    if ($orderCheck == "empty") {
+                        echo "<p id='message' class='text-danger space-left'>Please fill out all required fields.</p>";
+                    } elseif ($orderCheck == "email") {
+                        echo "<p id='message' class='text-danger space-left'>Please enter a valid email.</p>";
+                    } elseif ($orderCheck == "error") {
+                        echo "<p id='message' class='text-danger space-left'>Form submission error. Please try again.</p>";
+                    } elseif ($orderCheck == "SQL-statement-failed") {
+                        echo "<p id='message' class='text-danger space-left'>Server error. Please try again.</p>";
                     }
-                    else {
-                        $orderCheck = $_GET['order'];
-                        
-                        if ($orderCheck == "empty") {
-                            echo "<p id='message' class='text-danger space-left'>Please fill out all required fields.</p>";
-                        }
-                        elseif ($orderCheck == "email") {
-                            echo "<p id='message' class='text-danger space-left'>Please enter a valid email.</p>";
-                        }
-                        elseif ($orderCheck == "error") {
-                            echo "<p id='message' class='text-danger space-left'>Form submission error. Please try again.</p>";
-                        }
-                        elseif ($orderCheck == "SQL-statement-failed") {
-                            echo "<p id='message' class='text-danger space-left'>Server error. Please try again.</p>";
-                        }
-                    }
+                }
                 ?>
 
             </div><!-- / checkout-form -->
@@ -188,7 +177,7 @@
 
 <!-- footer -->
 <?php
-    include 'footer.php';
+include 'footer.php';
 ?>
 <!-- / footer -->
 

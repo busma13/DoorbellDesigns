@@ -1,5 +1,8 @@
 /* Base CSS */
-
+@font-face {
+  font-family: "Noteworthy";
+  src: url('../fonts/Noteworthy-Lt.ttf');
+}
 body {
   color: #666666;
   background: #fefefe;
@@ -333,6 +336,18 @@ img.btn-pill {
 
 #page-header img {
   max-width: 1200px;
+}
+
+.cicada-logo.hide-logo-small {
+  color: #000;
+  font-family: "Noteworthy", "Raleway", sans-serif;
+  font-size: 6vw;
+}
+
+.index .page-title {
+  font-family: "Noteworthy", "Raleway", sans-serif;
+  font-size: 9vw;
+  margin-bottom: 20px;
 }
 
 .sub-title {
@@ -2421,7 +2436,7 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 .navbar {
   border: 0;
   border-radius: 0;
-  margin-bottom: 30;
+  margin-bottom: 0px;
 }
 
 .navbar i {
@@ -5066,6 +5081,12 @@ footer #newsletter .form-control {
 /* End Max Widths */
 
 /* Min Widths */
+@media only screen and (min-width: 1500px) {
+  .index .page-title {
+    font-size: 136px;
+  }
+}
+
 @media only screen and (min-width: 1200px) {
   .container {
     min-width: 1200px !important;
@@ -5092,7 +5113,8 @@ footer #newsletter .form-control {
     min-width: 768px;
   }
 
-  .doorbell-designs-logo.hide-logo-small {
+  .doorbell-designs-logo.hide-logo-small,
+  .cicada-logo.hide-logo-small {
     display: none;
   }
   .navbar-nav {
