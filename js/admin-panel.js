@@ -52,7 +52,7 @@ async function getProductList() {
 // Cloudinary Upload Widget
 var myWidget = cloudinary.createUploadWidget({
     cloudName: 'doorbelldesigns', 
-    uploadPreset: 'preset1',
+    uploadPreset: 'keepFileName',
     resourceType: 'image',
     multiple: false,
     cropping: true,
@@ -75,7 +75,8 @@ document.getElementById("upload_widget").addEventListener("click", function(){
     const alt = addImageSelect.options[addImageSelect.selectedIndex].innerText;
     const picNumber = Number(addImageSelect.options[addImageSelect.selectedIndex].dataset.numpics) + 1;
     console.log(productName, alt, picNumber)
-    myWidget.update({publicId: `${productName}${picNumber}`, folder: `products/${productName}`, context: { alt: alt}})
+    myWidget.update({folder: `products/${productName}`, context: { alt: alt}})
+    // myWidget.update({publicId: `${productName}${picNumber}`, folder: `products/${productName}`, context: { alt: alt}})
     myWidget.open();
 }, false);
 
