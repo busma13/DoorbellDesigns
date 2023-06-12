@@ -91,7 +91,8 @@
                                         <a class="add-to-cart trigger" id="< ?php echo $row['itemName'] ?>">
                                             <i class="lnr lnr-cart"></i>
                                         </a>
-                                    </div>/ product-hover-tools -->
+                                    </div> -->
+                                     <!-- / product-hover-tools -->
 
                                     <!-- product-details -->
                                     <div class="product-details">

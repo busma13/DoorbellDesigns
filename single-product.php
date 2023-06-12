@@ -157,6 +157,7 @@ if ($currentRow) {
                     <!-- / product-content-area -->
 
                     <!-- product pagination -->
+                <?php if (count($categoryProdIds) > 1) { ?>
                     <div class="pagination no-padding">
                         <a href="single-product.php?category=<?php echo $currentRow['mainCategory'];
                          if (strtolower($_GET['category']) === 'doorbells') {
@@ -181,6 +182,7 @@ if ($currentRow) {
                            ?>
                         " class="btn btn-default btn-rounded no-margin pull-right"><span>Next</span><i class="fa fa-long-arrow-right"></i></a>
                     </div>
+                <?php } ?>
                     <!-- / product pagination -->       
 
                 </div>
@@ -227,7 +229,7 @@ if ($currentRow) {
                                     <p>All dimensions are approximate and can be up to 1/2" larger or smaller than stated.</p>
                                 <?php } ?>
                             </div>
-                        </div><!-- / project-info -->
+                        </div><!-- / product-info -->
 
                         <form onSubmit="return addToCart(event)">
                             <div class="buy-product">
