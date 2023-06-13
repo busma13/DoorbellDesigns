@@ -82,24 +82,24 @@ for ($i = 0; $i < count($categoryProdIds); $i++) {
     if ($subcat === '%') {
         $subcatStr = 'All';
     } ?>
-      <li>
-        <div class="dropdown">
-          <div class="dropdown-toggle" type="button" data-toggle="dropdown">
-          <a href="<?php echo strtolower($_GET['category']) . '.php#' . strtolower($subcat) ?>"><?php echo ucfirst($subcatStr) ?></a>
-          <span class="caret"></span>
-          </div>
-          <ul class="dropdown-menu">
-            <li><a href="single-product.php?category=doorbells&subcategory=all" data-group="all">All</a></li>
-            <li><a href="single-product.php?category=doorbells&subcategory=beachy" data-group="beachy">Beachy</a></li>
-            <li><a href="single-product.php?category=doorbells&subcategory=contemporary" data-group="contemporary">Contemporary</a></li>
-            <li><a href="single-product.php?category=doorbells&subcategory=dog" data-group="dog">Dog Lovers</a></li>
-            <li><a href="single-product.php?category=doorbells&subcategory=animals" data-group="animals">Animals</a></li>
-            <li><a href="single-product.php?category=doorbells&subcategory=petroglyphs" data-group="petroglyphs">Petroglyphs</a></li>
-            <li><a href="single-product.php?category=doorbells&subcategory=plants" data-group="plants">Plants</a></li>
-            <li><a href="single-product.php?category=doorbells&subcategory=one" data-group="one">One Of A Kind</a></li>
-            <li><a href="single-product.php?category=doorbells&subcategory=miscellaneous" data-group="miscellaneous">Miscellaneous</a></li>
-          </ul>
-        </div>
+          <li>
+            <div class="dropdown">
+              <div class="dropdown-toggle" type="button" data-toggle="dropdown">
+              <a href="<?php echo strtolower($_GET['category']) . '.php#' . strtolower($subcat) ?>"><?php echo ucfirst($subcatStr) ?></a>
+              <span class="caret"></span>
+              </div>
+              <ul class="dropdown-menu">
+                <li><a href="single-product.php?category=doorbells&subcategory=all" data-group="all">All</a></li>
+                <li><a href="single-product.php?category=doorbells&subcategory=beachy" data-group="beachy">Beachy</a></li>
+                <li><a href="single-product.php?category=doorbells&subcategory=contemporary" data-group="contemporary">Contemporary</a></li>
+                <li><a href="single-product.php?category=doorbells&subcategory=dog" data-group="dog">Dog Lovers</a></li>
+                <li><a href="single-product.php?category=doorbells&subcategory=animals" data-group="animals">Animals</a></li>
+                <li><a href="single-product.php?category=doorbells&subcategory=petroglyphs" data-group="petroglyphs">Petroglyphs</a></li>
+                <li><a href="single-product.php?category=doorbells&subcategory=plants" data-group="plants">Plants</a></li>
+                <li><a href="single-product.php?category=doorbells&subcategory=one" data-group="one">One Of A Kind</a></li>
+                <li><a href="single-product.php?category=doorbells&subcategory=miscellaneous" data-group="miscellaneous">Miscellaneous</a></li>
+              </ul>
+            </div>
   <?php } ?>
   </li> 
   <li class="active"><?php echo $currentRow['itemNameString'] ?></li>
@@ -125,174 +125,168 @@ if ($currentRow) {
 
     ?> 
 
-                    <!-- product content area -->
-                    <div class="col-sm-6 col-md-7 content-area">
-                        <div class="product-content-area">
-                            <div id="product-slider" class="carousel slide" data-ride="carousel" data-interval="false">
-                                <!-- wrapper for slides -->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <img class="product-single-image" src="<?php echo $picUrls[0] ?>" alt="<?php
-                                           $split = preg_split("#/#", $picUrls[0]);
-                                           $fileName = explode(".", $split[sizeOf($split) - 1])[0];
-                                           echo $fileName ?>">
-                                        <!-- <img class="product-single-image" src="<?php echo $picUrls[0] ?>" alt="<?php echo $currentRow['itemNameString'] ?>"> -->
+                        <!-- project content area -->
+                        <div class="col-sm-6 col-md-7 content-area">
+                            <div class="product-content-area">
+                                <div id="product-slider" class="carousel slide" data-ride="carousel" data-interval="false">
+                                    <!-- wrapper for slides -->
+                                    <div class="carousel-inner" role="listbox">
+                                        <?php for ($i = 0; $i < count($picUrls); $i++){ ?>
+                                            <div class="item <?php if ($i === 0) {
+                                                echo "active";
+                                            } ?>">
+                                                <img class="product-single-image" src="<?php echo $picUrls[$i] ?>" alt="<?php
+                                                    $split = preg_split("#/#", $picUrls[$i]);
+                                                    $fileName = str_replace("_", " ", (explode(".", $split[sizeOf($split) - 1])[0]));
+                                                    echo $fileName ?>" title="<?php echo $fileName ?>">
+                                            </div>
+                                            <?php } ?>         
                                     </div>
-                            <?php if (count($picUrls) > 1) {
-                                for ($i = 1; $i < count($picUrls); $i++) { ?>
-                                                    <div class="item">
-                                                        <img class="product-single-image" src="<?php echo $picUrls[$i] ?>" alt="<?php
-                                                           $split = preg_split("#/#", $picUrls[$i]);
-                                                           $fileName = explode(".", $split[sizeOf($split) - 1])[0];
-                                                           echo $fileName ?>">
-                                                    </div>
-                                        <?php } ?>         
-                                        </div>
-                                        <!-- / wrapper for slides -->
+                                    <!-- / wrapper for slides -->
 
-                                        <!-- controls -->
+                                    <!-- controls -->
+                                    <?php if (count($picUrls) > 1) { ?>
                                         <a class="left carousel-control" href="#product-slider" role="button" data-slide="prev">
                                             <span class="lnr lnr-chevron-left" aria-hidden="true"></span>
                                         </a>
                                         <a class="right carousel-control" href="#product-slider" role="button" data-slide="next">
                                             <span class="lnr lnr-chevron-right" aria-hidden="true"></span>
                                         </a>
-                                        <!-- / controls -->
-                            <?php } else { ?>
-                                        </div>
-                            <?php } ?>   
-                            </div><!-- / product-slider -->
-                        </div>
-                        <!-- / product-content-area -->
-
-                        <!-- product pagination -->
-                    <?php if (count($categoryProdIds) > 1) { ?>
-                            <div class="pagination no-padding">
-                                <a href="single-product.php?category=<?php echo $currentRow['mainCategory'];
-                                if (strtolower($_GET['category']) === 'doorbells') {
-                                    echo '&subcategory=' . $_GET['subcategory'];
-                                } ?>&product=<?php
-                                 if ($currentRowIndex == 0) {
-                                     echo $categoryProdIds[count($categoryProdIds) - 1];
-                                 } else {
-                                     echo $categoryProdIds[$currentRowIndex - 1];
-                                 }
-                                 ?>
-                        " class="btn btn-default btn-rounded no-margin"><i class="fa fa-long-arrow-left"></i><span>Previous</span></a>
-                                <a href="single-product.php?category=<?php echo $currentRow['mainCategory'];
-                                if (strtolower($_GET['category']) === 'doorbells') {
-                                    echo '&subcategory=' . $_GET['subcategory'];
-                                } ?>&product=<?php
-                                 if ($currentRowIndex == count($categoryProdIds) - 1) {
-                                     echo $categoryProdIds[0];
-                                 } else {
-                                     echo $categoryProdIds[$currentRowIndex + 1];
-                                 }
-                                 ?>
-                        " class="btn btn-default btn-rounded no-margin pull-right"><span>Next</span><i class="fa fa-long-arrow-right"></i></a>
+                                    <?php } ?>   
+                                    <!-- / controls -->
+                                    
+                                </div><!-- / product-slider -->
                             </div>
-                    <?php } ?>
-                        <!-- / product pagination -->       
+                            <!-- / product-content-area -->
 
-                    </div>
-                    <!-- / project-content-area -->
+                            <!-- product pagination -->
+                            <?php if (count($categoryProdIds) > 1) { ?>
+                                    <div class="pagination no-padding">
+                                        <a href="single-product.php?category=<?php echo $currentRow['mainCategory'];
+                                        if (strtolower($_GET['category']) === 'doorbells') {
+                                            echo '&subcategory=' . $_GET['subcategory'];
+                                        } ?>&product=<?php
+                                         if ($currentRowIndex == 0) {
+                                             echo $categoryProdIds[count($categoryProdIds) - 1];
+                                         } else {
+                                             echo $categoryProdIds[$currentRowIndex - 1];
+                                         }
+                                         ?>
+                                " class="btn btn-default btn-rounded no-margin"><i class="fa fa-long-arrow-left"></i><span>Previous</span></a>
+                                        <a href="single-product.php?category=<?php echo $currentRow['mainCategory'];
+                                        if (strtolower($_GET['category']) === 'doorbells') {
+                                            echo '&subcategory=' . $_GET['subcategory'];
+                                        } ?>&product=<?php
+                                         if ($currentRowIndex == count($categoryProdIds) - 1) {
+                                             echo $categoryProdIds[0];
+                                         } else {
+                                             echo $categoryProdIds[$currentRowIndex + 1];
+                                         }
+                                         ?>
+                                " class="btn btn-default btn-rounded no-margin pull-right"><span>Next</span><i class="fa fa-long-arrow-right"></i></a>
+                                    </div>
+                                <?php } ?>
+                            <!-- / product pagination -->       
 
-                    <!-- project sidebar area -->
-                    <div class="col-sm-6 col-md-5 product-sidebar">
-                        <div class="product-details">
-                            <h4 class="product-name"><?php echo $currentRow['itemNameString'] ?></h4>
+                        </div>
+                        <!-- / project-content-area -->
+
+                        <!-- project sidebar area -->
+                        <div class="col-sm-6 col-md-5 product-sidebar">
+                            <div class="product-details">
+                                <h4 class="product-name"><?php echo $currentRow['itemNameString'] ?></h4>
                  
-                            <div class="product-info">
-                                <div class="info">
-                                    <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $price; ?></span>
-                                    </p>
-                                </div>
-                                <div class="info">
-                                    <p><i class="lnr lnr-heart"></i><span>Category: <a href="<?php echo strtolower($currentRow['mainCategory']) ?>.php"> <?php echo $currentRow['mainCategory'] ?></a>
+                                <div class="product-info">
+                                    <div class="info">
+                                        <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $price; ?></span>
+                                        </p>
+                                    </div>
+                                    <div class="info">
+                                        <p><i class="lnr lnr-heart"></i><span>Category: <a href="<?php echo strtolower($currentRow['mainCategory']) ?>.php"> <?php echo $currentRow['mainCategory'] ?></a>
 
-                                    <!-- Loop through subcategory array. Add name of each subcategory with link to subcategory page.-->
-                                    <?php
-                                    $subCatArr = JSON_decode($currentRow['subCategories']);
-                                    foreach ($subCatArr as $i) {
-                                        if ($i === '') {
-                                            continue;
-                                        }
-                                        if ($i === 'dog') {
-                                            $i = "dog lovers";
-                                        }
-                                        if ($i === 'one') {
-                                            $i = "one of a kind";
+                                        <!-- Loop through subcategory array. Add name of each subcategory with link to subcategory page.-->
+                                        <?php
+                                        $subCatArr = JSON_decode($currentRow['subCategories']);
+                                        foreach ($subCatArr as $i) {
+                                            if ($i === '') {
+                                                continue;
+                                            }
+                                            if ($i === 'dog') {
+                                                $i = "dog lovers";
+                                            }
+                                            if ($i === 'one') {
+                                                $i = "one of a kind";
+                                            }
+                                            ?>
+                                                            , <a href="<?php echo strtolower($currentRow['mainCategory']) ?>.php#<?php echo $i ?>"><?php echo ucfirst($i) ?></a> <?php
                                         }
                                         ?>
-                                                    , <a href="<?php echo strtolower($currentRow['mainCategory']) ?>.php#<?php echo $i ?>"><?php echo ucfirst($i) ?></a> <?php
+
+                                        </span></p>
+                                    </div>
+                                    <div class="info">
+                                        <p><img class="ruler" src="images/ruler.png"><span>Dimensions: <?php echo $currentRow['dimensions'] ?></span></p>
+                                    </div>
+                                    <div class="info">
+                                        <?php if (strtolower($currentRow['mainCategory']) === 'doorbells') { ?>
+                                                    <p>All dimensions are approximate and can be up to 1/2" larger or smaller than stated.</p>
+                                        <?php } ?>
+                                    </div>
+                                </div><!-- / product-info -->
+
+                                <form onSubmit="return addToCart(event)">
+                                    <div class="buy-product">
+                                        <div class="options">
+                                            <div>
+                                                <span class="qty-span">Qty:</span>
+                                                <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
+                                            </div>
+                                            <!-- <span class="selectors"> -->
+
+                                    <?php $get_options_sql = "SELECT * FROM options;";
+
+                                    try {
+                                        $res3 = $pdo->prepare($get_options_sql);
+                                        $res3->execute();
+                                    } catch (PDOException $e) {
+                                        throw new Exception('Database query error');
+                                    }
+                                    while ($optionRow = $res3->fetch(PDO::FETCH_ASSOC)) {
+                                        $optionIDs = json_decode($currentRow['optionIDs']);
+                                        if (in_array($optionRow['id'], $optionIDs)) {
+                                            ?>
+                                                                        <select class="selectpicker" data-id="<?php echo $optionRow['id'] ?>" required>
+                                                                            <option hidden value=""><?php echo $optionRow['name'] ?>:</option>
+                                        
+                                                                        <?php $optionValues = json_decode($optionRow['optionValues']);
+                                                                        foreach ($optionValues as $key => $val) {
+                                                                            ?>
+                                                                                            <option data-id="<?php echo $key ?>"><?php echo ucfirst($val) ?></option>
+                                                                                <?php
+                                                                        }
+                                                                        ?>
+                                                                            </optgroup>
+                                                                        </select>
+                                                            <?php
+                                        }
                                     }
                                     ?>
-
-                                    </span></p>
-                                </div>
-                                <div class="info">
-                                    <p><img class="ruler" src="images/ruler.png"><span>Dimensions: <?php echo $currentRow['dimensions'] ?></span></p>
-                                </div>
-                                <div class="info">
-                                    <?php if (strtolower($currentRow['mainCategory']) === 'doorbells') { ?>
-                                            <p>All dimensions are approximate and can be up to 1/2" larger or smaller than stated.</p>
-                                    <?php } ?>
-                                </div>
-                            </div><!-- / product-info -->
-
-                            <form onSubmit="return addToCart(event)">
-                                <div class="buy-product">
-                                    <div class="options">
-                                        <div>
-                                            <span class="qty-span">Qty:</span>
-                                            <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
+                                            <!-- </span> -->
                                         </div>
-                                        <!-- <span class="selectors"> -->
+                                        <!-- / options -->
 
-                                <?php $get_options_sql = "SELECT * FROM options;";
-
-                                try {
-                                    $res3 = $pdo->prepare($get_options_sql);
-                                    $res3->execute();
-                                } catch (PDOException $e) {
-                                    throw new Exception('Database query error');
-                                }
-                                while ($optionRow = $res3->fetch(PDO::FETCH_ASSOC)) {
-                                    $optionIDs = json_decode($currentRow['optionIDs']);
-                                    if (in_array($optionRow['id'], $optionIDs)) {
-                                        ?>
-                                                            <select class="selectpicker" data-id="<?php echo $optionRow['id'] ?>" required>
-                                                                <option hidden value=""><?php echo $optionRow['name'] ?>:</option>
-                                        
-                                                            <?php $optionValues = json_decode($optionRow['optionValues']);
-                                                            foreach ($optionValues as $key => $val) {
-                                                                ?>
-                                                                            <option data-id="<?php echo $key ?>"><?php echo ucfirst($val) ?></option>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                                </optgroup>
-                                                            </select>
-                                                <?php
-                                    }
-                                }
-                                ?>
-                                        <!-- </span> -->
+                                        <div class="btn-container">
+                                            <button type="submit" class="btn btn-primary-filled btn-rounded" id="<?php echo $currentRow['itemName'] ?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></button>
+                                            <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
+                                        </div>
                                     </div>
-                                    <!-- / options -->
-
-                                    <div class="btn-container">
-                                        <button type="submit" class="btn btn-primary-filled btn-rounded" id="<?php echo $currentRow['itemName'] ?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></button>
-                                        <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div><!-- product-details -->
-                    </div><!-- / col-sm-4 col-md-3 -->
-                    <!-- / project sidebar area -->
-                </div><!-- / row -->
+                                </form>
+                            </div><!-- product-details -->
+                        </div><!-- / col-sm-4 col-md-3 -->
+                        <!-- / project sidebar area -->
+                    </div><!-- / row -->
     
-    <?php
+        <?php
 
 } else {
     echo 'Error retrieving product.';
