@@ -58,7 +58,7 @@ var myWidget = cloudinary.createUploadWidget({
     cropping: true,
     croppingAspectRatio: 0.9,}, (error, result) => { 
         if (!error && result && result.event === "success") { 
-            // console.log('Done! Here is the image info: ', result.info); 
+            console.log('Done! Here is the image info: ', result.info); 
             const selection = addImageSelect.options[addImageSelect.selectedIndex];
             const picNumber = Number(selection.dataset.numpics) + 1;
             selection.dataset.numpics = picNumber;
@@ -81,6 +81,7 @@ document.getElementById("upload_widget").addEventListener("click", function(){
 }, false);
 
 async function updateImageUrl(picInfo, numberOfPics, productId) {
+    console.log('picInfo: ', picInfo)
     const obj = { 
         picInfo: picInfo,
         numberOfPics: numberOfPics,
@@ -110,7 +111,7 @@ async function updateImageUrl(picInfo, numberOfPics, productId) {
         const responseMessageAddImage = document.querySelector('.responseMessageAddImage');
 
         if (data === 'success') {
-            responseMessageAddImage.textContent = 'Image successfully added. Refresh page to load thumbnail below.';
+            responseMessageAddImage.textContent = 'Image successfully added.';
         } else if (data === 'add-image-failed') {
             responseMessageAddImage.textContent = 'Error adding image. Please try again.'
         } else {

@@ -31,15 +31,19 @@ if (!is_array($decoded))
 $picInfo = $decoded['picInfo'];
 $numberOfPics = $decoded['numberOfPics'];
 $url = $picInfo['secure_url'];
+if ($picInfo['context']) {
+  $title = 'context';
+}
+$title = $picInfo->context->custom->alt;
 $productId = $decoded['productId'];
 $response =  $productId;
 
 // Add url to imgUrls database
 $id = uniqid('ID', true);
-$query1 = "INSERT INTO imgUrls (id, url, product_id)
-              VALUES (:id, :url, :product_id)";
+$query1 = "INSERT INTO imgUrls (id, url, title, product_id)
+              VALUES (:id, :url, :title, :product_id)";
 
-$values1 = array(':id' => $id, ':url' => $url, ':product_id' => $productId);
+$values1 = array(':id' => $id, ':url' => $url, ':title' => $title, ':product_id' => $productId);
 
 /* Execute the query */
 try {
