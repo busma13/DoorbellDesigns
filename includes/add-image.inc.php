@@ -32,11 +32,15 @@ $picInfo = $decoded['picInfo'];
 $numberOfPics = $decoded['numberOfPics'];
 $url = $picInfo['secure_url'];
 if ($picInfo['context']) {
-  $title = 'context';
+  $context = $picInfo['context'];
+  $custom = $context['custom'];
+  $title = $custom['alt'];
+} else {
+  $response = 'duplicate-file-name';
+  die(json_encode($response));
 }
-$title = $picInfo->context->custom->alt;
 $productId = $decoded['productId'];
-$response =  $productId;
+$response = $productId;
 
 // Add url to imgUrls database
 $id = uniqid('ID', true);

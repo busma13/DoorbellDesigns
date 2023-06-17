@@ -114,6 +114,8 @@ async function updateImageUrl(picInfo, numberOfPics, productId) {
             responseMessageAddImage.textContent = 'Image successfully added.';
         } else if (data === 'add-image-failed') {
             responseMessageAddImage.textContent = 'Error adding image. Please try again.'
+        } else if (data === 'duplicate-file-name') {
+            responseMessageAddImage.textContent = 'An image with that name already exists. Please rename the file to an unused name and add the image again.'
         } else {
             responseMessageAddImage.textContent = 'Error adding image';
         }
