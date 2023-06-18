@@ -72,10 +72,10 @@ var myWidget = cloudinary.createUploadWidget({
 // Open Cloudinary upload widget
 document.getElementById("upload_widget").addEventListener("click", function(){
     const productName = addImageSelect.value;
-    const alt = addImageSelect.options[addImageSelect.selectedIndex].innerText;
+    // const alt = addImageSelect.options[addImageSelect.selectedIndex].innerText;
     const picNumber = Number(addImageSelect.options[addImageSelect.selectedIndex].dataset.numpics) + 1;
-    console.log(productName, alt, picNumber)
-    myWidget.update({folder: `products/${productName}`, context: { alt: alt}})
+    console.log(productName, picNumber)
+    myWidget.update({folder: `products/${productName}`}) //, context: { alt: alt}
     // myWidget.update({publicId: `${productName}${picNumber}`, folder: `products/${productName}`, context: { alt: alt}})
     myWidget.open();
 }, false);

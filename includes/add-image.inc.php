@@ -31,10 +31,8 @@ if (!is_array($decoded))
 $picInfo = $decoded['picInfo'];
 $numberOfPics = $decoded['numberOfPics'];
 $url = $picInfo['secure_url'];
-if ($picInfo['context']) {
-  $context = $picInfo['context'];
-  $custom = $context['custom'];
-  $title = $custom['alt'];
+if ($picInfo['original_filename']) {
+  $title = $picInfo['original_filename'];
 } else {
   $response = 'duplicate-file-name';
   die(json_encode($response));

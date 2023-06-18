@@ -1,7 +1,7 @@
 <?php
 include_once 'includes/dbh.inc.php';
 include 'header-pt1.php';
-$title = 'Doorbell Designs';
+$title = 'Doorbell Designs - Single Product';
 echo $title;
 include 'header-pt2.php';
 global $pdo;
@@ -29,6 +29,7 @@ try {
 //Load the item we want.  On prev or next load the next/prev product.
 $categoryProdIds = array();
 $picUrls = array();
+$picTitles = array();
 $productRow = null;
 while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
     $currentRow = $row;
@@ -52,6 +53,7 @@ try {
 }
 while ($urlRow = $res2->fetch(PDO::FETCH_ASSOC)) {
     $picUrls[] = str_replace('upload/', 'upload/c_fill,h_1200/', $urlRow['url']);
+    $picTitles[] = $urlRow['title'];
 }
 
 for ($i = 0; $i < count($categoryProdIds); $i++) {
@@ -135,10 +137,7 @@ if ($currentRow) {
                                             <div class="item <?php if ($i === 0) {
                                                 echo "active";
                                             } ?>">
-                                                <img class="product-single-image" src="<?php echo $picUrls[$i] ?>" alt="<?php
-                                                    $split = preg_split("#/#", $picUrls[$i]);
-                                                    $fileName = str_replace("_", " ", (explode(".", $split[sizeOf($split) - 1])[0]));
-                                                    echo $fileName ?>" title="<?php echo $fileName ?>">
+                                                <img class="product-single-image" src="<?php echo $picUrls[$i] ?>" alt="<?php echo $picTitles[$i] ?>" title="<?php echo $picTitles[$i] ?>">
                                             </div>
                                             <?php } ?>         
                                     </div>
