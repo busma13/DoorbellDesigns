@@ -341,7 +341,7 @@ img.btn-pill {
 .cicada-logo.hide-logo-small {
   color: #000;
   font-family: "Noteworthy", "Raleway", sans-serif;
-  font-size: 6vw;
+  font-size: 5vw;
 }
 
 .index .page-title {
@@ -5045,6 +5045,10 @@ footer #newsletter .form-control {
     padding-right: 8px;
     margin-left: 0;
   }
+
+  .toast-container {
+    width: 90%;
+  }
 }
 
 @media only screen and (max-width: 370px) {
@@ -5136,7 +5140,7 @@ footer #newsletter .form-control {
 
 }
 
-@media only screen and (min-width: 350px) {
+@media only screen and (min-width: 400px) {
   .buy-product {
     flex-direction: row;
   }

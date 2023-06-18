@@ -58,7 +58,7 @@ var myWidget = cloudinary.createUploadWidget({
     cropping: true,
     croppingAspectRatio: 0.9,}, (error, result) => { 
         if (!error && result && result.event === "success") { 
-            // console.log('Done! Here is the image info: ', result.info); 
+            console.log('Done! Here is the image info: ', result.info); 
             const selection = addImageSelect.options[addImageSelect.selectedIndex];
             const picNumber = Number(selection.dataset.numpics) + 1;
             selection.dataset.numpics = picNumber;
@@ -72,15 +72,16 @@ var myWidget = cloudinary.createUploadWidget({
 // Open Cloudinary upload widget
 document.getElementById("upload_widget").addEventListener("click", function(){
     const productName = addImageSelect.value;
-    const alt = addImageSelect.options[addImageSelect.selectedIndex].innerText;
+    // const alt = addImageSelect.options[addImageSelect.selectedIndex].innerText;
     const picNumber = Number(addImageSelect.options[addImageSelect.selectedIndex].dataset.numpics) + 1;
-    console.log(productName, alt, picNumber)
-    myWidget.update({folder: `products/${productName}`, context: { alt: alt}})
+    console.log(productName, picNumber)
+    myWidget.update({folder: `products/${productName}`}) //, context: { alt: alt}
     // myWidget.update({publicId: `${productName}${picNumber}`, folder: `products/${productName}`, context: { alt: alt}})
     myWidget.open();
 }, false);
 
 async function updateImageUrl(picInfo, numberOfPics, productId) {
+    console.log('picInfo: ', picInfo)
     const obj = { 
         picInfo: picInfo,
         numberOfPics: numberOfPics,
@@ -110,9 +111,11 @@ async function updateImageUrl(picInfo, numberOfPics, productId) {
         const responseMessageAddImage = document.querySelector('.responseMessageAddImage');
 
         if (data === 'success') {
-            responseMessageAddImage.textContent = 'Image successfully added. Refresh page to load thumbnail below.';
+            responseMessageAddImage.textContent = 'Image successfully added.';
         } else if (data === 'add-image-failed') {
             responseMessageAddImage.textContent = 'Error adding image. Please try again.'
+        } else if (data === 'duplicate-file-name') {
+            responseMessageAddImage.textContent = 'An image with that name already exists. Please rename the file to an unused name and add the image again.'
         } else {
             responseMessageAddImage.textContent = 'Error adding image';
         }

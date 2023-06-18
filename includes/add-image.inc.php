@@ -31,15 +31,21 @@ if (!is_array($decoded))
 $picInfo = $decoded['picInfo'];
 $numberOfPics = $decoded['numberOfPics'];
 $url = $picInfo['secure_url'];
+if ($picInfo['original_filename']) {
+  $title = $picInfo['original_filename'];
+} else {
+  $response = 'duplicate-file-name';
+  die(json_encode($response));
+}
 $productId = $decoded['productId'];
-$response =  $productId;
+$response = $productId;
 
 // Add url to imgUrls database
 $id = uniqid('ID', true);
-$query1 = "INSERT INTO imgUrls (id, url, product_id)
-              VALUES (:id, :url, :product_id)";
+$query1 = "INSERT INTO imgUrls (id, url, title, product_id)
+              VALUES (:id, :url, :title, :product_id)";
 
-$values1 = array(':id' => $id, ':url' => $url, ':product_id' => $productId);
+$values1 = array(':id' => $id, ':url' => $url, ':title' => $title, ':product_id' => $productId);
 
 /* Execute the query */
 try {

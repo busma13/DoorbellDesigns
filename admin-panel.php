@@ -217,7 +217,7 @@ if ($login) {
             <div class="page-header wsub">
                 <h1 class="page-title fadeInDown animated first">Add Product Image</h1>
             </div><!-- / page-header -->
-            <p class="slide-text fadeInUp animated second">Choose product from dropdown menu then click on "Add Image" button.</p>
+            <p class="slide-text fadeInUp animated second">Choose product from dropdown menu then click on "Add Image" button. File name will be displayed on product page when hovering over an image.</p>
         </div><!-- / page-header-content -->
     </div><!-- / container -->
     <div class="container add-images flex ">
