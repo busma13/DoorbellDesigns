@@ -14,7 +14,7 @@ global $pdo;
             <div class="page-header-content text-center">
                 <div class="page-header wsub shift-down">
                     <h1 class="page-title fadeInDown animated first">
-                        <span class="fullscreen-logo hide-logo-large">CicadaCeramics.com</span>
+                        <img class="fullscreen-logo hide-logo-large" src="images/logo-cc-horizontal.jpeg" alt="Cicada Ceramics logo"/>
                     </h1>
                 </div><!-- / page-header -->
                 <p>

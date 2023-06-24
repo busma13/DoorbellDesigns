@@ -37,8 +37,7 @@
                 </button>
                 <a href="shopping-cart.php" class="navbar-toggle collapsed"><i class="lnr lnr-cart"></i><span> (<span class="cartCount">0</span>)</span></a>
                 <?php if ($title === 'Doorbell Designs') {
-                    echo '<a class="navbar-brand" href="index.php"><span class="cicada-logo hide-logo-small">CicadaCeramics.com</span>
-                    </a>';
+                    echo '<a class="navbar-brand" href="index.php"><img class="cicada-logo hide-logo-small" src="images/logo-cc-horizontal.jpeg" alt="Cicada Ceramics logo"></a>';
                 } elseif ($title === 'Doorbell Designs - Single Product') {
                     // echo '<a class="navbar-brand" href="index.php"><img class="doorbell-designs-logo hide-logo-small" src="images/logo-dd.jpg" alt="Doorbell Designs logo"></a>';
                 } else {

@@ -352,9 +352,7 @@ img.btn-pill {
 }
 
 .cicada-logo.hide-logo-small {
-  color: #000;
-  font-family: "Noteworthy", "Raleway", sans-serif;
-  font-size: 5vw;
+  width: 50vw;
 }
 
 .index .page-title {
@@ -3504,6 +3502,10 @@ section#single-product-page {
   margin-bottom: 15px;
 }
 
+#page-header.doorbells .page-title {
+  font-size: 5vw;
+}
+
 #page-header.fan-pulls {
   /* background-image: url("../images/fan-pulls-header.jpg"); */
   min-height: auto;
@@ -4728,10 +4730,10 @@ footer #newsletter .form-control {
     width: 80%;
   }
 
-  .navbar-brand .cicada-logo {
+  /* .navbar-brand .cicada-logo {
     width: auto;
     max-height: 70px;
-  }
+  } */
 
   .navbar-brand > img {
     width: auto;
@@ -4802,10 +4804,10 @@ footer #newsletter .form-control {
     max-height: 29px;
   }
 
-  .navbar-brand .cicada-logo {
+  /* .navbar-brand .cicada-logo {
     width: auto;
     max-height: 50px;
-  }
+  } */
 }
 @media only screen and (max-width: 900px) {
   #page-header {
@@ -5286,6 +5288,10 @@ footer #newsletter .form-control {
   .index .page-title {
     font-size: 136px;
   }
+
+  #page-header.doorbells .page-title {
+    font-size: 75px;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
@@ -5314,7 +5320,6 @@ footer #newsletter .form-control {
     min-width: 768px;
   }
 
-  .doorbell-designs-logo.hide-logo-small,
   .cicada-logo.hide-logo-small {
     display: none;
   }
