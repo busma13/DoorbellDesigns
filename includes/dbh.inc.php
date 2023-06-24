@@ -21,7 +21,7 @@ else {
 
 }
 
-$pdo = NULL;
+$pdo;
 
 /* Connection string, or "data source name" */
 $dsn = 'mysql:host=' . $dbServername . ';dbname=' . $dbName . ';**charset=utf8**';
