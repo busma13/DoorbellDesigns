@@ -1,25 +1,30 @@
 {
-    "name": "busma/doorbell-designs",
-    "autoload": {
-        "psr-4": {
-            "Busma\\DoorbellDesigns\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "busma13",
-            "email": "peterluitjens@gmail.com"
-        }
-    ],
-    "require": {
-        "square/square": "19.0.1.20220512",
-        "vlucas/phpdotenv": "^5.4",
-        "cloudinary/cloudinary_php": "^2"
-    },
-    "require-dev": {
-        "codeception/codeception": "^5.0",
-        "codeception/module-phpbrowser": "*",
-        "codeception/module-asserts": "*",
-        "codeception/module-webdriver": "^4.0"
+  "name": "busma/doorbell-designs",
+  "description": "DoorbellDesigns online store",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Busma\\DoorbellDesigns\\": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "busma13",
+      "email": "peterluitjens@gmail.com"
+    }
+  ],
+  "require": {
+    "square/square": "^19",
+    "vlucas/phpdotenv": "^5.4",
+    "cloudinary/cloudinary_php": "^2"
+  },
+  "require-dev": {
+    "codeception/codeception": "^5.0",
+    "codeception/module-phpbrowser": "*",
+    "codeception/module-asserts": "*",
+    "codeception/module-webdriver": "^4.0"
+  },
+  "scripts": {
+    "test": "php vendor/bin/codecept run"
+  }
 }
