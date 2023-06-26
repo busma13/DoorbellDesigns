@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6bcc8186b2dc030b6790ea775957381f",
+    "content-hash": "da56a8774521a3aac52073427b22e575",
     "packages": [
         {
             "name": "apimatic/jsonmapper",
@@ -1068,21 +1068,21 @@
         },
         {
             "name": "square/square",
-            "version": "19.0.1.20220512",
+            "version": "19.1.1.20220616",
             "source": {
                 "type": "git",
                 "url": "https://github.com/square/square-php-sdk.git",
-                "reference": "7852d8a09f818b1bdd929a6366afaa1dbc6bf5e9"
+                "reference": "337ebfe05eec40e9b74a3556807d4e133faf90fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/square/square-php-sdk/zipball/7852d8a09f818b1bdd929a6366afaa1dbc6bf5e9",
-                "reference": "7852d8a09f818b1bdd929a6366afaa1dbc6bf5e9",
+                "url": "https://api.github.com/repos/square/square-php-sdk/zipball/337ebfe05eec40e9b74a3556807d4e133faf90fb",
+                "reference": "337ebfe05eec40e9b74a3556807d4e133faf90fb",
                 "shasum": ""
             },
             "require": {
-                "apimatic/jsonmapper": "^3.0.1",
-                "apimatic/unirest-php": "^2.2.2",
+                "apimatic/jsonmapper": "^3.0.4",
+                "apimatic/unirest-php": "^2.3.0",
                 "ext-curl": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
@@ -1119,9 +1119,9 @@
             ],
             "support": {
                 "issues": "https://github.com/square/square-php-sdk/issues",
-                "source": "https://github.com/square/square-php-sdk/tree/19.0.1.20220512"
+                "source": "https://github.com/square/square-php-sdk/tree/19.1.1.20220616"
             },
-            "time": "2022-05-25T17:40:58+00:00"
+            "time": "2022-06-24T17:40:11+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
