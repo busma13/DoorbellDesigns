@@ -5,8 +5,6 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->load();
 
-// echo $_ENV['ADMIN_USERNAME'];
-
 use Tests\Support\AcceptanceTester;
 
 use \Codeception\Step\Argument\PasswordArgument;
