@@ -1,8 +1,7 @@
 <?php
+namespace Tests\Unit\Order;
 
 require_once __DIR__. '/../../../includes.order.inc.php';
-
-namespace Tests\Unit\Order;
 
 use Tests\Support\UnitTester;
 
