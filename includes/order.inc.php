@@ -42,19 +42,8 @@ if (isset($_POST['submit'])) {
             //create unique ID for the order
             $id = uniqid('ID', true);
 
-            //format telephone number
-            if (str_contains($tel, '-')) {
-                $tel = str_replace('-','',$tel);
-            }
-            if (str_contains($tel, '(')) {
-                $tel = str_replace('(','',$tel);
-            }
-            if (str_contains($tel, ')')) {
-                $tel = str_replace(')','',$tel);
-            }
-            if (strlen($tel) === 10) {
-                $tel = "1" . $tel;
-            }
+            $tel = formatTelephoneNumber($tel);
+           
             // Create a payment link.  This includes an order object.
             $products_array = json_decode($_POST['cart-list-input'], false);
             
@@ -317,6 +306,17 @@ if (isset($_POST['submit'])) {
 else {
     header("Location: ../checkout.php?order=error#message");
     exit();
+}
+
+function formatTelephoneNumber($originalNumber) {
+    $number = str_replace('-', '', $originalNumber);
+    $number = str_replace('(', '', $number);
+    $number = str_replace(')', '', $number);
+    $number = str_replace(' ', '', $number);
+    if (strlen($number) === 10) {
+        $number = "1" . $number;
+    }
+    return $number;
 }
 
 function setItemName($itemObj) {
