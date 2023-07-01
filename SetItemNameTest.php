@@ -5,7 +5,7 @@ namespace Tests\Unit\Order;
 
 use Tests\Support\UnitTester;
 
-require_once __DIR__. '/../../../includes.order.inc.php';
+// require_once __DIR__. '/../../../includes.order.inc.php';
 
 class SetItemNameTest extends \Codeception\Test\Unit
 {
