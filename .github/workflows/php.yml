@@ -12,16 +12,22 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: $
+          extensions: curl, mbstring, openssl, pdo, pdo_sqlite
+          ini-values: memory_limit=-1, date.timezone='UTC'
+          coverage: xdebug
+          tools: composer:v2
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-interaction --no-suggest
+    - name: Validate composer.json and composer.lock
+      run: composer validate
 
-      - name: Run chromedriver
-        run:  nohup $CHROMEWEBDRIVER/chromedriver --url-base=/wd/hub /dev/null 2>&1 &
-     
-      - name: Run tests
-        run: php vendor/bin/codecept run
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-interaction --no-suggest
+
+    - name: Run tests
+      run: php vendor/bin/codecept run
