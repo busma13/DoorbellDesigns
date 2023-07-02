@@ -1,9 +1,9 @@
 <?php
-    include_once 'includes/dbh.inc.php';
-    include 'header-pt1.php';
-    $title = 'Doorbell Designs - Schedule';
-    echo $title;
-    include 'header-pt2.php';
+include_once 'src/Dbh.php';
+include 'header-pt1.php';
+$title = 'Doorbell Designs - Schedule';
+echo $title;
+include 'header-pt2.php';
 ?>
 
 
@@ -57,30 +57,27 @@
 $get_shows_sql = "SELECT * FROM shows ORDER BY startDate;";
 
 /* Execute the query */
-try
-{
+try {
     $res1 = $pdo->prepare($get_shows_sql);
     $res1->execute();
+} catch (PDOException $e) {
+    /* If there is a PDO exception, throw a standard exception */
+    throw new Exception('Database query error');
 }
-catch (PDOException $e)
-{
-/* If there is a PDO exception, throw a standard exception */
-throw new Exception('Database query error');
-}
-while ($row = $res1->fetch(PDO::FETCH_ASSOC)) { 
+while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
     if ($row['startDateString'] == $row['endDateString']) {
         $dateString = $row['startDateString'];
     } else {
         $dateString = $row['startDateString'] . ' - ' . $row['endDateString'];
     }
-    
-?>
+
+    ?>
                     
                     <tr class="flex">
-                        <td><time><?php echo $dateString?></time></td>
-                        <td><?php echo $row['name']?></td>
-                        <td><?php echo $row['location']?></td>
-                        <td class="booth"><?php echo $row['booth']?></td>
+                        <td><time><?php echo $dateString ?></time></td>
+                        <td><?php echo $row['name'] ?></td>
+                        <td><?php echo $row['location'] ?></td>
+                        <td class="booth"><?php echo $row['booth'] ?></td>
                     </tr>
                 
 <?php
@@ -106,7 +103,7 @@ while ($row = $res1->fetch(PDO::FETCH_ASSOC)) {
 
 <!-- footer -->
 <?php
-    include 'footer.php';
+include 'footer.php';
 ?>
 <!-- / footer -->
 

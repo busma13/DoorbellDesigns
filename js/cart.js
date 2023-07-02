@@ -84,7 +84,7 @@ function hideToast() {
 // Get the product list
 async function getProductList() {
   try {
-    const response = await fetch("./includes/get-product-list.inc.php", {
+    const response = await fetch("./src/GetProductList.php", {
       dataType: "json",
       contentType: "application/json",
       mimeType: "application/json",

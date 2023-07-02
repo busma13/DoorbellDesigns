@@ -1,10 +1,11 @@
 <?php
 
-
 namespace Tests\Unit\Order;
 
-use Tests\Support\UnitTester;
+require 'vendor/autoload.php';
 
+use Tests\Support\UnitTester;
+use App\Utils;
 
 class SetItemNameTest extends \Codeception\Test\Unit
 {
@@ -18,7 +19,7 @@ class SetItemNameTest extends \Codeception\Test\Unit
     // tests
     public function testSetItemNameFunction()
     {
-        require_once __DIR__ . '/../../../includes/order.inc.php';
+        // require_once __DIR__ . '/../../../src/Order.php';
 
         $optionsObject = (object) [
             '17' => 2,
@@ -34,6 +35,6 @@ class SetItemNameTest extends \Codeception\Test\Unit
             'itemNameString' => 'Air Plant Cradle',
             'options' => $optionsObject
         ];
-        $this->assertTrue(setItemName($itemObj) == 'Air Plant Cradle, Color: Blue Azure');
+        $this->assertTrue(Utils::setItemName($itemObj) == 'Air Plant Cradle, Color: Blue Azure');
     }
 }

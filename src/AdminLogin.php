@@ -1,20 +1,17 @@
 <?php
 session_start();
-include 'account-class.inc.php';
-// require '../vendor/autoload.php'; 
-include_once 'dbh.inc.php';
+include_once 'Dbh.php';
+use App\AccountClass;
 
-/* Create a new Account object */
-$account = new Account();
+$account = new AccountClass();
 
 if (isset($_POST['login'])) {
 
     if (empty($_POST['userName']) || empty($_POST['password'])) {
         header("Location: ../admin.php?login=empty");
         exit();
-    }
-    else {
-//         try
+    } else {
+        //         try
 // {
 // 	$newId = $account->addAccount($_POST['userName'], $_POST['password']);
 // }
@@ -24,77 +21,60 @@ if (isset($_POST['login'])) {
 // 	die();
 // }
 
-// echo 'The new account ID is ' . $newId;
+        // echo 'The new account ID is ' . $newId;
 
         $login = FALSE;
 
-        try
-        {
+        try {
             $login = $account->login($_POST['userName'], $_POST['password']);
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             // echo $e->getMessage();
             header("Location: ../admin.php?login=error&msg=" . $e->getMessage());
         }
 
-        if ($login)
-        {
+        if ($login) {
             // echo 'Authentication successful.<br>';
             // echo 'Account ID: ' . $account->getId() . '<br>';
             // echo 'Account name: ' . $account->getName() . '<br>';
             header("Location: ../admin-panel.php");
-        }
-        else
-        {
+        } else {
             header("Location: ../admin.php?login=fail");
         }
     }
 
-}
-else if (isset($_POST['logout'])) {
-    try
-    {
+} else if (isset($_POST['logout'])) {
+    try {
         $login = $account->sessionLogin();
-        
-        if ($login)
-        {
+
+        if ($login) {
             // echo 'Authentication successful.';
             // echo 'Account ID: ' . $account->getId() . '<br>';
             // echo 'Account name: ' . $account->getName() . '<br>';
-        }
-        else
-        {
+        } else {
             // echo 'Authentication failed 1.<br>';
         }
         echo $account->logout();
-        
+
         $login = $account->sessionLogin();
-        
-        if ($login)
-        {
+
+        if ($login) {
             // echo 'Authentication successful.';
             // echo 'Account ID: ' . $account->getId() . '<br>';
             // echo 'Account name: ' . $account->getName() . '<br>';
-        }
-        else
-        {
+        } else {
             // echo 'Authentication failed 2.<br>';
         }
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
         header("Location: ../admin.php?logout=error&msg=" . $e->getMessage());
         exit();
     }
 
     // echo 'Logout successful.';
-    
-    
+
+
     header("Location: ../admin.php?logout=success");
     exit();
-    } 
-else {
+} else {
     header("Location: ../admin.php?logout=error");
     exit();
 }

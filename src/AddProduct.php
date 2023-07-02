@@ -1,7 +1,6 @@
 <?php
-include_once 'dbh.inc.php';
-require './stringUtils.php';
-use org\turbocommons\src\main\php\utils\StringUtils;
+include_once 'Dbh.php';
+use App\StringUtils;
 
 if (isset($_POST['addProduct'])) {
   // echo __DIR__ . '<br>';

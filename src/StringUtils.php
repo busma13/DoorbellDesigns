@@ -9,7 +9,7 @@
  * CopyRight : -> Copyright 2015 Edertone Advanded Solutions (08211 Castellar del Vallès, Barcelona). http://www.edertone.com
  */
 
-namespace org\turbocommons\src\main\php\utils;
+namespace App;
 
 use InvalidArgumentException;
 
@@ -17,7 +17,8 @@ use InvalidArgumentException;
 /**
  * The most common string processing and modification utilities
  */
-class StringUtils {
+class StringUtils
+{
 
 
     /**
@@ -107,7 +108,8 @@ class StringUtils {
      *
      * @return boolean true if the given value is a string, false otherwise
      */
-    public static function isString($value){
+    public static function isString($value)
+    {
 
         return is_string($value);
     }
@@ -124,11 +126,12 @@ class StringUtils {
      *
      * @return void
      */
-    public static function forceString($value, string $valueName = '', string $errorMessage = 'must be a string'){
+    public static function forceString($value, string $valueName = '', string $errorMessage = 'must be a string')
+    {
 
-        if(!is_string($value)){
+        if (!is_string($value)) {
 
-            throw new InvalidArgumentException($valueName.' '.$errorMessage);
+            throw new InvalidArgumentException($valueName . ' ' . $errorMessage);
         }
     }
 
@@ -140,24 +143,25 @@ class StringUtils {
      *
      * @return boolean False in case the validation fails or true if validation succeeds.
      */
-    public static function isUrl($value){
+    public static function isUrl($value)
+    {
 
         $res = false;
 
-        if(!self::isEmpty($value) && is_string($value)){
+        if (!self::isEmpty($value) && is_string($value)) {
 
             // This amazingly good solution's been found at https://jkwl.io/php/regex/2015/05/18/url-validation-php-regex.html
             $urlRegex = '#^(?:(?:https?|ftp):\\/\\/)?(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|' .
                 // host name
-            "(?:(?:[a-z\\x{00a1}-\\x{ffff}0-9]-*)*[a-z\\x{00a1}-\\x{ffff}0-9]+)" .
-            // domain name
-            "(?:\\.(?:[a-z\\x{00a1}-\\x{ffff}0-9]-*)*[a-z\\x{00a1}-\\x{ffff}0-9]+)*" .
-            // TLD identifier
-            '(?:\\.(?:[a-z\\x{00a1}-\\x{ffff}]{2,})))' .
-            // port number
-            '(?::\\d{2,5})?' .
-            // resource path
-            '(?:\\/\\S*)?$#ui';
+                "(?:(?:[a-z\\x{00a1}-\\x{ffff}0-9]-*)*[a-z\\x{00a1}-\\x{ffff}0-9]+)" .
+                // domain name
+                "(?:\\.(?:[a-z\\x{00a1}-\\x{ffff}0-9]-*)*[a-z\\x{00a1}-\\x{ffff}0-9]+)*" .
+                // TLD identifier
+                '(?:\\.(?:[a-z\\x{00a1}-\\x{ffff}]{2,})))' .
+                // port number
+                '(?::\\d{2,5})?' .
+                // resource path
+                '(?:\\/\\S*)?$#ui';
 
             $res = (strlen($value) < 2083 && preg_match($urlRegex, $value));
         }
@@ -178,13 +182,14 @@ class StringUtils {
      *
      * @return boolean false if the string is not empty, true if the string contains non semantically valuable characters or any other characters defined as "empty" values
      */
-    public static function isEmpty($string, array $emptyChars = []){
+    public static function isEmpty($string, array $emptyChars = [])
+    {
 
         // Throw exception if non string value was received
-        if(!is_string($string)){
+        if (!is_string($string)) {
 
             // Null value is considered empty
-            if($string == null){
+            if ($string == null) {
 
                 return true;
             }
@@ -209,11 +214,12 @@ class StringUtils {
      *
      * @return void
      */
-    public static function forceNonEmptyString($value, string $valueName = '', string $errorMessage = 'must be a non empty string'){
+    public static function forceNonEmptyString($value, string $valueName = '', string $errorMessage = 'must be a non empty string')
+    {
 
-        if(!is_string($value) || self::isEmpty($value)){
+        if (!is_string($value) || self::isEmpty($value)) {
 
-            throw new InvalidArgumentException($valueName.' '.$errorMessage);
+            throw new InvalidArgumentException($valueName . ' ' . $errorMessage);
         }
     }
 
@@ -232,15 +238,16 @@ class StringUtils {
      *
      * @return boolean True if the given string is accepted as camel case for the specified variant.
      */
-    public static function isCamelCase($string, string $type = self::FORMAT_CAMEL_CASE){
+    public static function isCamelCase($string, string $type = self::FORMAT_CAMEL_CASE)
+    {
 
-        if($string == null || $string == ''){
+        if ($string == null || $string == '') {
 
             return false;
         }
 
         // Throw exception if non string value was received
-        if(!is_string($string)){
+        if (!is_string($string)) {
 
             throw new InvalidArgumentException('value is not a string');
         }
@@ -295,15 +302,16 @@ class StringUtils {
      *
      * @return boolean True if the given string is accepted as snake case for the specified variant.
      */
-    public static function isSnakeCase($string, string $type = self::FORMAT_SNAKE_CASE){
+    public static function isSnakeCase($string, string $type = self::FORMAT_SNAKE_CASE)
+    {
 
-        if($string == null || $string == ''){
+        if ($string == null || $string == '') {
 
             return false;
         }
 
         // Throw exception if non string value was received
-        if(!is_string($string)){
+        if (!is_string($string)) {
 
             throw new InvalidArgumentException('value is not a string');
         }
@@ -312,7 +320,7 @@ class StringUtils {
         $isSnakeCase = preg_match('/^[a-zA-Z0-9_]*$/', $string) == 1;
 
         // Check that it does not start or end with underscore
-        $isSnakeCase = $isSnakeCase && $string[0] != '_' && $string[strlen($string)-1] != '_';
+        $isSnakeCase = $isSnakeCase && $string[0] != '_' && $string[strlen($string) - 1] != '_';
 
         // Check that it has at least one letter and no repeated underscores
         $isSnakeCase = $isSnakeCase && preg_match('/[a-z]/i', $string) && strpos($string, '__') === false;
@@ -342,7 +350,8 @@ class StringUtils {
      * TODO docs
      * TODO Verify that this version works exactly the same as the TS one, and implement the same unit tests
      */
-    public static function replace($string, $search, $replacement, $count = -1){
+    public static function replace($string, $search, $replacement, $count = -1)
+    {
 
         return str_replace($search, $replacement, $string, $count);
     }
@@ -351,7 +360,8 @@ class StringUtils {
     /**
      * TODO translate from TS
      */
-    public static function replaceMulti(){
+    public static function replaceMulti()
+    {
 
         // TODO translate from TS
     }
@@ -360,7 +370,8 @@ class StringUtils {
     /**
      * TODO translate from TS
      */
-    public static function trim(){
+    public static function trim()
+    {
 
         // TODO translate from TS
     }
@@ -377,9 +388,10 @@ class StringUtils {
      *
      * @return string The trimmed string
      */
-    public static function trimLeft($string, $characters = " \n\r"){
+    public static function trimLeft($string, $characters = " \n\r")
+    {
 
-        if(!is_string($string)){
+        if (!is_string($string)) {
 
             throw new InvalidArgumentException('value is not a string');
         }
@@ -391,7 +403,8 @@ class StringUtils {
     /**
      * TODO translate from TS
      */
-    public static function trimRight(){
+    public static function trimRight()
+    {
 
         // TODO translate from TS
     }
@@ -407,33 +420,34 @@ class StringUtils {
      *
      * @return string The padded string
      */
-    public static function pad($string, $padLength, $padString = '0', $mode = 'LEFT') {
+    public static function pad($string, $padLength, $padString = '0', $mode = 'LEFT')
+    {
 
-        if(!StringUtils::isString($string) || !StringUtils::isString($padString) || strlen($padString) <= 0){
+        if (!StringUtils::isString($string) || !StringUtils::isString($padString) || strlen($padString) <= 0) {
 
             throw new InvalidArgumentException('string and padString must be strings');
         }
 
-        if(!NumericUtils::isInteger($padLength)){
+        if (!NumericUtils::isInteger($padLength)) {
 
             throw new InvalidArgumentException('padLength is not an int');
         }
 
-        if($mode !== 'LEFT' && $mode !== 'RIGHT'){
+        if ($mode !== 'LEFT' && $mode !== 'RIGHT') {
 
             throw new InvalidArgumentException('mode must be LEFT or RIGHT');
         }
 
         $result = $string;
 
-        if($mode === 'RIGHT'){
+        if ($mode === 'RIGHT') {
 
             while (strlen($result) < $padLength) {
 
                 $result = $result . substr($padString, 0, $padLength - strlen($result));
             }
 
-        }else{
+        } else {
 
             while (strlen($result) < $padLength) {
 
@@ -453,14 +467,15 @@ class StringUtils {
      *
      * @return int The number of times that $findMe appears on $string
      */
-    public static function countStringOccurences($string, $findMe){
+    public static function countStringOccurences($string, $findMe)
+    {
 
-        if(!is_string($string) || !is_string($findMe)){
+        if (!is_string($string) || !is_string($findMe)) {
 
             throw new InvalidArgumentException('value is not a string');
         }
 
-        if($findMe === ''){
+        if ($findMe === '') {
 
             throw new InvalidArgumentException('cannot count empty string occurences');
         }
@@ -478,16 +493,17 @@ class StringUtils {
      *
      * @return int The number of characters with the specified letter case that are present on the string
      */
-    public static function countByCase($string, $letterCase = self::FORMAT_ALL_UPPER_CASE){
+    public static function countByCase($string, $letterCase = self::FORMAT_ALL_UPPER_CASE)
+    {
 
         $string = self::removeAccents($string);
 
-        if($letterCase === self::FORMAT_ALL_UPPER_CASE){
+        if ($letterCase === self::FORMAT_ALL_UPPER_CASE) {
 
             return mb_strlen(preg_replace('![^A-Z]+!', '', $string));
         }
 
-        if($letterCase === self::FORMAT_ALL_LOWER_CASE){
+        if ($letterCase === self::FORMAT_ALL_LOWER_CASE) {
 
             return mb_strlen(preg_replace('![^a-z]+!', '', $string));
         }
@@ -504,7 +520,8 @@ class StringUtils {
      *
      * @return int The number of words (elements divided by the wordSeparator value) that are present on the string
      */
-    public static function countWords($string, string $wordSeparator = ' '){
+    public static function countWords($string, string $wordSeparator = ' ')
+    {
 
         $count = 0;
         $lines = self::getLines($string);
@@ -517,7 +534,7 @@ class StringUtils {
 
             for ($j = 0; $j < $wordsCount; $j++) {
 
-                if(!self::isEmpty($words[$j])){
+                if (!self::isEmpty($words[$j])) {
 
                     $count++;
                 }
@@ -539,7 +556,8 @@ class StringUtils {
      *
      * @return number The number of elements that are listed on the provided path
      */
-    public static function countPathElements($path){
+    public static function countPathElements($path)
+    {
 
         $path = self::formatPath($path, '/');
 
@@ -559,30 +577,31 @@ class StringUtils {
      *
      * @return string The specified string but limited in length if necessary. Final result will never exceed the specified limit, also with the limiterString appended.
      */
-    public static function limitLen($string, int $limit = 100, string $limiterString = ' ...'){
+    public static function limitLen($string, int $limit = 100, string $limiterString = ' ...')
+    {
 
-        if($limit <= 0 || !NumericUtils::isNumeric($limit)){
+        if ($limit <= 0 || !NumericUtils::isNumeric($limit)) {
 
             throw new InvalidArgumentException('limit must be a positive numeric value');
         }
 
-        if(!self::isString($string)){
+        if (!self::isString($string)) {
 
             return '';
         }
 
-        if(strlen($string) <= $limit){
+        if (strlen($string) <= $limit) {
 
             return $string;
         }
 
-        if(strlen($limiterString) > $limit){
+        if (strlen($limiterString) > $limit) {
 
             return substr($limiterString, 0, $limit);
 
-        }else{
+        } else {
 
-            return substr($string, 0, $limit - strlen($limiterString)).$limiterString;
+            return substr($string, 0, $limit - strlen($limiterString)) . $limiterString;
         }
     }
 
@@ -590,7 +609,8 @@ class StringUtils {
     /**
      * TODO
      */
-    public static function getDomainFromUrl($string){
+    public static function getDomainFromUrl($string)
+    {
 
         // TODO translate from TS
     }
@@ -599,7 +619,8 @@ class StringUtils {
     /**
      * TODO
      */
-    public static function getHostNameFromUrl($string){
+    public static function getHostNameFromUrl($string)
+    {
 
         // TODO translate from TS
     }
@@ -615,22 +636,23 @@ class StringUtils {
      *
      * @return array A list with all the string lines sepparated as different array elements.
      */
-    public static function getLines($string, array $filters = ['/\s+/']){
+    public static function getLines($string, array $filters = ['/\s+/'])
+    {
 
         $res = [];
 
         // Validate we are receiving a string
-        if(!is_string($string)){
+        if (!is_string($string)) {
 
             return $res;
         }
 
         $tmp = preg_split("/\r\n|\n|\r/", $string);
 
-        foreach($tmp as $line){
+        foreach ($tmp as $line) {
 
             // Apply specified filters
-            if(preg_replace($filters, '', $line) != ''){
+            if (preg_replace($filters, '', $line) != '') {
 
                 $res[] = $line;
             }
@@ -652,9 +674,10 @@ class StringUtils {
      *
      * @return array The list of keywords that have been extracted from the given text
      */
-    public static function getKeyWords($string, int $max = 25, int $longerThan = 3, int $shorterThan = 15, bool $ignoreNumericWords = false){
+    public static function getKeyWords($string, int $max = 25, int $longerThan = 3, int $shorterThan = 15, bool $ignoreNumericWords = false)
+    {
 
-        if($string == null){
+        if ($string == null) {
 
             return [];
         }
@@ -671,7 +694,7 @@ class StringUtils {
         // Remove all the words longher than specified value
         $string = self::removeWordsLongerThan($string, $shorterThan);
 
-          // Count the occurences of each word
+        // Count the occurences of each word
         $words = array_count_values(explode(' ', $string));
 
         // Get the max nuber of times a word is repeated.
@@ -682,11 +705,11 @@ class StringUtils {
         // the text sorting does not get altered when all the words are repeated the same number of times.
         $res = [];
 
-        for($i=$maxCount; $i> 0; $i--){
+        for ($i = $maxCount; $i > 0; $i--) {
 
-            foreach($words as $key => $v){
+            foreach ($words as $key => $v) {
 
-                if($v == $i && (!NumericUtils::isNumeric($key) || (NumericUtils::isNumeric($key) && !$ignoreNumericWords))){
+                if ($v == $i && (!NumericUtils::isNumeric($key) || (NumericUtils::isNumeric($key) && !$ignoreNumericWords))) {
 
                     $res[] = $key;
                 }
@@ -694,11 +717,11 @@ class StringUtils {
         }
 
         // Get the number of words to return depending on the max parameter
-        if($max == ''){
+        if ($max == '') {
 
             return $res;
 
-        }else{
+        } else {
 
             return array_slice($res, 0, $max);
         }
@@ -724,16 +747,17 @@ class StringUtils {
      *
      * @return string The received path without the specified number of elements and correctly formatted
      */
-    public static function getPath($path, int $elementsToRemove = 1, string $separator = '/'){
+    public static function getPath($path, int $elementsToRemove = 1, string $separator = '/')
+    {
 
-        if(StringUtils::isEmpty($path)){
+        if (StringUtils::isEmpty($path)) {
 
             return '';
         }
 
         $path = StringUtils::formatPath($path, '/');
 
-        if($path === '/'){
+        if ($path === '/') {
 
             return $path;
         }
@@ -743,7 +767,7 @@ class StringUtils {
         $elements = explode('/', $processedPath);
         $elementsCount = count($elements);
 
-        if($elementsToRemove > $elementsCount || $elementsToRemove < -1){
+        if ($elementsToRemove > $elementsCount || $elementsToRemove < -1) {
 
             return '';
         }
@@ -755,7 +779,7 @@ class StringUtils {
             $arrayToRemove[] = $elements[$i];
         }
 
-        if(count($arrayToRemove) <= 0){
+        if (count($arrayToRemove) <= 0) {
 
             return $path;
         }
@@ -786,9 +810,10 @@ class StringUtils {
      *
      * @return string The element at the specified path position or the last one if no position is defined
      */
-    public static function getPathElement($path, int $position = -1){
+    public static function getPathElement($path, int $position = -1)
+    {
 
-        if(self::isEmpty($path)){
+        if (self::isEmpty($path)) {
 
             return '';
         }
@@ -800,7 +825,7 @@ class StringUtils {
         $elements = explode('/', $path);
         $elementsCount = count($elements);
 
-        if($position >= $elementsCount || $position < -$elementsCount){
+        if ($position >= $elementsCount || $position < -$elementsCount) {
 
             throw new InvalidArgumentException('Invalid position specified');
         }
@@ -825,11 +850,12 @@ class StringUtils {
      *
      * @return string The element at the specified path position with it's extension removed or the last one if no position is defined
      */
-    public static function getPathElementWithoutExt($path, int $position = -1, $extensionSeparator = '.'){
+    public static function getPathElementWithoutExt($path, int $position = -1, $extensionSeparator = '.')
+    {
 
         $element = self::getPathElement($path, $position);
 
-        if(strpos($element, $extensionSeparator) !== false){
+        if (strpos($element, $extensionSeparator) !== false) {
 
             $element = substr($element, 0, strrpos($element, $extensionSeparator));
         }
@@ -853,11 +879,12 @@ class StringUtils {
      *
      * @return string The extension from the element at the specified path position or the extension from the last one if no position is defined
      */
-    public static function getPathExtension($path, int $position = -1, $extensionSeparator = '.'){
+    public static function getPathExtension($path, int $position = -1, $extensionSeparator = '.')
+    {
 
         $element = self::getPathElement($path, $position);
 
-        if(strpos($element, $extensionSeparator) === false){
+        if (strpos($element, $extensionSeparator) === false) {
 
             return '';
         }
@@ -870,7 +897,8 @@ class StringUtils {
     /**
      * TODO - translate from Ts
      */
-    public static function getSchemeFromUrl(){
+    public static function getSchemeFromUrl()
+    {
 
         // TODO - translate from Ts
     }
@@ -897,35 +925,36 @@ class StringUtils {
      *
      * @return string The given string converted to the specified case format.
      */
-    public static function formatCase($string, string $format){
+    public static function formatCase($string, string $format)
+    {
 
         // Non string values will throw an exception
-        if(!is_string($string)){
+        if (!is_string($string)) {
 
             throw new InvalidArgumentException('value is not a string');
         }
 
         // Empty values will return the string itself
-        if(self::isEmpty($string)){
+        if (self::isEmpty($string)) {
 
             return $string;
         }
 
         // Generate the sentence case output
-        if($format == self::FORMAT_SENTENCE_CASE){
+        if ($format == self::FORMAT_SENTENCE_CASE) {
 
             $result = '';
-            $sentences = preg_split('/([.?!]+)/', $string, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+            $sentences = preg_split('/([.?!]+)/', $string, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 
             foreach ($sentences as $s) {
 
                 $match = null;
 
-                if(preg_match('~[a-z]~i', self::removeAccents($s), $match, PREG_OFFSET_CAPTURE) == 1){
+                if (preg_match('~[a-z]~i', self::removeAccents($s), $match, PREG_OFFSET_CAPTURE) == 1) {
 
-                    $result .= mb_substr($s, 0, $match[0][1]).mb_strtoupper(mb_substr($s, $match[0][1], 1)).mb_substr($s, $match[0][1] + 1);
+                    $result .= mb_substr($s, 0, $match[0][1]) . mb_strtoupper(mb_substr($s, $match[0][1], 1)) . mb_substr($s, $match[0][1] + 1);
 
-                }else{
+                } else {
 
                     $result .= $s;
                 }
@@ -935,52 +964,52 @@ class StringUtils {
         }
 
         // Generate the title case output
-        if($format == self::FORMAT_START_CASE){
+        if ($format == self::FORMAT_START_CASE) {
 
             return mb_convert_case($string, MB_CASE_TITLE);
         }
 
         // Generate the all upper case output
-        if($format == self::FORMAT_ALL_UPPER_CASE){
+        if ($format == self::FORMAT_ALL_UPPER_CASE) {
 
             return mb_strtoupper($string);
         }
 
         // Generate the all lower case output
-        if($format == self::FORMAT_ALL_LOWER_CASE){
+        if ($format == self::FORMAT_ALL_LOWER_CASE) {
 
             return mb_strtolower($string);
         }
 
         // Generate the first upper rest lower case output
-        if($format == self::FORMAT_FIRST_UPPER_REST_LOWER){
+        if ($format == self::FORMAT_FIRST_UPPER_REST_LOWER) {
 
-            return mb_strtoupper(mb_substr($string, 0, 1)).mb_substr(mb_strtolower($string), 1);
+            return mb_strtoupper(mb_substr($string, 0, 1)) . mb_substr(mb_strtolower($string), 1);
         }
 
         // Generate the snake case format
-        if(strpos($format, 'SNAKE_CASE') !== false){
+        if (strpos($format, 'SNAKE_CASE') !== false) {
 
             $processedString = null;
 
             // Check if string is accepted as camel case or a raw string
-            if(self::isCamelCase($string) && self::countByCase($string) > 0){
+            if (self::isCamelCase($string) && self::countByCase($string) > 0) {
 
                 preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $string, $processedString);
 
                 $processedString = $processedString[0];
 
-            }else{
+            } else {
 
                 $processedString = explode(' ', $string);
             }
 
-            if($format == self::FORMAT_UPPER_SNAKE_CASE){
+            if ($format == self::FORMAT_UPPER_SNAKE_CASE) {
 
                 return mb_strtoupper(implode('_', $processedString));
             }
 
-            if($format == self::FORMAT_LOWER_SNAKE_CASE){
+            if ($format == self::FORMAT_LOWER_SNAKE_CASE) {
 
                 return mb_strtolower(implode('_', $processedString));
             }
@@ -989,13 +1018,13 @@ class StringUtils {
         }
 
         // Generate the camel case format
-        if(strpos($format, 'CAMEL_CASE') !== false){
+        if (strpos($format, 'CAMEL_CASE') !== false) {
 
             // non-alpha and non-numeric characters become spaces and the whole string is splitted to words
             $stringWords = explode(' ', trim(preg_replace('/[^a-z0-9]+/i', ' ', self::removeAccents($string))));
 
             // uppercase the first character of each word except the first one
-            if(($stringCount = count($stringWords)) > 1){
+            if (($stringCount = count($stringWords)) > 1) {
 
                 for ($i = 1; $i < $stringCount; $i++) {
 
@@ -1005,12 +1034,12 @@ class StringUtils {
 
             $string = implode('', $stringWords);
 
-            if($format == self::FORMAT_UPPER_CAMEL_CASE){
+            if ($format == self::FORMAT_UPPER_CAMEL_CASE) {
 
                 return ucfirst($string);
             }
 
-            if($format == self::FORMAT_LOWER_CAMEL_CASE){
+            if ($format == self::FORMAT_LOWER_CAMEL_CASE) {
 
                 return lcfirst($string);
             }
@@ -1038,14 +1067,15 @@ class StringUtils {
      *
      * @return string The correctly formatted path without any trailing separator
      */
-    public static function formatPath($path, string $separator = '/'){
+    public static function formatPath($path, string $separator = '/')
+    {
 
-        if(!is_string($path)){
+        if (!is_string($path)) {
 
             throw new InvalidArgumentException('path must be a string');
         }
 
-        if($separator !== '/' && $separator !== '\\'){
+        if ($separator !== '/' && $separator !== '\\') {
 
             throw new InvalidArgumentException('separator must be a slash or backslash');
         }
@@ -1055,15 +1085,15 @@ class StringUtils {
         $path = str_replace('\\', $separator, $path);
 
         // Remove duplicate path separator characters
-        while(strpos($path, $separator.$separator) !== false) {
+        while (strpos($path, $separator . $separator) !== false) {
 
-            $path = str_replace($separator.$separator, $separator, $path);
+            $path = str_replace($separator . $separator, $separator, $path);
         }
 
         // Remove the last separator only if it exists and is not the only character of the path
         $pathLen = strlen($path);
 
-        if($pathLen > 1 && substr($path, $pathLen - 1) === $separator){
+        if ($pathLen > 1 && substr($path, $pathLen - 1) === $separator) {
 
             $path = substr($path, 0, $pathLen - 1);
         }
@@ -1075,7 +1105,8 @@ class StringUtils {
     /**
      * TODO - copy from Ts
      */
-    public static function formatUrl(){
+    public static function formatUrl()
+    {
 
         // TODO - copy from Ts
     }
@@ -1092,7 +1123,8 @@ class StringUtils {
      *
      * @return string The resulting string
      */
-    public static function formatForFullTextSearch($string, string $wordSeparator = ' '){
+    public static function formatForFullTextSearch($string, string $wordSeparator = ' ')
+    {
 
         // Remove accents
         $res = self::removeAccents($string);
@@ -1103,7 +1135,7 @@ class StringUtils {
         // Take only alphanumerical characters, but keep the spaces
         $res = preg_replace('/[^a-z0-9 ]/', '', $res);
 
-        if($wordSeparator != ' '){
+        if ($wordSeparator != ' ') {
 
             $res = str_replace(' ', $wordSeparator, $res);
         }
@@ -1129,11 +1161,12 @@ class StringUtils {
      * @return number The number of characters to replace to convert $string1 into $string2 where 0 means both strings are the same.
      *         The higher the result, the more different the strings are.
      */
-    public static function compareByLevenshtein($string1, $string2){
+    public static function compareByLevenshtein($string1, $string2)
+    {
 
         // This function was found at https://gist.github.com/santhoshtr/1710925
 
-        if(!is_string($string1) || !is_string($string2)){
+        if (!is_string($string1) || !is_string($string2)) {
 
             throw new InvalidArgumentException('string1 and string2 must be strings');
         }
@@ -1141,17 +1174,17 @@ class StringUtils {
         $length1 = mb_strlen($string1, 'UTF-8');
         $length2 = mb_strlen($string2, 'UTF-8');
 
-        if($length1 < $length2) {
+        if ($length1 < $length2) {
 
             return self::compareByLevenshtein($string2, $string1);
         }
 
-        if($length1 == 0) {
+        if ($length1 == 0) {
 
             return $length2;
         }
 
-        if($string1 === $string2) {
+        if ($string1 === $string2) {
 
             return 0;
         }
@@ -1168,7 +1201,7 @@ class StringUtils {
             for ($j = 0; $j < $length2; $j++) {
 
                 $c2 = mb_substr($string2, $j, 1, 'UTF-8');
-                $insertions = $prevRow[$j+1] + 1;
+                $insertions = $prevRow[$j + 1] + 1;
                 $deletions = $currentRow[$j] + 1;
                 $substitutions = $prevRow[$j] + (($c1 !== $c2) ? 1 : 0);
                 $currentRow[] = min($insertions, $deletions, $substitutions);
@@ -1190,11 +1223,12 @@ class StringUtils {
      *
      * @return number A number between 0 and 100, being 100 if both strings are the same and 0 if both strings are totally different
      */
-    public static function compareSimilarityPercent($string1, $string2){
+    public static function compareSimilarityPercent($string1, $string2)
+    {
 
         $levenshtein = self::compareByLevenshtein($string1, $string2);
 
-        if($levenshtein === 0){
+        if ($levenshtein === 0) {
 
             return 100;
         }
@@ -1215,20 +1249,23 @@ class StringUtils {
      *
      * @return string A randomly generated string
      */
-    public static function generateRandom(int $minLength, int $maxLength, array $charSet = ['0-9', 'a-z', 'A-Z']){
+    public static function generateRandom(int $minLength, int $maxLength, array $charSet = ['0-9', 'a-z', 'A-Z'])
+    {
 
-        if($minLength < 0 || !NumericUtils::isInteger($minLength) ||
-           $maxLength < 0 || !NumericUtils::isInteger($maxLength)) {
+        if (
+            $minLength < 0 || !NumericUtils::isInteger($minLength) ||
+            $maxLength < 0 || !NumericUtils::isInteger($maxLength)
+        ) {
 
-               throw new InvalidArgumentException('minLength and maxLength must be positive numbers');
+            throw new InvalidArgumentException('minLength and maxLength must be positive numbers');
         }
 
-        if($maxLength < $minLength){
+        if ($maxLength < $minLength) {
 
             throw new InvalidArgumentException('Provided maxLength must be higher or equal than minLength');
         }
 
-        if(!ArrayUtils::isArray($charSet) || count($charSet) <= 0){
+        if (!ArrayUtils::isArray($charSet) || count($charSet) <= 0) {
 
             throw new InvalidArgumentException('invalid charset');
         }
@@ -1241,7 +1278,7 @@ class StringUtils {
 
         foreach ($charSet as $chars) {
 
-            if(!self::isString($chars) || self::isEmpty($chars)){
+            if (!self::isString($chars) || self::isEmpty($chars)) {
 
                 throw new InvalidArgumentException('invalid charset');
             }
@@ -1250,10 +1287,10 @@ class StringUtils {
             $thirdChar = substr($chars, 2, 1);
 
             // Check if an interval of characters has been defined
-            if(strlen($chars) === 3 && strpos($chars, '-') === 1 && $firstChar !== '\\'){
+            if (strlen($chars) === 3 && strpos($chars, '-') === 1 && $firstChar !== '\\') {
 
                 // Look for numeric intervals
-                if(strpos($numbers, $firstChar) !== false) {
+                if (strpos($numbers, $firstChar) !== false) {
 
                     $finalCharSet .= substr($numbers, strpos($numbers, $firstChar), strpos($numbers, $thirdChar) + 1 - strpos($numbers, $firstChar));
 
@@ -1263,7 +1300,7 @@ class StringUtils {
                     $finalCharSet .= substr($lowerCaseLetters, strpos($lowerCaseLetters, $firstChar), strpos($lowerCaseLetters, $thirdChar) + 1 - strpos($lowerCaseLetters, $firstChar));
 
                     // Look for upper case letter intervals
-                } else if(strpos($upperCaseLetters, $firstChar) !== false) {
+                } else if (strpos($upperCaseLetters, $firstChar) !== false) {
 
                     $finalCharSet .= substr($upperCaseLetters, strpos($upperCaseLetters, $firstChar), strpos($upperCaseLetters, $thirdChar) + 1 - strpos($upperCaseLetters, $firstChar));
                 }
@@ -1275,10 +1312,10 @@ class StringUtils {
         }
 
         // Generate as many random characters as required
-        $result = '' ;
+        $result = '';
         $length = ($minLength === $maxLength) ? $maxLength : NumericUtils::generateRandomInteger($minLength, $maxLength);
 
-        for($i=0; $i<$length; $i++){
+        for ($i = 0; $i < $length; $i++) {
 
             $result .= substr($finalCharSet, mt_rand(0, strlen($finalCharSet) - 1), 1);
         }
@@ -1299,7 +1336,8 @@ class StringUtils {
      *
      * @return string The string that was found to be more similar to the provided one
      */
-    public static function findMostSimilarString($string, array $listOfStrings){
+    public static function findMostSimilarString($string, array $listOfStrings)
+    {
 
         return $listOfStrings[StringUtils::findMostSimilarStringIndex($string, $listOfStrings)];
     }
@@ -1317,14 +1355,15 @@ class StringUtils {
      *
      * @return int The array index for the string that was found to be more similar to the provided one
      */
-    public static function findMostSimilarStringIndex($string, array $listOfStrings){
+    public static function findMostSimilarStringIndex($string, array $listOfStrings)
+    {
 
-        if(!is_string($string)){
+        if (!is_string($string)) {
 
             throw new InvalidArgumentException('expected a string');
         }
 
-        if(count($listOfStrings) <= 0){
+        if (count($listOfStrings) <= 0) {
 
             throw new InvalidArgumentException('listOfStrings is empty');
         }
@@ -1336,7 +1375,7 @@ class StringUtils {
 
             $similarityPercent = StringUtils::compareSimilarityPercent($string, $listOfStrings[$i]);
 
-            if($similarityPercent > $mostSimilarPercentage){
+            if ($similarityPercent > $mostSimilarPercentage) {
 
                 $mostSimilarIndex = $i;
                 $mostSimilarPercentage = $similarityPercent;
@@ -1354,19 +1393,20 @@ class StringUtils {
      *
      * @return string The string without any new line character
      */
-    public static function removeNewLineCharacters($string){
+    public static function removeNewLineCharacters($string)
+    {
 
-        if($string === null){
+        if ($string === null) {
 
             return '';
         }
 
-        if(!self::isString($string)){
+        if (!self::isString($string)) {
 
             throw new InvalidArgumentException('Specified value must be a string');
         }
 
-        return str_replace(array("\n","\r"), '', $string);
+        return str_replace(array("\n", "\r"), '', $string);
     }
 
 
@@ -1380,113 +1420,114 @@ class StringUtils {
      *
      * @return string The given string with all accent and diacritics replaced by the respective ASCII characters.
      */
-    public static function removeAccents($string){
+    public static function removeAccents($string)
+    {
 
-        if(!is_string($string)){
+        if (!is_string($string)) {
 
             throw new InvalidArgumentException('value is not a string');
         }
 
-        if(!preg_match('/[\x80-\xff]/', $string)){
+        if (!preg_match('/[\x80-\xff]/', $string)) {
 
             return $string;
         }
 
         $chars = array(
             // Decompositions for Latin-1 Supplement
-            chr(195).chr(128) => 'A', chr(195).chr(129) => 'A',
-            chr(195).chr(130) => 'A', chr(195).chr(131) => 'A',
-            chr(195).chr(132) => 'A', chr(195).chr(133) => 'A',
-            chr(195).chr(135) => 'C', chr(195).chr(136) => 'E',
-            chr(195).chr(137) => 'E', chr(195).chr(138) => 'E',
-            chr(195).chr(139) => 'E', chr(195).chr(140) => 'I',
-            chr(195).chr(141) => 'I', chr(195).chr(142) => 'I',
-            chr(195).chr(143) => 'I', chr(195).chr(145) => 'N',
-            chr(195).chr(146) => 'O', chr(195).chr(147) => 'O',
-            chr(195).chr(148) => 'O', chr(195).chr(149) => 'O',
-            chr(195).chr(150) => 'O', chr(195).chr(153) => 'U',
-            chr(195).chr(154) => 'U', chr(195).chr(155) => 'U',
-            chr(195).chr(156) => 'U', chr(195).chr(157) => 'Y',
-            chr(195).chr(159) => 's', chr(195).chr(160) => 'a',
-            chr(195).chr(161) => 'a', chr(195).chr(162) => 'a',
-            chr(195).chr(163) => 'a', chr(195).chr(164) => 'a',
-            chr(195).chr(165) => 'a', chr(195).chr(167) => 'c',
-            chr(195).chr(168) => 'e', chr(195).chr(169) => 'e',
-            chr(195).chr(170) => 'e', chr(195).chr(171) => 'e',
-            chr(195).chr(172) => 'i', chr(195).chr(173) => 'i',
-            chr(195).chr(174) => 'i', chr(195).chr(175) => 'i',
-            chr(195).chr(177) => 'n', chr(195).chr(178) => 'o',
-            chr(195).chr(179) => 'o', chr(195).chr(180) => 'o',
-            chr(195).chr(181) => 'o', chr(195).chr(182) => 'o',
-            chr(195).chr(182) => 'o', chr(195).chr(185) => 'u',
-            chr(195).chr(186) => 'u', chr(195).chr(187) => 'u',
-            chr(195).chr(188) => 'u', chr(195).chr(189) => 'y',
-            chr(195).chr(191) => 'y',
+            chr(195) . chr(128) => 'A', chr(195) . chr(129) => 'A',
+            chr(195) . chr(130) => 'A', chr(195) . chr(131) => 'A',
+            chr(195) . chr(132) => 'A', chr(195) . chr(133) => 'A',
+            chr(195) . chr(135) => 'C', chr(195) . chr(136) => 'E',
+            chr(195) . chr(137) => 'E', chr(195) . chr(138) => 'E',
+            chr(195) . chr(139) => 'E', chr(195) . chr(140) => 'I',
+            chr(195) . chr(141) => 'I', chr(195) . chr(142) => 'I',
+            chr(195) . chr(143) => 'I', chr(195) . chr(145) => 'N',
+            chr(195) . chr(146) => 'O', chr(195) . chr(147) => 'O',
+            chr(195) . chr(148) => 'O', chr(195) . chr(149) => 'O',
+            chr(195) . chr(150) => 'O', chr(195) . chr(153) => 'U',
+            chr(195) . chr(154) => 'U', chr(195) . chr(155) => 'U',
+            chr(195) . chr(156) => 'U', chr(195) . chr(157) => 'Y',
+            chr(195) . chr(159) => 's', chr(195) . chr(160) => 'a',
+            chr(195) . chr(161) => 'a', chr(195) . chr(162) => 'a',
+            chr(195) . chr(163) => 'a', chr(195) . chr(164) => 'a',
+            chr(195) . chr(165) => 'a', chr(195) . chr(167) => 'c',
+            chr(195) . chr(168) => 'e', chr(195) . chr(169) => 'e',
+            chr(195) . chr(170) => 'e', chr(195) . chr(171) => 'e',
+            chr(195) . chr(172) => 'i', chr(195) . chr(173) => 'i',
+            chr(195) . chr(174) => 'i', chr(195) . chr(175) => 'i',
+            chr(195) . chr(177) => 'n', chr(195) . chr(178) => 'o',
+            chr(195) . chr(179) => 'o', chr(195) . chr(180) => 'o',
+            chr(195) . chr(181) => 'o', chr(195) . chr(182) => 'o',
+            chr(195) . chr(182) => 'o', chr(195) . chr(185) => 'u',
+            chr(195) . chr(186) => 'u', chr(195) . chr(187) => 'u',
+            chr(195) . chr(188) => 'u', chr(195) . chr(189) => 'y',
+            chr(195) . chr(191) => 'y',
             // Decompositions for Latin Extended-A
-            chr(196).chr(128) => 'A', chr(196).chr(129) => 'a',
-            chr(196).chr(130) => 'A', chr(196).chr(131) => 'a',
-            chr(196).chr(132) => 'A', chr(196).chr(133) => 'a',
-            chr(196).chr(134) => 'C', chr(196).chr(135) => 'c',
-            chr(196).chr(136) => 'C', chr(196).chr(137) => 'c',
-            chr(196).chr(138) => 'C', chr(196).chr(139) => 'c',
-            chr(196).chr(140) => 'C', chr(196).chr(141) => 'c',
-            chr(196).chr(142) => 'D', chr(196).chr(143) => 'd',
-            chr(196).chr(144) => 'D', chr(196).chr(145) => 'd',
-            chr(196).chr(146) => 'E', chr(196).chr(147) => 'e',
-            chr(196).chr(148) => 'E', chr(196).chr(149) => 'e',
-            chr(196).chr(150) => 'E', chr(196).chr(151) => 'e',
-            chr(196).chr(152) => 'E', chr(196).chr(153) => 'e',
-            chr(196).chr(154) => 'E', chr(196).chr(155) => 'e',
-            chr(196).chr(156) => 'G', chr(196).chr(157) => 'g',
-            chr(196).chr(158) => 'G', chr(196).chr(159) => 'g',
-            chr(196).chr(160) => 'G', chr(196).chr(161) => 'g',
-            chr(196).chr(162) => 'G', chr(196).chr(163) => 'g',
-            chr(196).chr(164) => 'H', chr(196).chr(165) => 'h',
-            chr(196).chr(166) => 'H', chr(196).chr(167) => 'h',
-            chr(196).chr(168) => 'I', chr(196).chr(169) => 'i',
-            chr(196).chr(170) => 'I', chr(196).chr(171) => 'i',
-            chr(196).chr(172) => 'I', chr(196).chr(173) => 'i',
-            chr(196).chr(174) => 'I', chr(196).chr(175) => 'i',
-            chr(196).chr(176) => 'I', chr(196).chr(177) => 'i',
-            chr(196).chr(178) => 'IJ',chr(196).chr(179) => 'ij',
-            chr(196).chr(180) => 'J', chr(196).chr(181) => 'j',
-            chr(196).chr(182) => 'K', chr(196).chr(183) => 'k',
-            chr(196).chr(184) => 'k', chr(196).chr(185) => 'L',
-            chr(196).chr(186) => 'l', chr(196).chr(187) => 'L',
-            chr(196).chr(188) => 'l', chr(196).chr(189) => 'L',
-            chr(196).chr(190) => 'l', chr(196).chr(191) => 'L',
-            chr(197).chr(128) => 'l', chr(197).chr(129) => 'L',
-            chr(197).chr(130) => 'l', chr(197).chr(131) => 'N',
-            chr(197).chr(132) => 'n', chr(197).chr(133) => 'N',
-            chr(197).chr(134) => 'n', chr(197).chr(135) => 'N',
-            chr(197).chr(136) => 'n', chr(197).chr(137) => 'N',
-            chr(197).chr(138) => 'n', chr(197).chr(139) => 'N',
-            chr(197).chr(140) => 'O', chr(197).chr(141) => 'o',
-            chr(197).chr(142) => 'O', chr(197).chr(143) => 'o',
-            chr(197).chr(144) => 'O', chr(197).chr(145) => 'o',
-            chr(197).chr(146) => 'OE',chr(197).chr(147) => 'oe',
-            chr(197).chr(148) => 'R',chr(197).chr(149) => 'r',
-            chr(197).chr(150) => 'R',chr(197).chr(151) => 'r',
-            chr(197).chr(152) => 'R',chr(197).chr(153) => 'r',
-            chr(197).chr(154) => 'S',chr(197).chr(155) => 's',
-            chr(197).chr(156) => 'S',chr(197).chr(157) => 's',
-            chr(197).chr(158) => 'S',chr(197).chr(159) => 's',
-            chr(197).chr(160) => 'S', chr(197).chr(161) => 's',
-            chr(197).chr(162) => 'T', chr(197).chr(163) => 't',
-            chr(197).chr(164) => 'T', chr(197).chr(165) => 't',
-            chr(197).chr(166) => 'T', chr(197).chr(167) => 't',
-            chr(197).chr(168) => 'U', chr(197).chr(169) => 'u',
-            chr(197).chr(170) => 'U', chr(197).chr(171) => 'u',
-            chr(197).chr(172) => 'U', chr(197).chr(173) => 'u',
-            chr(197).chr(174) => 'U', chr(197).chr(175) => 'u',
-            chr(197).chr(176) => 'U', chr(197).chr(177) => 'u',
-            chr(197).chr(178) => 'U', chr(197).chr(179) => 'u',
-            chr(197).chr(180) => 'W', chr(197).chr(181) => 'w',
-            chr(197).chr(182) => 'Y', chr(197).chr(183) => 'y',
-            chr(197).chr(184) => 'Y', chr(197).chr(185) => 'Z',
-            chr(197).chr(186) => 'z', chr(197).chr(187) => 'Z',
-            chr(197).chr(188) => 'z', chr(197).chr(189) => 'Z',
-            chr(197).chr(190) => 'z', chr(197).chr(191) => 's'
+            chr(196) . chr(128) => 'A', chr(196) . chr(129) => 'a',
+            chr(196) . chr(130) => 'A', chr(196) . chr(131) => 'a',
+            chr(196) . chr(132) => 'A', chr(196) . chr(133) => 'a',
+            chr(196) . chr(134) => 'C', chr(196) . chr(135) => 'c',
+            chr(196) . chr(136) => 'C', chr(196) . chr(137) => 'c',
+            chr(196) . chr(138) => 'C', chr(196) . chr(139) => 'c',
+            chr(196) . chr(140) => 'C', chr(196) . chr(141) => 'c',
+            chr(196) . chr(142) => 'D', chr(196) . chr(143) => 'd',
+            chr(196) . chr(144) => 'D', chr(196) . chr(145) => 'd',
+            chr(196) . chr(146) => 'E', chr(196) . chr(147) => 'e',
+            chr(196) . chr(148) => 'E', chr(196) . chr(149) => 'e',
+            chr(196) . chr(150) => 'E', chr(196) . chr(151) => 'e',
+            chr(196) . chr(152) => 'E', chr(196) . chr(153) => 'e',
+            chr(196) . chr(154) => 'E', chr(196) . chr(155) => 'e',
+            chr(196) . chr(156) => 'G', chr(196) . chr(157) => 'g',
+            chr(196) . chr(158) => 'G', chr(196) . chr(159) => 'g',
+            chr(196) . chr(160) => 'G', chr(196) . chr(161) => 'g',
+            chr(196) . chr(162) => 'G', chr(196) . chr(163) => 'g',
+            chr(196) . chr(164) => 'H', chr(196) . chr(165) => 'h',
+            chr(196) . chr(166) => 'H', chr(196) . chr(167) => 'h',
+            chr(196) . chr(168) => 'I', chr(196) . chr(169) => 'i',
+            chr(196) . chr(170) => 'I', chr(196) . chr(171) => 'i',
+            chr(196) . chr(172) => 'I', chr(196) . chr(173) => 'i',
+            chr(196) . chr(174) => 'I', chr(196) . chr(175) => 'i',
+            chr(196) . chr(176) => 'I', chr(196) . chr(177) => 'i',
+            chr(196) . chr(178) => 'IJ', chr(196) . chr(179) => 'ij',
+            chr(196) . chr(180) => 'J', chr(196) . chr(181) => 'j',
+            chr(196) . chr(182) => 'K', chr(196) . chr(183) => 'k',
+            chr(196) . chr(184) => 'k', chr(196) . chr(185) => 'L',
+            chr(196) . chr(186) => 'l', chr(196) . chr(187) => 'L',
+            chr(196) . chr(188) => 'l', chr(196) . chr(189) => 'L',
+            chr(196) . chr(190) => 'l', chr(196) . chr(191) => 'L',
+            chr(197) . chr(128) => 'l', chr(197) . chr(129) => 'L',
+            chr(197) . chr(130) => 'l', chr(197) . chr(131) => 'N',
+            chr(197) . chr(132) => 'n', chr(197) . chr(133) => 'N',
+            chr(197) . chr(134) => 'n', chr(197) . chr(135) => 'N',
+            chr(197) . chr(136) => 'n', chr(197) . chr(137) => 'N',
+            chr(197) . chr(138) => 'n', chr(197) . chr(139) => 'N',
+            chr(197) . chr(140) => 'O', chr(197) . chr(141) => 'o',
+            chr(197) . chr(142) => 'O', chr(197) . chr(143) => 'o',
+            chr(197) . chr(144) => 'O', chr(197) . chr(145) => 'o',
+            chr(197) . chr(146) => 'OE', chr(197) . chr(147) => 'oe',
+            chr(197) . chr(148) => 'R', chr(197) . chr(149) => 'r',
+            chr(197) . chr(150) => 'R', chr(197) . chr(151) => 'r',
+            chr(197) . chr(152) => 'R', chr(197) . chr(153) => 'r',
+            chr(197) . chr(154) => 'S', chr(197) . chr(155) => 's',
+            chr(197) . chr(156) => 'S', chr(197) . chr(157) => 's',
+            chr(197) . chr(158) => 'S', chr(197) . chr(159) => 's',
+            chr(197) . chr(160) => 'S', chr(197) . chr(161) => 's',
+            chr(197) . chr(162) => 'T', chr(197) . chr(163) => 't',
+            chr(197) . chr(164) => 'T', chr(197) . chr(165) => 't',
+            chr(197) . chr(166) => 'T', chr(197) . chr(167) => 't',
+            chr(197) . chr(168) => 'U', chr(197) . chr(169) => 'u',
+            chr(197) . chr(170) => 'U', chr(197) . chr(171) => 'u',
+            chr(197) . chr(172) => 'U', chr(197) . chr(173) => 'u',
+            chr(197) . chr(174) => 'U', chr(197) . chr(175) => 'u',
+            chr(197) . chr(176) => 'U', chr(197) . chr(177) => 'u',
+            chr(197) . chr(178) => 'U', chr(197) . chr(179) => 'u',
+            chr(197) . chr(180) => 'W', chr(197) . chr(181) => 'w',
+            chr(197) . chr(182) => 'Y', chr(197) . chr(183) => 'y',
+            chr(197) . chr(184) => 'Y', chr(197) . chr(185) => 'Z',
+            chr(197) . chr(186) => 'z', chr(197) . chr(187) => 'Z',
+            chr(197) . chr(188) => 'z', chr(197) . chr(189) => 'Z',
+            chr(197) . chr(190) => 'z', chr(197) . chr(191) => 's'
         );
 
         return strtr($string, $chars);
@@ -1502,7 +1543,8 @@ class StringUtils {
      *
      * @return string The string without the removed words
      */
-    public static function removeWordsShorterThan($string, int $shorterThan = 3, string $wordSeparator = ' '){
+    public static function removeWordsShorterThan($string, int $shorterThan = 3, string $wordSeparator = ' ')
+    {
 
         return self::_removeWordsByLengthAux($string, $shorterThan, $wordSeparator, false);
     }
@@ -1517,7 +1559,8 @@ class StringUtils {
      *
      * @return string The string without the removed words
      */
-    public static function removeWordsLongerThan($string, int $longerThan = 3, string $wordSeparator = ' '){
+    public static function removeWordsLongerThan($string, int $longerThan = 3, string $wordSeparator = ' ')
+    {
 
         return self::_removeWordsByLengthAux($string, $longerThan, $wordSeparator, true);
     }
@@ -1526,17 +1569,20 @@ class StringUtils {
     /**
      * Aux method that is used by the removeWordsShorterThan and removeWordsLongerThan methods to strip words by length
      */
-    private static function _removeWordsByLengthAux($string, int $length = 3, string $wordSeparator = ' ', $longer = true){
+    private static function _removeWordsByLengthAux($string, int $length = 3, string $wordSeparator = ' ', $longer = true)
+    {
 
         $result = [];
 
-        if($string !== null){
+        if ($string !== null) {
 
             foreach (explode($wordSeparator, $string) as $word) {
 
-                if($word === '' ||
-                   ($longer && strlen($word) <= $length) ||
-                   (!$longer && strlen($word) >= $length)){
+                if (
+                    $word === '' ||
+                    ($longer && strlen($word) <= $length) ||
+                    (!$longer && strlen($word) >= $length)
+                ) {
 
                     $result[] = $word;
                 }
@@ -1555,7 +1601,8 @@ class StringUtils {
      *
      * @return string The string without the urls
      */
-    public static function removeUrls($string, string $replacement = 'xxxx') {
+    public static function removeUrls($string, string $replacement = 'xxxx')
+    {
 
         return preg_replace('/[a-zA-Z]*[:\/\/]*[A-Za-z0-9\-_]+\.+[A-Za-z0-9\.\/%&=\?\-_]+/i', $replacement, $string);
     }
@@ -1569,9 +1616,10 @@ class StringUtils {
      *
      * @return string The string without the html code
      */
-    public static function removeHtmlCode($string, string $allowedTags = ''){
+    public static function removeHtmlCode($string, string $allowedTags = '')
+    {
 
-        return strip_tags($string , $allowedTags);
+        return strip_tags($string, $allowedTags);
     }
 
 
@@ -1588,27 +1636,28 @@ class StringUtils {
      *
      * @return string The string with a maximum of one consecutive sequence for all those matching the provided set
      */
-    public static function removeSameConsecutive($string, array $set = []){
+    public static function removeSameConsecutive($string, array $set = [])
+    {
 
-        if($string === null){
+        if ($string === null) {
 
             return '';
         }
 
-        if(!is_string($string)){
+        if (!is_string($string)) {
 
             throw new InvalidArgumentException('string must be a string');
         }
 
-        if($set === []){
+        if ($set === []) {
 
             // All possible duplicate characters will be removed from the string
             // Note that \R represents any line ending sequence
-            return preg_replace('/(.|\R)\1+/u','$1', $string);
+            return preg_replace('/(.|\R)\1+/u', '$1', $string);
         }
 
         // Split the characters string into an array
-        return preg_replace('/('.implode('|', $set).')\1+/u','$1', $string);
+        return preg_replace('/(' . implode('|', $set) . ')\1+/u', '$1', $string);
     }
 }
 

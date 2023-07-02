@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/dbh.inc.php';
+include_once 'src/Dbh.php';
 include 'header-pt1.php';
 $title = 'Doorbell Designs - Air Plant Cradles';
 echo $title;
@@ -73,136 +73,136 @@ if ($currentRow) {
 
     ?> 
 
-                                        <!-- project content area -->
-                                        <div class="col-sm-6 col-md-7 content-area">
-                                            <div class="product-content-area">
-                                                <div id="product-slider" class="carousel slide" data-ride="carousel" data-interval="false">
-                                                    <!-- wrapper for slides -->
-                                                    <div class="carousel-inner" role="listbox">
-                                                        <?php for ($i = 0; $i < count($picUrls); $i++) { ?>
-                                                            <div class="item <?php if ($i === 0) {
-                                                                echo "active";
-                                                            } ?>">
-                                                                <img class="product-single-image" src="<?php echo $picUrls[$i] ?>" alt="<?php echo $picTitles[$i] ?>">
-                                                                <p class="color-sample-title"><?php echo $picTitles[$i] ?></p>
-                                                            </div>
+                                                <!-- project content area -->
+                                                <div class="col-sm-6 col-md-7 content-area">
+                                                    <div class="product-content-area">
+                                                        <div id="product-slider" class="carousel slide" data-ride="carousel" data-interval="false">
+                                                            <!-- wrapper for slides -->
+                                                            <div class="carousel-inner" role="listbox">
+                                                                <?php for ($i = 0; $i < count($picUrls); $i++) { ?>
+                                                                    <div class="item <?php if ($i === 0) {
+                                                                        echo "active";
+                                                                    } ?>">
+                                                                        <img class="product-single-image" src="<?php echo $picUrls[$i] ?>" alt="<?php echo $picTitles[$i] ?>">
+                                                                        <p class="color-sample-title"><?php echo $picTitles[$i] ?></p>
+                                                                    </div>
                           <?php } ?>         
-                                                    </div>
-                                                    <!-- / wrapper for slides -->
-
-                                                    <!-- controls -->
-                                                    <?php if (count($picUrls) > 1) { ?>
-                                                        <a class="left carousel-control" href="#product-slider" role="button" data-slide="prev">
-                                                            <span class="lnr lnr-chevron-left" aria-hidden="true"></span>
-                                                        </a>
-                                                        <a class="right carousel-control" href="#product-slider" role="button" data-slide="next">
-                                                            <span class="lnr lnr-chevron-right" aria-hidden="true"></span>
-                                                        </a>
-                  <?php } ?>   
-                                                    <!-- / controls -->
-                
-                                                </div><!-- / product-slider -->
-                                            </div>
-                                            <!-- / product-content-area -->      
-                                        </div>
-                                        <!-- / project-content-area -->
-
-                                        <!-- project sidebar area -->
-                                        <div class="col-sm-6 col-md-5 product-sidebar">
-                                            <div class="product-details">
-                                                <h4 class="product-name"><?php echo $currentRow['itemNameString'] ?></h4>
-
-                                                <div class="product-info">
-                                                    <div class="info">
-                                                        <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $price; ?></span>
-                                                        </p>
-                                                    </div>
-                                                    <div class="info">
-                                                        <p><i class="lnr lnr-heart"></i><span>Category: <a href="<?php echo strtolower($currentRow['mainCategory']) ?>.php"> <?php echo $currentRow['mainCategory'] ?></a>
-
-                                                        <!-- Loop through subcategory array. Add name of each subcategory with link to subcategory page.-->
-                                                        <?php
-                                                        $subCatArr = JSON_decode($currentRow['subCategories']);
-                                                        foreach ($subCatArr as $i) {
-                                                            if ($i === '') {
-                                                                continue;
-                                                            }
-                                                            if ($i === 'dog') {
-                                                                $i = "dog lovers";
-                                                            }
-                                                            if ($i === 'one') {
-                                                                $i = "one of a kind";
-                                                            }
-                                                            ?>
-                                                            , <a href="<?php echo strtolower($currentRow['mainCategory']) ?>.php#<?php echo $i ?>"><?php echo ucfirst($i) ?></a> <?php
-                                                        }
-                                                        ?>
-
-                                                        </span></p>
-                                                    </div>
-                                                    <div class="info">
-                                                        <p><img class="ruler" src="images/ruler.png"><span>Dimensions: <?php echo $currentRow['dimensions'] ?></span></p>
-                                                    </div>
-                                                    <div class="info">
-                                                        <?php if (strtolower($currentRow['mainCategory']) === 'doorbells') { ?>
-                                                            <p>All dimensions are approximate and can be up to 1/2" larger or smaller than stated.</p>
-                      <?php } ?>
-                                                    </div>
-                                                </div><!-- / product-info -->
-
-                                                <form onSubmit="return addToCart(event)">
-                                                    <div class="buy-product">
-                                                        <div class="options">
-                                                            <div>
-                                                                <span class="qty-span">Qty:</span>
-                                                                <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
                                                             </div>
-                                                            <!-- <span class="selectors"> -->
+                                                            <!-- / wrapper for slides -->
 
-                                                    <?php $get_options_sql = "SELECT * FROM options;";
+                                                            <!-- controls -->
+                                                            <?php if (count($picUrls) > 1) { ?>
+                                                                <a class="left carousel-control" href="#product-slider" role="button" data-slide="prev">
+                                                                    <span class="lnr lnr-chevron-left" aria-hidden="true"></span>
+                                                                </a>
+                                                                <a class="right carousel-control" href="#product-slider" role="button" data-slide="next">
+                                                                    <span class="lnr lnr-chevron-right" aria-hidden="true"></span>
+                                                                </a>
+                  <?php } ?>   
+                                                            <!-- / controls -->
+                
+                                                        </div><!-- / product-slider -->
+                                                    </div>
+                                                    <!-- / product-content-area -->      
+                                                </div>
+                                                <!-- / project-content-area -->
 
-                                                    try {
-                                                        $res3 = $pdo->prepare($get_options_sql);
-                                                        $res3->execute();
-                                                    } catch (PDOException $e) {
-                                                        throw new Exception('Database query error');
-                                                    }
-                                                    while ($optionRow = $res3->fetch(PDO::FETCH_ASSOC)) {
-                                                        $optionIDs = json_decode($currentRow['optionIDs']);
-                                                        if (in_array($optionRow['id'], $optionIDs)) {
-                                                            ?>
-                                                            <select class="selectpicker" data-id="<?php echo $optionRow['id'] ?>" required>
-                                                                <option hidden value=""><?php echo $optionRow['name'] ?>:</option>
-        
-                                                            <?php $optionValues = json_decode($optionRow['optionValues']);
-                                                            foreach ($optionValues as $key => $val) {
-                                                                ?>
-                                                                <option data-id="<?php echo $key ?>"><?php echo ucfirst($val) ?></option>
+                                                <!-- project sidebar area -->
+                                                <div class="col-sm-6 col-md-5 product-sidebar">
+                                                    <div class="product-details">
+                                                        <h4 class="product-name"><?php echo $currentRow['itemNameString'] ?></h4>
+
+                                                        <div class="product-info">
+                                                            <div class="info">
+                                                                <p><i class="lnr lnr-tag"></i><span>Price: <?php echo '$' . $price; ?></span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="info">
+                                                                <p><i class="lnr lnr-heart"></i><span>Category: <a href="<?php echo strtolower($currentRow['mainCategory']) ?>.php"> <?php echo $currentRow['mainCategory'] ?></a>
+
+                                                                <!-- Loop through subcategory array. Add name of each subcategory with link to subcategory page.-->
                                                                 <?php
+                                                                $subCatArr = JSON_decode($currentRow['subCategories']);
+                                                                foreach ($subCatArr as $i) {
+                                                                    if ($i === '') {
+                                                                        continue;
+                                                                    }
+                                                                    if ($i === 'dog') {
+                                                                        $i = "dog lovers";
+                                                                    }
+                                                                    if ($i === 'one') {
+                                                                        $i = "one of a kind";
+                                                                    }
+                                                                    ?>
+                                                                    , <a href="<?php echo strtolower($currentRow['mainCategory']) ?>.php#<?php echo $i ?>"><?php echo ucfirst($i) ?></a> <?php
+                                                                }
+                                                                ?>
+
+                                                                </span></p>
+                                                            </div>
+                                                            <div class="info">
+                                                                <p><img class="ruler" src="images/ruler.png"><span>Dimensions: <?php echo $currentRow['dimensions'] ?></span></p>
+                                                            </div>
+                                                            <div class="info">
+                                                                <?php if (strtolower($currentRow['mainCategory']) === 'doorbells') { ?>
+                                                                    <p>All dimensions are approximate and can be up to 1/2" larger or smaller than stated.</p>
+                      <?php } ?>
+                                                            </div>
+                                                        </div><!-- / product-info -->
+
+                                                        <form onSubmit="return addToCart(event)">
+                                                            <div class="buy-product">
+                                                                <div class="options">
+                                                                    <div>
+                                                                        <span class="qty-span">Qty:</span>
+                                                                        <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="input-text qty text" size="4">
+                                                                    </div>
+                                                                    <!-- <span class="selectors"> -->
+
+                                                            <?php $get_options_sql = "SELECT * FROM options;";
+
+                                                            try {
+                                                                $res3 = $pdo->prepare($get_options_sql);
+                                                                $res3->execute();
+                                                            } catch (PDOException $e) {
+                                                                throw new Exception('Database query error');
+                                                            }
+                                                            while ($optionRow = $res3->fetch(PDO::FETCH_ASSOC)) {
+                                                                $optionIDs = json_decode($currentRow['optionIDs']);
+                                                                if (in_array($optionRow['id'], $optionIDs)) {
+                                                                    ?>
+                                                                    <select class="selectpicker" data-id="<?php echo $optionRow['id'] ?>" required>
+                                                                        <option hidden value=""><?php echo $optionRow['name'] ?>:</option>
+        
+                                                                    <?php $optionValues = json_decode($optionRow['optionValues']);
+                                                                    foreach ($optionValues as $key => $val) {
+                                                                        ?>
+                                                                        <option data-id="<?php echo $key ?>"><?php echo ucfirst($val) ?></option>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                        </optgroup>
+                                                                    </select>
+                                                                    <?php
+                                                                }
                                                             }
                                                             ?>
-                                                                </optgroup>
-                                                            </select>
-                                                            <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                                                <!-- </span> -->
-                                                                            </div>
-                                                                            <!-- / options -->
+                                                                                        <!-- </span> -->
+                                                                                    </div>
+                                                                                    <!-- / options -->
 
-                                                                            <div class="btn-container">
-                                                                                <button type="submit" class="btn btn-primary-filled btn-rounded" id="<?php echo $currentRow['itemName'] ?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></button>
-                                                                                <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div><!-- product-details -->
-                                                            </div><!-- / col-sm-4 col-md-3 -->
-                                                            <!-- / project sidebar area -->
-                                                        </div><!-- / row -->
+                                                                                    <div class="btn-container">
+                                                                                        <button type="submit" class="btn btn-primary-filled btn-rounded" id="<?php echo $currentRow['itemName'] ?>"><i class="lnr lnr-cart"></i><span> Add to Cart</span></button>
+                                                                                        <a href="shopping-cart.php" class="btn btn-success-filled btn-rounded"><i class="lnr lnr-checkmark-circle"></i><span> Checkout</span></a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div><!-- product-details -->
+                                                                    </div><!-- / col-sm-4 col-md-3 -->
+                                                                    <!-- / project sidebar area -->
+                                                                </div><!-- / row -->
     
-                                            <?php
+                                                    <?php
 
 } else {
     echo 'Error retrieving product.';

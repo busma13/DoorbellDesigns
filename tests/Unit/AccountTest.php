@@ -3,6 +3,9 @@
 
 namespace Tests\Unit;
 
+require_once 'vendor/autoload.php';
+
+use App\AccountClass;
 use Tests\Support\UnitTester;
 
 class AccountTest extends \Codeception\Test\Unit
@@ -17,8 +20,8 @@ class AccountTest extends \Codeception\Test\Unit
     // tests
     public function testNameValidity()
     {
-        // $user = new /includes/account-class.inc.php/Account("test");
-        // $this->assertTrue($user->isValidName("test"));
-        $this->assertEquals(1 + 1, 2);
+        $user = new AccountClass();
+        // $user->addAccount('Peter', 'abc123');
+        $this->assertTrue($user->isNameValid("test"));
     }
 }
