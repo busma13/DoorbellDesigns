@@ -9,7 +9,7 @@ use Tests\Support\FunctionalTester;
 
 use \Codeception\Step\Argument\PasswordArgument;
 
-class AdminLogInCest
+class AdminLogInFunctionalCest
 {
     public function _before(FunctionalTester $I)
     {

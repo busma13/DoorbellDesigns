@@ -8,7 +8,7 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 $host = $_SERVER['HTTP_HOST'];
-if ($host === 'localhost') {
+if ($host === 'localhost' || $host === '127.0.0.1') {
    $dbServername = "localhost"; //needs to point to actual online server 
    $dbUsername = "root"; //will be different for online server
    $dbPassword = ""; //xampp has no default pw
@@ -33,6 +33,6 @@ try {
    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
    /* If there is an error an exception is thrown */
-   echo 'Database connection failed.';
+   echo 'Database connection failed.' . " " . $host;
    die();
 }
