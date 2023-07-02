@@ -22,6 +22,11 @@ jobs:
           ini-values: memory_limit=-1, date.timezone='UTC'
           coverage: xdebug
           tools: composer:v2
+          
+      - name: Start web server
+        run: |
+          sudo apt-get install -y apache2 # Install Apache web server
+          sudo service apache2 start
 
       - name: Validate composer.json and composer.lock
         run: composer validate
@@ -29,5 +34,15 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-interaction --no-suggest
 
+      - name: Check if server is running
+        run: |
+          status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/doorbelldesigns/admin.php)
+          if [[ $status_code -eq 200 ]]; then
+            echo "Web server is running and serving the webpage."
+          else
+            echo "Web server is not running or not serving the webpage."
+            exit 1
+          fi
+          
       - name: Run tests
         run: php vendor/bin/codecept run
