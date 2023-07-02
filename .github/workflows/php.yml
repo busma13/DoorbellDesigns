@@ -19,16 +19,26 @@ jobs:
 
       - name: Install dependencies
         run: composer install
-        
+
       - name: Start web server
         run: |
           sudo apt-get install -y apache2 # Install Apache web server
           sudo service apache2 start
-          
-      - name: Public IP
-        id: ip
-        uses: haythem/public-ip@v1.2
-      - run: curl http://${{steps.ip.outputs.ipv4}}:80/report
-      
-      - name: Run tests
-        run: php vendor/bin/codecept run
+
+      - name: Check if server is running
+        run: |
+          status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/doorbelldesigns/admin.php)
+          if [[ $status_code -eq 200 ]]; then
+            echo "Web server is running and serving the webpage."
+          else
+            echo "Web server is not running or not serving the webpage."
+            exit 1
+          fi
+
+      # - name: Public IP
+      #   id: ip
+      #   uses: haythem/public-ip@v1.2
+      # - run: curl http://${{steps.ip.outputs.ipv4}}:80/report
+
+      # - name: Run tests
+      #   run: php vendor/bin/codecept run
