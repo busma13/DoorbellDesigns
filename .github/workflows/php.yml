@@ -18,7 +18,17 @@ jobs:
         run: composer validate
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-interaction --no-suggest
-
+        run: composer install
+        
+      - name: Start web server
+        run: |
+          sudo apt-get install -y apache2 # Install Apache web server
+          sudo service apache2 start
+          
+      - name: Public IP
+        id: ip
+        uses: haythem/public-ip@v1.2
+      - run: curl http://${{steps.ip.outputs.ipv4}}:80/report
+      
       - name: Run tests
         run: php vendor/bin/codecept run
