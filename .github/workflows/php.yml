@@ -38,6 +38,7 @@ jobs:
         run: |
           status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/doorbelldesigns)
           if [[ $status_code -eq 200 ]]; then
+            echo $status_code
             echo "Web server is running and serving the webpage."
           else
             echo "Web server is not running or not serving the webpage."
