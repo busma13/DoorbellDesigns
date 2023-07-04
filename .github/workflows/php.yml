@@ -34,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-interaction --no-suggest
 
+      - name: Run chromedriver
+        run:  nohup $CHROMEWEBDRIVER/chromedriver --url-base=/wd/hub /dev/null 2>&1 &
+      
       - name: Check if server is running
         run: |
           echo $GITHUB_WORKSPACE
