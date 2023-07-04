@@ -37,14 +37,20 @@ jobs:
       - name: Run chromedriver
         run:  nohup $CHROMEWEBDRIVER/chromedriver --url-base=/wd/hub /dev/null 2>&1 &
       
-      - name: Check if server is running
+      - name: Update Apache Server document root
         run: |
-          echo $GITHUB_WORKSPACE
           sudo sed -i -e 's:DocumentRoot /var/www/html:DocumentRoot /home/runner/work/DoorbellDesigns/DoorbellDesigns:g' /etc/apache2/sites-available/000-default.conf
           cat /etc/apache2/sites-available/000-default.conf
           
+      - name: Restart Apache
+        run: sudo service apache2 restart
+
+      - name: Test localhost
+        run: |
           curl http://localhost
           
+      - name: Check if server is running
+        run: |
           status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/doorbelldesigns)
           if [[ $status_code -eq 200 ]]; then
             echo "Web server is running and serving the webpage."
