@@ -41,8 +41,7 @@ jobs:
         run: |
           echo $GITHUB_WORKSPACE
           ls
-          curl http://localhost
-          curl http://localhost/doorbelldesigns
+          cat /etc/apache2/sites-available/000-default.conf
           status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/doorbelldesigns)
           if [[ $status_code -eq 200 ]]; then
             echo "Web server is running and serving the webpage."
