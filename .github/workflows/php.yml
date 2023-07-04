@@ -41,6 +41,11 @@ jobs:
           sudo sed -i -e 's:DocumentRoot /var/www/html:DocumentRoot /home/runner/work/DoorbellDesigns/DoorbellDesigns:g' /etc/apache2/sites-available/000-default.conf
           cat /etc/apache2/sites-available/000-default.conf
           
+      - name: Update permissions for document root
+        run: |
+          sudo chmod -R 755 /home/runner/work/DoorbellDesigns/DoorbellDesigns
+          sudo chown -R www-data:www-data /home/runner/work/DoorbellDesigns/DoorbellDesigns
+
       - name: Restart Apache
         run: sudo service apache2 restart
 
