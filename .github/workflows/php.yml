@@ -13,16 +13,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
-      - name: Install PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1.6
-          extensions: curl, mbstring, openssl, pdo, pdo_sqlite
-          ini-values: memory_limit=-1, date.timezone='UTC'
-          coverage: xdebug
-          tools: composer:v2
-          
+                 
       - name: Start web server
         run: |
           sudo service apache2 start
@@ -55,6 +46,7 @@ jobs:
           
       - name: Check if server is running
         run: |
+          sleep 3 
           status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/doorbelldesigns)
           if [[ $status_code -eq 200 ]]; then
             echo "Web server is running and serving the webpage."
