@@ -1,5 +1,5 @@
 <?php
-include_once './includes/dbh.inc.php';
+include_once './src/Dbh.php';
 require 'vendor/autoload.php';
 
 use Dotenv\Dotenv;
@@ -59,19 +59,18 @@ include 'header-pt2.php';
 <?php
 $order_id = $_GET["orderId"];
 
-if ($order_id === null) { 
-?>
-<div class="whitespace noTransId">
-  <p>There was an error.  No order ID found.</p> 
-  <p>Try reloading the page. If you still need help get in contact <a href="/doorbelldesigns/contact.php">here</a>.</p> 
-</div>
-  
-  <div class="space-top text-center">
-    <a href="index.php">Back to home page</a>
+if ($order_id === null) {
+  ?>
+  <div class="whitespace noTransId">
+    <p>There was an error.  No order ID found.</p> 
+    <p>Try reloading the page. If you still need help get in contact <a href="/doorbelldesigns/contact.php">here</a>.</p> 
   </div>
-<?php
-}
-else {
+  
+    <div class="space-top text-center">
+      <a href="index.php">Back to home page</a>
+    </div>
+  <?php
+} else {
   try {
     $orders_api = $client->getOrdersApi();
     $response = $orders_api->retrieveOrder($order_id);
@@ -92,7 +91,7 @@ else {
     echo $err;
     exit();
   }
-  
+
   // If there was an error with the request we will
   // print it to the browser screen here
   if ($response->isError()) {
@@ -111,7 +110,7 @@ else {
   // Check that order has been paid for.
   $tenders = $order->getTenders();
   if (!$tenders) {
-?>
+    ?>
       <div class="whitespace noTransId">
         <p>There was an error.  No record of payment for this order.</p> 
         <p>Try reloading the page. If you still need help get in contact <a href="/doorbelldesigns/contact.php">here</a>.</p> 
@@ -119,15 +118,14 @@ else {
       <div class="space-top text-center">
           <a href="index.php">Back to home page</a>
       </div>
-<?php      
-  }
-  else {
+<?php
+  } else {
     $total_tenders = 0;
     for ($i = 0; $i < count($tenders); $i++) {
       $total_tenders += (int) $tenders[$i]->getAmountMoney()->getAmount();
     }
-    if ($order->getTotalMoney()->getAmount() !== $total_tenders) { 
-?>
+    if ($order->getTotalMoney()->getAmount() !== $total_tenders) {
+      ?>
       <div class="whitespace noTransId">
         <p>There was an error.  There is still a balance due on this order.</p> 
         <p>Try reloading the page. If you still need help get in contact <a href="/doorbelldesigns/contact.php">here</a>.</p> 
@@ -137,51 +135,47 @@ else {
           <a href="index.php">Back to home page</a>
       </div>
 <?php
-    }
-    else { 
+    } else {
       //Set the order status to paid in the database
       $query = "UPDATE orders SET paid = :paid
-                WHERE order_id = :order_id;"; 
-      
+                WHERE order_id = :order_id;";
+
       $values = array(':paid' => 'yes', ':order_id' => $order_id);
 
       /* Execute the query */
-      try
-      {
-          $res1 = $pdo->prepare($query);
-          $success = $res1->execute($values);
-          $response = $pdo->lastInsertId();
+      try {
+        $res1 = $pdo->prepare($query);
+        $success = $res1->execute($values);
+        $response = $pdo->lastInsertId();
+      } catch (PDOException $e) {
+        $msg = $e->getMessage();
+        $response = $msg . ' ' . $query;
       }
-      catch (PDOException $e)
-      {
-          $msg = $e->getMessage();
-          $response = $msg . ' ' . $query;
-      }     
-?>
+      ?>
       <div class="container space-left space-right" id="confirmation">
         <div class="row">
           <h2 class="space-top">Thank you for your purchase!</h2>      
           <h4 class="space-top">Your Order:</h4>
 <?php
-          foreach ($order->getLineItems() as $line_item) {
-            // Display each line item in the order
-            echo ("
+            foreach ($order->getLineItems() as $line_item) {
+              // Display each line item in the order
+              echo ("
               <div class=\"item-line\">
                 <div class=\"item-label\"> (" . $line_item->getQuantity() . ") " . $line_item->getName() . "</div>
-                <div class=\"item-amount\">$" . number_format((float)$line_item->getTotalMoney()->getAmount() / 100, 2, '.', '') . "</div>
+                <div class=\"item-amount\">$" . number_format((float) $line_item->getTotalMoney()->getAmount() / 100, 2, '.', '') . "</div>
               </div>");
-          }
+            }
 
-          // Display total amount paid for the order
-          echo ("
+            // Display total amount paid for the order
+            echo ("
             <div>
               <div class=\"item-line total-line\">
                 <div class=\"item-label\">Total</div>
-                <div class=\"item-amount\">$" . number_format((float)$order->getTotalMoney()->getAmount() / 100, 2, '.', '') . "</div>
+                <div class=\"item-amount\">$" . number_format((float) $order->getTotalMoney()->getAmount() / 100, 2, '.', '') . "</div>
               </div>
             </div>
             ");
-?>
+            ?>
         </div class="row">
         <h4 class="space-top">Payment Successful!</h4>
         <div>
@@ -196,14 +190,14 @@ else {
         </div>
       </div>
 <?php
-    }  
+    }
   }
 }
 ?>
 
   <!-- footer -->
 <?php
-    include 'footer.php';
+include 'footer.php';
 ?>
   <!-- / footer -->
 

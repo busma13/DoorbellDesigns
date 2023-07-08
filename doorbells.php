@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/dbh.inc.php';
+include_once 'src/Dbh.php';
 include 'header-pt1.php';
 $title = 'Doorbell Designs - Doorbells';
 echo $title;

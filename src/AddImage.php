@@ -1,5 +1,5 @@
 <?php
-include_once 'dbh.inc.php';
+include_once 'Dbh.php';
 
 /* Get content type */
 // $contentType = trim($_SERVER["CONTENT_TYPE"] ?? ''); // PHP 8+
@@ -54,23 +54,20 @@ try {
   if ($success1) {
     $query2 = "UPDATE products SET numberOfPics = :newValue WHERE id = :product_id;";
 
-    $values2 = array(':product_id' => $productId, ':newValue' => $numberOfPics );
+    $values2 = array(':product_id' => $productId, ':newValue' => $numberOfPics);
     /* Execute the update image count query */
-    try
-    {
-        $res1 = $pdo->prepare($query2);
-        $success2 = $res1->execute($values2);
-        if ($success2) {
-          $response = 'success';
-        }
-    }
-    catch (PDOException $e)
-    {
-        $msg = $e->getMessage();
-        $response = 'Q2' . $msg . ' ' . $query2;
+    try {
+      $res1 = $pdo->prepare($query2);
+      $success2 = $res1->execute($values2);
+      if ($success2) {
+        $response = 'success';
+      }
+    } catch (PDOException $e) {
+      $msg = $e->getMessage();
+      $response = 'Q2' . $msg . ' ' . $query2;
     }
   }
- 
+
   $response = 'success';
 } catch (PDOException $e) {
   $msg = $e->getMessage();

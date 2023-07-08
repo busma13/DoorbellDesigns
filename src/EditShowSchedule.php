@@ -1,5 +1,5 @@
 <?php
-include_once 'dbh.inc.php';
+include_once 'Dbh.php';
 
 /* Get content type */
 // $contentType = trim($_SERVER["CONTENT_TYPE"] ?? ''); // PHP 8+

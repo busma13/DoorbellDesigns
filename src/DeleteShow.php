@@ -1,5 +1,5 @@
 <?php
-include_once 'dbh.inc.php';
+include_once 'Dbh.php';
 
 /* Get content type */
 $contentType = trim($_SERVER["CONTENT_TYPE"] ?? ''); // PHP 8+
@@ -21,7 +21,7 @@ $content = trim(file_get_contents("php://input"));
 $decoded = json_decode($content, true);
 
 /* Send error to Fetch API, if JSON is broken */
-if(! is_array($decoded))
+if (!is_array($decoded))
   exit(json_encode([
     'value' => 0,
     'error' => 'Received JSON is improperly formatted',
@@ -34,23 +34,19 @@ $deleteDate = $decoded['date'];
 $query = "DELETE FROM shows WHERE startDate = :deleteDate;";
 
 /* Execute the query */
-try
-{
+try {
   $res1 = $pdo->prepare($query);
   $res1->bindParam(':deleteDate', $deleteDate);
   $success = $res1->execute();
-    
-    if ($success) {
-      $response = 'success';
-    }
-    else {
-      $response = 'delete-failed';
-    }
-}
-catch (PDOException $e)
-{
-    $msg = $e->getMessage();
-    $response = $msg;
+
+  if ($success) {
+    $response = 'success';
+  } else {
+    $response = 'delete-failed';
+  }
+} catch (PDOException $e) {
+  $msg = $e->getMessage();
+  $response = $msg;
 }
 
 /* Send success to fetch API */

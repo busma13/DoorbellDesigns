@@ -1,9 +1,9 @@
 <?php
-    include_once 'includes/dbh.inc.php';
-    include 'header-pt1.php';
-    $title = 'Doorbell Designs - Custom Orders';
-    echo $title;
-    include 'header-pt2.php';
+include_once 'src/Dbh.php';
+include 'header-pt1.php';
+$title = 'Doorbell Designs - Custom Orders';
+echo $title;
+include 'header-pt2.php';
 ?>
 
     <div id="page-header" class="about">
@@ -121,7 +121,7 @@
 
 <!-- footer -->
 <?php
-    include 'footer.php';
+include 'footer.php';
 ?>
 <!-- / footer -->
 

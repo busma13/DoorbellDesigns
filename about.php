@@ -1,20 +1,20 @@
 <?php
-    include_once 'includes/dbh.inc.php';
-    include 'header-pt1.php';
-    $title = 'Doorbell Designs - About';
-    echo $title;
-    include 'header-pt2.php';
+include_once 'src/Dbh.php';
+include 'header-pt1.php';
+$title = 'Doorbell Designs - About';
+echo $title;
+include 'header-pt2.php';
 ?>
 
-    <div id="page-header" class="about">
-        <div class="container">
-            <div class="page-header-content text-center">
-                <div class="page-header wsub">
-                    <h1 class="page-title fadeInDown animated first">About</h1>
-                </div><!-- / page-header -->
-                <p>
-                    <img sizes="(max-width: 1400px) 98vw, 1400px"
-                    srcset="https://res.cloudinary.com/doorbelldesigns/image/upload/f_auto/q_auto/c_scale/w_200/v1676250824/banner/banner_ni12ho.jpg 200w,
+<div id="page-header" class="about">
+  <div class="container">
+    <div class="page-header-content text-center">
+      <div class="page-header wsub">
+        <h1 class="page-title fadeInDown animated first">About</h1>
+      </div><!-- / page-header -->
+      <p>
+        <img sizes="(max-width: 1400px) 98vw, 1400px"
+          srcset="https://res.cloudinary.com/doorbelldesigns/image/upload/f_auto/q_auto/c_scale/w_200/v1676250824/banner/banner_ni12ho.jpg 200w,
 
                     https://res.cloudinary.com/doorbelldesigns/image/upload/f_auto/q_auto/c_scale/w_653/v1676250824/banner/banner_ni12ho.jpg 653w,
 
@@ -23,14 +23,13 @@
                     https://res.cloudinary.com/doorbelldesigns/image/upload/f_auto/q_auto/c_scale/w_1207/v1676250824/banner/banner_ni12ho.jpg 1207w,
 
                     https://res.cloudinary.com/doorbelldesigns/image/upload/f_auto/q_auto/c_scale/w_1400/v1676250824/banner/banner_ni12ho.jpg 1400w"
-
-                    src="https://res.cloudinary.com/doorbelldesigns/image/upload/f_auto/q_auto/c_scale/w_1400/v1676250824/banner/banner_ni12ho.jpg"
-                    alt="Doorbell banner" />
-                </p> 
-            </div><!-- / page-header-content -->
-        </div><!-- / container -->
-    </div><!-- / page-header -->
-    <hr>
+          src="https://res.cloudinary.com/doorbelldesigns/image/upload/f_auto/q_auto/c_scale/w_1400/v1676250824/banner/banner_ni12ho.jpg"
+          alt="Doorbell banner" />
+      </p>
+    </div><!-- / page-header-content -->
+  </div><!-- / container -->
+</div><!-- / page-header -->
+<hr>
 </header>
 <!-- / header -->
 
@@ -38,48 +37,57 @@
 
 <!-- about -->
 <section id="about">
-    <div class="container">
-        <div class="text-wrap">
-            <div class="page-header text-center space-top-30">
-                <h3>About us</h3>
-            </div><!-- / page-header -->
-            <p>    
-                We are Ray and Colleen Dossey. We make decorative ceramic doorbells to enhance the entrance to your home. Everything is made right here at home in the USA. This ceramic artwork is only available online here or at Arts & Crafts Shows.
-            </p>
-            <p>    
-                You may also order doorbells <a href="/doorbelldesigns/custom-orders.php">custom</a> made especially for you. All the colors we use are fired on underglazes and glazes and will not fade in the sun or be damaged by rain or snow.
-            </p>
-            <p>    
-                All our door bells come with lighted buttons, screws and anchors, and instructions. They are for wired doorbells. They can replace any shape of wired door bell button. We can also make a decorative door bell surround for your wireless doorbell button.
-            </p>
-            <p>    
-                Click <a href="schedule.php">here</a> to see our <a href="schedule.php">Show Schedule</a> for this year.  We primarily do shows in the West.  Although we have sold hundreds of doorbells to people throughout the US, Canada, the UK and Australia.
-            </p>
-            <div class="page-header text-center space-top-30">
-                <h3>There are a few things you do need to know:</h3>
-            </div><!-- / page-header -->    
-                
-            <ul>
-                <li>Where is your doorbell?</li>
-                <li>Is it close to, or on the door frame?</li>
-                <li>How close?</li>
-                <li>Close to a corner or the edge of the wall?</li>
-                <li>Will it be attached to stucco, cement block, or an electrical box?</li>
-                <li>Will it be attached to wood siding, 4", 6", or 8"?</li>
-                <li>If so, where is your button in relation to that siding, in the middle, near the top, or bottom?</li>
-                <li>Are you replacing a non-functioning intercom?</li>
-                <li>Are you trying to cover the place where the builder messed up the stucco when he repaired the doorbell?</li>
-                <li>How big can it be?</li>
-                <li>How small does it have to be?</li>
-            </ul>
-            <p>
-                Fortunately, all you have to do is go take a look to answer all these questions. So go take a look and come back and choose your perfect doorbell!
-            </p>
-            <p>     
-                Our doorbells are all handmade so sizes are only approximate. 
-            </p>
-        </div><!-- / text-wrap -->   
-    </div><!-- / container -->
+  <div class="container">
+    <div class="text-wrap">
+      <div class="page-header text-center space-top-30">
+        <h3>About us</h3>
+      </div><!-- / page-header -->
+      <p>
+        We are Ray and Colleen Dossey. We make decorative ceramic doorbells to enhance the entrance to your home.
+        Everything is made right here at home in the USA. This ceramic artwork is only available online here or at Arts
+        & Crafts Shows.
+      </p>
+      <p>
+        You may also order doorbells <a href="/doorbelldesigns/custom-orders.php">custom</a> made especially for you.
+        All the colors we use are fired on underglazes and glazes and will not fade in the sun or be damaged by rain or
+        snow.
+      </p>
+      <p>
+        All our door bells come with lighted buttons, screws and anchors, and instructions. They are for wired
+        doorbells. They can replace any shape of wired door bell button. We can also make a decorative door bell
+        surround for your wireless doorbell button.
+      </p>
+      <p>
+        Click <a href="schedule.php">here</a> to see our <a href="schedule.php">Show Schedule</a> for this year. We
+        primarily do shows in the West. Although we have sold hundreds of doorbells to people throughout the US, Canada,
+        the UK and Australia.
+      </p>
+      <div class="page-header text-center space-top-30">
+        <h3>There are a few things you do need to know:</h3>
+      </div><!-- / page-header -->
+
+      <ul>
+        <li>Where is your doorbell?</li>
+        <li>Is it close to, or on the door frame?</li>
+        <li>How close?</li>
+        <li>Close to a corner or the edge of the wall?</li>
+        <li>Will it be attached to stucco, cement block, or an electrical box?</li>
+        <li>Will it be attached to wood siding, 4", 6", or 8"?</li>
+        <li>If so, where is your button in relation to that siding, in the middle, near the top, or bottom?</li>
+        <li>Are you replacing a non-functioning intercom?</li>
+        <li>Are you trying to cover the place where the builder messed up the stucco when he repaired the doorbell?</li>
+        <li>How big can it be?</li>
+        <li>How small does it have to be?</li>
+      </ul>
+      <p>
+        Fortunately, all you have to do is go take a look to answer all these questions. So go take a look and come back
+        and choose your perfect doorbell!
+      </p>
+      <p>
+        Our doorbells are all handmade so sizes are only approximate.
+      </p>
+    </div><!-- / text-wrap -->
+  </div><!-- / container -->
 </section>
 <!-- / about -->
 
@@ -89,7 +97,7 @@
 
 <!-- footer -->
 <?php
-    include 'footer.php';
+include 'footer.php';
 ?>
 <!-- / footer -->
 

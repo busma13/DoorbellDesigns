@@ -1,7 +1,6 @@
 <?php
-include_once 'dbh.inc.php';
-require './stringUtils.php';
-use org\turbocommons\src\main\php\utils\StringUtils;
+include_once 'Dbh.php';
+use App\StringUtils;
 
 
 /* Get content type */
@@ -24,7 +23,7 @@ $content = trim(file_get_contents("php://input"));
 $decoded = json_decode($content, true);
 
 /* Send error to Fetch API, if JSON is broken */
-if(! is_array($decoded))
+if (!is_array($decoded))
   exit(json_encode([
     'value' => 0,
     'error' => 'Received JSON is improperly formatted',
@@ -37,30 +36,26 @@ $editProductName = StringUtils::formatCase($decoded['name'], StringUtils::FORMAT
 $query = "SELECT * FROM `products` WHERE itemName = :editProductName;";
 
 /* Execute the query */
-try
-{
-    $res1 = $pdo->prepare($query);
-    $res1->bindParam(':editProductName', $editProductName);
-    $success = $res1->execute();
-    if ($success) {
-        $row = $res1->fetch(PDO::FETCH_ASSOC);
-        if ($row['itemNameString'] == '') {
-            $response = 'not-found';
-        } else {
-            $response = $row;
-        }
+try {
+  $res1 = $pdo->prepare($query);
+  $res1->bindParam(':editProductName', $editProductName);
+  $success = $res1->execute();
+  if ($success) {
+    $row = $res1->fetch(PDO::FETCH_ASSOC);
+    if ($row['itemNameString'] == '') {
+      $response = 'not-found';
+    } else {
+      $response = $row;
     }
-    else {
-        // header("Location: ../admin-panel.php?editProduct=retrieve-fail#edit-form");
-        $response = 'retrieve-fail';
-    }
-}
-catch (PDOException $e)
-{
-    $msg = $e->getMessage();
-    $response = $msg;
-    // header("Location: ../admin-panel.php?editProduct=query&code=" . $msg . "#edit-form");
-    // exit();
+  } else {
+    // header("Location: ../admin-panel.php?editProduct=retrieve-fail#edit-form");
+    $response = 'retrieve-fail';
+  }
+} catch (PDOException $e) {
+  $msg = $e->getMessage();
+  $response = $msg;
+  // header("Location: ../admin-panel.php?editProduct=query&code=" . $msg . "#edit-form");
+  // exit();
 }
 
 

@@ -9,5 +9,5 @@ actor: FunctionalTester
 modules:
   enabled:
     - PhpBrowser:
-        url: http://localhost/doorbelldesigns
+        url: http://127.0.0.1/doorbelldesigns
 step_decorators: ~

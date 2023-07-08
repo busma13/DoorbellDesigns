@@ -1,8 +1,8 @@
 <?php
-include_once 'dbh.inc.php';
+include_once 'Dbh.php';
 
 /* Get content type */
-$contentType = trim($_SERVER["CONTENT_TYPE"] ?? ''); 
+$contentType = trim($_SERVER["CONTENT_TYPE"] ?? '');
 
 /* Send error to Fetch API, if unexpected content type */
 if ($contentType !== "application/json")
@@ -19,7 +19,7 @@ $content = trim(file_get_contents("php://input"));
 $decoded = json_decode($content, true);
 
 /* Send error to Fetch API, if JSON is broken */
-if(! is_array($decoded)) {
+if (!is_array($decoded)) {
   exit(json_encode([
     'value' => 0,
     'error' => 'Received JSON is improperly formatted',
@@ -32,23 +32,19 @@ $deletedMainCategory = $decoded['deletedMainCategory'];
 
 $query = "DELETE FROM products WHERE id = :deletedId;";
 
-try
-{
+try {
   $res1 = $pdo->prepare($query);
   $res1->bindParam(':deletedId', $deletedId);
   $success = $res1->execute();
-    
-    if ($success) {
-      $response = 'success';
-    }
-    else {
-      $response = 'delete-failed';
-    }
-}
-catch (PDOException $e)
-{
-    $msg = $e->getMessage();
-    $response = $msg;
+
+  if ($success) {
+    $response = 'success';
+  } else {
+    $response = 'delete-failed';
+  }
+} catch (PDOException $e) {
+  $msg = $e->getMessage();
+  $response = $msg;
 }
 
 /* Send success to fetch API */

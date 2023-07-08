@@ -4,7 +4,7 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Busma\\DoorbellDesigns\\": "src/"
+      "App\\": "src/"
     }
   },
   "authors": [
@@ -22,7 +22,8 @@
     "codeception/codeception": "^5.0",
     "codeception/module-phpbrowser": "*",
     "codeception/module-asserts": "*",
-    "codeception/module-webdriver": "^4.0"
+    "codeception/module-webdriver": "^4.0",
+    "codeception/verify": "^3.0"
   },
   "scripts": {
     "test": "php vendor/bin/codecept run"
